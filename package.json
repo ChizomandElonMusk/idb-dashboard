@@ -1,0 +1,37 @@
+{
+  "name": "ie_commercial_workforce",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxt",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider nuxt build",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider nuxt start",
+    "generate": "NODE_OPTIONS=--openssl-legacy-provider nuxt generate",
+    "ionic:build": "NODE_OPTIONS=--openssl-legacy-provider npm run build",
+    "ionic:serve": "NODE_OPTIONS=--openssl-legacy-provider npm run start",
+    "cap": "cap"
+  },
+  "dependencies": {
+    "@capacitor-community/http": "^0.3.2",
+    "@capacitor/android": "4.8.2",
+    "@capacitor/app": "^4.1.1",
+    "@capacitor/camera": "^4.1.4",
+    "@capacitor/cli": "^4.8.2",
+    "@capacitor/core": "^4.8.2",
+    "@capacitor/geolocation": "^4.1.0",
+    "@capacitor/ios": "4.8.2",
+    "@ionic/pwa-elements": "^3.1.1",
+    "@mrmikkou/custom-select": "^0.0.5",
+    "@nuxtjs/axios": "^5.13.6",
+    "browser-image-compression": "^2.0.0",
+    "core-js": "^3.15.1",
+    "dateformat": "^5.0.3",
+    "materialize-css": "^1.0.0-rc.2",
+    "nuxt": "^2.15.7"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.3.2"
+  }
+}

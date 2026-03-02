@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/ie_force", {data:[{}],fetch:{},mutations:void 0});

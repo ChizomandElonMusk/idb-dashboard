@@ -1,0 +1,7 @@
+{
+  "name": "ie_mobiworks_web",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}

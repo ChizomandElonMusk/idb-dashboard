@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/crmd/switch_to_dormant", {data:[{}],fetch:{},mutations:void 0});

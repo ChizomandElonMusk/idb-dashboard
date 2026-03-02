@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/crmd/account_reactivation", {data:[{}],fetch:{},mutations:void 0});

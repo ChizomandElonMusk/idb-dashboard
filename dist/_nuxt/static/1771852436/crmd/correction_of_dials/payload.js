@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/crmd/correction_of_dials", {data:[{}],fetch:{},mutations:void 0});

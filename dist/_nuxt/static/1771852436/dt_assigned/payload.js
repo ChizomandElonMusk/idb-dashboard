@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/dt_assigned", {data:[{}],fetch:{},mutations:void 0});

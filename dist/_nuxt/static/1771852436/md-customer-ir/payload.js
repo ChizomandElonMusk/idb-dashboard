@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/md-customer-ir", {data:[{}],fetch:{},mutations:void 0});

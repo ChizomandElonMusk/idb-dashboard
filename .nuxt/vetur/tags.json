@@ -1,0 +1,38 @@
+{
+  "AdminNavBar": {
+    "description": "Auto imported from components/AdminNavBar.vue"
+  },
+  "AnimatedValue": {
+    "description": "Auto imported from components/AnimatedValue.vue"
+  },
+  "ChartPie": {
+    "description": "Auto imported from components/ChartPie.vue"
+  },
+  "CustomSelect": {
+    "description": "Auto imported from components/CustomSelect.vue"
+  },
+  "Forgot": {
+    "description": "Auto imported from components/Forgot.vue"
+  },
+  "Login": {
+    "description": "Auto imported from components/Login.vue"
+  },
+  "Logo": {
+    "description": "Auto imported from components/Logo.vue"
+  },
+  "MeterCommunication": {
+    "description": "Auto imported from components/MeterCommunication.vue"
+  },
+  "NavBar": {
+    "description": "Auto imported from components/NavBar.vue"
+  },
+  "PreLoader": {
+    "description": "Auto imported from components/PreLoader.vue"
+  },
+  "SignUp": {
+    "description": "Auto imported from components/SignUp.vue"
+  },
+  "SideNav": {
+    "description": "Auto imported from components/SideNav/SideNav.vue"
+  }
+}

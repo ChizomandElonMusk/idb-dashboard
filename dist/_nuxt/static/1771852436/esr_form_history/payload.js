@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/esr_form_history", {data:[{}],fetch:{},mutations:void 0});

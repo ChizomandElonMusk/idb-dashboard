@@ -1,0 +1,14 @@
+[
+  {
+    "name": "idb_dashboard",
+    "path": "/idb_dashboard",
+    "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/idb_dashboard.vue",
+    "chunkName": "pages/idb_dashboard"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]
