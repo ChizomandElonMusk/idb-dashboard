@@ -87,7 +87,7 @@ export default {
 
     signIn() {
       M.toast({ html: '<b class="yellow-text">Please wait...</b>' })
-      // this.$router.push('./dashboard')
+      this.$router.push('./control_center_dashboard')
       this.username = this.username.trim()
       this.password = this.password.trim()
 
@@ -96,11 +96,11 @@ export default {
       // this.convertEmail(this.username, this.password)
 
       // console.log(`username -> ${this.username}     password -> ${this.password}`)
-      if (this.username === '' || this.password === '') {
-        M.toast({ html: '<b class="red-text">Username or Password is empty!</b>' })
-      } else {
-        this.convertEmail(this.username, this.password)
-      }
+      // if (this.username === '' || this.password === '') {
+      //   M.toast({ html: '<b class="red-text">Username or Password is empty!</b>' })
+      // } else {
+      //   this.convertEmail(this.username, this.password)
+      // }
 
     },
 

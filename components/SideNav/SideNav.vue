@@ -13,6 +13,14 @@
                     </b>
                 </nuxt-link>
             </li>
+            <li>
+                <nuxt-link to="/" class="red-text">
+                    <i class="material-icons">lock</i>
+                    <b style="font-weight: 500; font-size: 10px;">
+                        Logout
+                    </b>
+                </nuxt-link>
+            </li>
         </ul>
     </div>
 </template>
@@ -26,10 +34,10 @@ export default {
                 // { title: 'End-To-End Energy Dashboard', icon: 'dashboard', active: false },
                 // { title: 'Energy Flow Diagram', icon: 'dashboard', active: false },
                 { title: 'Control Center Dashboard', icon: 'dashboard', url: '/control_center_dashboard', active: false },
-                // { title: 'Availability Summary', icon: 'dashboard', url: '/availability_summary', active: false },
-                // { title: 'DT Availability', icon: 'dashboard', url: '/dt_availability', active: false },
-                // { title: 'MYTO Dashboard', icon: 'dashboard', active: false },
-                { title: 'IDB Dashboard', icon: 'dashboard', url: '/idb_dashboard', active: true },
+                { title: 'Availability Summary', icon: 'dashboard', url: '/availability_summary', active: false },
+                { title: 'DT Availability', icon: 'dashboard', url: '/dt_availability', active: false },
+                { title: 'MYTO Dashboard', icon: 'dashboard', url: '/myto_dashboard', active: false },
+                { title: 'IDB Dashboard', icon: 'dashboard', url: '/idb_dashboard', active: false },
                 { title: 'IDB Events', icon: 'dashboard', url: '/idb_events', active: false },
             ]
         }

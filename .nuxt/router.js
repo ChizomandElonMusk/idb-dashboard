@@ -4,6 +4,7 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _912cc572 = () => interopDefault(import('../pages/control_center_dashboard.vue' /* webpackChunkName: "pages/control_center_dashboard" */))
 const _61667891 = () => interopDefault(import('../pages/idb_dashboard.vue' /* webpackChunkName: "pages/idb_dashboard" */))
 const _16c57c67 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -19,6 +20,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/control_center_dashboard",
+    component: _912cc572,
+    name: "control_center_dashboard"
+  }, {
     path: "/idb_dashboard",
     component: _61667891,
     name: "idb_dashboard"

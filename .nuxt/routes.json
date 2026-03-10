@@ -1,14 +1,23 @@
 [
   {
+    "name": "control_center_dashboard",
+    "path": "/control_center_dashboard",
+    "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/control_center_dashboard.vue",
+    "chunkName": "pages/control_center_dashboard",
+    "_name": "_912cc572"
+  },
+  {
     "name": "idb_dashboard",
     "path": "/idb_dashboard",
     "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/idb_dashboard.vue",
-    "chunkName": "pages/idb_dashboard"
+    "chunkName": "pages/idb_dashboard",
+    "_name": "_61667891"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_16c57c67"
   }
 ]
