@@ -2473,6 +2473,8 @@ progress {
   /* 1 */
   vertical-align: baseline;
   /* 2 */
+
+  
 }
 
 /**
@@ -3203,6 +3205,8 @@ td, th {
   border-radius: 2px;
   margin: 0.5rem 0 1rem 0;
   overflow: hidden;
+  height: 15px; 
+  border-radius: 7px;
 }
 
 .progress .determinate {

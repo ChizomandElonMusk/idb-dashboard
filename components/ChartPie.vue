@@ -1,11 +1,22 @@
 <template>
-  <div class="chart-pie">
-    <canvas ref="canvas"></canvas>
+  <div class="chart-pie-wrapper">
+    <div class="chart-canvas-container">
+      <canvas ref="canvas"></canvas>
+      <div class="chart-center-text" v-if="centerText">{{ centerText }}</div>
+    </div>
+    <div class="chart-legend" v-if="showValueLegend && chartData">
+      <div class="legend-grid">
+        <div class="legend-item" v-for="(label, i) in chartData.labels" :key="i">
+          <span class="legend-dot" :style="{ backgroundColor: chartData.datasets[0].backgroundColor[i] }"></span>
+          <span class="legend-label">{{ label }}</span>
+          <span class="legend-value">{{ chartData.datasets[0].data[i] }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// use local Chart.js asset located in assets/js/Chart.js (v2.x UMD build)
 import Chart from '~/assets/js/Chart.js'
 
 export default {
@@ -22,6 +33,14 @@ export default {
     chartOptions: {
       type: Object,
       default: () => ({ responsive: true, maintainAspectRatio: false })
+    },
+    centerText: {
+      type: String,
+      default: null
+    },
+    showValueLegend: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -62,9 +81,57 @@ export default {
 </script>
 
 <style scoped>
-.chart-pie {
-  position: relative;
+.chart-pie-wrapper {
   width: 100%;
-  height: 100%;
+}
+
+.chart-canvas-container {
+  position: relative;
+  height: 200px;
+}
+
+.chart-center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+  pointer-events: none;
+}
+
+.chart-legend {
+  margin-top: 16px;
+}
+
+.legend-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-label {
+  color: #555;
+  flex: 1;
+}
+
+.legend-value {
+  font-weight: bold;
+  color: #222;
 }
 </style>

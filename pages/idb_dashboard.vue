@@ -114,7 +114,7 @@
                     </div>
 
                     <div class="col s12 m4">
-                        <div class="card-panel dt-summary-card mini-chart-card" style="padding-bottom: 57px">
+                        <div class="card-panel dt-summary-card mini-chart-card" style="padding-bottom: 82px">
                             <div class="row center-align">
                                 <div class="col s12">
                                     <!-- <div class="icon-circle-small  center-align" style="margin: 0 auto;">
@@ -171,7 +171,7 @@
                     </div>
 
                     <div class="col s12 m3">
-                        <div class="card-panel mini-chart-card" style="padding-bottom: 138px;">
+                        <div class="card-panel mini-chart-card" style="padding-bottom: 115px;">
                             <p class="grey-text text-darken-2 center">Energy</p>
                             <div class="progress green lighten-4">
                                 <div class="determinate blue" :style="{ width: md_energy }"></div>

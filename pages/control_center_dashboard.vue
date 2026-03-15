@@ -14,23 +14,27 @@
 
             <div class="row" id="dashboard">
                 <div class="row">
-                    <div class="col s12 m4">
-                        <div class="card-panel dt-summary-card mini-chart-card" style="padding-bottom: 57px">
+                    <div class="col s12 m2">
+                        <div class="card-panel dt-summary-card mini-chart-card" style="padding-bottom: 0px">
                             <div class="row center-align">
                                 <div class="col s12">
-                                    <!-- <div class="icon-circle-small  center-align" style="margin: 0 auto;">
-                                    <div class="icon-circle red darken-2"><i
-                                            class="material-icons white-text">router</i></div>
-                                </div> -->
 
 
-                                    <h3>
-                                        <div class="icon-circle red darken-2" style="margin: 0 auto;"><i
-                                                class="material-icons white-text">router</i></div>
-                                        <AnimatedValue :value="total_dts" />
-                                    </h3>
-                                    <p class="grey-text">Total DTs</p>
-                                    <div class="divider"></div>
+                                    <div class="row">
+                                        <div class="icon-circle red darken-2 col s4" style="margin: 0 auto;">
+                                            <i class="material-icons white-text">router</i>
+                                        </div>
+                                        <div class="col s8">
+                                            <AnimatedValue :value="total_dts" style="font-size: 30px;" />
+                                            <p class="grey-text">Total DTs</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <div class="divider"></div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col s6 border-right">
                                     <h5>
@@ -47,53 +51,109 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col s12 m4">
-                        <div class="card-panel stats-card">
-                            <div class="valign-wrapper">
-                                <div class="icon-circle red darken-2"><i class="material-icons white-text">router</i>
-                                </div>
-                                <div class="stats-text">
-                                    <AnimatedValue class="value" :value="total_feeders" />
-                                    <p class="grey-text">Total Feeders</p>
-                                </div>
-                                <span class="badge green white-text">+3.6% ↑</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m4">
-                        <div class="card-panel stats-card">
-                            <div class="valign-wrapper">
-                                <div class="icon-circle green"><i
-                                        class="material-icons white-text">battery_charging_full</i></div>
-                                <div class="stats-text">
-                                    <AnimatedValue class="value" :value="total_flagged" />
-                                    <p class="grey-text">Total flagged IDB meters</p>
-                                </div>
-                                <span class="badge green white-text">+13.6% ↑</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col s12 m4">
-                        <div class="card-panel mini-chart-card">
-                            <p class="grey-text text-darken-2">Feeder - to - DT Loss</p>
-                            <h5>
-                                <AnimatedValue :value="feeder_loss" />
-                            </h5>
-                            <p class="tiny-text grey-text">Loss (%) <span class="right">
-                                    <AnimatedValue :value="feeder_loss_pct" />
-                                </span></p>
-                            <div class="progress red lighten-4">
-                                <div class="determinate red" :style="{ width: feeder_loss_pct }"></div>
+
+
+                    <div class="col s12 m2">
+                        <div class="card-panel dt-summary-card mini-chart-card" style="padding-bottom: 0px">
+                            <div class="row center-align">
+                                <div class="col s12">
+
+
+                                    <div class="row">
+                                        <div class="icon-circle red darken-2 col s4" style="margin: 0 auto;">
+                                            <i class="material-icons white-text">router</i>
+                                        </div>
+                                        <div class="col s8">
+                                            <AnimatedValue :value="total_dts" style="font-size: 30px;" />
+                                            <p class="grey-text">Total DTs</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <div class="divider"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s6 border-right">
+                                    <h5>
+                                        <AnimatedValue :value="public_dts" />
+                                    </h5>
+                                    <p class="grey-text">Public</p>
+                                </div>
+                                <div class="col s6">
+                                    <h5>
+                                        <AnimatedValue :value="private_dts" />
+                                    </h5>
+                                    <p class="grey-text">Private</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-panel mini-chart-card">
-                            <p class="grey-text text-darken-2">Billing Efficiency</p>
-                            <p class="tiny-text grey-text">Billing Efficiency <span class="right">
+                    </div>
+
+
+
+
+
+                    <div class="col s12 m2">
+                        <div class="card-panel dt-summary-card mini-chart-card" style="padding-bottom: 0px">
+                            <div class="row center-align">
+                                <div class="col s12">
+
+
+                                    <div class="row">
+                                        <div class="icon-circle red darken-2 col s4" style="margin: 0 auto;">
+                                            <i class="material-icons white-text">router</i>
+                                        </div>
+                                        <div class="col s8">
+                                            <AnimatedValue :value="total_dts" style="font-size: 30px;" />
+                                            <p class="grey-text">Total DTs</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <div class="divider"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s6 border-right">
+                                    <h5>
+                                        <AnimatedValue :value="public_dts" />
+                                    </h5>
+                                    <p class="grey-text">Public</p>
+                                </div>
+                                <div class="col s6">
+                                    <h5>
+                                        <AnimatedValue :value="private_dts" />
+                                    </h5>
+                                    <p class="grey-text">Private</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col s6">
+                        <div class="card-panel mini-chart-card" style="padding-bottom: 14px;">
+                            <p class="grey-text text-darken-2 center">Total Customers</p>
+                            <p class="tiny-text black-text">
+                                Metered NMD
+                                <span class="right">
                                     <AnimatedValue :value="billing_eff" />
-                                </span></p>
+                                </span>
+                            </p>
+                            <div class="progress indigo lighten-4">
+                                <div class="determinate indigo accent-2" :style="{ width: billing_eff }"></div>
+                            </div>
+
+                            <p class="tiny-text black-text">
+                                Metered MD
+                                <span class="right">
+                                    <AnimatedValue :value="billing_eff" />
+                                </span>
+                            </p>
                             <div class="progress green lighten-4">
                                 <div class="determinate green" :style="{ width: billing_eff }"></div>
                             </div>
@@ -101,128 +161,119 @@
                         </div>
                     </div>
 
-                    <div class="col s12 m4">
-                        <div class="card-panel mini-chart-card">
-                            <p class="grey-text text-darken-2">Customer - to - DT Loss</p>
-                            <h5>
-                                <AnimatedValue :value="customer_loss" />
-                            </h5>
-                            <p class="tiny-text grey-text">Loss (%) <span class="right">
-                                    <AnimatedValue :value="customer_loss_pct" />
-                                </span></p>
-                            <div class="progress red lighten-4">
-                                <div class="determinate red" :style="{ width: customer_loss_pct }"></div>
-                            </div>
-                        </div>
-                        <div class="card-panel mini-chart-card">
-                            <p class="grey-text text-darken-2">ATC & C</p>
-                            <p class="tiny-text grey-text">ATC & C <span class="right">
-                                    <AnimatedValue :value="atc_c" />
-                                </span></p>
-                            <div class="progress light-blue lighten-4">
-                                <div class="determinate light-blue" :style="{ width: atc_c }"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col s12 m4">
-                        <div class="card-panel dt-summary-card mini-chart-card" style="padding-bottom: 57px">
-                            <div class="row center-align">
-                                <div class="col s12">
-                                    <!-- <div class="icon-circle-small  center-align" style="margin: 0 auto;">
-                                    <div class="icon-circle red darken-2"><i
-                                            class="material-icons white-text">router</i></div>
-                                </div> -->
 
 
-                                    <h3>
-                                        <div class="icon-circle red darken-2" style="margin: 0 auto;"><i
-                                                class="material-icons white-text">router</i></div>
-                                        <AnimatedValue :value="total_dts" />
-                                    </h3>
-                                    <p class="grey-text">Total DTs</p>
-                                    <div class="divider"></div>
-                                </div>
-                                <div class="col s6 border-right">
-                                    <h5>
-                                        <AnimatedValue :value="public_dts" />
-                                    </h5>
-                                    <p class="grey-text">Public</p>
-                                </div>
-                                <div class="col s6">
-                                    <h5>
-                                        <AnimatedValue :value="private_dts" />
-                                    </h5>
-                                    <p class="grey-text">Private</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 
+
+                <!-- energy graph -->
                 <div class="row">
-                    <div class="col s12 m3">
+                    <div class="col s9">
+                        <div class="right" style="margin-top:10px;">
+                            <button class="btn-flat btn-small">Day</button>
+                            <button class="btn-flat btn-small">Week</button>
+                            <button class="btn-flat btn-small">Month</button>
+                        </div>
+                        <div class="card-panel mini-chart-card" style="padding-bottom: 20px;">
+                            <p class="grey-text text-darken-2 left-align">Energy</p>
+                            <p class="left" style="margin:0 0 10px;">{{ energyTotal }}</p>
+                            <div style="position: relative; height:160px; padding-bottom:20px; overflow:visible;">
+                                <canvas id="energyChart"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col s3">
                         <div class="card-panel mini-chart-card">
-                            <p class="grey-text text-darken-2 center">Total Customers</p>
-                            <ChartPie v-if="doughnutData" chart-type="doughnut" :chart-data="doughnutData"
+                            <p class="grey-text text-darken-2 center">Energy Allocation per Feeder Band</p>
+                            <ChartPie v-if="energyAllocationData" chart-type="pie" :chart-data="energyAllocationData"
                                 :chart-options="pieOptions">
-                                <AnimatedValue :value="total_customers" />
+                                <AnimatedValue :value="energy_allocation" />
                             </ChartPie>
                         </div>
                     </div>
-
-                    <div class="col s12 m3">
-                        <div class="card-panel mini-chart-card">
-                            <p class="grey-text text-darken-2 center">Revenue</p>
-                            <ChartPie v-if="revenueData" chart-type="pie" :chart-data="revenueData"
-                                :chart-options="pieOptions">
-                                <AnimatedValue :value="revenue" />
-                            </ChartPie>
-                        </div>
-                    </div>
-
-                    <div class="col s12 m3">
-                        <div class="card-panel mini-chart-card" style="padding-bottom: 138px;">
-                            <p class="grey-text text-darken-2 center">Energy</p>
-                            <div class="progress green lighten-4">
-                                <div class="determinate blue" :style="{ width: md_energy }"></div>
-                            </div>
-                            <div class="progress green lighten-4">
-                                <div class="determinate green" :style="{ width: nmd_energy }"></div>
-                            </div>
-
-                            <div class="col s6">
-                                <p>
-                                    <span class="circle blue"
-                                        style="width: 10px; height: 10px; display: inline-block; margin-left: 5px;"></span>
-                                    <span style="font-size: 12px;">MD Energy</span>
-
-                                    <span>336.79</span>
-                                    <span>80.93%</span>
-                                </p>
-                            </div>
-                            <div class="col s6">
-                                <p>
-                                    <span class="circle green"
-                                        style="width: 10px; height: 10px; display: inline-block; margin-left: 5px;"></span>
-                                    <span style="font-size: 12px;">NMD Energy</span>
-                                    <span>336.79</span>
-                                    <span>80.93%</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col s12 m3">
-                        <div class="card-panel mini-chart-card" style="padding-bottom: 60px;">
-                            <MeterCommunication :percentage="meterValue" />
-
-                        </div>
-                    </div>
-
-
                 </div>
+                <!-- end of energy graph -->
+
+
+
+                <!-- vending allocation -->
+                <div class="row">
+                    <div class="col s9">
+                        <div class="card-panel mini-chart-card" style="padding-bottom: 20px;">
+                            <div class="vending-card-header">
+                                <span class="vending-card-title">Vending &amp; Collection</span>
+                                <div class="vending-period-btns">
+                                    <button class="btn-flat btn-small period-btn">Day</button>
+                                    <button class="btn-flat btn-small period-btn">Week</button>
+                                    <button class="btn-flat btn-small period-btn period-btn-active">Month</button>
+                                    <button class="btn-flat btn-small period-btn period-btn-icon">
+                                        <i class="material-icons tiny">calendar_today</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="position: relative; height:160px; padding-bottom:20px; overflow:visible;">
+                                <canvas id="vendingChart"></canvas>
+                            </div>
+                            <hr style="margin-top: 40px;">
+                            <div class="vending-stats-grid">
+                                <div class="vending-stats-col">
+                                    <div class="vending-stat-row">
+                                        <span class="vstat-dot vstat-dot-green"></span>
+                                        <span class="vstat-label">Total customer Vended Today</span>
+                                        <span class="vstat-value">{{ total_customer_vended_today }}</span>
+                                    </div>
+                                    <div class="vending-stat-row">
+                                        <span class="vstat-dot vstat-dot-green"></span>
+                                        <span class="vstat-label">Amount Vended Today</span>
+                                        <span class="vstat-value">{{ amount_vended_today }}</span>
+                                    </div>
+                                    <div class="vending-stat-row">
+                                        <span class="vstat-dot vstat-dot-green"></span>
+                                        <span class="vstat-label">Amount Vended MTD</span>
+                                        <span class="vstat-value">{{ amount_vended_mtd }}</span>
+                                    </div>
+                                </div>
+                                <div class="vending-stats-col">
+                                    <div class="vending-stat-row">
+                                        <span class="vstat-dot vstat-dot-blue"></span>
+                                        <span class="vstat-label">Total Collection Today</span>
+                                        <span class="vstat-value">{{ total_collection_today }}</span>
+                                    </div>
+                                    <div class="vending-stat-row">
+                                        <span class="vstat-dot vstat-dot-blue"></span>
+                                        <span class="vstat-label">Amount Collected MTD</span>
+                                        <span class="vstat-value">{{ amount_collected_mtd }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s3">
+                        <div class="card-panel mini-chart-card">
+                            <p class="grey-text text-darken-2 center">Total Feeder</p>
+                            <ChartPie v-if="vendingAllocationData" chart-type="doughnut"
+                                :chart-data="vendingAllocationData"
+                                :chart-options="vendingPieOptions"
+                                :center-text="vending_allocation"
+                                :show-value-legend="true">
+                            </ChartPie>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of vending allocation -->
+
+
+
+
+
+
+
+
+                
             </div>
             <!-- dashboard ends here -->
 
@@ -237,6 +288,7 @@ import SideNav from '~/components/SideNav/SideNav.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import ChartPie from '~/components/ChartPie.vue'
 import MeterCommunication from '~/components/MeterCommunication.vue';
+import Chart from '~/assets/js/Chart.js';
 export default {
     components: {
         SideNav,
@@ -272,10 +324,107 @@ export default {
             public_dts: '0',
             private_dts: '0',
             total_customers: '0',
-            revenue: '0',
+            energy_allocation: '0',
+            vending_allocation: '0',
+            total_customer_vended_today: '0',
+            amount_vended_today: '0',
+            amount_vended_mtd: '0',
+            total_collection_today: '0',
+            amount_collected_mtd: '0',
             doughnutData: null,
-            revenueData: null,
-            pieOptions: { responsive: true, maintainAspectRatio: false }
+            energyAllocationData: null,
+            pieOptions: { responsive: true, maintainAspectRatio: false },
+            vendingPieOptions: { responsive: true, maintainAspectRatio: false, legend: { display: false } },
+            /* energy chart config */
+            vendingChart: null,
+            vendingData: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: 'Vending',
+                        data: [350, 250, 180, 320, 480, 400, 220, 150, 260, 380, 420, 380],
+                        borderColor: '#5ebd8d',
+                        backgroundColor: 'rgba(94,189,141,0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#5ebd8d'
+                    },
+                    {
+                        label: 'Collection',
+                        data: [200, 150, 200, 380, 280, 180, 150, 200, 320, 280, 350, 390],
+                        borderColor: '#5b7cfa',
+                        backgroundColor: 'rgba(91,124,250,0.08)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#5b7cfa'
+                    }
+                ]
+            },
+            /* options formatted for Chart.js v2.x */
+            vendingOptions: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: { display: true },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItems/*, data*/) {
+                            return tooltipItems.yLabel + ' MWh';
+                        }
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: { display: false },
+                        ticks: { fontColor: '#888' }
+                    }],
+                    yAxes: [{
+                        gridLines: { display: false },
+                        ticks: { beginAtZero: true }
+                    }]
+                }
+            },
+            vendingTotal: '350.00MWh',
+            energyChart: null,
+            energyData: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Energy (MWh)',
+                    data: [30, 25, 43, 38, 28, 32, 36],
+                    borderColor: '#5ebd8d',
+                    backgroundColor: '#f9faff',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#5ebd8d'
+                }]
+            },
+            
+            /* options formatted for Chart.js v2.x */
+            energyOptions: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: { display: false },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItems/*, data*/) {
+                            return tooltipItems.yLabel + ' MWh';
+                        }
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: { display: false },
+                        ticks: { fontColor: '#888' }
+                    }],
+                    yAxes: [{
+                        gridLines: { display: false },
+                        ticks: { beginAtZero: true }
+                    }]
+                }
+            },
+            energyTotal: '350.00MWh'
         }
     },
 
@@ -297,7 +446,12 @@ export default {
                 atc_c: '7.87%',
                 total_dts: '61',
                 public_dts: '31',
-                private_dts: '30'
+                private_dts: '30',
+                total_customer_vended_today: '30,400,000',
+                amount_vended_today: '30,400,000',
+                amount_vended_mtd: '2,000,000,000',
+                total_collection_today: '50,000,000',
+                amount_collected_mtd: '7,000,000,000'
             };
             Object.assign(this, data);
             // set customer doughnut chart values
@@ -314,17 +468,38 @@ export default {
                     backgroundColor: doughnutSegments.map(s => s.color)
                 }]
             };
-            // set revenue pie chart values
-            this.revenue = '45,200';
-            const revenueSegments = [
-                { value: 50, color: '#f2a10a', name: 'Revenue Billed' },
-                { value: 25, color: '#f191c5', name: 'Revenue Collected' },
+            // set energy_allocation pie chart values
+            this.energy_allocation = '45,200';
+            const energy_allocationSegments = [
+                { value: 40, color: '#5b7cfa', name: 'A' },
+                { value: 25, color: '#6dd4c7', name: 'B' },
+                { value: 15, color: '#c87dff', name: 'C' },
+                { value: 15, color: '#ff6b6b', name: 'D' },
+                { value: 5, color: '#ffa94e', name: 'E' },
             ];
-            this.revenueData = {
-                labels: revenueSegments.map(s => s.name),
+            this.energyAllocationData = {
+                labels: energy_allocationSegments.map(s => s.name),
                 datasets: [{
-                    data: revenueSegments.map(s => s.value),
-                    backgroundColor: revenueSegments.map(s => s.color)
+                    data: energy_allocationSegments.map(s => s.value),
+                    backgroundColor: energy_allocationSegments.map(s => s.color)
+                }]
+            };
+
+
+            // set vending pie chart values
+            const vending_allocationSegments = [
+                { value: 188, color: '#5b7cfa', name: 'Band A' },
+                { value: 78, color: '#6dd4c7', name: 'Band B' },
+                { value: 132, color: '#c87dff', name: 'Band C' },
+                { value: 18, color: '#ff6b6b', name: 'Band D' },
+                { value: 5, color: '#ffa94e', name: 'Band E' },
+            ];
+            this.vending_allocation = String(vending_allocationSegments.reduce((sum, s) => sum + s.value, 0));
+            this.vendingAllocationData = {
+                labels: vending_allocationSegments.map(s => s.name),
+                datasets: [{
+                    data: vending_allocationSegments.map(s => s.value),
+                    backgroundColor: vending_allocationSegments.map(s => s.color)
                 }]
             };
         }
@@ -335,10 +510,25 @@ export default {
     },
     mounted() {
         this.getData(); // Fetch data when component is mounted
+        // initialize energy chart after DOM
+        const ctx = document.getElementById('energyChart').getContext('2d');
+        this.energyChart = new Chart(ctx, {
+            type: 'line',
+            data: this.energyData,
+            options: this.energyOptions
+        });
+
+        const ctx2 = document.getElementById('vendingChart').getContext('2d');
+        this.vendingChart = new Chart(ctx2, {
+            type: 'line',
+            data: this.vendingData,
+            options: this.vendingOptions
+        });
+
         // var instance = M.Tabs.init(el, options);
-         // Initialize Materialize tabs
-         var el = document.querySelector('.tabs');
-         var instance = M.Tabs.init(el, {});
+        // Initialize Materialize tabs
+        var el = document.querySelector('.tabs');
+        var instance = M.Tabs.init(el, {});
     }
 }
 </script>
@@ -416,6 +606,15 @@ export default {
 .mini-chart-card {
     border-radius: 12px;
     margin-bottom: 10px;
+    box-sizing: unset;
+}
+
+/* keep certain cards the same height */
+.equal-height {
+    min-height: 260px; /* adjust as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .tiny-text {
@@ -462,21 +661,27 @@ export default {
 table.rounded-header thead.orange {
     border-radius: 20px;
     overflow: hidden;
-    display: table-header-group; /* Keep table behavior but allow radius */
+    display: table-header-group;
+    /* Keep table behavior but allow radius */
 }
+
 table.rounded-header2 thead.red-accent-4 {
     border-radius: 20px;
     overflow: hidden;
-    display: table-header-group; /* Keep table behavior but allow radius */
+    display: table-header-group;
+    /* Keep table behavior but allow radius */
 }
 
 /* If the above doesn't work, wrap thead in a div */
 table.rounded-header {
-    border-collapse: separate; /* Required for border-radius to work */
+    border-collapse: separate;
+    /* Required for border-radius to work */
     border-spacing: 0;
 }
+
 table.rounded-header2 {
-    border-collapse: separate; /* Required for border-radius to work */
+    border-collapse: separate;
+    /* Required for border-radius to work */
     border-spacing: 0;
 }
 
@@ -485,6 +690,7 @@ table.rounded-header thead.orange th {
     color: white;
     padding: 10px 15px;
 }
+
 table.rounded-header2 thead.red-accent-4 th {
     background-color: #d50000;
     color: white;
@@ -496,6 +702,7 @@ table.rounded-header thead.orange th:first-child {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
+
 table.rounded-header2 thead.red-accent-4 th:first-child {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -505,6 +712,7 @@ table.rounded-header thead.orange th:last-child {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
+
 table.rounded-header2 thead.red-accent-4 th:last-child {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -514,10 +722,115 @@ table.rounded-header2 thead.red-accent-4 th:last-child {
 table.rounded-header thead.orange th:not(:first-child):not(:last-child) {
     border-radius: 0;
 }
+
 table.rounded-header2 thead.red-accent-4 th:not(:first-child):not(:last-child) {
     border-radius: 0;
 }
 
+
+.vending-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.vending-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+}
+
+.vending-period-btns {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.period-btn {
+    color: #aaa;
+    font-size: 12px;
+    padding: 0 10px;
+    border-radius: 6px;
+}
+
+.period-btn-active {
+    background: #fff;
+    color: #222;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.period-btn-icon {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    color: #888;
+}
+
+.vending-stats-grid {
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+}
+
+.vending-stats-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.vending-stat-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.vstat-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vstat-dot::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.vstat-dot-green {
+    border-color: #5ebd8d;
+}
+
+.vstat-dot-green::after {
+    background-color: #5ebd8d;
+}
+
+.vstat-dot-blue {
+    border-color: #5b7cfa;
+}
+
+.vstat-dot-blue::after {
+    background-color: #5b7cfa;
+}
+
+.vstat-label {
+    color: #666;
+    flex: 1;
+}
+
+.vstat-value {
+    font-weight: 700;
+    color: #222;
+    white-space: nowrap;
+}
 
 @media only screen and (max-width: 992px) {
     .main-content {
