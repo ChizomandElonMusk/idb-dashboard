@@ -99,7 +99,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #222;
   pointer-events: none;
