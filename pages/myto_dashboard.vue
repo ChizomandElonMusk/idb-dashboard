@@ -2,10 +2,8 @@
     <div class="dashboard-wrapper">
         <SideNav />
         <main class="main-content">
-            <div class="row" style="margin-bottom: 0;">
-                <div class="col s12">
-                    <h5 class="page-title">Feeders MYTO Energy Dashboard</h5>
-                </div>
+            <div class="avail-header">
+                <h5 class="avail-title">Feeders MYTO Energy Dashboard</h5>
             </div>
 
             <!-- Filter Row -->
@@ -226,7 +224,7 @@ export default {
 
 <style scoped>
 .dashboard-wrapper {
-    background-color: #f8f9fd;
+    background-color: #f0f2f8;
     min-height: 100vh;
 }
 
@@ -236,9 +234,17 @@ export default {
     padding-top: 20px;
 }
 
-.page-title {
-    font-weight: 400;
-    margin-bottom: 8px;
+.avail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.avail-title {
+    font-weight: 600;
+    color: #222;
+    margin: 0;
 }
 
 /* Filter */

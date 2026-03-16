@@ -5,8 +5,8 @@
                 <img src="~/assets/images/logo.png" alt="Logo" class="responsive-img"
                     style="width: 60px; margin-top: 20px;">
             </li>
-            <li v-for="item in menuItems" :key="item.title" :class="{ active: item.active }">
-                <nuxt-link :to="item.url" :class="{ 'red-text text-darken-2': item.active }">
+            <li v-for="item in menuItems" :key="item.title" :class="{ active: isActive(item) }">
+                <nuxt-link :to="item.url" :class="{ 'red-text text-darken-2': isActive(item) }">
                     <i class="material-icons">{{ item.icon }}</i>
                     <b style="font-weight: 500; font-size: 10px;">
                         {{ item.title }}
@@ -31,15 +31,20 @@ export default {
     data() {
         return {
             menuItems: [
-                // { title: 'End-To-End Energy Dashboard', icon: 'dashboard', active: false },
-                // { title: 'Energy Flow Diagram', icon: 'dashboard', active: false },
-                { title: 'Control Center Dashboard', icon: 'dashboard', url: '/control_center_dashboard', active: false },
-                { title: 'Availability Summary', icon: 'dashboard', url: '/availability_summary', active: false },
-                { title: 'DT Availability', icon: 'dashboard', url: '/dt_availability', active: false },
-                { title: 'MYTO Dashboard', icon: 'dashboard', url: '/myto_dashboard', active: false },
-                { title: 'IDB Dashboard', icon: 'dashboard', url: '/idb_dashboard', active: false },
-                { title: 'IDB Events', icon: 'dashboard', url: '/idb_events', active: false },
+                // { title: 'End-To-End Energy Dashboard', icon: 'dashboard' },
+                // { title: 'Energy Flow Diagram', icon: 'dashboard' },
+                { title: 'Control Center Dashboard', icon: 'dashboard', url: '/control_center_dashboard' },
+                { title: 'Availability Summary', icon: 'dashboard', url: '/availability_summary' },
+                { title: 'DT Availability', icon: 'dashboard', url: '/dt_availability' },
+                { title: 'MYTO Dashboard', icon: 'dashboard', url: '/myto_dashboard' },
+                { title: 'IDB Dashboard', icon: 'dashboard', url: '/idb_dashboard' },
+                { title: 'IDB Events', icon: 'dashboard', url: '/idb_events' },
             ]
+        }
+    },
+    methods: {
+        isActive(item) {
+            return this.$route.path === item.url
         }
     }
 }

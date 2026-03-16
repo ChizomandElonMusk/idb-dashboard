@@ -2,206 +2,168 @@
     <div class="dashboard-wrapper">
         <SideNav />
         <main class="main-content">
-            <div class="row header-row">
-                <div class="col s12">
-                    <h5 class="light">Control Center Dashboard</h5>
-                </div>
+            <div class="avail-header">
+                <h5 class="avail-title">Control Center Dashboard</h5>
             </div>
 
-
-
-            <!-- this is the dashboard section -->
-
+            <!-- dashboard section -->
             <div class="row" id="dashboard">
-                <div class="row">
-                    <div class="col s12 m2">
-                        <div class="card-panel dt-summary-card mini-chart-card" style="padding-bottom: 0px">
-                            <div class="row center-align">
-                                <div class="col s12">
 
+                <!-- Top Stats Row -->
+                <div class="row top-cards-row">
 
-                                    <div class="row">
-                                        <div class="icon-circle red darken-2 col s4" style="margin: 0 auto;">
-                                            <i class="material-icons white-text">router</i>
-                                        </div>
-                                        <div class="col s8">
-                                            <AnimatedValue :value="total_dts" style="font-size: 30px;" />
-                                            <p class="grey-text">Total DTs</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <div class="divider"></div>
-                                        </div>
-                                    </div>
+                    <!-- Card 1: Online Feeders -->
+                    <div class="col s12 m3">
+                        <div class="card-panel top-stat-card">
+                            <div class="top-stat-header">
+                                <div class="top-stat-icon-wrap red-icon-wrap">
+                                    <i class="material-icons top-stat-icon red-icon">device_hub</i>
                                 </div>
-                                <div class="col s6 border-right">
-                                    <h5>
-                                        <AnimatedValue :value="public_dts" />
-                                    </h5>
-                                    <p class="grey-text">Public</p>
+                                <div class="top-stat-info">
+                                    <p class="top-stat-value"><AnimatedValue :value="online_feeders" /></p>
+                                    <p class="top-stat-label">Online feeders</p>
                                 </div>
-                                <div class="col s6">
-                                    <h5>
-                                        <AnimatedValue :value="private_dts" />
-                                    </h5>
-                                    <p class="grey-text">Private</p>
+                            </div>
+                            <div class="top-stat-divider"></div>
+                            <div class="top-stat-sub-row">
+                                <div class="top-stat-sub border-right">
+                                    <p class="sub-label">11kv</p>
+                                    <p class="sub-value"><AnimatedValue :value="kv11" /></p>
+                                </div>
+                                <div class="top-stat-sub">
+                                    <p class="sub-label">33kv</p>
+                                    <p class="sub-value"><AnimatedValue :value="kv33" /></p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
-
-                    <div class="col s12 m2">
-                        <div class="card-panel dt-summary-card mini-chart-card" style="padding-bottom: 0px">
-                            <div class="row center-align">
-                                <div class="col s12">
-
-
-                                    <div class="row">
-                                        <div class="icon-circle red darken-2 col s4" style="margin: 0 auto;">
-                                            <i class="material-icons white-text">router</i>
-                                        </div>
-                                        <div class="col s8">
-                                            <AnimatedValue :value="total_dts" style="font-size: 30px;" />
-                                            <p class="grey-text">Total DTs</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <div class="divider"></div>
-                                        </div>
-                                    </div>
+                    <!-- Card 2: Online DTs -->
+                    <div class="col s12 m3">
+                        <div class="card-panel top-stat-card">
+                            <div class="top-stat-header">
+                                <div class="top-stat-icon-wrap red-icon-wrap">
+                                    <i class="material-icons top-stat-icon red-icon">bolt</i>
                                 </div>
-                                <div class="col s6 border-right">
-                                    <h5>
-                                        <AnimatedValue :value="public_dts" />
-                                    </h5>
-                                    <p class="grey-text">Public</p>
+                                <div class="top-stat-info">
+                                    <p class="top-stat-value"><AnimatedValue :value="online_dts" /></p>
+                                    <p class="top-stat-label">Online DTs</p>
                                 </div>
-                                <div class="col s6">
-                                    <h5>
-                                        <AnimatedValue :value="private_dts" />
-                                    </h5>
-                                    <p class="grey-text">Private</p>
+                            </div>
+                            <div class="top-stat-divider"></div>
+                            <div class="top-stat-sub-row">
+                                <div class="top-stat-sub border-right">
+                                    <p class="sub-label">Public</p>
+                                    <p class="sub-value"><AnimatedValue :value="public_dts" /></p>
+                                </div>
+                                <div class="top-stat-sub">
+                                    <p class="sub-label">Private</p>
+                                    <p class="sub-value"><AnimatedValue :value="private_dts" /></p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
-
-
-
-                    <div class="col s12 m2">
-                        <div class="card-panel dt-summary-card mini-chart-card" style="padding-bottom: 0px">
-                            <div class="row center-align">
-                                <div class="col s12">
-
-
-                                    <div class="row">
-                                        <div class="icon-circle red darken-2 col s4" style="margin: 0 auto;">
-                                            <i class="material-icons white-text">router</i>
-                                        </div>
-                                        <div class="col s8">
-                                            <AnimatedValue :value="total_dts" style="font-size: 30px;" />
-                                            <p class="grey-text">Total DTs</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <div class="divider"></div>
-                                        </div>
-                                    </div>
+                    <!-- Card 3: Total Customer Complaints -->
+                    <div class="col s12 m3">
+                        <div class="card-panel top-stat-card">
+                            <div class="top-stat-header">
+                                <div class="top-stat-icon-wrap blue-icon-wrap">
+                                    <i class="material-icons top-stat-icon blue-icon">group</i>
                                 </div>
-                                <div class="col s6 border-right">
-                                    <h5>
-                                        <AnimatedValue :value="public_dts" />
-                                    </h5>
-                                    <p class="grey-text">Public</p>
+                                <div class="top-stat-info">
+                                    <p class="top-stat-value"><AnimatedValue :value="total_complaints" /></p>
+                                    <p class="top-stat-label">Total Customer Complaints</p>
                                 </div>
-                                <div class="col s6">
-                                    <h5>
-                                        <AnimatedValue :value="private_dts" />
-                                    </h5>
-                                    <p class="grey-text">Private</p>
+                            </div>
+                            <div class="top-stat-divider"></div>
+                            <div class="top-stat-sub-row">
+                                <div class="top-stat-sub border-right">
+                                    <p class="sub-label">Open</p>
+                                    <p class="sub-value"><AnimatedValue :value="open_complaints" /></p>
+                                </div>
+                                <div class="top-stat-sub">
+                                    <p class="sub-label">Closed</p>
+                                    <p class="sub-value"><AnimatedValue :value="closed_complaints" /></p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
-                    <div class="col s6">
-                        <div class="card-panel mini-chart-card" style="padding-bottom: 14px;">
-                            <p class="grey-text text-darken-2 center">Total Customers</p>
-                            <p class="tiny-text black-text">
-                                Metered NMD
-                                <span class="right">
-                                    <AnimatedValue :value="billing_eff" />
-                                </span>
-                            </p>
-                            <div class="progress indigo lighten-4">
-                                <div class="determinate indigo accent-2" :style="{ width: billing_eff }"></div>
+                    <!-- Card 4: Total Customers -->
+                    <div class="col s12 m3">
+                        <div class="card-panel top-stat-card">
+                            <p class="customers-card-title">Total Customers</p>
+                            <div class="progress-item">
+                                <div class="progress-label-row">
+                                    <span class="progress-name">Metered NMD</span>
+                                    <span class="progress-fraction">
+                                        <AnimatedValue :value="nmd_value" />/{{ nmd_total }}
+                                    </span>
+                                </div>
+                                <div class="progress indigo lighten-4" style="height:8px; border-radius:4px;">
+                                    <div class="determinate indigo accent-2" :style="{ width: nmd_pct }"></div>
+                                </div>
                             </div>
-
-                            <p class="tiny-text black-text">
-                                Metered MD
-                                <span class="right">
-                                    <AnimatedValue :value="billing_eff" />
-                                </span>
-                            </p>
-                            <div class="progress green lighten-4">
-                                <div class="determinate green" :style="{ width: billing_eff }"></div>
+                            <div class="progress-item" style="margin-top: 14px;">
+                                <div class="progress-label-row">
+                                    <span class="progress-name">Metered MD</span>
+                                    <span class="progress-fraction">
+                                        <AnimatedValue :value="md_value" />/{{ md_total }}
+                                    </span>
+                                </div>
+                                <div class="progress green lighten-4" style="height:8px; border-radius:4px;">
+                                    <div class="determinate green" :style="{ width: md_pct }"></div>
+                                </div>
                             </div>
-
                         </div>
                     </div>
-
-
 
                 </div>
 
-
-
-                <!-- energy graph -->
+                <!-- Energy + Pie Row -->
                 <div class="row">
-                    <div class="col s9">
-                        <div class="right" style="margin-top:10px;">
-                            <button class="btn-flat btn-small">Day</button>
-                            <button class="btn-flat btn-small">Week</button>
-                            <button class="btn-flat btn-small">Month</button>
-                        </div>
+                    <div class="col s12 m9">
                         <div class="card-panel mini-chart-card" style="padding-bottom: 20px;">
-                            <p class="grey-text text-darken-2 left-align">Energy</p>
-                            <p class="left" style="margin:0 0 10px;">{{ energyTotal }}</p>
-                            <div style="position: relative; height:160px; padding-bottom:20px; overflow:visible;">
+                            <div class="energy-card-header">
+                                <div>
+                                    <p class="energy-card-title">Energy</p>
+                                    <p class="energy-card-value">{{ energyTotal }}</p>
+                                </div>
+                                <div class="energy-period-btns">
+                                    <button class="btn-flat btn-small period-btn">Day</button>
+                                    <button class="btn-flat btn-small period-btn">Week</button>
+                                    <button class="btn-flat btn-small period-btn period-btn-active">Month</button>
+                                    <button class="btn-flat btn-small period-btn period-btn-icon">
+                                        <i class="material-icons tiny">calendar_today</i>
+                                    </button>
+                                    <button class="btn-flat btn-small period-btn period-btn-icon">
+                                        <i class="material-icons tiny">grid_on</i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="position: relative; height:180px; overflow:visible;">
                                 <canvas id="energyChart"></canvas>
                             </div>
-
                         </div>
                     </div>
 
-                    <div class="col s3">
+                    <div class="col s12 m3">
                         <div class="card-panel mini-chart-card">
-                            <p class="grey-text text-darken-2 center">Energy Allocation per Feeder Band</p>
-                            <ChartPie v-if="energyAllocationData" chart-type="pie" :chart-data="energyAllocationData"
-                                :chart-options="pieOptions">
-                                <AnimatedValue :value="energy_allocation" />
-                            </ChartPie>
+                            <p class="pie-card-title center">Energy Allocation per Feeder Band</p>
+                            <ChartPie
+                                v-if="energyAllocationData"
+                                chart-type="pie"
+                                :chart-data="energyAllocationData"
+                                :chart-options="pieOptions"
+                            />
                         </div>
                     </div>
                 </div>
-                <!-- end of energy graph -->
 
-
-
-                <!-- vending allocation -->
+                <!-- Vending & Collection + Doughnut Row -->
                 <div class="row">
-                    <div class="col s9">
+                    <div class="col s12 m9">
                         <div class="card-panel mini-chart-card" style="padding-bottom: 20px;">
                             <div class="vending-card-header">
                                 <span class="vending-card-title">Vending &amp; Collection</span>
@@ -252,90 +214,115 @@
                         </div>
                     </div>
 
-                    <div class="col s3">
+                    <div class="col s12 m3">
                         <div class="card-panel mini-chart-card">
-                            <p class="grey-text text-darken-2 center">Total Feeder</p>
-                            <ChartPie v-if="vendingAllocationData" chart-type="doughnut"
+                            <p class="pie-card-title center">Total Feeder</p>
+                            <ChartPie
+                                v-if="vendingAllocationData"
+                                chart-type="doughnut"
                                 :chart-data="vendingAllocationData"
                                 :chart-options="vendingPieOptions"
                                 :center-text="vending_allocation"
-                                :show-value-legend="true">
-                            </ChartPie>
+                                :show-value-legend="true"
+                            />
                         </div>
                     </div>
                 </div>
-                <!-- end of vending allocation -->
 
-
-
-
-
-
-
-
-                
             </div>
             <!-- dashboard ends here -->
-
 
         </main>
     </div>
 </template>
 
 <script>
-
 import SideNav from '~/components/SideNav/SideNav.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import ChartPie from '~/components/ChartPie.vue'
-import MeterCommunication from '~/components/MeterCommunication.vue';
-import Chart from '~/assets/js/Chart.js';
+import Chart from '~/assets/js/Chart.js'
+
 export default {
-    components: {
-        SideNav,
-        AnimatedValue,
-        ChartPie,
-        MeterCommunication,
-    },
+    components: { SideNav, AnimatedValue, ChartPie },
     data() {
         return {
-            feeder_to_dt_loss_data: [
-                { feeder: '11 - IgbobilNJ-T1 - Apata', date: '2024-01-01', band: 'A', total_public_dts: 10, public_dts: 8, total_private_dts: 5, private_dts_energy: '50 MWh' },
-                { feeder: '11 - IgbobilNJ-T1 - Apata', date: '2024-01-02', band: 'B', total_public_dts: 15, public_dts: 12, total_private_dts: 7, private_dts_energy: '70 MWh' },
-                { feeder: '11 - IgbobilNJ-T1 - Apata', date: '2024-01-03', band: 'C', total_public_dts: 20, public_dts: 18, total_private_dts: 10, private_dts_energy: '100 MWh' },
-            ],
-            customer_loss_pct_data: [
-                { feeder: '11 - IgbobilNJ-T1 - Apata', all_customers: 1000, post_md: 800, comms_pct: '80%', total_meters_communicating: 900, prepaid_md: 700, idb_prepay: 50 },
-                { feeder: '11 - IgbobilNJ-T1 - Apata', all_customers: 1500, post_md: 1200, comms_pct: '80%', total_meters_communicating: 1400, prepaid_md: 1100, idb_prepay: 70 },
-                { feeder: '11 - IgbobilNJ-T1 - Apata', all_customers: 2000, post_md: 1800, comms_pct: '90%', total_meters_communicating: 1900, prepaid_md: 1700, idb_prepay: 100 },
-            ],
-            meterValue: 100,
-            energy_total: '0',
-            total_feeders: '0',
-            total_flagged: '0',
-            feeder_loss: '0',
-            feeder_loss_pct: '0%',
-            billing_eff: '0%',
-            md_energy: '0%',
-            nmd_energy: '0%',
-            customer_loss: '0',
-            customer_loss_pct: '0%',
-            atc_c: '0%',
-            total_dts: '0',
+            /* top stat cards */
+            online_feeders: '0',
+            kv11: '0',
+            kv33: '0',
+            online_dts: '0',
             public_dts: '0',
             private_dts: '0',
-            total_customers: '0',
-            energy_allocation: '0',
-            vending_allocation: '0',
+            total_complaints: '0',
+            open_complaints: '0',
+            closed_complaints: '0',
+            nmd_value: '0',
+            nmd_total: '1,033,000',
+            nmd_pct: '0%',
+            md_value: '0',
+            md_total: '7,000',
+            md_pct: '0%',
+            /* vending stats */
             total_customer_vended_today: '0',
             amount_vended_today: '0',
             amount_vended_mtd: '0',
             total_collection_today: '0',
             amount_collected_mtd: '0',
-            doughnutData: null,
+            /* chart data */
+            energy_allocation: '0',
+            vending_allocation: '0',
             energyAllocationData: null,
-            pieOptions: { responsive: true, maintainAspectRatio: false },
+            vendingAllocationData: null,
+            pieOptions: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: { display: false },
+                plugins: {
+                    labels: { render: 'label', fontColor: '#fff', fontSize: 11 }
+                }
+            },
             vendingPieOptions: { responsive: true, maintainAspectRatio: false, legend: { display: false } },
-            /* energy chart config */
+            /* energy chart */
+            energyChart: null,
+            energyData: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Energy (MWh)',
+                    data: [30, 25, 43, 38, 28, 32, 36],
+                    borderColor: '#5ebd8d',
+                    backgroundColor: 'rgba(235,250,243,0.6)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#5ebd8d',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2
+                }]
+            },
+            energyOptions: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: { display: false },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    backgroundColor: '#fff',
+                    titleFontColor: '#9b9faa',
+                    bodyFontColor: '#222',
+                    bodyFontStyle: 'bold',
+                    borderColor: '#eee',
+                    borderWidth: 1,
+                    callbacks: {
+                        label: function(tooltipItems) { return tooltipItems.yLabel + ' MWh' }
+                    }
+                },
+                scales: {
+                    xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#aaa' } }],
+                    yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)' }, ticks: { display: false } }]
+                }
+            },
+            energyTotal: '350.00MWh',
+            /* vending chart */
             vendingChart: null,
             vendingData: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -362,186 +349,101 @@ export default {
                     }
                 ]
             },
-            /* options formatted for Chart.js v2.x */
             vendingOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
                 legend: { display: true },
                 tooltips: {
                     callbacks: {
-                        label: function(tooltipItems/*, data*/) {
-                            return tooltipItems.yLabel + ' MWh';
-                        }
+                        label: function(tooltipItems) { return tooltipItems.yLabel + ' MWh' }
                     }
                 },
                 scales: {
-                    xAxes: [{
-                        gridLines: { display: false },
-                        ticks: { fontColor: '#888' }
-                    }],
-                    yAxes: [{
-                        gridLines: { display: false },
-                        ticks: { beginAtZero: true }
-                    }]
+                    xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#888' } }],
+                    yAxes: [{ gridLines: { display: false }, ticks: { beginAtZero: true } }]
                 }
-            },
-            vendingTotal: '350.00MWh',
-            energyChart: null,
-            energyData: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                datasets: [{
-                    label: 'Energy (MWh)',
-                    data: [30, 25, 43, 38, 28, 32, 36],
-                    borderColor: '#5ebd8d',
-                    backgroundColor: '#f9faff',
-                    tension: 0.4,
-                    fill: true,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#5ebd8d'
-                }]
-            },
-            
-            /* options formatted for Chart.js v2.x */
-            energyOptions: {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: { display: false },
-                tooltips: {
-                    callbacks: {
-                        label: function(tooltipItems/*, data*/) {
-                            return tooltipItems.yLabel + ' MWh';
-                        }
-                    }
-                },
-                scales: {
-                    xAxes: [{
-                        gridLines: { display: false },
-                        ticks: { fontColor: '#888' }
-                    }],
-                    yAxes: [{
-                        gridLines: { display: false },
-                        ticks: { beginAtZero: true }
-                    }]
-                }
-            },
-            energyTotal: '350.00MWh'
+            }
         }
     },
-
     methods: {
         getData() {
-            // Fetch data from API and update values
-            // Example stubbed data below
-            const data = {
-                energy_total: '2,345.78',
-                total_feeders: '2',
-                total_flagged: '32',
-                feeder_loss: '151.22 MWh',
-                feeder_loss_pct: '7.87%',
-                billing_eff: '85.75%',
-                md_energy: '85.75%',
-                nmd_energy: '35.75%',
-                customer_loss: '116.91 MWh',
-                customer_loss_pct: '7.87%',
-                atc_c: '7.87%',
-                total_dts: '61',
-                public_dts: '31',
-                private_dts: '30',
-                total_customer_vended_today: '30,400,000',
-                amount_vended_today: '30,400,000',
-                amount_vended_mtd: '2,000,000,000',
-                total_collection_today: '50,000,000',
-                amount_collected_mtd: '7,000,000,000'
-            };
-            Object.assign(this, data);
-            // set customer doughnut chart values
-            this.total_customers = '12,450';
-            const doughnutSegments = [
-                { value: 45, color: '#5f82ef', name: 'NMD Customer' },
-                { value: 30, color: '#93f1ba', name: '' },
-            ];
-            this.doughnutData = {
-                // labels: doughnutSegments.map((_, i) => `${i} ${i + 1}`),
-                labels: doughnutSegments.map(s => s.name),
-                datasets: [{
-                    data: doughnutSegments.map(s => s.value),
-                    backgroundColor: doughnutSegments.map(s => s.color)
-                }]
-            };
-            // set energy_allocation pie chart values
-            this.energy_allocation = '45,200';
+            this.online_feeders = '200'
+            this.kv11 = '150'
+            this.kv33 = '50'
+            this.online_dts = '1200'
+            this.public_dts = '1000'
+            this.private_dts = '200'
+            this.total_complaints = '50'
+            this.open_complaints = '20'
+            this.closed_complaints = '30'
+            this.nmd_value = '900,000'
+            this.nmd_pct = '87%'
+            this.md_value = '5,000'
+            this.md_pct = '71%'
+            this.total_customer_vended_today = '30,400,000'
+            this.amount_vended_today = '30,400,000'
+            this.amount_vended_mtd = '2,000,000,000'
+            this.total_collection_today = '50,000,000'
+            this.amount_collected_mtd = '7,000,000,000'
+
             const energy_allocationSegments = [
                 { value: 40, color: '#5b7cfa', name: 'A' },
                 { value: 25, color: '#6dd4c7', name: 'B' },
                 { value: 15, color: '#c87dff', name: 'C' },
                 { value: 15, color: '#ff6b6b', name: 'D' },
-                { value: 5, color: '#ffa94e', name: 'E' },
-            ];
+                { value: 5,  color: '#ffa94e', name: 'E' },
+            ]
             this.energyAllocationData = {
                 labels: energy_allocationSegments.map(s => s.name),
                 datasets: [{
                     data: energy_allocationSegments.map(s => s.value),
-                    backgroundColor: energy_allocationSegments.map(s => s.color)
+                    backgroundColor: energy_allocationSegments.map(s => s.color),
+                    borderWidth: 0
                 }]
-            };
+            }
 
-
-            // set vending pie chart values
             const vending_allocationSegments = [
                 { value: 188, color: '#5b7cfa', name: 'Band A' },
-                { value: 78, color: '#6dd4c7', name: 'Band B' },
+                { value: 78,  color: '#6dd4c7', name: 'Band B' },
                 { value: 132, color: '#c87dff', name: 'Band C' },
-                { value: 18, color: '#ff6b6b', name: 'Band D' },
-                { value: 5, color: '#ffa94e', name: 'Band E' },
-            ];
-            this.vending_allocation = String(vending_allocationSegments.reduce((sum, s) => sum + s.value, 0));
+                { value: 18,  color: '#ff6b6b', name: 'Band D' },
+                { value: 5,   color: '#ffa94e', name: 'Band E' },
+            ]
+            this.vending_allocation = String(vending_allocationSegments.reduce((sum, s) => sum + s.value, 0))
             this.vendingAllocationData = {
                 labels: vending_allocationSegments.map(s => s.name),
                 datasets: [{
                     data: vending_allocationSegments.map(s => s.value),
-                    backgroundColor: vending_allocationSegments.map(s => s.color)
+                    backgroundColor: vending_allocationSegments.map(s => s.color),
+                    borderWidth: 0
                 }]
-            };
+            }
         }
-        // signIn() {
-        //     M.toast({ html: '<b class=\"yellow-text\">Please wait...</b>' })
-        //     this.$router.push('./dashboard')
-        // }
     },
     mounted() {
-        this.getData(); // Fetch data when component is mounted
-        // initialize energy chart after DOM
-        const ctx = document.getElementById('energyChart').getContext('2d');
+        this.getData()
+
+        const ctx = document.getElementById('energyChart').getContext('2d')
         this.energyChart = new Chart(ctx, {
             type: 'line',
             data: this.energyData,
             options: this.energyOptions
-        });
+        })
 
-        const ctx2 = document.getElementById('vendingChart').getContext('2d');
+        const ctx2 = document.getElementById('vendingChart').getContext('2d')
         this.vendingChart = new Chart(ctx2, {
             type: 'line',
             data: this.vendingData,
             options: this.vendingOptions
-        });
-
-        // var instance = M.Tabs.init(el, options);
-        // Initialize Materialize tabs
-        var el = document.querySelector('.tabs');
-        var instance = M.Tabs.init(el, {});
+        })
     }
 }
 </script>
 
 <style scoped>
 .dashboard-wrapper {
-    background-color: #f8f9fd;
+    background-color: #f0f2f8;
     min-height: 100vh;
-}
-
-.sidenav {
-    width: 260px;
-    border-right: 1px solid #eee;
 }
 
 .main-content {
@@ -550,184 +452,203 @@ export default {
     padding-top: 20px;
 }
 
-.stats-card {
-    border-radius: 12px;
-    position: relative;
+.avail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-.icon-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.avail-title {
+    font-weight: 600;
+    color: #222;
+    margin: 0;
+}
+
+/* ── Top Stat Cards ── */
+.top-cards-row {
+    margin-bottom: 0;
+}
+
+.top-stat-card {
+    border-radius: 14px;
+    padding: 18px 16px 14px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+.top-stat-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.top-stat-icon-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 15px;
+    flex-shrink: 0;
 }
 
-.stats-text .value {
-    font-size: 24px;
-    font-weight: bold;
-    display: inline-block;
-    /* so transform works */
+.red-icon-wrap  { background-color: #fdeaeb; }
+.blue-icon-wrap { background-color: #eaedff; }
+
+.top-stat-icon { font-size: 22px !important; }
+.red-icon  { color: #c0392b; }
+.blue-icon { color: #4a5fa5; }
+
+.top-stat-info {
+    flex: 1;
 }
 
-/* animation class applied while counting */
-.counting {
-    animation: pop 1s ease-out;
+.top-stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
 }
 
-@keyframes pop {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.4);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.stats-text p {
-    margin: 0;
+.top-stat-label {
     font-size: 12px;
+    color: #888;
+    margin: 0;
 }
 
-.badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    border-radius: 4px !important;
+.top-stat-divider {
+    height: 1px;
+    background: #f0f0f0;
+    margin-bottom: 12px;
 }
 
-.mini-chart-card {
-    border-radius: 12px;
-    margin-bottom: 10px;
-    box-sizing: unset;
-}
-
-/* keep certain cards the same height */
-.equal-height {
-    min-height: 260px; /* adjust as needed */
+.top-stat-sub-row {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
-.tiny-text {
-    font-size: 11px;
-    margin-bottom: 5px;
+.top-stat-sub {
+    flex: 1;
+    text-align: center;
+}
+
+.sub-label {
+    font-size: 12px;
+    color: #999;
+    margin: 0 0 2px 0;
+}
+
+.sub-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
 }
 
 .border-right {
     border-right: 1px solid #eee;
 }
 
-/* simple circle indicator used in MD Energy section */
-.circle {
-    display: inline-block;
-    border-radius: 50%;
-    vertical-align: middle;
+/* ── Total Customers Card ── */
+.customers-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin: 0 0 14px 0;
+    text-align: center;
 }
 
-.circle.orange {
-    background-color: orange;
+.progress-item { margin-bottom: 4px; }
+
+.progress-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
 }
 
-.circle.green {
-    background-color: green;
+.progress-name {
+    font-size: 12px;
+    color: #666;
 }
 
-.tabs {
-    background: transparent;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 20px;
-}
-
-.tabs .tab a {
+.progress-fraction {
+    font-size: 11px;
     color: #888;
+}
+
+/* ── Energy Chart Card ── */
+.mini-chart-card {
+    border-radius: 14px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+.energy-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.energy-card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin: 0 0 2px 0;
+}
+
+.energy-card-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+}
+
+.energy-period-btns {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.pie-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    margin: 0 0 10px 0;
+}
+
+/* ── Period Buttons ── */
+.period-btn {
+    color: #aaa;
+    font-size: 12px;
+    padding: 0 10px;
+    border-radius: 6px;
     text-transform: none;
+    height: 30px;
+    line-height: 30px;
 }
 
-.tabs .tab a.active {
-    border-bottom: 2px solid #e91e63;
+.period-btn-active {
+    background: #fff;
+    color: #222;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    border: 1px solid #e8e8e8;
 }
 
-
-/* For thead with orange background */
-table.rounded-header thead.orange {
-    border-radius: 20px;
-    overflow: hidden;
-    display: table-header-group;
-    /* Keep table behavior but allow radius */
+.period-btn-icon {
+    border: 1px solid #eee;
+    border-radius: 6px;
+    color: #888;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
 }
 
-table.rounded-header2 thead.red-accent-4 {
-    border-radius: 20px;
-    overflow: hidden;
-    display: table-header-group;
-    /* Keep table behavior but allow radius */
-}
-
-/* If the above doesn't work, wrap thead in a div */
-table.rounded-header {
-    border-collapse: separate;
-    /* Required for border-radius to work */
-    border-spacing: 0;
-}
-
-table.rounded-header2 {
-    border-collapse: separate;
-    /* Required for border-radius to work */
-    border-spacing: 0;
-}
-
-table.rounded-header thead.orange th {
-    background-color: orange;
-    color: white;
-    padding: 10px 15px;
-}
-
-table.rounded-header2 thead.red-accent-4 th {
-    background-color: #d50000;
-    color: white;
-    padding: 10px 15px;
-}
-
-/* Round all th corners */
-table.rounded-header thead.orange th:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-table.rounded-header2 thead.red-accent-4 th:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-table.rounded-header thead.orange th:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-table.rounded-header2 thead.red-accent-4 th:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-/* This makes the middle th have no radius */
-table.rounded-header thead.orange th:not(:first-child):not(:last-child) {
-    border-radius: 0;
-}
-
-table.rounded-header2 thead.red-accent-4 th:not(:first-child):not(:last-child) {
-    border-radius: 0;
-}
-
-
+/* ── Vending Section ── */
 .vending-card-header {
     display: flex;
     align-items: center;
@@ -736,35 +657,15 @@ table.rounded-header2 thead.red-accent-4 th:not(:first-child):not(:last-child) {
 }
 
 .vending-card-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
-    color: #222;
+    color: #1a1a2e;
 }
 
 .vending-period-btns {
     display: flex;
     align-items: center;
     gap: 2px;
-}
-
-.period-btn {
-    color: #aaa;
-    font-size: 12px;
-    padding: 0 10px;
-    border-radius: 6px;
-}
-
-.period-btn-active {
-    background: #fff;
-    color: #222;
-    font-weight: 600;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-
-.period-btn-icon {
-    border: 1px solid #eee;
-    border-radius: 6px;
-    color: #888;
 }
 
 .vending-stats-grid {
@@ -805,36 +706,15 @@ table.rounded-header2 thead.red-accent-4 th:not(:first-child):not(:last-child) {
     border-radius: 50%;
 }
 
-.vstat-dot-green {
-    border-color: #5ebd8d;
-}
+.vstat-dot-green { border-color: #5ebd8d; }
+.vstat-dot-green::after { background-color: #5ebd8d; }
+.vstat-dot-blue { border-color: #5b7cfa; }
+.vstat-dot-blue::after { background-color: #5b7cfa; }
 
-.vstat-dot-green::after {
-    background-color: #5ebd8d;
-}
-
-.vstat-dot-blue {
-    border-color: #5b7cfa;
-}
-
-.vstat-dot-blue::after {
-    background-color: #5b7cfa;
-}
-
-.vstat-label {
-    color: #666;
-    flex: 1;
-}
-
-.vstat-value {
-    font-weight: 700;
-    color: #222;
-    white-space: nowrap;
-}
+.vstat-label { color: #666; flex: 1; }
+.vstat-value { font-weight: 700; color: #222; white-space: nowrap; }
 
 @media only screen and (max-width: 992px) {
-    .main-content {
-        padding-left: 20px;
-    }
+    .main-content { padding-left: 20px; }
 }
 </style>

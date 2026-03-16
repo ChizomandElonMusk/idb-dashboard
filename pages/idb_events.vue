@@ -4,7 +4,7 @@
         <main class="main-content">
             <div class="row" style="margin-bottom: 0;">
                 <div class="col s12">
-                    <h5 class="page-title">IDB Events</h5>
+                    <h5 class="avail-title">IDB Events</h5>
                     <ul class="tabs">
                         <li class="tab">
                             <a href="#events-dashboard" class="active tab-link dashboard-tab">
@@ -295,9 +295,9 @@ export default {
 </script>
 
 <style scoped>
-.dashboard-wrapper { background-color: #f8f9fd; min-height: 100vh; }
+.dashboard-wrapper { background-color: #f0f2f8; min-height: 100vh; }
 .main-content { padding-left: 280px; padding-right: 20px; padding-top: 20px; }
-.page-title { font-weight: 400; margin-bottom: 8px; }
+.avail-title { font-weight: 600; color: #222; margin: 0; }
 
 /* Tabs */
 .tabs { background: transparent; border-bottom: 1px solid #ddd; margin-bottom: 20px; }
