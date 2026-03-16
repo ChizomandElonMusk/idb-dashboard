@@ -4,8 +4,12 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _084026bd = () => interopDefault(import('../pages/availability_summary.vue' /* webpackChunkName: "pages/availability_summary" */))
 const _912cc572 = () => interopDefault(import('../pages/control_center_dashboard.vue' /* webpackChunkName: "pages/control_center_dashboard" */))
+const _e62b2802 = () => interopDefault(import('../pages/dt_availability.vue' /* webpackChunkName: "pages/dt_availability" */))
 const _61667891 = () => interopDefault(import('../pages/idb_dashboard.vue' /* webpackChunkName: "pages/idb_dashboard" */))
+const _20bd9bec = () => interopDefault(import('../pages/idb_events.vue' /* webpackChunkName: "pages/idb_events" */))
+const _a9b92e92 = () => interopDefault(import('../pages/myto_dashboard.vue' /* webpackChunkName: "pages/myto_dashboard" */))
 const _16c57c67 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -20,13 +24,29 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/availability_summary",
+    component: _084026bd,
+    name: "availability_summary"
+  }, {
     path: "/control_center_dashboard",
     component: _912cc572,
     name: "control_center_dashboard"
   }, {
+    path: "/dt_availability",
+    component: _e62b2802,
+    name: "dt_availability"
+  }, {
     path: "/idb_dashboard",
     component: _61667891,
     name: "idb_dashboard"
+  }, {
+    path: "/idb_events",
+    component: _20bd9bec,
+    name: "idb_events"
+  }, {
+    path: "/myto_dashboard",
+    component: _a9b92e92,
+    name: "myto_dashboard"
   }, {
     path: "/",
     component: _16c57c67,

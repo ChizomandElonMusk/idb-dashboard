@@ -5,7 +5,7 @@
       <div class="chart-center-text" v-if="centerText">{{ centerText }}</div>
     </div>
     <div class="chart-legend" v-if="showValueLegend && chartData">
-      <div class="legend-grid">
+      <div class="legend-grid" :style="{ gridTemplateColumns: `repeat(${legendCols}, 1fr)` }">
         <div class="legend-item" v-for="(label, i) in chartData.labels" :key="i">
           <span class="legend-dot" :style="{ backgroundColor: chartData.datasets[0].backgroundColor[i] }"></span>
           <span class="legend-label">{{ label }}</span>
@@ -41,6 +41,10 @@ export default {
     showValueLegend: {
       type: Boolean,
       default: false
+    },
+    legendCols: {
+      type: Number,
+      default: 2
     }
   },
   data() {
@@ -107,7 +111,6 @@ export default {
 
 .legend-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 8px 16px;
 }
 

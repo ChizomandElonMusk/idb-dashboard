@@ -2,18 +2,38 @@
     <div class="dashboard-wrapper">
         <SideNav />
         <main class="main-content">
-            <div class="row header-row">
+            <div class="row header-row" style="margin-bottom: 0;">
                 <div class="col s12">
                     <h5 class="light">IDB Dashboard</h5>
-                    <div class="tabs-container">
-                        <ul class="tabs tabs-transparent">
-                            <li class="tab"><a class="active pink-text" href="#dashboard">Dashboard</a></li>
-                            <li class="tab"><a class="active pink-text" href="#feeder-loss">Feeder to DT loss Table</a>
-                            </li>
-                            <li class="tab"><a class="active pink-text" href="#customer-loss">Customer to DT loss
-                                    Table</a></li>
-                        </ul>
-                    </div>
+                    <ul class="tabs">
+                        <li class="tab">
+                            <a href="#dashboard" class="active tab-link dashboard-tab">
+                                <i class="material-icons tiny tab-icon">speed</i> Dashboard
+                            </a>
+                        </li>
+                        <li class="tab">
+                            <a href="#feeder-loss" class="tab-link feeder-tab">
+                                <i class="material-icons tiny tab-icon">apps</i> Feeder to DT loss Table
+                            </a>
+                        </li>
+                        <li class="tab">
+                            <a href="#customer-loss" class="tab-link customer-tab">
+                                <i class="material-icons tiny tab-icon">apps</i> Customer to DT loss Table
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-row-right">
+                <div class="filter-pill">
+                    <span class="filter-label">All feeders</span>
+                    <i class="material-icons filter-arrow">arrow_drop_down</i>
+                </div>
+                <div class="filter-pill">
+                    <span class="filter-label">Date</span>
+                    <i class="material-icons" style="font-size:18px; color:#888;">calendar_today</i>
                 </div>
             </div>
 
@@ -154,9 +174,14 @@
                         <div class="card-panel mini-chart-card">
                             <p class="grey-text text-darken-2 center">Total Customers</p>
                             <ChartPie v-if="doughnutData" chart-type="doughnut" :chart-data="doughnutData"
-                                :chart-options="pieOptions">
-                                <AnimatedValue :value="total_customers" />
-                            </ChartPie>
+                                :chart-options="pieOptions" :center-text="total_customers" />
+                            <div class="chart-legend-list">
+                                <div class="cleg-item" v-for="item in customerLegend" :key="item.label">
+                                    <span class="cleg-dot" :style="{ backgroundColor: item.color }"></span>
+                                    <span class="cleg-label">{{ item.label }}</span>
+                                    <span class="cleg-val">{{ item.value }}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -164,9 +189,14 @@
                         <div class="card-panel mini-chart-card">
                             <p class="grey-text text-darken-2 center">Revenue</p>
                             <ChartPie v-if="revenueData" chart-type="pie" :chart-data="revenueData"
-                                :chart-options="pieOptions">
-                                <AnimatedValue :value="revenue" />
-                            </ChartPie>
+                                :chart-options="pieOptions" />
+                            <div class="chart-legend-list">
+                                <div class="cleg-item" v-for="item in revenueLegend" :key="item.label">
+                                    <span class="cleg-dot" :style="{ backgroundColor: item.color }"></span>
+                                    <span class="cleg-label">{{ item.label }}</span>
+                                    <span class="cleg-val">{{ item.value }}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -185,7 +215,6 @@
                                     <span class="circle blue"
                                         style="width: 10px; height: 10px; display: inline-block; margin-left: 5px;"></span>
                                     <span style="font-size: 12px;">MD Energy</span>
-
                                     <span>336.79</span>
                                     <span>80.93%</span>
                                 </p>
@@ -195,8 +224,8 @@
                                     <span class="circle green"
                                         style="width: 10px; height: 10px; display: inline-block; margin-left: 5px;"></span>
                                     <span style="font-size: 12px;">NMD Energy</span>
-                                    <span>336.79</span>
-                                    <span>80.93%</span>
+                                    <span>1,429.65k</span>
+                                    <span>19.07%</span>
                                 </p>
                             </div>
                         </div>
@@ -204,8 +233,8 @@
 
                     <div class="col s12 m3">
                         <div class="card-panel mini-chart-card" style="padding-bottom: 60px;">
+                            <p class="grey-text text-darken-2 center">Meter Communication</p>
                             <MeterCommunication :percentage="meterValue" />
-
                         </div>
                     </div>
 
@@ -349,7 +378,7 @@ export default {
                 { feeder: '11 - IgbobilNJ-T1 - Apata', all_customers: 1500, post_md: 1200, comms_pct: '80%', total_meters_communicating: 1400, prepaid_md: 1100, idb_prepay: 70, dt_consumption: '81,807.62', idb_prepay_consumption: '48,000.42', md_prepay_consumption: '15.33', postpaid_consumption: '15,114.30', idb_md_consumption: '16,692.89', ce: '80.93%', be: '85.75%', atc: '7.87%', current_loss: '7.87%', customer_to_dt_loss: '18,0828.35' },
                 { feeder: '11 - IgbobilNJ-T1 - Apata', all_customers: 2000, post_md: 1800, comms_pct: '90%', total_meters_communicating: 1900, prepaid_md: 1700, idb_prepay: 100, dt_consumption: '81,807', idb_prepay_consumption: '48,000.42', md_prepay_consumption: '15.33', postpaid_consumption: '15,114.30', idb_md_consumption: '16,692.89', ce: '80.93%', be: '85.75%', atc: '7.87%', current_loss: '7.87%', customer_to_dt_loss: '18,0828.35' },
             ],
-            meterValue: 100,
+            meterValue: 0,
             energy_total: '0',
             total_feeders: '0',
             total_flagged: '0',
@@ -368,7 +397,15 @@ export default {
             revenue: '0',
             doughnutData: null,
             revenueData: null,
-            pieOptions: { responsive: true, maintainAspectRatio: false }
+            pieOptions: { responsive: true, maintainAspectRatio: false, legend: { display: false } },
+            customerLegend: [
+                { label: 'NMD Customers', color: '#5f82ef', value: '88k(78.29%)' },
+                { label: 'MD Customers',  color: '#93f1ba', value: '24.4k(21.71%)' },
+            ],
+            revenueLegend: [
+                { label: 'Revenue Billed',     color: '#f191c5', value: '258.19M(78.29%)' },
+                { label: 'Revenue Collected',  color: '#f2a10a', value: '280.4M(21.71%)' },
+            ]
         }
     },
 
@@ -377,7 +414,7 @@ export default {
             // Fetch data from API and update values
             // Example stubbed data below
             const data = {
-                energy_total: '2,345.78',
+                energy_total: '1,917.66',
                 total_feeders: '2',
                 total_flagged: '32',
                 feeder_loss: '151.22 MWh',
@@ -393,8 +430,9 @@ export default {
                 private_dts: '30'
             };
             Object.assign(this, data);
+            this.meterValue = 93.21;
             // set customer doughnut chart values
-            this.total_customers = '12,450';
+            this.total_customers = '5,390';
             const doughnutSegments = [
                 { value: 45, color: '#5f82ef', name: 'NMD Customer' },
                 { value: 30, color: '#93f1ba', name: '' },
@@ -538,17 +576,45 @@ export default {
 .tabs {
     background: transparent;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 }
 
 .tabs .tab a {
     color: #888;
     text-transform: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.tabs .tab a.active {
-    border-bottom: 2px solid #e91e63;
+.tabs .tab a .tab-icon { font-size: 16px !important; }
+.tabs .tab a.active.dashboard-tab { color: #c0392b; border-bottom: 2px solid #c0392b; }
+.tabs .tab a.active.feeder-tab    { color: #e8941a; border-bottom: 2px solid #e8941a; }
+.tabs .tab a.active.customer-tab  { color: #e8941a; border-bottom: 2px solid #e8941a; }
+.tabs .indicator { display: none; }
+
+/* Filters */
+.filter-row-right {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 16px;
 }
+.filter-pill {
+    display: flex; align-items: center; gap: 6px;
+    border: 1px solid #ddd; border-radius: 8px;
+    padding: 8px 12px; background: #fff; cursor: pointer; min-width: 110px;
+}
+.filter-label { font-size: 13px; color: #555; }
+.filter-arrow { color: #888; font-size: 20px !important; }
+
+/* Chart legend */
+.chart-legend-list { margin-top: 10px; }
+.cleg-item { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+.cleg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.cleg-label { font-size: 12px; color: #555; flex: 1; }
+.cleg-val { font-size: 12px; font-weight: 700; color: #222; }
 
 
 /* For thead with orange background */
