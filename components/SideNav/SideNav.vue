@@ -5,6 +5,9 @@
                 <img src="~/assets/images/logo.png" alt="Logo" class="responsive-img"
                     style="width: 60px; margin-top: 20px;">
             </li>
+            <li class="theme-toggle-container">
+                <ThemeToggle />
+            </li>
             <li v-for="item in menuItems" :key="item.title" :class="{ active: isActive(item) }">
                 <nuxt-link :to="item.url" :class="{ 'red-text text-darken-2': isActive(item) }">
                     <i class="material-icons">{{ item.icon }}</i>
@@ -26,8 +29,11 @@
 </template>
 
 <script>
+import ThemeToggle from '~/components/ThemeToggle.vue'
+
 export default {
     name: 'SideNav',
+    components: { ThemeToggle },
     data() {
         return {
             menuItems: [
@@ -52,13 +58,18 @@ export default {
 
 <style scoped>
 .dashboard-wrapper {
-    background-color: #f8f9fd;
+    background-color: var(--bg-sidenav);
     min-height: 100vh;
 }
 
 .sidenav {
     width: 260px;
-    border-right: 1px solid #eee;
+    border-right: 1px solid var(--border-color);
+    background-color: var(--bg-sidenav);
+}
+
+.theme-toggle-container {
+    padding: 0 16px;
 }
 
 .main-content {
@@ -110,17 +121,17 @@ export default {
 }
 
 .border-right {
-    border-right: 1px solid #eee;
+    border-right: 1px solid var(--border-color);
 }
 
 .tabs {
     background: transparent;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-strong);
     margin-bottom: 20px;
 }
 
 .tabs .tab a {
-    color: #888;
+    color: var(--text-muted);
     text-transform: none;
 }
 

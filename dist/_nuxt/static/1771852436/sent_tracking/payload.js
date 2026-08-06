@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/sent_tracking", {data:[{}],fetch:{},mutations:void 0});

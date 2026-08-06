@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/customer_complaints", {data:[{}],fetch:{},mutations:void 0});

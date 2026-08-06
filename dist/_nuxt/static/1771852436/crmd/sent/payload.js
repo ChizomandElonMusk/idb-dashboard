@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/crmd/sent", {data:[{}],fetch:{},mutations:void 0});

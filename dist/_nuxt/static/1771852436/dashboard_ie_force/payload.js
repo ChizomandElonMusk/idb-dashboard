@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/dashboard_ie_force", {data:[{}],fetch:{},mutations:void 0});

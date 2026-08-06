@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/crmd/switch_to_quantitative", {data:[{}],fetch:{},mutations:void 0});

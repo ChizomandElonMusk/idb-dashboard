@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/customer_details_validation", {data:[{}],fetch:{},mutations:void 0});

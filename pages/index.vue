@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="row full-width">
-      <div class="col s12 m6" style="margin-top: 130px">
+      <div class="col s12 m6" style="margin-top: 130px; position: relative;">
+        <client-only>
+          <button type="button" class="login-theme-toggle" @click="$theme.toggle()">
+            <i class="material-icons">{{ $theme.isDark ? 'light_mode' : 'dark_mode' }}</i>
+          </button>
+        </client-only>
         <!-- <Logo /> -->
         <div class="container">
           <div class="row">
@@ -231,6 +236,26 @@ export default {
 </script>
 
 <style scoped>
+.login-theme-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card-alt);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+}
+.login-theme-toggle .material-icons {
+  font-size: 20px !important;
+}
+
 /* ── Electric Panel ── */
 .electric-panel {
   position: relative;

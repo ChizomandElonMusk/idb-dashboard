@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/myto_dashboard", {data:[{}],fetch:{},mutations:void 0});

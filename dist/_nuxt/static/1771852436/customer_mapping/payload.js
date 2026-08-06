@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/customer_mapping", {data:[{}],fetch:{},mutations:void 0});

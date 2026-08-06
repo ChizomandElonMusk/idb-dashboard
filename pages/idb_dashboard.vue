@@ -476,13 +476,13 @@ export default {
 
 <style scoped>
 .dashboard-wrapper {
-    background-color: #f0f2f8;
+    background-color: var(--bg-page);
     min-height: 100vh;
 }
 
 .sidenav {
     width: 260px;
-    border-right: 1px solid #eee;
+    border-right: 1px solid var(--border-color);
 }
 
 .main-content {
@@ -493,7 +493,7 @@ export default {
 
 .avail-title {
     font-weight: 600;
-    color: #222;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -561,7 +561,7 @@ export default {
 }
 
 .border-right {
-    border-right: 1px solid #eee;
+    border-right: 1px solid var(--border-color);
 }
 
 /* simple circle indicator used in MD Energy section */
@@ -581,12 +581,12 @@ export default {
 
 .tabs {
     background: transparent;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-strong);
     margin-bottom: 8px;
 }
 
 .tabs .tab a {
-    color: #888;
+    color: var(--text-muted);
     text-transform: none;
     font-size: 14px;
     display: flex;
@@ -609,18 +609,18 @@ export default {
 }
 .filter-pill {
     display: flex; align-items: center; gap: 6px;
-    border: 1px solid #ddd; border-radius: 8px;
-    padding: 8px 12px; background: #fff; cursor: pointer; min-width: 110px;
+    border: 1px solid var(--border-strong); border-radius: 8px;
+    padding: 8px 12px; background: var(--bg-card); cursor: pointer; min-width: 110px;
 }
-.filter-label { font-size: 13px; color: #555; }
-.filter-arrow { color: #888; font-size: 20px !important; }
+.filter-label { font-size: 13px; color: var(--text-secondary); }
+.filter-arrow { color: var(--text-muted); font-size: 20px !important; }
 
 /* Chart legend */
 .chart-legend-list { margin-top: 10px; }
 .cleg-item { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
 .cleg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.cleg-label { font-size: 12px; color: #555; flex: 1; }
-.cleg-val { font-size: 12px; font-weight: 700; color: #222; }
+.cleg-label { font-size: 12px; color: var(--text-secondary); flex: 1; }
+.cleg-val { font-size: 12px; font-weight: 700; color: var(--text-primary); }
 
 
 /* For thead with orange background */

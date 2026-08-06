@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'IE Commercial Workforce',
+    title: 'IE IDB',
     htmlAttrs: {
       lang: 'en'
     },
@@ -23,6 +23,11 @@ export default {
       //     type: 'module',
       //     src: 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js'
       // }
+      {
+        innerHTML: `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+        type: 'text/javascript',
+        body: false
+      }
   ]
   },
 
@@ -36,6 +41,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/materialize.js', mode: 'client' },
+    '~/plugins/theme.js',
   ],
 
   generate: {

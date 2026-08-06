@@ -270,7 +270,7 @@ export default {
 
 <style scoped>
 .dashboard-wrapper {
-    background-color: #f0f2f8;
+    background-color: var(--bg-page);
     min-height: 100vh;
 }
 
@@ -282,19 +282,19 @@ export default {
 
 .avail-title {
     font-weight: 600;
-    color: #222;
+    color: var(--text-primary);
     margin: 0;
 }
 
 /* Tabs */
 .tabs {
     background: transparent;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-strong);
     margin-bottom: 20px;
 }
 
 .tabs .tab a {
-    color: #888;
+    color: var(--text-muted);
     text-transform: none;
     font-size: 14px;
     display: flex;
@@ -329,20 +329,20 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-strong);
     border-radius: 8px;
     padding: 8px 12px;
-    background: #fff;
+    background: var(--bg-card);
     cursor: pointer;
 }
 
 .filter-label {
     font-size: 13px;
-    color: #555;
+    color: var(--text-secondary);
 }
 
 .filter-arrow {
-    color: #888;
+    color: var(--text-muted);
     font-size: 20px !important;
 }
 
@@ -359,7 +359,7 @@ export default {
 
 .metric-label {
     font-size: 11px;
-    color: #888;
+    color: var(--text-muted);
     margin: 0 0 8px 0;
     line-height: 1.4;
 }
@@ -371,7 +371,7 @@ export default {
 }
 
 .dark-value {
-    color: #222;
+    color: var(--text-primary);
 }
 
 .green-value {
@@ -394,7 +394,7 @@ export default {
 .trend-title {
     font-size: 15px;
     font-weight: 600;
-    color: #222;
+    color: var(--text-primary);
 }
 
 .period-btns {
@@ -405,7 +405,7 @@ export default {
 
 .period-btn {
     font-size: 13px;
-    color: #9b9faa;
+    color: var(--text-faint);
     padding: 0 10px;
     height: 32px;
     line-height: 32px;
@@ -414,15 +414,15 @@ export default {
 }
 
 .active-period {
-    color: #222;
+    color: var(--text-primary);
     font-weight: 600;
-    border: 1px solid #ddd;
-    background: #fff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card-alt);
+    box-shadow: 0 1px 3px var(--shadow-color);
 }
 
 .icon-btn {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-strong);
     border-radius: 6px;
     padding: 0 8px;
     display: flex;
@@ -434,7 +434,7 @@ export default {
     gap: 24px;
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid var(--divider);
 }
 
 .legend-item {
@@ -442,7 +442,7 @@ export default {
     align-items: center;
     gap: 8px;
     font-size: 13px;
-    color: #555;
+    color: var(--text-secondary);
 }
 
 .legend-ring {
@@ -493,21 +493,21 @@ export default {
 }
 
 .dt-table tbody tr td {
-    background: #fff;
+    background: var(--bg-card);
     padding: 12px 16px;
     font-size: 13px;
-    color: #444;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .dt-table tbody tr td:first-child {
-    border-left: 1px solid #eee;
+    border-left: 1px solid var(--border-color);
     border-radius: 8px 0 0 8px;
 }
 
 .dt-table tbody tr td:last-child {
-    border-right: 1px solid #eee;
+    border-right: 1px solid var(--border-color);
     border-radius: 0 8px 8px 0;
 }
 

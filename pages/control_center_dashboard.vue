@@ -442,7 +442,7 @@ export default {
 
 <style scoped>
 .dashboard-wrapper {
-    background-color: #f0f2f8;
+    background-color: var(--bg-page);
     min-height: 100vh;
 }
 
@@ -461,7 +461,7 @@ export default {
 
 .avail-title {
     font-weight: 600;
-    color: #222;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -474,7 +474,7 @@ export default {
     border-radius: 14px;
     padding: 18px 16px 14px;
     margin-bottom: 12px;
-    background: #fff;
+    background: var(--bg-card);
 }
 
 .top-stat-header {
@@ -508,20 +508,20 @@ export default {
 .top-stat-value {
     font-size: 28px;
     font-weight: 700;
-    color: #1a1a2e;
+    color: var(--text-primary);
     margin: 0 0 2px 0;
     line-height: 1.1;
 }
 
 .top-stat-label {
     font-size: 12px;
-    color: #888;
+    color: var(--text-muted);
     margin: 0;
 }
 
 .top-stat-divider {
     height: 1px;
-    background: #f0f0f0;
+    background: var(--divider);
     margin-bottom: 12px;
 }
 
@@ -536,26 +536,26 @@ export default {
 
 .sub-label {
     font-size: 12px;
-    color: #999;
+    color: var(--text-muted);
     margin: 0 0 2px 0;
 }
 
 .sub-value {
     font-size: 20px;
     font-weight: 700;
-    color: #1a1a2e;
+    color: var(--text-primary);
     margin: 0;
 }
 
 .border-right {
-    border-right: 1px solid #eee;
+    border-right: 1px solid var(--border-color);
 }
 
 /* ── Total Customers Card ── */
 .customers-card-title {
     font-size: 13px;
     font-weight: 600;
-    color: #555;
+    color: var(--text-secondary);
     margin: 0 0 14px 0;
     text-align: center;
 }
@@ -571,19 +571,19 @@ export default {
 
 .progress-name {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 .progress-fraction {
     font-size: 11px;
-    color: #888;
+    color: var(--text-muted);
 }
 
 /* ── Energy Chart Card ── */
 .mini-chart-card {
     border-radius: 14px;
     margin-bottom: 12px;
-    background: #fff;
+    background: var(--bg-card);
 }
 
 .energy-card-header {
@@ -596,14 +596,14 @@ export default {
 .energy-card-title {
     font-size: 15px;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--text-primary);
     margin: 0 0 2px 0;
 }
 
 .energy-card-value {
     font-size: 22px;
     font-weight: 700;
-    color: #1a1a2e;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -616,13 +616,13 @@ export default {
 .pie-card-title {
     font-size: 13px;
     font-weight: 600;
-    color: #444;
+    color: var(--text-secondary);
     margin: 0 0 10px 0;
 }
 
 /* ── Period Buttons ── */
 .period-btn {
-    color: #aaa;
+    color: var(--text-faint);
     font-size: 12px;
     padding: 0 10px;
     border-radius: 6px;
@@ -632,17 +632,17 @@ export default {
 }
 
 .period-btn-active {
-    background: #fff;
-    color: #222;
+    background: var(--bg-card-alt);
+    color: var(--text-primary);
     font-weight: 600;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
-    border: 1px solid #e8e8e8;
+    box-shadow: 0 1px 4px var(--shadow-color);
+    border: 1px solid var(--border-color);
 }
 
 .period-btn-icon {
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
     border-radius: 6px;
-    color: #888;
+    color: var(--text-muted);
     padding: 0 8px;
     display: flex;
     align-items: center;
@@ -659,7 +659,7 @@ export default {
 .vending-card-title {
     font-size: 15px;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--text-primary);
 }
 
 .vending-period-btns {
@@ -711,8 +711,8 @@ export default {
 .vstat-dot-blue { border-color: #5b7cfa; }
 .vstat-dot-blue::after { background-color: #5b7cfa; }
 
-.vstat-label { color: #666; flex: 1; }
-.vstat-value { font-weight: 700; color: #222; white-space: nowrap; }
+.vstat-label { color: var(--text-secondary); flex: 1; }
+.vstat-value { font-weight: 700; color: var(--text-primary); white-space: nowrap; }
 
 @media only screen and (max-width: 992px) {
     .main-content { padding-left: 20px; }

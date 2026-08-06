@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/vsm-checklist", {data:[{}],fetch:{},mutations:void 0});

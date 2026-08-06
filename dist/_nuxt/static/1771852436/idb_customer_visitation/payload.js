@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/idb_customer_visitation", {data:[{}],fetch:{},mutations:void 0});

@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/energy_theft", {data:[{}],fetch:{},mutations:void 0});

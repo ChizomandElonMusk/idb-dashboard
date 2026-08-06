@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/nmd-activity-checklist", {data:[{}],fetch:{},mutations:void 0});

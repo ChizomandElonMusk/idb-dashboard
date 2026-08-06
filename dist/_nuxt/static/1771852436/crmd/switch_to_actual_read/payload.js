@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/crmd/switch_to_actual_read", {data:[{}],fetch:{},mutations:void 0});

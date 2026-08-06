@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/control_center_dashboard", {data:[{}],fetch:{},mutations:void 0});

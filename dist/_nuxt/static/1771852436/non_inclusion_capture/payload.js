@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/non_inclusion_capture", {data:[{}],fetch:{},mutations:void 0});

@@ -99,7 +99,7 @@ export default {
   height: 200px; /* Full circle diameter */
   width: 200px;
   border-radius: 50%;
-  background-color: #eee;
+  background-color: var(--meter-track);
   /* Smooth transition for the background color fill */
   transition: background-image 0.5s ease;
 }
@@ -111,7 +111,7 @@ export default {
   height: 160px;
   width: 160px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--bg-card);
   z-index: 2;
 }
 
@@ -121,7 +121,7 @@ export default {
   left: 100px;
   height: 16px;
   width: 16px;
-  background-color: #333;
+  background-color: var(--meter-needle);
   border-radius: 50%;
   z-index: 5;
   /* CRITICAL: The transition property must be here */
@@ -137,7 +137,7 @@ export default {
   transform: translateX(-50%);
   width: 4px;
   height: 70px;
-  background-color: #333;
+  background-color: var(--meter-needle);
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
 

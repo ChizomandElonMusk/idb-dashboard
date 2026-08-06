@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/customer_categorization", {data:[{}],fetch:{},mutations:void 0});

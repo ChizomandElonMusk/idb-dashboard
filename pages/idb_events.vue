@@ -295,13 +295,13 @@ export default {
 </script>
 
 <style scoped>
-.dashboard-wrapper { background-color: #f0f2f8; min-height: 100vh; }
+.dashboard-wrapper { background-color: var(--bg-page); min-height: 100vh; }
 .main-content { padding-left: 280px; padding-right: 20px; padding-top: 20px; }
-.avail-title { font-weight: 600; color: #222; margin: 0; }
+.avail-title { font-weight: 600; color: var(--text-primary); margin: 0; }
 
 /* Tabs */
-.tabs { background: transparent; border-bottom: 1px solid #ddd; margin-bottom: 20px; }
-.tabs .tab a { color: #888; text-transform: none; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.tabs { background: transparent; border-bottom: 1px solid var(--border-strong); margin-bottom: 20px; }
+.tabs .tab a { color: var(--text-muted); text-transform: none; font-size: 14px; display: flex; align-items: center; gap: 6px; }
 .tabs .tab a .tab-icon { font-size: 16px !important; }
 .tabs .tab a.active.dashboard-tab { color: #c0392b; border-bottom: 2px solid #c0392b; }
 .tabs .tab a.active.event-tab     { color: #e8941a; border-bottom: 2px solid #e8941a; }
@@ -317,12 +317,12 @@ export default {
 }
 .grey-icon  { background-color: #e8eaf0; color: #555; }
 .green-icon { background-color: #22c55e; color: #fff; }
-.stat-value { font-size: 24px; font-weight: 700; color: #222; margin: 0 0 2px 0; }
-.stat-label { font-size: 12px; color: #888; margin: 0; }
+.stat-value { font-size: 24px; font-weight: 700; color: var(--text-primary); margin: 0 0 2px 0; }
+.stat-label { font-size: 12px; color: var(--text-muted); margin: 0; }
 
 /* Chart Cards */
 .chart-card { border-radius: 12px; padding: 16px; margin-bottom: 10px; }
-.chart-title { font-size: 14px; font-weight: 600; color: #222; margin: 0 0 10px 0; }
+.chart-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin: 0 0 10px 0; }
 
 /* Small charts (Event Status + Vending) override ChartPie canvas height */
 .small-chart ::v-deep .chart-canvas-container { height: 140px; }
@@ -331,41 +331,41 @@ export default {
 .event-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 8px; margin-top: 12px; }
 .event-legend-item { display: flex; align-items: center; gap: 5px; }
 .eleg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.eleg-name { font-size: 11px; color: #555; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.eleg-pct { font-size: 11px; font-weight: 600; color: #222; white-space: nowrap; }
+.eleg-name { font-size: 11px; color: var(--text-secondary); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.eleg-pct { font-size: 11px; font-weight: 600; color: var(--text-primary); white-space: nowrap; }
 
 /* Event Status / Vending legend */
 .status-legend { display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap; }
 .status-legend-item { display: flex; align-items: center; gap: 6px; }
 .sleg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.sleg-label { font-size: 12px; color: #555; }
-.sleg-val { font-size: 12px; font-weight: 700; color: #222; }
+.sleg-label { font-size: 12px; color: var(--text-secondary); }
+.sleg-val { font-size: 12px; font-weight: 700; color: var(--text-primary); }
 
 /* Event Names List (right column) */
 .event-list-card { border-radius: 12px; padding: 16px; }
 .event-list-header {
     display: flex; justify-content: space-between;
-    font-size: 13px; font-weight: 700; color: #222;
-    padding-bottom: 10px; border-bottom: 1px solid #f0f0f0; margin-bottom: 6px;
+    font-size: 13px; font-weight: 700; color: var(--text-primary);
+    padding-bottom: 10px; border-bottom: 1px solid var(--divider); margin-bottom: 6px;
 }
 .event-list-row {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 7px 0; border-bottom: 1px solid #f8f8f8;
+    padding: 7px 0; border-bottom: 1px solid var(--divider);
 }
 .elist-left { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .elist-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.elist-name { font-size: 12px; color: #444; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
-.elist-count { font-size: 12px; font-weight: 700; color: #222; white-space: nowrap; }
+.elist-name { font-size: 12px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+.elist-count { font-size: 12px; font-weight: 700; color: var(--text-primary); white-space: nowrap; }
 
 /* Filters */
 .filter-row-right { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 16px; }
 .filter-pill {
     display: flex; align-items: center; justify-content: space-between; gap: 6px;
-    border: 1px solid #ddd; border-radius: 8px; padding: 8px 12px; background: #fff;
+    border: 1px solid var(--border-strong); border-radius: 8px; padding: 8px 12px; background: var(--bg-card);
     cursor: pointer; min-width: 120px;
 }
-.filter-label { font-size: 13px; color: #555; }
-.filter-arrow { color: #888; font-size: 20px !important; }
+.filter-label { font-size: 13px; color: var(--text-secondary); }
+.filter-arrow { color: var(--text-muted); font-size: 20px !important; }
 
 /* Tables */
 .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -376,11 +376,11 @@ export default {
 .ev-table thead tr th:first-child { border-radius: 10px 0 0 10px; }
 .ev-table thead tr th:last-child  { border-radius: 0 10px 10px 0; }
 .ev-table tbody tr td {
-    background: #fff; padding: 12px 16px; font-size: 13px; color: #444;
-    border-top: 1px solid #eee; border-bottom: 1px solid #eee;
+    background: var(--bg-card); padding: 12px 16px; font-size: 13px; color: var(--text-secondary);
+    border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
 }
-.ev-table tbody tr td:first-child { border-left: 1px solid #eee; border-radius: 8px 0 0 8px; }
-.ev-table tbody tr td:last-child  { border-right: 1px solid #eee; border-radius: 0 8px 8px 0; }
+.ev-table tbody tr td:first-child { border-left: 1px solid var(--border-color); border-radius: 8px 0 0 8px; }
+.ev-table tbody tr td:last-child  { border-right: 1px solid var(--border-color); border-radius: 0 8px 8px 0; }
 
 @media only screen and (max-width: 992px) {
     .main-content { padding-left: 20px; }

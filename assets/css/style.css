@@ -6,6 +6,180 @@
  * Made By MaterializeCSS.com
  */
 
+/* ============================================================
+   Theme tokens (light default / dark override)
+   ============================================================ */
+:root {
+  --bg-page: #f0f2f8;
+  --bg-sidenav: #f8f9fd;
+  --bg-card: #ffffff;
+  --bg-card-alt: #f7f8fc;
+  --bg-input: #ffffff;
+  --bg-hover: rgba(0, 0, 0, 0.04);
+  --bg-stripe: rgba(242, 242, 242, 0.5);
+
+  --text-primary: #222222;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --text-faint: #aaaaaa;
+
+  --border-color: #eeeeee;
+  --border-strong: #dddddd;
+  --divider: #f0f0f0;
+
+  --shadow-color: rgba(0, 0, 0, 0.08);
+
+  --meter-track: #eeeeee;
+  --meter-needle: #333333;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg-page: #12121a;
+  --bg-sidenav: #17171f;
+  --bg-card: #1e1e29;
+  --bg-card-alt: #23232f;
+  --bg-input: #23232f;
+  --bg-hover: rgba(255, 255, 255, 0.06);
+  --bg-stripe: rgba(255, 255, 255, 0.04);
+
+  --text-primary: #ececf2;
+  --text-secondary: #b7b7c4;
+  --text-muted: #8b8b99;
+  --text-faint: #6f6f7d;
+
+  --border-color: #2c2c3a;
+  --border-strong: #383846;
+  --divider: #2a2a37;
+
+  --shadow-color: rgba(0, 0, 0, 0.4);
+
+  --meter-track: #33333f;
+  --meter-needle: #ececf2;
+
+  color-scheme: dark;
+}
+
+[data-theme="dark"] body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+}
+
+/* Materialize base surfaces */
+[data-theme="dark"] .card-panel,
+[data-theme="dark"] .card,
+[data-theme="dark"] .dropdown-content,
+[data-theme="dark"] .collapsible,
+[data-theme="dark"] .modal {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .sidenav {
+  background-color: var(--bg-sidenav);
+}
+
+[data-theme="dark"] .sidenav li > a {
+  color: var(--text-secondary);
+}
+
+/* Tables */
+[data-theme="dark"] table.striped > tbody > tr:nth-child(odd) {
+  background-color: var(--bg-stripe);
+}
+
+[data-theme="dark"] table.highlight > tbody > tr:hover {
+  background-color: var(--bg-hover);
+}
+
+[data-theme="dark"] td,
+[data-theme="dark"] th {
+  color: var(--text-primary);
+}
+
+/* Text utility classes */
+[data-theme="dark"] .grey-text {
+  color: #9a9aa8 !important;
+}
+[data-theme="dark"] .grey-text.text-darken-1,
+[data-theme="dark"] .grey-text.text-darken-2,
+[data-theme="dark"] .grey-text.text-darken-3,
+[data-theme="dark"] .grey-text.text-darken-4 {
+  color: var(--text-secondary) !important;
+}
+[data-theme="dark"] .black-text {
+  color: var(--text-primary) !important;
+}
+
+/* Form inputs */
+[data-theme="dark"] input[type=text]:not(.browser-default),
+[data-theme="dark"] input[type=password]:not(.browser-default),
+[data-theme="dark"] input[type=email]:not(.browser-default),
+[data-theme="dark"] input[type=search]:not(.browser-default),
+[data-theme="dark"] textarea.materialize-textarea {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-strong);
+}
+
+[data-theme="dark"] .input-field > label {
+  color: var(--text-muted);
+}
+
+[data-theme="dark"] ::placeholder {
+  color: var(--text-faint);
+}
+
+[data-theme="dark"] hr,
+[data-theme="dark"] .divider {
+  background-color: var(--border-color);
+  border-color: var(--border-color);
+}
+
+/* Scrollbar polish */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-page);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 6px;
+}
+
+/* Theme toggle button */
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 8px 0;
+  margin: 6px 0 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card-alt);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.theme-toggle-btn:hover,
+.theme-toggle-btn:focus {
+  background: var(--bg-hover);
+}
+.theme-toggle-btn .material-icons {
+  font-size: 16px !important;
+}
+
+.login-theme-toggle:focus {
+  background: var(--bg-hover);
+  outline: none;
+}
 
  .mini-chart-card canvas { display:block; }
 .mini-chart-card { overflow: visible; }

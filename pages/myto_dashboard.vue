@@ -224,7 +224,7 @@ export default {
 
 <style scoped>
 .dashboard-wrapper {
-    background-color: #f0f2f8;
+    background-color: var(--bg-page);
     min-height: 100vh;
 }
 
@@ -243,7 +243,7 @@ export default {
 
 .avail-title {
     font-weight: 600;
-    color: #222;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -254,15 +254,15 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-strong);
     border-radius: 8px;
     padding: 8px 12px;
-    background: #fff;
+    background: var(--bg-card);
     cursor: pointer;
 }
 
-.filter-label { font-size: 13px; color: #555; }
-.filter-arrow { color: #888; font-size: 20px !important; }
+.filter-label { font-size: 13px; color: var(--text-secondary); }
+.filter-arrow { color: var(--text-muted); font-size: 20px !important; }
 
 /* Total Consumption Card */
 .total-card {
@@ -293,18 +293,18 @@ export default {
     font-size: 26px;
     font-weight: 700;
     margin: 0 0 2px 0;
-    color: #222;
+    color: var(--text-primary);
 }
 
 .total-label {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
     margin: 0 0 2px 0;
 }
 
 .total-date {
     font-size: 12px;
-    color: #999;
+    color: var(--text-muted);
     margin: 0;
 }
 
@@ -331,7 +331,7 @@ export default {
 
 .band-name {
     font-size: 13px;
-    color: #555;
+    color: var(--text-secondary);
     margin: 0 0 4px 0;
     font-weight: 500;
 }
@@ -339,13 +339,13 @@ export default {
 .band-pct {
     font-size: 22px;
     font-weight: 700;
-    color: #222;
+    color: var(--text-primary);
     margin: 0 0 2px 0;
 }
 
 .band-target {
     font-size: 11px;
-    color: #aaa;
+    color: var(--text-faint);
     margin: 4px 0 0 0;
 }
 
@@ -376,7 +376,7 @@ export default {
 .trend-title {
     font-size: 15px;
     font-weight: 600;
-    color: #222;
+    color: var(--text-primary);
 }
 
 .period-btns {
@@ -387,7 +387,7 @@ export default {
 
 .period-btn {
     font-size: 13px;
-    color: #9b9faa;
+    color: var(--text-faint);
     padding: 0 10px;
     height: 32px;
     line-height: 32px;
@@ -396,15 +396,15 @@ export default {
 }
 
 .active-period {
-    color: #222;
+    color: var(--text-primary);
     font-weight: 600;
-    border: 1px solid #ddd;
-    background: #fff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card-alt);
+    box-shadow: 0 1px 3px var(--shadow-color);
 }
 
 .icon-btn {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-strong);
     border-radius: 6px;
     padding: 0 8px;
     display: flex;
@@ -420,7 +420,7 @@ export default {
 .mini-title {
     font-size: 14px;
     font-weight: 600;
-    color: #222;
+    color: var(--text-primary);
     margin: 0 0 12px 0;
 }
 
@@ -447,14 +447,14 @@ export default {
 
 .fleg-name {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
     flex: 1;
 }
 
 .fleg-val {
     font-size: 12px;
     font-weight: 700;
-    color: #222;
+    color: var(--text-primary);
 }
 
 @media only screen and (max-width: 992px) {

@@ -17,6 +17,7 @@ import nuxt_plugin_debug_1e4379f0 from 'nuxt_plugin_debug_1e4379f0' // Source: .
 import nuxt_plugin_index_72373012 from 'nuxt_plugin_index_72373012' // Source: ./customSelect/components/index.js (mode: 'all')
 import nuxt_plugin_axios_21f4de57 from 'nuxt_plugin_axios_21f4de57' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_materialize_3c083100 from 'nuxt_plugin_materialize_3c083100' // Source: ../plugins/materialize.js (mode: 'client')
+import nuxt_plugin_theme_352fc904 from 'nuxt_plugin_theme_352fc904' // Source: ../plugins/theme.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -67,7 +68,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"IE Commercial Workforce","htmlAttrs":{"lang":"en"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"},{"hid":"description","name":"description","content":""},{"name":"format-detection","content":"telephone=no"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"script":[],"style":[]},
+    head: {"title":"IE IDB","htmlAttrs":{"lang":"en"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"},{"hid":"description","name":"description","content":""},{"name":"format-detection","content":"telephone=no"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"script":[{"innerHTML":"(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();","type":"text\u002Fjavascript","body":false}],"style":[]},
 
     router,
     nuxt: {
@@ -202,6 +203,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_materialize_3c083100 === 'function') {
     await nuxt_plugin_materialize_3c083100(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_theme_352fc904 === 'function') {
+    await nuxt_plugin_theme_352fc904(app.context, inject)
   }
 
   // Lock enablePreview in context

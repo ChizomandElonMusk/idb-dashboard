@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/suspended_cv", {data:[{}],fetch:{},mutations:void 0});

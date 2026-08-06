@@ -113,7 +113,7 @@ const valueLabelPlugin = {
                     const value = dataset.data[index];
                     const model = bar._model;
                     ctx.save();
-                    ctx.fillStyle = '#333';
+                    ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ececf2' : '#333';
                     ctx.font = 'bold 11px sans-serif';
                     // horizontal bar: text to the right of bar end
                     if (chart.config.type === 'horizontalBar') {
@@ -147,6 +147,12 @@ export default {
                 cutoutPercentage: 70,
                 legend: { display: false }
             },
+            barCharts: [],
+        }
+    },
+    watch: {
+        '$theme.value'() {
+            this.barCharts.forEach(chart => chart && chart.update());
         }
     },
     methods: {
@@ -162,7 +168,7 @@ export default {
         },
         initCharts() {
             // DT Availability Status — grouped vertical bar
-            new Chart(document.getElementById('dtAvailChart').getContext('2d'), {
+            this.barCharts.push(new Chart(document.getElementById('dtAvailChart').getContext('2d'), {
                 type: 'bar',
                 data: {
                     labels: ['Private DTs', 'Public DTs'],
@@ -181,10 +187,10 @@ export default {
                     }
                 },
                 plugins: [valueLabelPlugin]
-            });
+            }));
 
             // Feeders By Business Unit — horizontal bar
-            new Chart(document.getElementById('feedersByBuChart').getContext('2d'), {
+            this.barCharts.push(new Chart(document.getElementById('feedersByBuChart').getContext('2d'), {
                 type: 'horizontalBar',
                 data: {
                     labels: ['Ikeja', 'Akowonjo', 'Oshodi', 'Ikorodu', 'Shomolu', 'Abule Egba'],
@@ -203,10 +209,10 @@ export default {
                     }
                 },
                 plugins: [valueLabelPlugin]
-            });
+            }));
 
             // DTs By Business Units — horizontal bar
-            new Chart(document.getElementById('dtsByBuChart').getContext('2d'), {
+            this.barCharts.push(new Chart(document.getElementById('dtsByBuChart').getContext('2d'), {
                 type: 'horizontalBar',
                 data: {
                     labels: ['Oshodi', 'Shomolu', 'Ikeja', 'Akowonjo', 'Ikorodu', 'Abule Egba'],
@@ -225,7 +231,7 @@ export default {
                     }
                 },
                 plugins: [valueLabelPlugin]
-            });
+            }));
         }
     },
     mounted() {
@@ -237,7 +243,7 @@ export default {
 
 <style scoped>
 .dashboard-wrapper {
-    background-color: #f0f2f8;
+    background-color: var(--bg-page);
     min-height: 100vh;
 }
 
@@ -257,7 +263,7 @@ export default {
 
 .avail-title {
     font-weight: 600;
-    color: #222;
+    color: var(--text-primary);
     margin: 0;
 }
 
@@ -271,8 +277,8 @@ export default {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: #fff;
-    border: 1px solid #e0e0e0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 6px 14px;
     cursor: pointer;
@@ -281,20 +287,20 @@ export default {
 
 .filter-label {
     font-size: 13px;
-    color: #666;
+    color: var(--text-secondary);
     flex: 1;
 }
 
 .filter-icon {
     font-size: 18px;
-    color: #888;
+    color: var(--text-muted);
 }
 
 /* cards */
 .avail-card {
     border-radius: 14px;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    background: var(--bg-card);
+    box-shadow: 0 2px 8px var(--shadow-color);
     padding: 20px;
     margin-bottom: 16px;
 }
@@ -302,7 +308,7 @@ export default {
 .avail-card-title {
     font-size: 14px;
     font-weight: 600;
-    color: #333;
+    color: var(--text-secondary);
     margin: 0 0 12px;
 }
 
@@ -319,7 +325,7 @@ export default {
     align-items: center;
     gap: 5px;
     font-size: 12px;
-    color: #555;
+    color: var(--text-secondary);
 }
 
 .bar-legend-dot {
@@ -342,7 +348,7 @@ export default {
 
 .bottom-chart-divider {
     width: 1px;
-    background: #eee;
+    background: var(--border-color);
     margin: 0 8px;
 }
 

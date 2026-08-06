@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/newly_installed_ppm", {data:[{}],fetch:{},mutations:void 0});

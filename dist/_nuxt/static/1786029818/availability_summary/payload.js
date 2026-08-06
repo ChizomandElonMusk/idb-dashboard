@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/availability_summary", {data:[{}],fetch:{},mutations:void 0});

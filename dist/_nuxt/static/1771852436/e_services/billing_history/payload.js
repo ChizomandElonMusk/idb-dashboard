@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/e_services/billing_history", {data:[{}],fetch:{},mutations:void 0});

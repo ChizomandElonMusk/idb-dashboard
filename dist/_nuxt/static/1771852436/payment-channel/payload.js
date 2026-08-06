@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/payment-channel", {data:[{}],fetch:{},mutations:void 0});

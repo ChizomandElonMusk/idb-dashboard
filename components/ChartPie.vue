@@ -101,7 +101,7 @@ export default {
   transform: translate(-50%, -50%);
   font-size: 1rem;
   font-weight: bold;
-  color: #222;
+  color: var(--text-primary);
   pointer-events: none;
 }
 
@@ -129,12 +129,12 @@ export default {
 }
 
 .legend-label {
-  color: #555;
+  color: var(--text-secondary);
   flex: 1;
 }
 
 .legend-value {
   font-weight: bold;
-  color: #222;
+  color: var(--text-primary);
 }
 </style>
