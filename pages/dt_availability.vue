@@ -20,6 +20,16 @@
                 </div>
             </div>
 
+            <div v-if="loading" class="state-panel">
+                <PreLoader />
+            </div>
+            <div v-else-if="error" class="state-panel">
+                <p class="state-message">Could not load availability data: {{ error }}</p>
+                <button class="btn-flat retry-btn" @click="getData">Retry</button>
+            </div>
+
+            <template v-else>
+
             <!-- Dashboard Tab -->
             <div id="dt-dashboard">
                 <div class="row filter-row">
@@ -36,15 +46,15 @@
                     <div class="col s12 m4">
                         <div class="row" style="margin-bottom: 0;">
                             <div class="col s6" style="padding: 0 6px 0 0;">
-                                <div class="card-panel metric-card">
+                                <div class="card-panel metric-card pending-card">
                                     <p class="metric-label">DT Target Availability (Hrs)</p>
-                                    <p class="metric-value dark-value"><AnimatedValue :value="dt_target_availability" /></p>
+                                    <CertificationBadge status="pending" />
                                 </div>
                             </div>
                             <div class="col s6" style="padding: 0 0 0 6px;">
-                                <div class="card-panel metric-card">
+                                <div class="card-panel metric-card pending-card">
                                     <p class="metric-label">Feeder Target Availability(Hrs)</p>
-                                    <p class="metric-value dark-value"><AnimatedValue :value="feeder_target_availability" /></p>
+                                    <CertificationBadge status="pending" />
                                 </div>
                             </div>
                         </div>
@@ -67,13 +77,13 @@
                         <div class="row" style="margin-bottom: 0;">
                             <div class="col s6" style="padding: 0 6px 0 0;">
                                 <div class="card-panel metric-card">
-                                    <p class="metric-label">Availability Rate(%)</p>
+                                    <p class="metric-label">DT Meeting 20h+ (%)</p>
                                     <p class="metric-value green-value"><AnimatedValue :value="dt_availability_rate" /></p>
                                 </div>
                             </div>
                             <div class="col s6" style="padding: 0 0 0 6px;">
                                 <div class="card-panel metric-card">
-                                    <p class="metric-label">Availability Rate(%)</p>
+                                    <p class="metric-label">Feeder Meeting 20h+ (%)</p>
                                     <p class="metric-value green-value"><AnimatedValue :value="feeder_availability_rate" /></p>
                                 </div>
                             </div>
@@ -84,15 +94,7 @@
                     <div class="col s12 m8">
                         <div class="card-panel trend-card">
                             <div class="trend-header">
-                                <span class="trend-title">Availability Trend</span>
-                                <div class="period-btns">
-                                    <button class="btn-flat period-btn">Day</button>
-                                    <button class="btn-flat period-btn">Week</button>
-                                    <button class="btn-flat period-btn active-period">Month</button>
-                                    <button class="btn-flat period-btn icon-btn">
-                                        <i class="material-icons" style="font-size:18px;">calendar_today</i>
-                                    </button>
-                                </div>
+                                <span class="trend-title">Availability Trend (last 7 days)</span>
                             </div>
                             <div style="position: relative; height: 250px;">
                                 <canvas id="availabilityChart"></canvas>
@@ -100,11 +102,11 @@
                             <div class="trend-legend">
                                 <span class="legend-item">
                                     <span class="legend-ring green-ring"></span>
-                                    <span class="legend-text">Average Availability</span>
+                                    <span class="legend-text">Average DT Availability</span>
                                 </span>
                                 <span class="legend-item">
                                     <span class="legend-ring blue-ring"></span>
-                                    <span class="legend-text">Average Target</span>
+                                    <span class="legend-text">Average Feeder Availability</span>
                                 </span>
                             </div>
                         </div>
@@ -128,32 +130,34 @@
                         </div>
                     </div>
                 </div>
+                <p class="pending-note" style="margin: 0 0 10px 4px;">Worst-performing DT meters for {{ resolvedDate }}</p>
 
                 <div class="table-wrapper">
                     <table class="dt-table">
                         <thead>
                             <tr>
-                                <th>Date</th>
                                 <th>DT Name</th>
-                                <th>Name_Of _Feeder</th>
+                                <th>Feeder</th>
                                 <th>Band</th>
-                                <th>Consumption</th>
-                                <th>DT Actual<br>Availability</th>
+                                <th>Availability (Hrs)</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(row, i) in dt_availability_data" :key="i">
-                                <td>{{ row.date }}</td>
                                 <td>{{ row.dt_name }}</td>
                                 <td>{{ row.feeder_name }}</td>
                                 <td>{{ row.band }}</td>
-                                <td>{{ row.consumption }}</td>
-                                <td>{{ row.dt_actual_availability }}</td>
+                                <td>{{ row.availability_hours }}</td>
+                            </tr>
+                            <tr v-if="!dt_availability_data.length">
+                                <td colspan="4" class="center-align pending-note">No worst-performer rows returned</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            </template>
 
         </main>
     </div>
@@ -163,47 +167,86 @@
 import Chart from '~/assets/js/Chart.js'
 import SideNav from '~/components/SideNav/SideNav.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
+import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
+import { pick, formatNumber, lastNDays, dayLabel } from '~/js_modules/controlCenterApi.js'
 
 export default {
     components: { SideNav, AnimatedValue },
     data() {
         return {
-            dt_target_availability: '0',
-            feeder_target_availability: '0',
+            loading: true,
+            error: null,
             dt_actual_availability: '0',
             feeder_actual_availability: '0',
             dt_availability_rate: '0',
             feeder_availability_rate: '0',
-            dt_availability_data: Array.from({ length: 10 }, () => ({
-                date: '07/01/2026',
-                dt_name: '11-OguduINJ-T1Ogudu-94 VICTORIA STREET CSP',
-                feeder_name: '11-OguduINJ-T1-Ogudu',
-                band: 'A',
-                consumption: '10.90',
-                dt_actual_availability: '19.35'
-            }))
+            dt_availability_data: [],
+            resolvedDate: '',
+            trendChart: null
         }
     },
     methods: {
-        getData() {
-            this.dt_target_availability = '20.00'
-            this.feeder_target_availability = '20.00'
-            this.dt_actual_availability = '22.03'
-            this.feeder_actual_availability = '20.03'
-            this.dt_availability_rate = '110.16'
-            this.feeder_availability_rate = 'Exceeded'
+        async getData() {
+            this.loading = true
+            this.error = null
+            try {
+                const [dtAvail, feederAvail] = await Promise.all([
+                    controlCenterApi.getDtAvailability({ limit: 10 }),
+                    controlCenterApi.getFeederAvailability({ limit: 10 })
+                ])
+
+                const dtAvgHours = pick(dtAvail, ['summary.avg_dt_availability_hours', 'summary.avg_availability_hours'], null)
+                const feederAvgHours = pick(feederAvail, ['summary.avg_feeder_availability_hours', 'summary.avg_availability_hours'], null)
+                this.dt_actual_availability = dtAvgHours != null ? Number(dtAvgHours).toFixed(2) : '0'
+                this.feeder_actual_availability = feederAvgHours != null ? Number(feederAvgHours).toFixed(2) : '0'
+
+                const dtMetPct = pick(dtAvail, ['summary.dt_met_20_hours_pct', 'summary.met_20_hours_pct'], null)
+                const feederMetPct = pick(feederAvail, ['summary.feeder_met_20_hours_pct', 'summary.met_20_hours_pct'], null)
+                this.dt_availability_rate = dtMetPct != null ? `${dtMetPct}` : '0'
+                this.feeder_availability_rate = feederMetPct != null ? `${feederMetPct}` : '0'
+
+                this.resolvedDate = pick(dtAvail, ['summary.dt_availability_date', 'summary.date'], '—')
+
+                const worstMeters = pick(dtAvail, ['worst_dt_meters'], []) || []
+                this.dt_availability_data = worstMeters.map(row => ({
+                    dt_name: pick(row, ['dt_name', 'name'], '—'),
+                    feeder_name: pick(row, ['feeder_name', 'feeder'], '—'),
+                    band: pick(row, ['band', 'myto_band'], '—'),
+                    availability_hours: formatNumber(pick(row, ['availability_hours', 'dt_actual_availability_hours', 'hours'], 0))
+                }))
+
+                await this.loadTrend(pick(dtAvail, ['summary.dt_availability_date'], null))
+            } catch (err) {
+                this.error = err.message
+                console.error('dt availability load failed', err)
+            } finally {
+                this.loading = false
+            }
         },
-        initChart() {
-            const ctx = document.getElementById('availabilityChart')
-            if (!ctx) return
-            new Chart(ctx.getContext('2d'), {
+        async loadTrend(baseDate) {
+            const days = lastNDays(baseDate, 7)
+            const [dtResponses, feederResponses] = await Promise.all([
+                Promise.all(days.map(d => controlCenterApi.getDtAvailability({ date: d }).catch(() => null))),
+                Promise.all(days.map(d => controlCenterApi.getFeederAvailability({ date: d }).catch(() => null)))
+            ])
+            this.renderTrendChart(
+                days.map(dayLabel),
+                dtResponses.map(r => pick(r, ['summary.avg_dt_availability_hours'], null)),
+                feederResponses.map(r => pick(r, ['summary.avg_feeder_availability_hours'], null))
+            )
+        },
+        renderTrendChart(labels, dtData, feederData) {
+            const canvas = document.getElementById('availabilityChart')
+            if (!canvas) return
+            if (this.trendChart) this.trendChart.destroy()
+            this.trendChart = new Chart(canvas.getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels,
                     datasets: [
                         {
-                            label: 'Average Availability',
-                            data: [21, 20.5, 19.8, 21.2, 23.8, 21.5, 19.5, 19.2, 20, 22, 21.8, 21.2],
+                            label: 'Average DT Availability',
+                            data: dtData,
                             borderColor: '#4ecb71',
                             backgroundColor: 'rgba(78,203,113,0.08)',
                             pointBackgroundColor: '#4ecb71',
@@ -212,11 +255,11 @@ export default {
                             pointBorderWidth: 2,
                             borderWidth: 2,
                             tension: 0.4,
-                            fill: false,
+                            fill: false
                         },
                         {
-                            label: 'Average Target',
-                            data: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+                            label: 'Average Feeder Availability',
+                            data: feederData,
                             borderColor: '#5b7cfa',
                             backgroundColor: 'rgba(91,124,250,0.08)',
                             pointBackgroundColor: '#5b7cfa',
@@ -224,8 +267,8 @@ export default {
                             pointRadius: 6,
                             pointBorderWidth: 2,
                             borderWidth: 2,
-                            tension: 0,
-                            fill: false,
+                            tension: 0.4,
+                            fill: false
                         }
                     ]
                 },
@@ -241,14 +284,10 @@ export default {
                         bodyFontColor: '#222',
                         bodyFontStyle: 'bold',
                         borderColor: '#eee',
-                        borderWidth: 1,
-                        callbacks: {
-                            title: (items) => items[0].xLabel + ' 16'
-                        }
+                        borderWidth: 1
                     },
                     scales: {
                         yAxes: [{
-                            ticks: { min: 19, max: 24, stepSize: 1 },
                             gridLines: { color: 'rgba(0,0,0,0.05)' }
                         }],
                         xAxes: [{
@@ -259,11 +298,10 @@ export default {
             })
         }
     },
-    mounted() {
+    async mounted() {
         const el = document.querySelector('.tabs')
         if (el) M.Tabs.init(el, {})
-        this.getData()
-        this.initChart()
+        await this.getData()
     }
 }
 </script>
@@ -284,6 +322,37 @@ export default {
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
+}
+
+.state-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    gap: 12px;
+}
+
+.state-message {
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.retry-btn {
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+}
+
+.pending-card {
+    text-align: center;
+    justify-content: center !important;
+}
+
+.pending-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 8px 0 0 0;
 }
 
 /* Tabs */
@@ -370,10 +439,6 @@ export default {
     margin: 0;
 }
 
-.dark-value {
-    color: var(--text-primary);
-}
-
 .green-value {
     color: #27ae60;
 }
@@ -395,38 +460,6 @@ export default {
     font-size: 15px;
     font-weight: 600;
     color: var(--text-primary);
-}
-
-.period-btns {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.period-btn {
-    font-size: 13px;
-    color: var(--text-faint);
-    padding: 0 10px;
-    height: 32px;
-    line-height: 32px;
-    border-radius: 6px;
-    text-transform: none;
-}
-
-.active-period {
-    color: var(--text-primary);
-    font-weight: 600;
-    border: 1px solid var(--border-strong);
-    background: var(--bg-card-alt);
-    box-shadow: 0 1px 3px var(--shadow-color);
-}
-
-.icon-btn {
-    border: 1px solid var(--border-strong);
-    border-radius: 6px;
-    padding: 0 8px;
-    display: flex;
-    align-items: center;
 }
 
 .trend-legend {

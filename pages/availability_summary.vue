@@ -11,23 +11,25 @@
                         <span class="filter-label">Date</span>
                         <i class="material-icons filter-icon">calendar_today</i>
                     </div>
-                    <div class="filter-select">
-                        <span class="filter-label">Feeder Band</span>
-                        <i class="material-icons filter-icon">arrow_drop_down</i>
-                    </div>
-                    <div class="filter-select">
-                        <span class="filter-label">Business Unit</span>
-                        <i class="material-icons filter-icon">arrow_drop_down</i>
-                    </div>
                 </div>
             </div>
+
+            <div v-if="loading" class="state-panel">
+                <PreLoader />
+            </div>
+            <div v-else-if="error" class="state-panel">
+                <p class="state-message">Could not load availability summary: {{ error }}</p>
+                <button class="btn-flat retry-btn" @click="getData">Retry</button>
+            </div>
+
+            <template v-else>
 
             <!-- top 3 cards -->
             <div class="row">
                 <!-- Feeders Availability Status -->
                 <div class="col s12 m4">
                     <div class="card-panel avail-card">
-                        <p class="avail-card-title center-align">Feeders Availability Status</p>
+                        <p class="avail-card-title center-align">Feeders Meeting 20h+ ({{ feeder_date }})</p>
                         <ChartPie v-if="feedersAvailData" chart-type="doughnut"
                             :chart-data="feedersAvailData"
                             :chart-options="doughnutOptions"
@@ -38,12 +40,12 @@
                     </div>
                 </div>
 
-                <!-- Total DTs -->
+                <!-- DTs Availability Status -->
                 <div class="col s12 m4">
                     <div class="card-panel avail-card">
-                        <p class="avail-card-title center-align">Total DTs</p>
-                        <ChartPie v-if="totalDtsData" chart-type="doughnut"
-                            :chart-data="totalDtsData"
+                        <p class="avail-card-title center-align">DTs Meeting 20h+ ({{ dt_date }})</p>
+                        <ChartPie v-if="dtsAvailData" chart-type="doughnut"
+                            :chart-data="dtsAvailData"
                             :chart-options="doughnutOptions"
                             :center-text="total_dts"
                             :show-value-legend="true"
@@ -52,47 +54,29 @@
                     </div>
                 </div>
 
-                <!-- DT Availability Status grouped bar -->
+                <!-- DT Availability Bands -->
                 <div class="col s12 m4">
                     <div class="card-panel avail-card">
-                        <p class="avail-card-title center-align">DT Availability Status</p>
+                        <p class="avail-card-title center-align">DT Availability Bands</p>
                         <div style="position: relative; height: 200px;">
                             <canvas id="dtAvailChart"></canvas>
-                        </div>
-                        <div class="bar-legend">
-                            <span class="bar-legend-item">
-                                <span class="bar-legend-dot" style="background:#1a237e;"></span> Met
-                            </span>
-                            <span class="bar-legend-item">
-                                <span class="bar-legend-dot" style="background:#c62828;"></span> Not Met
-                            </span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- bottom horizontal bar charts -->
+            <!-- bottom section: no business-unit / geographic breakdown available yet -->
             <div class="row">
                 <div class="col s12">
-                    <div class="card-panel avail-card">
-                        <div class="bottom-charts-grid">
-                            <div class="bottom-chart-section">
-                                <p class="avail-card-title center-align">Feeders By Business Unit</p>
-                                <div style="position: relative; height: 260px;">
-                                    <canvas id="feedersByBuChart"></canvas>
-                                </div>
-                            </div>
-                            <div class="bottom-chart-divider"></div>
-                            <div class="bottom-chart-section">
-                                <p class="avail-card-title center-align">DTs By Business Units</p>
-                                <div style="position: relative; height: 260px;">
-                                    <canvas id="dtsByBuChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card-panel avail-card pending-card">
+                        <p class="avail-card-title center-align">Feeders &amp; DTs By Business Unit</p>
+                        <CertificationBadge status="pending" />
+                        <p class="pending-note">Business unit / geographic breakdown not provided by the current endpoints</p>
                     </div>
                 </div>
             </div>
+
+            </template>
 
         </main>
     </div>
@@ -102,6 +86,8 @@
 import SideNav from '~/components/SideNav/SideNav.vue'
 import ChartPie from '~/components/ChartPie.vue'
 import Chart from '~/assets/js/Chart.js'
+import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
+import { pick, formatNumber } from '~/js_modules/controlCenterApi.js'
 
 const valueLabelPlugin = {
     afterDatasetsDraw(chart) {
@@ -115,17 +101,9 @@ const valueLabelPlugin = {
                     ctx.save();
                     ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ececf2' : '#333';
                     ctx.font = 'bold 11px sans-serif';
-                    // horizontal bar: text to the right of bar end
-                    if (chart.config.type === 'horizontalBar') {
-                        ctx.textAlign = 'left';
-                        ctx.textBaseline = 'middle';
-                        ctx.fillText(value.toLocaleString(), model.x + 5, model.y);
-                    } else {
-                        // vertical bar: text above bar
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'bottom';
-                        ctx.fillText(value.toLocaleString(), model.x, model.y - 3);
-                    }
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    ctx.fillText(value.toLocaleString(), model.x, model.y - 3);
                     ctx.restore();
                 });
             }
@@ -137,10 +115,15 @@ export default {
     components: { SideNav, ChartPie },
     data() {
         return {
-            feeders_total: '392',
-            total_dts: '5,390',
+            loading: true,
+            error: null,
+            feeders_total: '0',
+            total_dts: '0',
+            feeder_date: '—',
+            dt_date: '—',
             feedersAvailData: null,
-            totalDtsData: null,
+            dtsAvailData: null,
+            dtBands: null,
             doughnutOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -156,26 +139,57 @@ export default {
         }
     },
     methods: {
-        getData() {
-            this.feedersAvailData = {
-                labels: ['Met', 'Not Met'],
-                datasets: [{ data: [256, 136], backgroundColor: ['#1a237e', '#c62828'] }]
-            };
-            this.totalDtsData = {
-                labels: ['Public DTs', 'Private DTs'],
-                datasets: [{ data: [5113, 188], backgroundColor: ['#7986cb', '#80cbc4'] }]
-            };
+        async getData() {
+            this.loading = true
+            this.error = null
+            try {
+                const summary = await controlCenterApi.getAvailabilitySummary()
+
+                const totalFeederMeters = Number(pick(summary, ['total_feeder_meters'], 0))
+                const feederMet20 = Number(pick(summary, ['feeder_met_20_hours'], 0))
+                this.feeders_total = formatNumber(totalFeederMeters)
+                this.feeder_date = pick(summary, ['feeder_availability_date'], '—')
+                this.feedersAvailData = {
+                    labels: ['Met 20h+', 'Not Met'],
+                    datasets: [{ data: [feederMet20, Math.max(totalFeederMeters - feederMet20, 0)], backgroundColor: ['#1a237e', '#c62828'] }]
+                }
+
+                const totalDtMeters = Number(pick(summary, ['total_dt_meters'], 0))
+                const dtMet20 = Number(pick(summary, ['dt_met_20_hours'], 0))
+                this.total_dts = formatNumber(totalDtMeters)
+                this.dt_date = pick(summary, ['dt_availability_date'], '—')
+                this.dtsAvailData = {
+                    labels: ['Met 20h+', 'Not Met'],
+                    datasets: [{ data: [dtMet20, Math.max(totalDtMeters - dtMet20, 0)], backgroundColor: ['#7986cb', '#80cbc4'] }]
+                }
+
+                const dtZero = Number(pick(summary, ['dt_zero_hours'], 0))
+                const dtBelow12 = Number(pick(summary, ['dt_below_12_hours'], 0))
+                const dt12to20 = Number(pick(summary, ['dt_12_to_20_hours'], 0))
+                const dtFull24 = Number(pick(summary, ['dt_full_24_hours'], 0))
+                const dt20to24 = Math.max(dtMet20 - dtFull24, 0)
+                this.dtBands = { labels: ['0h', '0-12h', '12-20h', '20-24h', '24h'], data: [dtZero, dtBelow12, dt12to20, dt20to24, dtFull24] }
+
+                this.$nextTick(() => this.initCharts())
+            } catch (err) {
+                this.error = err.message
+                console.error('availability summary load failed', err)
+            } finally {
+                this.loading = false
+            }
         },
         initCharts() {
-            // DT Availability Status — grouped vertical bar
-            this.barCharts.push(new Chart(document.getElementById('dtAvailChart').getContext('2d'), {
+            this.barCharts.forEach(chart => chart && chart.destroy())
+            this.barCharts = []
+
+            const canvas = document.getElementById('dtAvailChart')
+            if (!canvas || !this.dtBands) return
+
+            this.barCharts.push(new Chart(canvas.getContext('2d'), {
                 type: 'bar',
                 data: {
-                    labels: ['Private DTs', 'Public DTs'],
-                    datasets: [
-                        { label: 'Met',     data: [150, 2639], backgroundColor: '#1a237e' },
-                        { label: 'Not Met', data: [38, 2494],  backgroundColor: '#c62828' }
-                    ]
+                    labels: this.dtBands.labels,
+                    datasets: [{ data: this.dtBands.data, backgroundColor: ['#c62828', '#e8941a', '#f5a623', '#7986cb', '#1a237e'] }]
                 },
                 options: {
                     responsive: true,
@@ -187,56 +201,11 @@ export default {
                     }
                 },
                 plugins: [valueLabelPlugin]
-            }));
-
-            // Feeders By Business Unit — horizontal bar
-            this.barCharts.push(new Chart(document.getElementById('feedersByBuChart').getContext('2d'), {
-                type: 'horizontalBar',
-                data: {
-                    labels: ['Ikeja', 'Akowonjo', 'Oshodi', 'Ikorodu', 'Shomolu', 'Abule Egba'],
-                    datasets: [{
-                        data: [3719, 3446, 2870, 2724, 2447, 1844],
-                        backgroundColor: '#f5a623'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    legend: { display: false },
-                    scales: {
-                        xAxes: [{ display: false, ticks: { beginAtZero: true } }],
-                        yAxes: [{ gridLines: { display: false } }]
-                    }
-                },
-                plugins: [valueLabelPlugin]
-            }));
-
-            // DTs By Business Units — horizontal bar
-            this.barCharts.push(new Chart(document.getElementById('dtsByBuChart').getContext('2d'), {
-                type: 'horizontalBar',
-                data: {
-                    labels: ['Oshodi', 'Shomolu', 'Ikeja', 'Akowonjo', 'Ikorodu', 'Abule Egba'],
-                    datasets: [{
-                        data: [83, 82, 74, 71, 60, 41],
-                        backgroundColor: '#8b1a1a'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    legend: { display: false },
-                    scales: {
-                        xAxes: [{ display: false, ticks: { beginAtZero: true } }],
-                        yAxes: [{ gridLines: { display: false } }]
-                    }
-                },
-                plugins: [valueLabelPlugin]
-            }));
+            }))
         }
     },
-    mounted() {
-        this.getData();
-        this.$nextTick(() => { this.initCharts(); });
+    async mounted() {
+        await this.getData()
     }
 }
 </script>
@@ -272,8 +241,7 @@ export default {
     gap: 12px;
 }
 
-.filter-input,
-.filter-select {
+.filter-input {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -296,6 +264,36 @@ export default {
     color: var(--text-muted);
 }
 
+.state-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    gap: 12px;
+}
+
+.state-message {
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.retry-btn {
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+}
+
+.pending-card {
+    text-align: center;
+}
+
+.pending-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 8px 0 0 0;
+}
+
 /* cards */
 .avail-card {
     border-radius: 14px;
@@ -312,46 +310,6 @@ export default {
     margin: 0 0 12px;
 }
 
-/* DT availability bar legend */
-.bar-legend {
-    display: flex;
-    justify-content: flex-end;
-    gap: 16px;
-    margin-top: 8px;
-}
-
-.bar-legend-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    color: var(--text-secondary);
-}
-
-.bar-legend-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-/* bottom charts */
-.bottom-charts-grid {
-    display: flex;
-    gap: 0;
-}
-
-.bottom-chart-section {
-    flex: 1;
-    padding: 0 16px;
-}
-
-.bottom-chart-divider {
-    width: 1px;
-    background: var(--border-color);
-    margin: 0 8px;
-}
-
 @media only screen and (max-width: 992px) {
     .main-content {
         padding-left: 20px;
@@ -360,14 +318,6 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
-    }
-    .bottom-charts-grid {
-        flex-direction: column;
-    }
-    .bottom-chart-divider {
-        width: 100%;
-        height: 1px;
-        margin: 16px 0;
     }
 }
 </style>

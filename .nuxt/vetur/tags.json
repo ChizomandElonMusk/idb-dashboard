@@ -5,6 +5,9 @@
   "AnimatedValue": {
     "description": "Auto imported from components/AnimatedValue.vue"
   },
+  "CertificationBadge": {
+    "description": "Auto imported from components/CertificationBadge.vue"
+  },
   "ChartPie": {
     "description": "Auto imported from components/ChartPie.vue"
   },

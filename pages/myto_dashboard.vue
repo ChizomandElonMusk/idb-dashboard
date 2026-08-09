@@ -16,7 +16,15 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div v-if="loading" class="state-panel">
+                <PreLoader />
+            </div>
+            <div v-else-if="error" class="state-panel">
+                <p class="state-message">Could not load MYTO dashboard data: {{ error }}</p>
+                <button class="btn-flat retry-btn" @click="getData">Retry</button>
+            </div>
+
+            <div v-else class="row">
                 <!-- LEFT: Summary + Band Cards -->
                 <div class="col s12 m4">
 
@@ -28,11 +36,10 @@
                             </div>
                             <div class="total-info">
                                 <p class="total-value"><AnimatedValue :value="total_consumption" /></p>
-                                <p class="total-label">Total Consumption (MWh)</p>
+                                <p class="total-label">Total DT Energy Raw</p>
                                 <p class="total-date">{{ consumption_date }}</p>
                             </div>
                         </div>
-                        <span class="total-badge">+13.6% ↑</span>
                     </div>
 
                     <!-- Band Cards (chunked 2 per row) -->
@@ -46,11 +53,12 @@
                             <div class="card-panel band-card">
                                 <p class="band-name">{{ band.name }}</p>
                                 <p class="band-pct"><AnimatedValue :value="band.pct" /></p>
-                                <p class="band-status" :class="band.statusClass">{{ band.status }}</p>
-                                <p class="band-target">NERC Target {{ band.target }}</p>
+                                <p class="band-target">share of total DT energy</p>
+                                <p class="band-target">DTs in band: {{ band.count }}</p>
                             </div>
                         </div>
                     </div>
+                    <p v-if="!bands.length" class="pending-note">No band energy data returned</p>
                 </div>
 
                 <!-- RIGHT: Charts -->
@@ -59,15 +67,7 @@
                     <!-- Energy Consumption Trend -->
                     <div class="card-panel trend-card">
                         <div class="trend-header">
-                            <span class="trend-title">Energy Consumption Trend</span>
-                            <div class="period-btns">
-                                <button class="btn-flat period-btn active-period">Day</button>
-                                <button class="btn-flat period-btn">Week</button>
-                                <button class="btn-flat period-btn">Month</button>
-                                <button class="btn-flat period-btn icon-btn">
-                                    <i class="material-icons" style="font-size:18px;">calendar_today</i>
-                                </button>
-                            </div>
+                            <span class="trend-title">DT Energy Raw Trend (last 6 months)</span>
                         </div>
                         <div style="position: relative; height: 200px;">
                             <canvas id="energyTrendChart"></canvas>
@@ -78,7 +78,7 @@
                     <div class="row" style="margin-bottom: 0;">
                         <div class="col s12 m6">
                             <div class="card-panel mini-card">
-                                <p class="mini-title">Energy Per Feeder (MWh)</p>
+                                <p class="mini-title">DT Energy Raw by Band</p>
                                 <ChartPie
                                     v-if="energyPerFeederData"
                                     chart-type="doughnut"
@@ -95,9 +95,19 @@
                             </div>
                         </div>
                         <div class="col s12 m6">
-                            <div class="card-panel mini-card">
+                            <div class="card-panel mini-card pending-card">
                                 <p class="mini-title">Feeder Communication Status</p>
-                                <MeterCommunication :percentage="commStatus" />
+                                <CertificationBadge status="pending" />
+                                <p class="pending-note">Meter communication data pending source onboarding</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 0;">
+                        <div class="col s12">
+                            <div class="card-panel mini-card">
+                                <p class="mini-title">Availability by Band</p>
+                                <CertificationBadge status="pending" text="Not certified — no confirmed TG/band mapping key" />
                             </div>
                         </div>
                     </div>
@@ -112,23 +122,21 @@
 import Chart from '~/assets/js/Chart.js'
 import SideNav from '~/components/SideNav/SideNav.vue'
 import ChartPie from '~/components/ChartPie.vue'
-import MeterCommunication from '~/components/MeterCommunication.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
+import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
+import { pick, formatNumber, lastNMonths, monthLabel } from '~/js_modules/controlCenterApi.js'
+
+const BAND_COLORS = ['#5b7cfa', '#6dd4c7', '#c87dff', '#e74c3c', '#ffa94e', '#4ecdc4']
 
 export default {
-    components: { SideNav, ChartPie, MeterCommunication, AnimatedValue },
+    components: { SideNav, ChartPie, AnimatedValue },
     data() {
         return {
+            loading: true,
+            error: null,
             total_consumption: '0',
-            consumption_date: 'Jan 2026',
-            commStatus: 70,
-            bands: [
-                { name: 'Band A', pct: '0%', status: 'Not met',  statusClass: 'status-red',    target: '45%' },
-                { name: 'Band B', pct: '0%', status: 'Exceeded', statusClass: 'status-green',  target: '22.98%' },
-                { name: 'Band C', pct: '0%', status: 'Met',      statusClass: 'status-orange', target: '20.41%' },
-                { name: 'Band D', pct: '0%', status: 'Not met',  statusClass: 'status-red',    target: '11.46%' },
-                { name: 'Band E', pct: '0%', status: 'Not met',  statusClass: 'status-red',    target: '0.15%' },
-            ],
+            consumption_date: '',
+            bands: [],
             energyPerFeederData: null,
             doughnutOptions: {
                 responsive: true,
@@ -136,12 +144,8 @@ export default {
                 legend: { display: false },
                 cutoutPercentage: 65
             },
-            energyLegend: [
-                { name: 'Band A', color: '#5b7cfa', value: '17,737.08' },
-                { name: 'Band B', color: '#6dd4c7', value: '14,636.88' },
-                { name: 'Band C', color: '#c87dff', value: '11,125.60' },
-                { name: 'Band D', color: '#e74c3c', value: '4,306.36' },
-            ]
+            energyLegend: [],
+            trendChart: null
         }
     },
     computed: {
@@ -154,34 +158,89 @@ export default {
         }
     },
     methods: {
-        getData() {
-            this.total_consumption = '48,060.44'
-            this.bands = [
-                { name: 'Band A', pct: '37.10%', status: 'Not met',  statusClass: 'status-red',    target: '45%' },
-                { name: 'Band B', pct: '25.00%', status: 'Exceeded', statusClass: 'status-green',  target: '22.98%' },
-                { name: 'Band C', pct: '20.41%', status: 'Met',      statusClass: 'status-orange', target: '20.41%' },
-                { name: 'Band D', pct: '1.49%',  status: 'Not met',  statusClass: 'status-red',    target: '11.46%' },
-                { name: 'Band E', pct: '0.1%',   status: 'Not met',  statusClass: 'status-red',    target: '0.15%' },
-            ]
-            this.energyPerFeederData = {
-                labels: this.energyLegend.map(l => l.name),
-                datasets: [{
-                    data: [17737.08, 14636.88, 11125.60, 4306.36],
-                    backgroundColor: this.energyLegend.map(l => l.color),
-                    borderWidth: 0
-                }]
+        async getData() {
+            this.loading = true
+            this.error = null
+            try {
+                const myto = await controlCenterApi.getMytoDashboard()
+
+                const totalDtEnergy = pick(myto, ['summary.total_dt_energy_raw'], null)
+                this.total_consumption = totalDtEnergy != null ? formatNumber(totalDtEnergy) : '0'
+
+                const monthStart = pick(myto, ['month', 'summary.month_start'], null)
+                this.consumption_date = this.formatMonth(monthStart)
+
+                const bandCounts = pick(myto, ['band_summary.myto_band_counts', 'band_summary.band_counts'], {}) || {}
+                const bandEnergy = pick(myto, ['band_summary.dt_energy_by_band', 'band_summary.energy_by_band'], {}) || {}
+                this.bands = this.buildBands(bandCounts, bandEnergy, totalDtEnergy)
+
+                if (this.bands.length) {
+                    this.energyLegend = this.bands.map((b, i) => ({
+                        name: b.name,
+                        color: BAND_COLORS[i % BAND_COLORS.length],
+                        value: formatNumber(b.energy)
+                    }))
+                    this.energyPerFeederData = {
+                        labels: this.bands.map(b => b.name),
+                        datasets: [{
+                            data: this.bands.map(b => b.energy),
+                            backgroundColor: this.bands.map((_, i) => BAND_COLORS[i % BAND_COLORS.length]),
+                            borderWidth: 0
+                        }]
+                    }
+                } else {
+                    this.energyLegend = []
+                    this.energyPerFeederData = null
+                }
+
+                await this.loadTrend(monthStart)
+            } catch (err) {
+                this.error = err.message
+                console.error('myto dashboard load failed', err)
+            } finally {
+                this.loading = false
             }
         },
-        initTrendChart() {
-            const ctx = document.getElementById('energyTrendChart')
-            if (!ctx) return
-            new Chart(ctx.getContext('2d'), {
+        formatMonth(monthStr) {
+            const d = monthStr ? new Date(monthStr) : new Date()
+            return Number.isNaN(d.getTime()) ? '' : d.toLocaleString('en-US', { month: 'short', year: 'numeric' })
+        },
+        buildBands(bandCounts, bandEnergy, totalEnergy) {
+            const names = Array.from(new Set([...Object.keys(bandCounts || {}), ...Object.keys(bandEnergy || {})])).sort()
+            const denom = totalEnergy || names.reduce((sum, n) => sum + (Number(bandEnergy[n]) || 0), 0) || 1
+            return names.map(name => {
+                const energy = Number(bandEnergy[name]) || 0
+                const count = bandCounts[name] != null ? formatNumber(bandCounts[name]) : '—'
+                const pct = denom ? (energy / denom) * 100 : 0
+                return {
+                    name: `Band ${name}`,
+                    pct: `${pct.toFixed(2)}%`,
+                    count,
+                    energy
+                }
+            })
+        },
+        async loadTrend(baseMonth) {
+            const months = lastNMonths(baseMonth, 6)
+            const responses = await Promise.all(
+                months.map(m => controlCenterApi.getMytoDashboard({ month: m }).catch(() => null))
+            )
+            this.renderTrendChart(
+                months.map(monthLabel),
+                responses.map(r => pick(r, ['summary.total_dt_energy_raw'], null))
+            )
+        },
+        renderTrendChart(labels, data) {
+            const canvas = document.getElementById('energyTrendChart')
+            if (!canvas) return
+            if (this.trendChart) this.trendChart.destroy()
+            this.trendChart = new Chart(canvas.getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ['Jan 01', 'Jan 02', 'Jan 03', 'Jan 04', 'Jan 05', 'Jan 06'],
+                    labels,
                     datasets: [{
-                        label: 'Energy Consumption',
-                        data: [4200, 3900, 4250, 4050, 4600, 3600],
+                        label: 'DT Energy Raw',
+                        data,
                         borderColor: '#4ecb71',
                         backgroundColor: 'rgba(78,203,113,0.08)',
                         pointBackgroundColor: '#4ecb71',
@@ -205,7 +264,10 @@ export default {
                         bodyFontColor: '#222',
                         bodyFontStyle: 'bold',
                         borderColor: '#eee',
-                        borderWidth: 1
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(tooltipItems) { return formatNumber(tooltipItems.yLabel) + ' (raw)' }
+                        }
                     },
                     scales: {
                         yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)' }, ticks: { display: false } }],
@@ -215,9 +277,8 @@ export default {
             })
         }
     },
-    mounted() {
-        this.getData()
-        this.initTrendChart()
+    async mounted() {
+        await this.getData()
     }
 }
 </script>
@@ -245,6 +306,36 @@ export default {
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
+}
+
+.state-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    gap: 12px;
+}
+
+.state-message {
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.retry-btn {
+    color: var(--text-primary);
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+}
+
+.pending-card {
+    text-align: center;
+}
+
+.pending-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 8px 0 0 0;
 }
 
 /* Filter */
@@ -308,18 +399,6 @@ export default {
     margin: 0;
 }
 
-.total-badge {
-    position: absolute;
-    bottom: 18px;
-    right: 18px;
-    background: #27ae60;
-    color: #fff;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 8px;
-    border-radius: 6px;
-}
-
 /* Band Cards */
 .band-row { margin-bottom: 0; }
 
@@ -349,16 +428,6 @@ export default {
     margin: 4px 0 0 0;
 }
 
-.band-status {
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0;
-}
-
-.status-red    { color: #e74c3c; }
-.status-green  { color: #27ae60; }
-.status-orange { color: #f39c12; }
-
 /* Trend Chart Card */
 .trend-card {
     border-radius: 12px;
@@ -377,38 +446,6 @@ export default {
     font-size: 15px;
     font-weight: 600;
     color: var(--text-primary);
-}
-
-.period-btns {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.period-btn {
-    font-size: 13px;
-    color: var(--text-faint);
-    padding: 0 10px;
-    height: 32px;
-    line-height: 32px;
-    border-radius: 6px;
-    text-transform: none;
-}
-
-.active-period {
-    color: var(--text-primary);
-    font-weight: 600;
-    border: 1px solid var(--border-strong);
-    background: var(--bg-card-alt);
-    box-shadow: 0 1px 3px var(--shadow-color);
-}
-
-.icon-btn {
-    border: 1px solid var(--border-strong);
-    border-radius: 6px;
-    padding: 0 8px;
-    display: flex;
-    align-items: center;
 }
 
 /* Mini Cards (bottom row) */

@@ -24,6 +24,7 @@ export default {
       //     src: 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js'
       // }
       {
+        hid: 'theme-init',
         innerHTML: `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
         type: 'text/javascript',
         body: false
@@ -46,6 +47,12 @@ export default {
 
   generate: {
     dir: 'dist'
+  },
+
+  // Exposed to the client bundle at build time (target: 'static' means the
+  // dashboard fetches live data in the browser at runtime, not at generate time)
+  env: {
+    CONTROL_CENTER_API_BASE_URL: process.env.CONTROL_CENTER_API_BASE_URL || 'http://192.168.80.108:8090/api/v1'
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components

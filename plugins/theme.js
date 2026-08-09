@@ -46,3 +46,15 @@ const theme = {
 }
 
 Vue.prototype.$theme = theme
+
+// Reapply the theme after every client-side route change. Without this,
+// the attribute is only ever set once at boot — if anything else (Nuxt's
+// hydration reconciliation, a third-party script) ever touches
+// document.documentElement in between, nothing corrects it back until
+// the user manually toggles the theme.
+export default ({ app }) => {
+  if (!process.client || !app.router) return
+  app.router.afterEach(() => {
+    applyTheme(state.value)
+  })
+}
