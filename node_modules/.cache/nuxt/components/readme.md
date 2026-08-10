@@ -8,6 +8,7 @@ You can directly use them in pages and other components without the need to impo
 
 - `<AdminNavBar>` | `<admin-nav-bar>` (components/AdminNavBar.vue)
 - `<AnimatedValue>` | `<animated-value>` (components/AnimatedValue.vue)
+- `<CertificationBadge>` | `<certification-badge>` (components/CertificationBadge.vue)
 - `<ChartPie>` | `<chart-pie>` (components/ChartPie.vue)
 - `<CustomSelect>` | `<custom-select>` (components/CustomSelect.vue)
 - `<Forgot>` | `<forgot>` (components/Forgot.vue)

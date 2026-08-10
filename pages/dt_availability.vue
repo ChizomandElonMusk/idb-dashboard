@@ -205,17 +205,18 @@ export default {
                 this.dt_availability_rate = dtMetPct != null ? `${dtMetPct}` : '0'
                 this.feeder_availability_rate = feederMetPct != null ? `${feederMetPct}` : '0'
 
-                this.resolvedDate = pick(dtAvail, ['summary.dt_availability_date', 'summary.date'], '—')
+                this.resolvedDate = pick(dtAvail, ['summary.data_date', 'summary.dt_availability_date', 'summary.date'], '—')
 
                 const worstMeters = pick(dtAvail, ['worst_dt_meters'], []) || []
                 this.dt_availability_data = worstMeters.map(row => ({
-                    dt_name: pick(row, ['dt_name', 'name'], '—'),
+                    dt_name: pick(row, ['dt_name', 'name', 'r_meter_id'], '—'),
+                    // feeder/band are not joinable from this endpoint yet — see doc §2.4
                     feeder_name: pick(row, ['feeder_name', 'feeder'], '—'),
                     band: pick(row, ['band', 'myto_band'], '—'),
-                    availability_hours: formatNumber(pick(row, ['availability_hours', 'dt_actual_availability_hours', 'hours'], 0))
+                    availability_hours: formatNumber(pick(row, ['dt_availability', 'availability_hours', 'dt_actual_availability_hours', 'hours'], 0))
                 }))
 
-                await this.loadTrend(pick(dtAvail, ['summary.dt_availability_date'], null))
+                await this.loadTrend(pick(dtAvail, ['summary.data_date', 'summary.dt_availability_date'], null))
             } catch (err) {
                 this.error = err.message
                 console.error('dt availability load failed', err)
@@ -299,9 +300,11 @@ export default {
         }
     },
     async mounted() {
-        const el = document.querySelector('.tabs')
-        if (el) M.Tabs.init(el, {})
         await this.getData()
+        this.$nextTick(() => {
+            const el = document.querySelector('.tabs')
+            if (el) M.Tabs.init(el, {})
+        })
     }
 }
 </script>

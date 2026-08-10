@@ -326,12 +326,12 @@ export default {
                     ]
                 }
 
-                const topContributors = pick(idb, ['data_quality.top_contributors'], [])
+                const topContributors = pick(idb, ['data_quality.high_impact_feeders', 'data_quality.top_contributors'], [])
                 this.data_quality_rows = (topContributors || []).map(row => ({
-                    feeder: pick(row, ['feeder', 'feeder_name'], '—'),
-                    energy: formatNumber(pick(row, ['feeder_energy_raw', 'energy_raw', 'total_energy_raw'], 0)),
+                    feeder: pick(row, ['line_name', 'feeder', 'feeder_name'], '—'),
+                    energy: formatNumber(pick(row, ['monthly_consumption', 'feeder_energy_raw', 'energy_raw', 'total_energy_raw'], 0)),
                     contribution_pct: `${pick(row, ['contribution_pct', 'contribution'], 0)}%`,
-                    p99_flag: !!pick(row, ['p99_flag', 'is_p99'], false)
+                    p99_flag: !!pick(row, ['above_p99_flag', 'p99_flag', 'is_p99'], false)
                 }))
                 this.total_flagged = this.data_quality_rows.length ? formatNumber(this.data_quality_rows.length) : '—'
             } catch (err) {

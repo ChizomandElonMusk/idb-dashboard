@@ -170,9 +170,10 @@ export default {
                 const monthStart = pick(myto, ['month', 'summary.month_start'], null)
                 this.consumption_date = this.formatMonth(monthStart)
 
-                const bandCounts = pick(myto, ['band_summary.myto_band_counts', 'band_summary.band_counts'], {}) || {}
-                const bandEnergy = pick(myto, ['band_summary.dt_energy_by_band', 'band_summary.energy_by_band'], {}) || {}
-                this.bands = this.buildBands(bandCounts, bandEnergy, totalDtEnergy)
+                // band_summary is an array of per-band rows (band_code, total_dts, dt_energy_raw, ...),
+                // not an object keyed by band name
+                const bandSummary = pick(myto, ['band_summary'], []) || []
+                this.bands = this.buildBands(bandSummary, totalDtEnergy)
 
                 if (this.bands.length) {
                     this.energyLegend = this.bands.map((b, i) => ({
@@ -205,15 +206,15 @@ export default {
             const d = monthStr ? new Date(monthStr) : new Date()
             return Number.isNaN(d.getTime()) ? '' : d.toLocaleString('en-US', { month: 'short', year: 'numeric' })
         },
-        buildBands(bandCounts, bandEnergy, totalEnergy) {
-            const names = Array.from(new Set([...Object.keys(bandCounts || {}), ...Object.keys(bandEnergy || {})])).sort()
-            const denom = totalEnergy || names.reduce((sum, n) => sum + (Number(bandEnergy[n]) || 0), 0) || 1
-            return names.map(name => {
-                const energy = Number(bandEnergy[name]) || 0
-                const count = bandCounts[name] != null ? formatNumber(bandCounts[name]) : '—'
+        buildBands(bandSummary, totalEnergy) {
+            const denom = totalEnergy || bandSummary.reduce((sum, b) => sum + (Number(pick(b, ['dt_energy_raw'], 0)) || 0), 0) || 1
+            return bandSummary.map(b => {
+                const energy = Number(pick(b, ['dt_energy_raw'], 0)) || 0
+                const totalDts = pick(b, ['total_dts'], null)
+                const count = totalDts != null ? formatNumber(totalDts) : '—'
                 const pct = denom ? (energy / denom) * 100 : 0
                 return {
-                    name: `Band ${name}`,
+                    name: `Band ${pick(b, ['band_code'], '—')}`,
                     pct: `${pct.toFixed(2)}%`,
                     count,
                     energy

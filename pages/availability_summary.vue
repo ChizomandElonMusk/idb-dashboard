@@ -143,7 +143,9 @@ export default {
             this.loading = true
             this.error = null
             try {
-                const summary = await controlCenterApi.getAvailabilitySummary()
+                const summaryRes = await controlCenterApi.getAvailabilitySummary()
+                // /dashboard/availability-summary wraps its fields in a `data` envelope
+                const summary = pick(summaryRes, ['data'], summaryRes)
 
                 const totalFeederMeters = Number(pick(summary, ['total_feeder_meters'], 0))
                 const feederMet20 = Number(pick(summary, ['feeder_met_20_hours'], 0))

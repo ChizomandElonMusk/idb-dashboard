@@ -258,7 +258,14 @@ export default {
             this.loading = true
             this.error = null
             try {
-                const cc = await controlCenterApi.getControlCenter()
+                // control-center's own `cards`/`dt_status` sections don't carry the
+                // public/private DT split or the NMD/MD customer split — those only
+                // exist on /dashboard/overview, so pull it in parallel and fall back to it.
+                const [cc, overviewRes] = await Promise.all([
+                    controlCenterApi.getControlCenter(),
+                    controlCenterApi.getOverview().catch(() => null)
+                ])
+                const overview = pick(overviewRes, ['data'], {}) || {}
 
                 console.log('=== CONTROL CENTER DASHBOARD: RAW API RESPONSE ===')
                 console.log(JSON.stringify(cc, null, 2))
@@ -270,14 +277,15 @@ export default {
                 this.kv33 = kv33Raw != null ? formatNumber(kv33Raw) : '—'
 
                 this.online_dts = formatNumber(pick(cc, ['cards.total_dts', 'dt_status.total_dts', 'total_dts'], 0))
-                this.public_dts = formatNumber(pick(cc, ['cards.public_dts', 'dt_status.public_dts', 'public_dts'], 0))
-                const privatePublic = Number(pick(cc, ['cards.private_public_dts', 'dt_status.private_public_dts', 'private_public_dts'], 0))
-                const privateSingle = Number(pick(cc, ['cards.private_single_dts', 'dt_status.private_single_dts', 'private_single_dts'], 0))
+                const publicDts = pick(cc, ['cards.public_dts', 'dt_status.public_dts', 'public_dts'], null) ?? pick(overview, ['public_dts'], 0)
+                this.public_dts = formatNumber(publicDts)
+                const privatePublic = Number(pick(cc, ['cards.private_public_dts', 'dt_status.private_public_dts', 'private_public_dts'], null) ?? pick(overview, ['private_public_dts'], 0))
+                const privateSingle = Number(pick(cc, ['cards.private_single_dts', 'dt_status.private_single_dts', 'private_single_dts'], null) ?? pick(overview, ['private_single_dts'], 0))
                 this.private_dts = (privatePublic || privateSingle) ? formatNumber(privatePublic + privateSingle) : '—'
 
-                const totalCustomers = pick(cc, ['cards.total_customers', 'total_customers'], null)
-                const nmdCustomers = pick(cc, ['cards.nmd_customers', 'nmd_customers'], null)
-                const mdCustomers = pick(cc, ['cards.md_customers', 'md_customers'], null)
+                const totalCustomers = pick(cc, ['cards.total_customers', 'total_customers'], null) ?? pick(overview, ['total_customers'], null)
+                const nmdCustomers = pick(cc, ['cards.nmd_customers', 'nmd_customers'], null) ?? pick(overview, ['nmd_customers'], null)
+                const mdCustomers = pick(cc, ['cards.md_customers', 'md_customers'], null) ?? pick(overview, ['md_customers'], null)
                 this.total_customers_display = totalCustomers != null ? formatNumber(totalCustomers) : '—'
                 this.nmd_value = nmdCustomers != null ? formatNumber(nmdCustomers) : '0'
                 this.md_value = mdCustomers != null ? formatNumber(mdCustomers) : '0'
