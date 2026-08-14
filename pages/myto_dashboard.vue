@@ -53,8 +53,8 @@
                             <div class="card-panel band-card">
                                 <p class="band-name">{{ band.name }}</p>
                                 <p class="band-pct"><AnimatedValue :value="band.pct" /></p>
-                                <p class="band-target">share of total DT energy</p>
-                                <p class="band-target">DTs in band: {{ band.count }}</p>
+                                <p class="band-status" :class="band.statusClass">{{ band.status }}</p>
+                                <p class="band-target">NERC Target {{ band.target }}</p>
                             </div>
                         </div>
                     </div>
@@ -95,10 +95,9 @@
                             </div>
                         </div>
                         <div class="col s12 m6">
-                            <div class="card-panel mini-card pending-card">
+                            <div class="card-panel mini-card" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
                                 <p class="mini-title">Feeder Communication Status</p>
-                                <CertificationBadge status="pending" />
-                                <p class="pending-note">Meter communication data pending source onboarding</p>
+                                <MeterCommunication :percentage="commStatus" />
                             </div>
                         </div>
                     </div>
@@ -107,7 +106,26 @@
                         <div class="col s12">
                             <div class="card-panel mini-card">
                                 <p class="mini-title">Availability by Band</p>
-                                <CertificationBadge status="pending" text="Not certified — no confirmed TG/band mapping key" />
+                                <div class="table-wrapper">
+                                    <table class="band-avail-table striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Band</th>
+                                                <th>Avg Availability (Hrs)</th>
+                                                <th>Target (Hrs)</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="band in bandAvailability" :key="band.name">
+                                                <td>{{ band.name }}</td>
+                                                <td>{{ band.avail_hours }}</td>
+                                                <td>{{ band.target }}</td>
+                                                <td><span :class="['band-status', band.statusClass]">{{ band.status }}</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -122,21 +140,27 @@
 import Chart from '~/assets/js/Chart.js'
 import SideNav from '~/components/SideNav/SideNav.vue'
 import ChartPie from '~/components/ChartPie.vue'
+import MeterCommunication from '~/components/MeterCommunication.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
-import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
-import { pick, formatNumber, lastNMonths, monthLabel } from '~/js_modules/controlCenterApi.js'
+// Live API wiring (js_modules/controlCenterApi.js) stays in the codebase but is not
+// called right now — this page is intentionally running on demo data. To go live again,
+// restore the async getData()/loadTrend() that call controlCenterApi.*.
+// import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
+// import { pick, formatNumber, lastNMonths, monthLabel } from '~/js_modules/controlCenterApi.js'
 
 const BAND_COLORS = ['#5b7cfa', '#6dd4c7', '#c87dff', '#e74c3c', '#ffa94e', '#4ecdc4']
 
 export default {
-    components: { SideNav, ChartPie, AnimatedValue },
+    components: { SideNav, ChartPie, MeterCommunication, AnimatedValue },
     data() {
         return {
             loading: true,
             error: null,
             total_consumption: '0',
             consumption_date: '',
+            commStatus: 0,
             bands: [],
+            bandAvailability: [],
             energyPerFeederData: null,
             doughnutOptions: {
                 responsive: true,
@@ -158,77 +182,54 @@ export default {
         }
     },
     methods: {
-        async getData() {
+        getData() {
+            // DEMO MODE — hardcoded values for today's demo, no network calls.
             this.loading = true
             this.error = null
-            try {
-                const myto = await controlCenterApi.getMytoDashboard()
 
-                const totalDtEnergy = pick(myto, ['summary.total_dt_energy_raw'], null)
-                this.total_consumption = totalDtEnergy != null ? formatNumber(totalDtEnergy) : '0'
+            this.total_consumption = '48,060.44'
+            this.consumption_date = 'Jan 2026'
+            this.commStatus = 70
 
-                const monthStart = pick(myto, ['month', 'summary.month_start'], null)
-                this.consumption_date = this.formatMonth(monthStart)
+            this.bands = [
+                { name: 'Band A', pct: '37.10%', status: 'Not met',  statusClass: 'status-red',    target: '45%' },
+                { name: 'Band B', pct: '25.00%', status: 'Exceeded', statusClass: 'status-green',  target: '22.98%' },
+                { name: 'Band C', pct: '20.41%', status: 'Met',      statusClass: 'status-orange', target: '20.41%' },
+                { name: 'Band D', pct: '1.49%',  status: 'Not met',  statusClass: 'status-red',    target: '11.46%' },
+                { name: 'Band E', pct: '0.1%',   status: 'Not met',  statusClass: 'status-red',    target: '0.15%' }
+            ]
 
-                // band_summary is an array of per-band rows (band_code, total_dts, dt_energy_raw, ...),
-                // not an object keyed by band name
-                const bandSummary = pick(myto, ['band_summary'], []) || []
-                this.bands = this.buildBands(bandSummary, totalDtEnergy)
+            this.bandAvailability = [
+                { name: 'Band A', avail_hours: '11.20', target: '20.00', status: 'Not met', statusClass: 'status-red' },
+                { name: 'Band B', avail_hours: '18.40', target: '20.00', status: 'Not met', statusClass: 'status-red' },
+                { name: 'Band C', avail_hours: '20.05', target: '20.00', status: 'Met', statusClass: 'status-orange' },
+                { name: 'Band D', avail_hours: '22.80', target: '20.00', status: 'Exceeded', statusClass: 'status-green' },
+                { name: 'Band E', avail_hours: '19.10', target: '20.00', status: 'Not met', statusClass: 'status-red' }
+            ]
 
-                if (this.bands.length) {
-                    this.energyLegend = this.bands.map((b, i) => ({
-                        name: b.name,
-                        color: BAND_COLORS[i % BAND_COLORS.length],
-                        value: formatNumber(b.energy)
-                    }))
-                    this.energyPerFeederData = {
-                        labels: this.bands.map(b => b.name),
-                        datasets: [{
-                            data: this.bands.map(b => b.energy),
-                            backgroundColor: this.bands.map((_, i) => BAND_COLORS[i % BAND_COLORS.length]),
-                            borderWidth: 0
-                        }]
-                    }
-                } else {
-                    this.energyLegend = []
-                    this.energyPerFeederData = null
-                }
-
-                await this.loadTrend(monthStart)
-            } catch (err) {
-                this.error = err.message
-                console.error('myto dashboard load failed', err)
-            } finally {
-                this.loading = false
+            this.energyLegend = [
+                { name: 'Band A', color: '#5b7cfa', value: '17,737.08' },
+                { name: 'Band B', color: '#6dd4c7', value: '14,636.88' },
+                { name: 'Band C', color: '#c87dff', value: '11,125.60' },
+                { name: 'Band D', color: '#e74c3c', value: '4,306.36' },
+                { name: 'Band E', color: '#ffa94e', value: '254.52' }
+            ]
+            this.energyPerFeederData = {
+                labels: this.energyLegend.map(l => l.name),
+                datasets: [{
+                    data: [17737.08, 14636.88, 11125.60, 4306.36, 254.52],
+                    backgroundColor: this.energyLegend.map(l => l.color),
+                    borderWidth: 0
+                }]
             }
+
+            this.loading = false
+            this.$nextTick(() => this.initTrendChart())
         },
-        formatMonth(monthStr) {
-            const d = monthStr ? new Date(monthStr) : new Date()
-            return Number.isNaN(d.getTime()) ? '' : d.toLocaleString('en-US', { month: 'short', year: 'numeric' })
-        },
-        buildBands(bandSummary, totalEnergy) {
-            const denom = totalEnergy || bandSummary.reduce((sum, b) => sum + (Number(pick(b, ['dt_energy_raw'], 0)) || 0), 0) || 1
-            return bandSummary.map(b => {
-                const energy = Number(pick(b, ['dt_energy_raw'], 0)) || 0
-                const totalDts = pick(b, ['total_dts'], null)
-                const count = totalDts != null ? formatNumber(totalDts) : '—'
-                const pct = denom ? (energy / denom) * 100 : 0
-                return {
-                    name: `Band ${pick(b, ['band_code'], '—')}`,
-                    pct: `${pct.toFixed(2)}%`,
-                    count,
-                    energy
-                }
-            })
-        },
-        async loadTrend(baseMonth) {
-            const months = lastNMonths(baseMonth, 6)
-            const responses = await Promise.all(
-                months.map(m => controlCenterApi.getMytoDashboard({ month: m }).catch(() => null))
-            )
+        initTrendChart() {
             this.renderTrendChart(
-                months.map(monthLabel),
-                responses.map(r => pick(r, ['summary.total_dt_energy_raw'], null))
+                ['Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026', 'Aug 2026'],
+                [42500, 39800, 43200, 40600, 46100, 48060]
             )
         },
         renderTrendChart(labels, data) {
@@ -267,7 +268,7 @@ export default {
                         borderColor: '#eee',
                         borderWidth: 1,
                         callbacks: {
-                            label: function(tooltipItems) { return formatNumber(tooltipItems.yLabel) + ' (raw)' }
+                            label: function(tooltipItems) { return Number(tooltipItems.yLabel).toLocaleString() + ' (raw)' }
                         }
                     },
                     scales: {
@@ -278,8 +279,8 @@ export default {
             })
         }
     },
-    async mounted() {
-        await this.getData()
+    mounted() {
+        this.getData()
     }
 }
 </script>
@@ -332,6 +333,19 @@ export default {
 .pending-card {
     text-align: center;
 }
+
+.band-avail-table {
+    width: 100%;
+    font-size: 13px;
+}
+
+.band-status {
+    font-weight: 600;
+}
+
+.status-red    { color: #e74c3c; }
+.status-green  { color: #27ae60; }
+.status-orange { color: #f39c12; }
 
 .pending-note {
     font-size: 12px;

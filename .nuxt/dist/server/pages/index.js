@@ -1,14 +1,14 @@
 exports.ids = [18,9];
 exports.modules = {
 
-/***/ 43:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/logo.d2f3c61.png";
 
 /***/ }),
 
-/***/ 52:
+/***/ 49:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58,13 +58,13 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 69:
+/***/ 64:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(85);
+var content = __webpack_require__(80);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -76,19 +76,19 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 84:
+/***/ 79:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_6db59b96_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(69);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_6db59b96_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_6db59b96_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_6db59b96_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_6db59b96_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_style_index_0_id_6db59b96_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 85:
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -103,7 +103,7 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 88:
+/***/ 85:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -131,14 +131,14 @@ var render = function render() {
     class: {
       'hide': _vm.hidePreLoader
     }
-  })], 2), _vm._ssrNode(" <form data-v-6db59b96><div class=\"row\" data-v-6db59b96><div class=\"input-field col s12\" data-v-6db59b96><input type=\"text\" placeholder id=\"username\" focused" + _vm._ssrAttr("value", _vm.username) + " class=\"black-text focus\" data-v-6db59b96> <label for=\"username\" data-v-6db59b96>Username</label></div></div> <div class=\"row\" data-v-6db59b96><div class=\"input-field col s12\" data-v-6db59b96><input type=\"password\" placeholder id=\"password\"" + _vm._ssrAttr("value", _vm.password) + " class=\"black-text\" data-v-6db59b96> <label for=\"password\" data-v-6db59b96>Password</label></div></div> <div class=\"row\" data-v-6db59b96><div class=\"input-field col s12\" data-v-6db59b96><button" + _vm._ssrAttr("disabled", _vm.disabled) + " class=\"red btn btn-large col s12\" style=\"background: linear-gradient(to right, #E75309, #C60606);\" data-v-6db59b96>\n                Login\n              </button></div></div></form>")], 2)], 2), _vm._ssrNode(" <div class=\"col s12 m6 hide-on-small-and-down electric-panel\" data-v-6db59b96><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 600\" preserveAspectRatio=\"xMidYMid slice\" class=\"waves-svg\" data-v-6db59b96><path d=\"M 0,300 C 50,220 100,380 150,300 C 200,220 250,380 300,300 C 350,220 400,380 450,300\n             C 500,220 550,380 600,300 C 650,220 700,380 750,300 C 800,220 850,380 900,300\n             C 950,220 1000,380 1050,300 C 1100,220 1150,380 1200,300\n             C 1250,220 1300,380 1350,300 C 1400,220 1450,380 1500,300\n             C 1550,220 1600,380 1650,300 C 1700,220 1750,380 1800,300\n             C 1850,220 1900,380 1950,300 C 2000,220 2050,380 2100,300\" fill=\"none\" stroke=\"#00d4ff\" stroke-width=\"2.5\" class=\"e-wave w1\" data-v-6db59b96></path> <path d=\"M 0,340 C 50,270 100,410 150,340 C 200,270 250,410 300,340 C 350,270 400,410 450,340\n             C 500,270 550,410 600,340 C 650,270 700,410 750,340 C 800,270 850,410 900,340\n             C 950,270 1000,410 1050,340 C 1100,270 1150,410 1200,340\n             C 1250,270 1300,410 1350,340 C 1400,270 1450,410 1500,340\n             C 1550,270 1600,410 1650,340 C 1700,270 1750,410 1800,340\n             C 1850,270 1900,410 1950,340 C 2000,270 2050,410 2100,340\" fill=\"none\" stroke=\"#5b7cfa\" stroke-width=\"1.8\" class=\"e-wave w2\" data-v-6db59b96></path> <path d=\"M 0,260 C 50,190 100,330 150,260 C 200,190 250,330 300,260 C 350,190 400,330 450,260\n             C 500,190 550,330 600,260 C 650,190 700,330 750,260 C 800,190 850,330 900,260\n             C 950,190 1000,330 1050,260 C 1100,190 1150,330 1200,260\n             C 1250,190 1300,330 1350,260 C 1400,190 1450,330 1500,260\n             C 1550,190 1600,330 1650,260 C 1700,190 1750,330 1800,260\n             C 1850,190 1900,330 1950,260 C 2000,190 2050,330 2100,260\" fill=\"none\" stroke=\"#c87dff\" stroke-width=\"1.2\" class=\"e-wave w3\" data-v-6db59b96></path> <path d=\"M 0,400 C 50,340 100,460 150,400 C 200,340 250,460 300,400 C 350,340 400,460 450,400\n             C 500,340 550,460 600,400 C 650,340 700,460 750,400 C 800,340 850,460 900,400\n             C 950,340 1000,460 1050,400 C 1100,340 1150,460 1200,400\n             C 1250,340 1300,460 1350,400 C 1400,340 1450,460 1500,400\n             C 1550,340 1600,460 1650,400 C 1700,340 1750,460 1800,400\n             C 1850,340 1900,460 1950,400 C 2000,340 2050,460 2100,400\" fill=\"none\" stroke=\"#00d4ff\" stroke-width=\"0.8\" class=\"e-wave w4\" data-v-6db59b96></path></svg> <span class=\"spark sp1\" data-v-6db59b96></span> <span class=\"spark sp2\" data-v-6db59b96></span> <span class=\"spark sp3\" data-v-6db59b96></span> <span class=\"spark sp4\" data-v-6db59b96></span> <span class=\"spark sp5\" data-v-6db59b96></span> <span class=\"spark sp6\" data-v-6db59b96></span> <div class=\"e-center\" data-v-6db59b96><div class=\"e-ring r1\" data-v-6db59b96></div> <div class=\"e-ring r2\" data-v-6db59b96></div> <div class=\"e-ring r3\" data-v-6db59b96></div> <div class=\"logo-circle\" data-v-6db59b96><img" + _vm._ssrAttr("src", __webpack_require__(43)) + " alt class=\"responsive-img\" style=\"max-width:70px; max-height:70px;\" data-v-6db59b96></div> <p class=\"e-brand\" data-v-6db59b96>IDB Dashboard</p> <p class=\"e-sub\" data-v-6db59b96>Ikeja Electric</p> <b class=\"center white-text\" style=\"font-weight: 300; font-size: 12px;\" data-v-6db59b96>" + _vm._ssrEscape("Version: " + _vm._s(_vm.version_number)) + "</b></div></div>")], 2)]);
+  })], 2), _vm._ssrNode(" <form data-v-6db59b96><div class=\"row\" data-v-6db59b96><div class=\"input-field col s12\" data-v-6db59b96><input type=\"text\" placeholder id=\"username\" focused" + _vm._ssrAttr("value", _vm.username) + " class=\"black-text focus\" data-v-6db59b96> <label for=\"username\" data-v-6db59b96>Username</label></div></div> <div class=\"row\" data-v-6db59b96><div class=\"input-field col s12\" data-v-6db59b96><input type=\"password\" placeholder id=\"password\"" + _vm._ssrAttr("value", _vm.password) + " class=\"black-text\" data-v-6db59b96> <label for=\"password\" data-v-6db59b96>Password</label></div></div> <div class=\"row\" data-v-6db59b96><div class=\"input-field col s12\" data-v-6db59b96><button" + _vm._ssrAttr("disabled", _vm.disabled) + " class=\"red btn btn-large col s12\" style=\"background: linear-gradient(to right, #E75309, #C60606);\" data-v-6db59b96>\n                Login\n              </button></div></div></form>")], 2)], 2), _vm._ssrNode(" <div class=\"col s12 m6 hide-on-small-and-down electric-panel\" data-v-6db59b96><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 600\" preserveAspectRatio=\"xMidYMid slice\" class=\"waves-svg\" data-v-6db59b96><path d=\"M 0,300 C 50,220 100,380 150,300 C 200,220 250,380 300,300 C 350,220 400,380 450,300\n             C 500,220 550,380 600,300 C 650,220 700,380 750,300 C 800,220 850,380 900,300\n             C 950,220 1000,380 1050,300 C 1100,220 1150,380 1200,300\n             C 1250,220 1300,380 1350,300 C 1400,220 1450,380 1500,300\n             C 1550,220 1600,380 1650,300 C 1700,220 1750,380 1800,300\n             C 1850,220 1900,380 1950,300 C 2000,220 2050,380 2100,300\" fill=\"none\" stroke=\"#00d4ff\" stroke-width=\"2.5\" class=\"e-wave w1\" data-v-6db59b96></path> <path d=\"M 0,340 C 50,270 100,410 150,340 C 200,270 250,410 300,340 C 350,270 400,410 450,340\n             C 500,270 550,410 600,340 C 650,270 700,410 750,340 C 800,270 850,410 900,340\n             C 950,270 1000,410 1050,340 C 1100,270 1150,410 1200,340\n             C 1250,270 1300,410 1350,340 C 1400,270 1450,410 1500,340\n             C 1550,270 1600,410 1650,340 C 1700,270 1750,410 1800,340\n             C 1850,270 1900,410 1950,340 C 2000,270 2050,410 2100,340\" fill=\"none\" stroke=\"#5b7cfa\" stroke-width=\"1.8\" class=\"e-wave w2\" data-v-6db59b96></path> <path d=\"M 0,260 C 50,190 100,330 150,260 C 200,190 250,330 300,260 C 350,190 400,330 450,260\n             C 500,190 550,330 600,260 C 650,190 700,330 750,260 C 800,190 850,330 900,260\n             C 950,190 1000,330 1050,260 C 1100,190 1150,330 1200,260\n             C 1250,190 1300,330 1350,260 C 1400,190 1450,330 1500,260\n             C 1550,190 1600,330 1650,260 C 1700,190 1750,330 1800,260\n             C 1850,190 1900,330 1950,260 C 2000,190 2050,330 2100,260\" fill=\"none\" stroke=\"#c87dff\" stroke-width=\"1.2\" class=\"e-wave w3\" data-v-6db59b96></path> <path d=\"M 0,400 C 50,340 100,460 150,400 C 200,340 250,460 300,400 C 350,340 400,460 450,400\n             C 500,340 550,460 600,400 C 650,340 700,460 750,400 C 800,340 850,460 900,400\n             C 950,340 1000,460 1050,400 C 1100,340 1150,460 1200,400\n             C 1250,340 1300,460 1350,400 C 1400,340 1450,460 1500,400\n             C 1550,340 1600,460 1650,400 C 1700,340 1750,460 1800,400\n             C 1850,340 1900,460 1950,400 C 2000,340 2050,460 2100,400\" fill=\"none\" stroke=\"#00d4ff\" stroke-width=\"0.8\" class=\"e-wave w4\" data-v-6db59b96></path></svg> <span class=\"spark sp1\" data-v-6db59b96></span> <span class=\"spark sp2\" data-v-6db59b96></span> <span class=\"spark sp3\" data-v-6db59b96></span> <span class=\"spark sp4\" data-v-6db59b96></span> <span class=\"spark sp5\" data-v-6db59b96></span> <span class=\"spark sp6\" data-v-6db59b96></span> <div class=\"e-center\" data-v-6db59b96><div class=\"e-ring r1\" data-v-6db59b96></div> <div class=\"e-ring r2\" data-v-6db59b96></div> <div class=\"e-ring r3\" data-v-6db59b96></div> <div class=\"logo-circle\" data-v-6db59b96><img" + _vm._ssrAttr("src", __webpack_require__(41)) + " alt class=\"responsive-img\" style=\"max-width:70px; max-height:70px;\" data-v-6db59b96></div> <p class=\"e-brand\" data-v-6db59b96>IDB Dashboard</p> <p class=\"e-sub\" data-v-6db59b96>Ikeja Electric</p> <b class=\"center white-text\" style=\"font-weight: 300; font-size: 12px;\" data-v-6db59b96>" + _vm._ssrEscape("Version: " + _vm._s(_vm.version_number)) + "</b></div></div>")], 2)]);
 };
 var staticRenderFns = [];
 
 // CONCATENATED MODULE: ./pages/index.vue?vue&type=template&id=6db59b96&scoped=true
 
 // EXTERNAL MODULE: ./components/PreLoader.vue + 4 modules
-var PreLoader = __webpack_require__(52);
+var PreLoader = __webpack_require__(49);
 
 // CONCATENATED MODULE: ./js_modules/mods.js
 async function checkCustomerMeterNumber(meterNumber, internal) {
@@ -1013,7 +1013,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(84)
+  var style0 = __webpack_require__(79)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1034,7 +1034,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var pages = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {PreLoader: __webpack_require__(52).default})
+installComponents(component, {PreLoader: __webpack_require__(49).default})
 
 
 /***/ })

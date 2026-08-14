@@ -1,7 +1,7 @@
-exports.ids = [14,1,2,3,9,10,12];
+exports.ids = [14,1,3,9,10,12];
 exports.modules = {
 
-/***/ 39:
+/***/ 38:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78,13 +78,13 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 40:
+/***/ 39:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(49);
+var content = __webpack_require__(48);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -96,25 +96,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 41:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(51);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(4).default
-module.exports.__inject__ = function (context) {
-  add("2f542b3b", content, true, context)
-};
-
-/***/ }),
-
-/***/ 42:
+/***/ 40:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -125,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-2c494de8>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-2c494de8><img" + _vm._ssrAttr("src", __webpack_require__(43)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-2c494de8></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-2c494de8>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
+  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-2c494de8>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-2c494de8><img" + _vm._ssrAttr("src", __webpack_require__(41)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-2c494de8></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-2c494de8>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
     return _vm._ssrNode("<li" + _vm._ssrClass(null, {
       active: _vm.isActive(item)
     }) + " data-v-2c494de8>", "</li>", [_c('nuxt-link', {
@@ -162,7 +144,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=template&id=2c494de8&scoped=true
 
 // EXTERNAL MODULE: ./components/ThemeToggle.vue + 4 modules
-var ThemeToggle = __webpack_require__(39);
+var ThemeToggle = __webpack_require__(38);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=script&lang=js
 
@@ -220,7 +202,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(48)
+  var style0 = __webpack_require__(47)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -241,238 +223,55 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var SideNav = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {ThemeToggle: __webpack_require__(39).default})
+installComponents(component, {ThemeToggle: __webpack_require__(38).default})
 
 
 /***/ }),
 
-/***/ 43:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/logo.d2f3c61.png";
 
 /***/ }),
 
-/***/ 44:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 42:
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(URLSearchParams) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return pick; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return formatNumber; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return lastNMonths; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return monthLabel; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return lastNDays; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return dayLabel; });
-/* unused harmony export getHealth */
-/* unused harmony export getOracleStatus */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getOverview; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getControlCenter; });
-/* unused harmony export getEnergyFlow */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getAvailabilitySummary; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getDtAvailability; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getFeederAvailability; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getMonthlyEnergy; });
-/* unused harmony export getMonthlyEnergyQuality */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getIdbDashboard; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getMytoDashboard; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return getIdbEvents; });
-// Client for the streaming-dashboard-api Control Center backend.
-// See static/control_center_api_doc.md for endpoint/field documentation.
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-const BASE_URL = "http://192.168.80.108:8090/api/v1";
-function buildQuery(params = {}) {
-  const search = new URLSearchParams();
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && value !== '') {
-      search.append(key, value);
-    }
-  });
-  const qs = search.toString();
-  return qs ? `?${qs}` : '';
-}
-const REQUEST_TIMEOUT_MS = 15000;
-async function get(path, params) {
-  const url = `${BASE_URL}${path}${buildQuery(params)}`;
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-  console.log(`[controlCenterApi] GET ${url}`);
-  try {
-    const response = await fetch(url, {
-      signal: controller.signal
-    });
-    if (!response.ok) {
-      throw new Error(`Control Center API error: ${response.status} ${response.statusText} (${path})`);
-    }
-    const data = await response.json();
-    console.log(`[controlCenterApi] response for ${path}`, data);
-    return data;
-  } catch (err) {
-    if (err.name === 'AbortError') {
-      const timeoutErr = new Error(`Request to ${path} timed out after ${REQUEST_TIMEOUT_MS / 1000}s — is ${BASE_URL} reachable? (VPN connected?)`);
-      console.error(`[controlCenterApi] ${timeoutErr.message}`);
-      throw timeoutErr;
-    }
-    console.error(`[controlCenterApi] request failed for ${path}`, err);
-    throw err;
-  } finally {
-    clearTimeout(timeoutId);
-  }
-}
-
-// Reads the first defined value found at any of the given dot-paths.
-// The API doc doesn't always show a full example JSON shape for every
-// section, so callers probe a few plausible field names and fall back
-// gracefully instead of crashing or silently showing a fabricated number.
-function pick(obj, paths, fallback = undefined) {
-  for (const path of paths) {
-    const value = path.split('.').reduce((acc, key) => acc == null ? undefined : acc[key], obj);
-    if (value !== undefined && value !== null) return value;
-  }
-  return fallback;
-}
-function formatNumber(value) {
-  const n = Number(value);
-  return Number.isFinite(n) ? n.toLocaleString() : '—';
-}
-
-// Builds N ascending 'YYYY-MM-01' month strings ending at baseMonth (or today).
-function lastNMonths(baseMonthStr, n) {
-  const base = baseMonthStr ? new Date(baseMonthStr) : new Date();
-  const months = [];
-  for (let i = n - 1; i >= 0; i--) {
-    const d = new Date(base.getFullYear(), base.getMonth() - i, 1);
-    months.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-01`);
-  }
-  return months;
-}
-function monthLabel(monthStr) {
-  const d = new Date(monthStr);
-  return Number.isNaN(d.getTime()) ? monthStr : d.toLocaleString('en-US', {
-    month: 'short'
-  });
-}
-
-// Builds N ascending 'YYYY-MM-DD' date strings ending at baseDate (or today).
-function lastNDays(baseDateStr, n) {
-  const base = baseDateStr ? new Date(baseDateStr) : new Date();
-  const days = [];
-  for (let i = n - 1; i >= 0; i--) {
-    const d = new Date(base.getFullYear(), base.getMonth(), base.getDate() - i);
-    days.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`);
-  }
-  return days;
-}
-function dayLabel(dateStr) {
-  const d = new Date(dateStr);
-  return Number.isNaN(d.getTime()) ? dateStr : d.toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric'
-  });
-}
-function getHealth() {
-  return get('/health');
-}
-function getOracleStatus() {
-  return get('/oracle/status');
-}
-function getOverview() {
-  return get('/dashboard/overview');
-}
-function getControlCenter({
-  month,
-  date,
-  limit
-} = {}) {
-  return get('/dashboard/control-center', {
-    month,
-    date,
-    limit
-  });
-}
-function getEnergyFlow({
-  month,
-  limit
-} = {}) {
-  return get('/dashboard/energy-flow', {
-    month,
-    limit
-  });
-}
-function getAvailabilitySummary() {
-  return get('/dashboard/availability-summary');
-}
-function getDtAvailability({
-  date,
-  limit
-} = {}) {
-  return get('/dashboard/dt-availability', {
-    date,
-    limit
-  });
-}
-function getFeederAvailability({
-  date,
-  limit
-} = {}) {
-  return get('/dashboard/feeder-availability', {
-    date,
-    limit
-  });
-}
-function getMonthlyEnergy({
-  month,
-  limit
-} = {}) {
-  return get('/dashboard/monthly-energy', {
-    month,
-    limit
-  });
-}
-function getMonthlyEnergyQuality({
-  month,
-  limit
-} = {}) {
-  return get('/dashboard/monthly-energy-quality', {
-    month,
-    limit
-  });
-}
-function getIdbDashboard({
-  month,
-  quality_limit
-} = {}) {
-  return get('/dashboard/idb', {
-    month,
-    quality_limit
-  });
-}
-function getMytoDashboard({
-  month,
-  date,
-  limit
-} = {}) {
-  return get('/dashboard/myto', {
-    month,
-    date,
-    limit
-  });
-}
-function getIdbEvents({
-  month,
-  date,
-  limit
-} = {}) {
-  return get('/dashboard/idb-events', {
-    month,
-    date,
-    limit
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(38)["URLSearchParams"]))
+// load the styles
+var content = __webpack_require__(51);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add CSS to SSR context
+var add = __webpack_require__(4).default
+module.exports.__inject__ = function (context) {
+  add("225bbff9", content, true, context)
+};
 
 /***/ }),
 
-/***/ 45:
+/***/ 43:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(53);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add CSS to SSR context
+var add = __webpack_require__(4).default
+module.exports.__inject__ = function (context) {
+  add("036588f4", content, true, context)
+};
+
+/***/ }),
+
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -2541,147 +2340,7 @@ for(var k in plugins){if(plugins.hasOwnProperty(k)){core_controller.plugins.regi
 
 /***/ }),
 
-/***/ 46:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(57);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(4).default
-module.exports.__inject__ = function (context) {
-  add("225bbff9", content, true, context)
-};
-
-/***/ }),
-
-/***/ 47:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(59);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(4).default
-module.exports.__inject__ = function (context) {
-  add("036588f4", content, true, context)
-};
-
-/***/ }),
-
-/***/ 48:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(40);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 49:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-2c494de8]{min-height:100vh}.dashboard-wrapper[data-v-2c494de8],.sidenav[data-v-2c494de8]{background-color:var(--bg-sidenav)}.sidenav[data-v-2c494de8]{border-right:1px solid var(--border-color);width:260px}.theme-toggle-container[data-v-2c494de8]{padding:0 16px}.main-content[data-v-2c494de8]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-2c494de8]{border-radius:12px;position:relative}.icon-circle[data-v-2c494de8]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-2c494de8]{font-size:24px;font-weight:700}.stats-text p[data-v-2c494de8]{font-size:12px;margin:0}.badge[data-v-2c494de8]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-2c494de8]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-2c494de8]{font-size:11px;margin-bottom:5px}.border-right[data-v-2c494de8]{border-right:1px solid var(--border-color)}.tabs[data-v-2c494de8]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-2c494de8]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-2c494de8]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-2c494de8]{padding-left:20px}}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 50:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CertificationBadge_vue_vue_type_style_index_0_id_03e771c5_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(41);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CertificationBadge_vue_vue_type_style_index_0_id_03e771c5_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CertificationBadge_vue_vue_type_style_index_0_id_03e771c5_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CertificationBadge_vue_vue_type_style_index_0_id_03e771c5_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CertificationBadge_vue_vue_type_style_index_0_id_03e771c5_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 51:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".cert-badge[data-v-03e771c5]{align-items:center;background:var(--bg-card-alt);border:1px solid var(--border-strong);border-radius:999px;color:var(--text-secondary);display:inline-flex;font-size:11px;font-weight:600;gap:4px;line-height:1.6;padding:2px 10px;white-space:nowrap}.cert-badge__icon[data-v-03e771c5]{font-size:13px;line-height:1}.cert-badge--ready[data-v-03e771c5]{background:rgba(27,138,90,.12);border-color:rgba(27,138,90,.3);color:#1b8a5a}.cert-badge--warning[data-v-03e771c5]{background:rgba(184,121,10,.12);border-color:rgba(184,121,10,.3);color:#b8790a}.cert-badge--pending[data-v-03e771c5]{background:var(--bg-card-alt);border-color:var(--border-strong);color:var(--text-muted)}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 52:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/PreLoader.vue?vue&type=template&id=daccfba6
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', [_vm._ssrNode("<div class=\"preloader-wrapper active\"><div class=\"spinner-layer spinner-red-only\"><div class=\"circle-clipper left\"><div class=\"circle\"></div></div><div class=\"gap-patch\"><div class=\"circle\"></div></div><div class=\"circle-clipper right\"><div class=\"circle\"></div></div></div></div>")]);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/PreLoader.vue?vue&type=template&id=daccfba6
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/PreLoader.vue?vue&type=script&lang=js
-/* harmony default export */ var PreLoadervue_type_script_lang_js = ({});
-// CONCATENATED MODULE: ./components/PreLoader.vue?vue&type=script&lang=js
- /* harmony default export */ var components_PreLoadervue_type_script_lang_js = (PreLoadervue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./components/PreLoader.vue
-
-
-
-function injectStyles (context) {
-  
-  
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_PreLoadervue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  null,
-  "3a21b866"
-  
-)
-
-/* harmony default export */ var PreLoader = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ 53:
+/***/ 45:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2707,7 +2366,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/ChartPie.vue?vue&type=template&id=34e817af&scoped=true
 
 // EXTERNAL MODULE: ./assets/js/Chart.js
-var Chart = __webpack_require__(45);
+var Chart = __webpack_require__(44);
 var Chart_default = /*#__PURE__*/__webpack_require__.n(Chart);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ChartPie.vue?vue&type=script&lang=js
@@ -2789,7 +2448,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(56)
+  var style0 = __webpack_require__(50)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2811,108 +2470,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 54:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CertificationBadge.vue?vue&type=template&id=03e771c5&scoped=true
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('span', {
-    staticClass: "cert-badge",
-    class: `cert-badge--${_vm.tone}`
-  }, [_vm._ssrNode("<i class=\"material-icons cert-badge__icon\" data-v-03e771c5>" + _vm._ssrEscape(_vm._s(_vm.icon)) + "</i>" + _vm._ssrEscape("\n  " + _vm._s(_vm.label) + "\n"))]);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/CertificationBadge.vue?vue&type=template&id=03e771c5&scoped=true
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/CertificationBadge.vue?vue&type=script&lang=js
-const STATUS_MAP = {
-  ready: {
-    label: 'Ready',
-    tone: 'ready',
-    icon: 'check_circle'
-  },
-  requires_validation: {
-    label: 'Requires business validation',
-    tone: 'warning',
-    icon: 'warning'
-  },
-  pending: {
-    label: 'Pending source',
-    tone: 'pending',
-    icon: 'schedule'
-  },
-  partial: {
-    label: 'Partial',
-    tone: 'warning',
-    icon: 'info'
-  }
-};
-/* harmony default export */ var CertificationBadgevue_type_script_lang_js = ({
-  name: 'CertificationBadge',
-  props: {
-    status: {
-      type: String,
-      required: true,
-      validator: value => Object.keys(STATUS_MAP).includes(value)
-    },
-    text: {
-      type: String,
-      default: null
-    }
-  },
-  computed: {
-    label() {
-      return this.text || STATUS_MAP[this.status].label;
-    },
-    tone() {
-      return STATUS_MAP[this.status].tone;
-    },
-    icon() {
-      return STATUS_MAP[this.status].icon;
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/CertificationBadge.vue?vue&type=script&lang=js
- /* harmony default export */ var components_CertificationBadgevue_type_script_lang_js = (CertificationBadgevue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./components/CertificationBadge.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(50)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_CertificationBadgevue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "03e771c5",
-  "9506702e"
-  
-)
-
-/* harmony default export */ var CertificationBadge = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ 55:
+/***/ 46:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3016,7 +2574,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(58)
+  var style0 = __webpack_require__(52)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -3038,19 +2596,96 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 56:
+/***/ 47:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_34e817af_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ 48:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-2c494de8]{min-height:100vh}.dashboard-wrapper[data-v-2c494de8],.sidenav[data-v-2c494de8]{background-color:var(--bg-sidenav)}.sidenav[data-v-2c494de8]{border-right:1px solid var(--border-color);width:260px}.theme-toggle-container[data-v-2c494de8]{padding:0 16px}.main-content[data-v-2c494de8]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-2c494de8]{border-radius:12px;position:relative}.icon-circle[data-v-2c494de8]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-2c494de8]{font-size:24px;font-weight:700}.stats-text p[data-v-2c494de8]{font-size:12px;margin:0}.badge[data-v-2c494de8]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-2c494de8]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-2c494de8]{font-size:11px;margin-bottom:5px}.border-right[data-v-2c494de8]{border-right:1px solid var(--border-color)}.tabs[data-v-2c494de8]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-2c494de8]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-2c494de8]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-2c494de8]{padding-left:20px}}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 49:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/PreLoader.vue?vue&type=template&id=daccfba6
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', [_vm._ssrNode("<div class=\"preloader-wrapper active\"><div class=\"spinner-layer spinner-red-only\"><div class=\"circle-clipper left\"><div class=\"circle\"></div></div><div class=\"gap-patch\"><div class=\"circle\"></div></div><div class=\"circle-clipper right\"><div class=\"circle\"></div></div></div></div>")]);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/PreLoader.vue?vue&type=template&id=daccfba6
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/PreLoader.vue?vue&type=script&lang=js
+/* harmony default export */ var PreLoadervue_type_script_lang_js = ({});
+// CONCATENATED MODULE: ./components/PreLoader.vue?vue&type=script&lang=js
+ /* harmony default export */ var components_PreLoadervue_type_script_lang_js = (PreLoadervue_type_script_lang_js); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./components/PreLoader.vue
+
+
+
+function injectStyles (context) {
+  
+  
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_PreLoadervue_type_script_lang_js,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  null,
+  "3a21b866"
+  
+)
+
+/* harmony default export */ var PreLoader = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ 50:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_34e817af_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_34e817af_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_34e817af_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_34e817af_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_34e817af_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 57:
+/***/ 51:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -3065,19 +2700,19 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 58:
+/***/ 52:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(47);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 59:
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -3092,44 +2727,44 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 64:
+/***/ 59:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(75);
+var content = __webpack_require__(70);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(4).default
 module.exports.__inject__ = function (context) {
-  add("4f8bf8fc", content, true, context)
+  add("d0bfdaf6", content, true, context)
 };
 
 /***/ }),
 
-/***/ 74:
+/***/ 69:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_e814f74c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_e814f74c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_e814f74c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_e814f74c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_e814f74c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_692c7110_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(59);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_692c7110_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_692c7110_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_692c7110_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_692c7110_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 75:
+/***/ 70:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-e814f74c]{background-color:var(--bg-page);min-height:100vh}.main-content[data-v-e814f74c]{padding-left:280px;padding-right:20px;padding-top:20px}.avail-header[data-v-e814f74c]{align-items:center;display:flex;justify-content:space-between;margin-bottom:20px}.avail-title[data-v-e814f74c]{color:var(--text-primary);font-weight:600;margin:0}.state-panel[data-v-e814f74c]{align-items:center;display:flex;flex-direction:column;gap:12px;justify-content:center;padding:60px 20px}.state-message[data-v-e814f74c]{color:var(--text-secondary);text-align:center}.retry-btn[data-v-e814f74c]{border:1px solid var(--border-strong);border-radius:6px;color:var(--text-primary)}.pending-note[data-v-e814f74c]{color:var(--text-muted);font-size:12px;margin:8px 0 0}.pending-card[data-v-e814f74c]{padding:20px;text-align:center}.loss-row[data-v-e814f74c]{align-items:center;display:flex;gap:8px;margin-top:4px}.loss-label[data-v-e814f74c]{color:var(--text-muted);font-size:11px}.top-cards-row[data-v-e814f74c]{margin-bottom:0}.top-stat-card[data-v-e814f74c]{background:var(--bg-card);border-radius:14px;margin-bottom:12px;padding:18px 16px 14px}.top-stat-header[data-v-e814f74c]{align-items:flex-start;display:flex;gap:12px;margin-bottom:14px}.top-stat-icon-wrap[data-v-e814f74c]{align-items:center;border-radius:10px;display:flex;flex-shrink:0;height:46px;justify-content:center;width:46px}.red-icon-wrap[data-v-e814f74c]{background-color:#fdeaeb}.blue-icon-wrap[data-v-e814f74c]{background-color:#eaedff}.top-stat-icon[data-v-e814f74c]{font-size:22px!important}.red-icon[data-v-e814f74c]{color:#c0392b}.blue-icon[data-v-e814f74c]{color:#4a5fa5}.top-stat-info[data-v-e814f74c]{flex:1}.top-stat-value[data-v-e814f74c]{color:var(--text-primary);font-size:28px;font-weight:700;line-height:1.1;margin:0 0 2px}.top-stat-label[data-v-e814f74c]{color:var(--text-muted);font-size:12px;margin:0}.top-stat-divider[data-v-e814f74c]{background:var(--divider);height:1px;margin-bottom:12px}.top-stat-sub-row[data-v-e814f74c]{display:flex}.top-stat-sub[data-v-e814f74c]{flex:1;text-align:center}.sub-label[data-v-e814f74c]{color:var(--text-muted);font-size:12px;margin:0 0 2px}.sub-value[data-v-e814f74c]{color:var(--text-primary);font-size:20px;font-weight:700;margin:0}.border-right[data-v-e814f74c]{border-right:1px solid var(--border-color)}.customers-card-title[data-v-e814f74c]{color:var(--text-secondary);font-size:13px;font-weight:600;margin:0 0 14px;text-align:center}.progress-item[data-v-e814f74c]{margin-bottom:4px}.progress-label-row[data-v-e814f74c]{align-items:center;display:flex;justify-content:space-between;margin-bottom:4px}.progress-name[data-v-e814f74c]{color:var(--text-secondary);font-size:12px}.progress-fraction[data-v-e814f74c]{color:var(--text-muted);font-size:11px}.mini-chart-card[data-v-e814f74c]{background:var(--bg-card);border-radius:14px;margin-bottom:12px}.energy-card-header[data-v-e814f74c]{align-items:flex-start;display:flex;justify-content:space-between;margin-bottom:8px}.energy-card-title[data-v-e814f74c]{color:var(--text-primary);font-size:15px;font-weight:600;margin:0 0 2px}.energy-card-value[data-v-e814f74c]{color:var(--text-primary);font-size:22px;font-weight:700;margin:0}.pie-card-title[data-v-e814f74c]{color:var(--text-secondary);font-size:13px;font-weight:600;margin:0 0 10px}.vending-card-title[data-v-e814f74c]{color:var(--text-primary);font-size:15px;font-weight:600;margin-right:8px}@media only screen and (max-width:992px){.main-content[data-v-e814f74c]{padding-left:20px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-692c7110]{background-color:var(--bg-page);min-height:100vh}.main-content[data-v-692c7110]{padding-left:280px;padding-right:20px;padding-top:20px}.avail-header[data-v-692c7110]{align-items:center;display:flex;justify-content:space-between;margin-bottom:20px}.avail-title[data-v-692c7110]{color:var(--text-primary);font-weight:600;margin:0}.state-panel[data-v-692c7110]{align-items:center;display:flex;flex-direction:column;gap:12px;justify-content:center;padding:60px 20px}.state-message[data-v-692c7110]{color:var(--text-secondary);text-align:center}.retry-btn[data-v-692c7110]{border:1px solid var(--border-strong);border-radius:6px;color:var(--text-primary)}.pending-note[data-v-692c7110]{color:var(--text-muted);font-size:12px;margin:8px 0 0}.pending-card[data-v-692c7110]{padding:20px;text-align:center}.loss-row[data-v-692c7110]{align-items:center;display:flex;gap:8px;margin-top:4px}.loss-label[data-v-692c7110]{color:var(--text-muted);font-size:11px}.top-cards-row[data-v-692c7110]{margin-bottom:0}.top-stat-card[data-v-692c7110]{background:var(--bg-card);border-radius:14px;margin-bottom:12px;padding:18px 16px 14px}.top-stat-header[data-v-692c7110]{align-items:flex-start;display:flex;gap:12px;margin-bottom:14px}.top-stat-icon-wrap[data-v-692c7110]{align-items:center;border-radius:10px;display:flex;flex-shrink:0;height:46px;justify-content:center;width:46px}.red-icon-wrap[data-v-692c7110]{background-color:#fdeaeb}.blue-icon-wrap[data-v-692c7110]{background-color:#eaedff}.top-stat-icon[data-v-692c7110]{font-size:22px!important}.red-icon[data-v-692c7110]{color:#c0392b}.blue-icon[data-v-692c7110]{color:#4a5fa5}.top-stat-info[data-v-692c7110]{flex:1}.top-stat-value[data-v-692c7110]{color:var(--text-primary);font-size:28px;font-weight:700;line-height:1.1;margin:0 0 2px}.top-stat-label[data-v-692c7110]{color:var(--text-muted);font-size:12px;margin:0}.top-stat-divider[data-v-692c7110]{background:var(--divider);height:1px;margin-bottom:12px}.top-stat-sub-row[data-v-692c7110]{display:flex}.top-stat-sub[data-v-692c7110]{flex:1;text-align:center}.sub-label[data-v-692c7110]{color:var(--text-muted);font-size:12px;margin:0 0 2px}.sub-value[data-v-692c7110]{color:var(--text-primary);font-size:20px;font-weight:700;margin:0}.border-right[data-v-692c7110]{border-right:1px solid var(--border-color)}.customers-card-title[data-v-692c7110]{color:var(--text-secondary);font-size:13px;font-weight:600;margin:0 0 14px;text-align:center}.progress-item[data-v-692c7110]{margin-bottom:4px}.progress-label-row[data-v-692c7110]{align-items:center;display:flex;justify-content:space-between;margin-bottom:4px}.progress-name[data-v-692c7110]{color:var(--text-secondary);font-size:12px}.progress-fraction[data-v-692c7110]{color:var(--text-muted);font-size:11px}.mini-chart-card[data-v-692c7110]{background:var(--bg-card);border-radius:14px;margin-bottom:12px}.energy-card-header[data-v-692c7110]{align-items:flex-start;display:flex;justify-content:space-between;margin-bottom:8px}.energy-card-title[data-v-692c7110]{color:var(--text-primary);font-size:15px;font-weight:600;margin:0 0 2px}.energy-card-value[data-v-692c7110]{color:var(--text-primary);font-size:22px;font-weight:700;margin:0}.pie-card-title[data-v-692c7110]{color:var(--text-secondary);font-size:13px;font-weight:600;margin:0 0 10px}.vending-card-title[data-v-692c7110]{color:var(--text-primary);font-size:15px;font-weight:600;margin-right:8px}.vending-stats-grid[data-v-692c7110]{display:flex;gap:20px;margin-top:12px}.vending-stats-col[data-v-692c7110]{display:flex;flex:1;flex-direction:column;gap:8px}.vending-stat-row[data-v-692c7110]{font-size:12px;gap:8px}.vending-stat-row[data-v-692c7110],.vstat-dot[data-v-692c7110]{align-items:center;display:flex}.vstat-dot[data-v-692c7110]{border:2px solid;border-radius:50%;flex-shrink:0;height:14px;justify-content:center;width:14px}.vstat-dot[data-v-692c7110]:after{border-radius:50%;content:\"\";height:5px;width:5px}.vstat-dot-green[data-v-692c7110]{border-color:#5ebd8d}.vstat-dot-green[data-v-692c7110]:after{background-color:#5ebd8d}.vstat-dot-blue[data-v-692c7110]{border-color:#5b7cfa}.vstat-dot-blue[data-v-692c7110]:after{background-color:#5b7cfa}.vstat-label[data-v-692c7110]{color:var(--text-secondary);flex:1}.vstat-value[data-v-692c7110]{color:var(--text-primary);font-weight:700;white-space:nowrap}@media only screen and (max-width:992px){.main-content[data-v-692c7110]{padding-left:20px}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -3137,91 +2772,90 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 90:
+/***/ 87:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/control_center_dashboard.vue?vue&type=template&id=e814f74c&scoped=true
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/control_center_dashboard.vue?vue&type=template&id=692c7110&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
     staticClass: "dashboard-wrapper"
-  }, [_c('SideNav'), _vm._ssrNode(" "), _vm._ssrNode("<main class=\"main-content\" data-v-e814f74c>", "</main>", [_vm._ssrNode("<div class=\"avail-header\" data-v-e814f74c><h5 class=\"avail-title\" data-v-e814f74c>Control Center Dashboard</h5></div> "), _vm.loading ? _vm._ssrNode("<div class=\"state-panel\" data-v-e814f74c>", "</div>", [_c('PreLoader')], 1) : _vm.error ? _vm._ssrNode("<div class=\"state-panel\" data-v-e814f74c><p class=\"state-message\" data-v-e814f74c>" + _vm._ssrEscape("Could not load Control Center data: " + _vm._s(_vm.error)) + "</p> <button class=\"btn-flat retry-btn\" data-v-e814f74c>Retry</button></div>") : _vm._ssrNode("<div id=\"dashboard\" class=\"row\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"row top-cards-row\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"col s12 m3\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap red-icon-wrap\" data-v-e814f74c><i class=\"material-icons top-stat-icon red-icon\" data-v-e814f74c>device_hub</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-e814f74c>", "</p>", [_c('AnimatedValue', {
+  }, [_c('SideNav'), _vm._ssrNode(" "), _vm._ssrNode("<main class=\"main-content\" data-v-692c7110>", "</main>", [_vm._ssrNode("<div class=\"avail-header\" data-v-692c7110><h5 class=\"avail-title\" data-v-692c7110>Control Center Dashboard</h5></div> "), _vm.loading ? _vm._ssrNode("<div class=\"state-panel\" data-v-692c7110>", "</div>", [_c('PreLoader')], 1) : _vm.error ? _vm._ssrNode("<div class=\"state-panel\" data-v-692c7110><p class=\"state-message\" data-v-692c7110>" + _vm._ssrEscape("Could not load Control Center data: " + _vm._s(_vm.error)) + "</p> <button class=\"btn-flat retry-btn\" data-v-692c7110>Retry</button></div>") : _vm._ssrNode("<div id=\"dashboard\" class=\"row\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"row top-cards-row\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"col s12 m3\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap red-icon-wrap\" data-v-692c7110><i class=\"material-icons top-stat-icon red-icon\" data-v-692c7110>device_hub</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-692c7110>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-692c7110>", "</p>", [_c('AnimatedValue', {
     attrs: {
       "value": _vm.online_feeders
     }
-  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-e814f74c>Total feeders</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-e814f74c></div> <div class=\"top-stat-sub-row\" data-v-e814f74c><div class=\"top-stat-sub border-right\" data-v-e814f74c><p class=\"sub-label\" data-v-e814f74c>11kv</p> <p class=\"sub-value\" data-v-e814f74c>" + _vm._ssrEscape(_vm._s(_vm.kv11)) + "</p></div> <div class=\"top-stat-sub\" data-v-e814f74c><p class=\"sub-label\" data-v-e814f74c>33kv</p> <p class=\"sub-value\" data-v-e814f74c>" + _vm._ssrEscape(_vm._s(_vm.kv33)) + "</p></div></div>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap red-icon-wrap\" data-v-e814f74c><i class=\"material-icons top-stat-icon red-icon\" data-v-e814f74c>bolt</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-e814f74c>", "</p>", [_c('AnimatedValue', {
+  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-692c7110>Total feeders</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-692c7110></div> <div class=\"top-stat-sub-row\" data-v-692c7110><div class=\"top-stat-sub border-right\" data-v-692c7110><p class=\"sub-label\" data-v-692c7110>11kv</p> <p class=\"sub-value\" data-v-692c7110>" + _vm._ssrEscape(_vm._s(_vm.kv11)) + "</p></div> <div class=\"top-stat-sub\" data-v-692c7110><p class=\"sub-label\" data-v-692c7110>33kv</p> <p class=\"sub-value\" data-v-692c7110>" + _vm._ssrEscape(_vm._s(_vm.kv33)) + "</p></div></div>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap red-icon-wrap\" data-v-692c7110><i class=\"material-icons top-stat-icon red-icon\" data-v-692c7110>bolt</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-692c7110>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-692c7110>", "</p>", [_c('AnimatedValue', {
     attrs: {
       "value": _vm.online_dts
     }
-  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-e814f74c>Total DTs</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-e814f74c></div> "), _vm._ssrNode("<div class=\"top-stat-sub-row\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"top-stat-sub border-right\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<p class=\"sub-label\" data-v-e814f74c>Public</p> "), _vm._ssrNode("<p class=\"sub-value\" data-v-e814f74c>", "</p>", [_c('AnimatedValue', {
+  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-692c7110>Total DTs</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-692c7110></div> "), _vm._ssrNode("<div class=\"top-stat-sub-row\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"top-stat-sub border-right\" data-v-692c7110>", "</div>", [_vm._ssrNode("<p class=\"sub-label\" data-v-692c7110>Public</p> "), _vm._ssrNode("<p class=\"sub-value\" data-v-692c7110>", "</p>", [_c('AnimatedValue', {
     attrs: {
       "value": _vm.public_dts
     }
-  })], 1)], 2), _vm._ssrNode(" <div class=\"top-stat-sub\" data-v-e814f74c><p class=\"sub-label\" data-v-e814f74c>Private</p> <p class=\"sub-value\" data-v-e814f74c>" + _vm._ssrEscape(_vm._s(_vm.private_dts)) + "</p></div>")], 2)], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap blue-icon-wrap\" data-v-e814f74c><i class=\"material-icons top-stat-icon blue-icon\" data-v-e814f74c>group</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<p class=\"top-stat-label\" style=\"margin-bottom: 6px;\" data-v-e814f74c>Total Customer Complaints</p> "), _c('CertificationBadge', {
+  })], 1)], 2), _vm._ssrNode(" <div class=\"top-stat-sub\" data-v-692c7110><p class=\"sub-label\" data-v-692c7110>Private</p> <p class=\"sub-value\" data-v-692c7110>" + _vm._ssrEscape(_vm._s(_vm.private_dts)) + "</p></div>")], 2)], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap blue-icon-wrap\" data-v-692c7110><i class=\"material-icons top-stat-icon blue-icon\" data-v-692c7110>group</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-692c7110>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-692c7110>", "</p>", [_c('AnimatedValue', {
     attrs: {
-      "status": "pending"
+      "value": _vm.total_complaints
     }
-  })], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-e814f74c></div> <p class=\"pending-note\" data-v-e814f74c>Complaints data pending source onboarding</p>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<p class=\"customers-card-title\" data-v-e814f74c>Total Customers</p> "), _vm._ssrNode("<div class=\"progress-item\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"progress-label-row\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<span class=\"progress-name\" data-v-e814f74c>NMD</span> "), _vm._ssrNode("<span class=\"progress-fraction\" data-v-e814f74c>", "</span>", [_c('AnimatedValue', {
+  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-692c7110>Total Customer Complaints</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-692c7110></div> "), _vm._ssrNode("<div class=\"top-stat-sub-row\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"top-stat-sub border-right\" data-v-692c7110>", "</div>", [_vm._ssrNode("<p class=\"sub-label\" data-v-692c7110>Open</p> "), _vm._ssrNode("<p class=\"sub-value\" data-v-692c7110>", "</p>", [_c('AnimatedValue', {
+    attrs: {
+      "value": _vm.open_complaints
+    }
+  })], 1)], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"top-stat-sub\" data-v-692c7110>", "</div>", [_vm._ssrNode("<p class=\"sub-label\" data-v-692c7110>Closed</p> "), _vm._ssrNode("<p class=\"sub-value\" data-v-692c7110>", "</p>", [_c('AnimatedValue', {
+    attrs: {
+      "value": _vm.closed_complaints
+    }
+  })], 1)], 2)], 2)], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-692c7110>", "</div>", [_vm._ssrNode("<p class=\"customers-card-title\" data-v-692c7110>Total Customers</p> "), _vm._ssrNode("<div class=\"progress-item\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"progress-label-row\" data-v-692c7110>", "</div>", [_vm._ssrNode("<span class=\"progress-name\" data-v-692c7110>NMD</span> "), _vm._ssrNode("<span class=\"progress-fraction\" data-v-692c7110>", "</span>", [_c('AnimatedValue', {
     attrs: {
       "value": _vm.nmd_value
     }
-  }), _vm._ssrNode(_vm._ssrEscape("/" + _vm._s(_vm.total_customers_display) + "\n                                "))], 2)], 2), _vm._ssrNode(" <div class=\"progress indigo lighten-4\" style=\"height:8px; border-radius:4px;\" data-v-e814f74c><div class=\"determinate indigo accent-2\"" + _vm._ssrStyle(null, {
+  }), _vm._ssrNode(_vm._ssrEscape("/" + _vm._s(_vm.nmd_total) + "\n                                "))], 2)], 2), _vm._ssrNode(" <div class=\"progress indigo lighten-4\" style=\"height:8px; border-radius:4px;\" data-v-692c7110><div class=\"determinate indigo accent-2\"" + _vm._ssrStyle(null, {
     width: _vm.nmd_pct
-  }, null) + " data-v-e814f74c></div></div>")], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"progress-item\" style=\"margin-top: 14px;\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"progress-label-row\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<span class=\"progress-name\" data-v-e814f74c>MD</span> "), _vm._ssrNode("<span class=\"progress-fraction\" data-v-e814f74c>", "</span>", [_c('AnimatedValue', {
+  }, null) + " data-v-692c7110></div></div>")], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"progress-item\" style=\"margin-top: 14px;\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"progress-label-row\" data-v-692c7110>", "</div>", [_vm._ssrNode("<span class=\"progress-name\" data-v-692c7110>MD</span> "), _vm._ssrNode("<span class=\"progress-fraction\" data-v-692c7110>", "</span>", [_c('AnimatedValue', {
     attrs: {
       "value": _vm.md_value
     }
-  }), _vm._ssrNode(_vm._ssrEscape("/" + _vm._s(_vm.total_customers_display) + "\n                                "))], 2)], 2), _vm._ssrNode(" <div class=\"progress green lighten-4\" style=\"height:8px; border-radius:4px;\" data-v-e814f74c><div class=\"determinate green\"" + _vm._ssrStyle(null, {
+  }), _vm._ssrNode(_vm._ssrEscape("/" + _vm._s(_vm.md_total) + "\n                                "))], 2)], 2), _vm._ssrNode(" <div class=\"progress green lighten-4\" style=\"height:8px; border-radius:4px;\" data-v-692c7110><div class=\"determinate green\"" + _vm._ssrStyle(null, {
     width: _vm.md_pct
-  }, null) + " data-v-e814f74c></div></div>")], 2)], 2)])], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"row\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"col s12 m9\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"card-panel mini-chart-card\" style=\"padding-bottom: 20px;\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"energy-card-header\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div data-v-e814f74c>", "</div>", [_vm._ssrNode("<p class=\"energy-card-title\" data-v-e814f74c>Energy</p> <p class=\"energy-card-value\" data-v-e814f74c>" + _vm._ssrEscape(_vm._s(_vm.energyTotal)) + "</p> "), _vm._ssrNode("<div class=\"loss-row\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<span class=\"loss-label\" data-v-e814f74c>" + _vm._ssrEscape("Feeder→DT loss: " + _vm._s(_vm.lossPctDisplay)) + "</span> "), _c('CertificationBadge', {
-    attrs: {
-      "status": "requires_validation"
-    }
-  })], 2)], 2)]), _vm._ssrNode(" <div style=\"position: relative; height:180px; overflow:visible;\" data-v-e814f74c><canvas id=\"energyChart\" data-v-e814f74c></canvas></div>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"card-panel mini-chart-card\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<p class=\"pie-card-title center\" data-v-e814f74c>Energy Allocation per MYTO Band</p> "), _vm.energyAllocationData ? _c('ChartPie', {
+  }, null) + " data-v-692c7110></div></div>")], 2)], 2)])], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"row\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"col s12 m9\" data-v-692c7110><div class=\"card-panel mini-chart-card\" style=\"padding-bottom: 20px;\" data-v-692c7110><div class=\"energy-card-header\" data-v-692c7110><div data-v-692c7110><p class=\"energy-card-title\" data-v-692c7110>Energy</p> <p class=\"energy-card-value\" data-v-692c7110>" + _vm._ssrEscape(_vm._s(_vm.energyTotal)) + "</p> <div class=\"loss-row\" data-v-692c7110><span class=\"loss-label\" data-v-692c7110>" + _vm._ssrEscape("Feeder→DT loss: " + _vm._s(_vm.lossPctDisplay)) + "</span></div></div></div> <div style=\"position: relative; height:180px; overflow:visible;\" data-v-692c7110><canvas id=\"energyChart\" data-v-692c7110></canvas></div></div></div> "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-692c7110>", "</div>", [_vm._ssrNode("<div class=\"card-panel mini-chart-card\" data-v-692c7110>", "</div>", [_vm._ssrNode("<p class=\"pie-card-title center\" data-v-692c7110>Energy Allocation per MYTO Band</p> "), _vm.energyAllocationData ? _c('ChartPie', {
     attrs: {
       "chart-type": "pie",
       "chart-data": _vm.energyAllocationData,
       "chart-options": _vm.pieOptions
     }
-  }) : _c('p', {
-    staticClass: "pending-note center"
-  }, [_vm._v("No band energy data returned")])], 2)])], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"row\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"col s12\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<div class=\"card-panel mini-chart-card pending-card\" data-v-e814f74c>", "</div>", [_vm._ssrNode("<span class=\"vending-card-title\" data-v-e814f74c>Vending &amp; Collection</span> "), _c('CertificationBadge', {
-    attrs: {
-      "status": "pending"
-    }
-  }), _vm._ssrNode(" <p class=\"pending-note\" data-v-e814f74c>Vending and collection data pending source onboarding</p>")], 2)])])], 2)], 2)], 2);
+  }) : _vm._e()], 2)])], 2), _vm._ssrNode(" <div class=\"row\" data-v-692c7110><div class=\"col s12\" data-v-692c7110><div class=\"card-panel mini-chart-card\" style=\"padding-bottom: 20px;\" data-v-692c7110><span class=\"vending-card-title\" data-v-692c7110>Vending &amp; Collection</span> <div style=\"position: relative; height:160px; padding-bottom:20px; overflow:visible; margin-top: 14px;\" data-v-692c7110><canvas id=\"vendingChart\" data-v-692c7110></canvas></div> <hr style=\"margin-top: 40px;\" data-v-692c7110> <div class=\"vending-stats-grid\" data-v-692c7110><div class=\"vending-stats-col\" data-v-692c7110><div class=\"vending-stat-row\" data-v-692c7110><span class=\"vstat-dot vstat-dot-green\" data-v-692c7110></span> <span class=\"vstat-label\" data-v-692c7110>Total Customers Vended Today</span> <span class=\"vstat-value\" data-v-692c7110>" + _vm._ssrEscape(_vm._s(_vm.total_customer_vended_today)) + "</span></div> <div class=\"vending-stat-row\" data-v-692c7110><span class=\"vstat-dot vstat-dot-green\" data-v-692c7110></span> <span class=\"vstat-label\" data-v-692c7110>Amount Vended Today</span> <span class=\"vstat-value\" data-v-692c7110>" + _vm._ssrEscape(_vm._s(_vm.amount_vended_today)) + "</span></div> <div class=\"vending-stat-row\" data-v-692c7110><span class=\"vstat-dot vstat-dot-green\" data-v-692c7110></span> <span class=\"vstat-label\" data-v-692c7110>Amount Vended MTD</span> <span class=\"vstat-value\" data-v-692c7110>" + _vm._ssrEscape(_vm._s(_vm.amount_vended_mtd)) + "</span></div></div> <div class=\"vending-stats-col\" data-v-692c7110><div class=\"vending-stat-row\" data-v-692c7110><span class=\"vstat-dot vstat-dot-blue\" data-v-692c7110></span> <span class=\"vstat-label\" data-v-692c7110>Total Collection Today</span> <span class=\"vstat-value\" data-v-692c7110>" + _vm._ssrEscape(_vm._s(_vm.total_collection_today)) + "</span></div> <div class=\"vending-stat-row\" data-v-692c7110><span class=\"vstat-dot vstat-dot-blue\" data-v-692c7110></span> <span class=\"vstat-label\" data-v-692c7110>Amount Collected MTD</span> <span class=\"vstat-value\" data-v-692c7110>" + _vm._ssrEscape(_vm._s(_vm.amount_collected_mtd)) + "</span></div></div></div></div></div></div>")], 2)], 2)], 2);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/control_center_dashboard.vue?vue&type=template&id=e814f74c&scoped=true
+// CONCATENATED MODULE: ./pages/control_center_dashboard.vue?vue&type=template&id=692c7110&scoped=true
 
 // EXTERNAL MODULE: ./components/SideNav/SideNav.vue + 4 modules
-var SideNav = __webpack_require__(42);
+var SideNav = __webpack_require__(40);
 
 // EXTERNAL MODULE: ./components/AnimatedValue.vue + 4 modules
-var AnimatedValue = __webpack_require__(55);
+var AnimatedValue = __webpack_require__(46);
 
 // EXTERNAL MODULE: ./components/ChartPie.vue + 4 modules
-var ChartPie = __webpack_require__(53);
+var ChartPie = __webpack_require__(45);
 
 // EXTERNAL MODULE: ./assets/js/Chart.js
-var Chart = __webpack_require__(45);
+var Chart = __webpack_require__(44);
 var Chart_default = /*#__PURE__*/__webpack_require__.n(Chart);
-
-// EXTERNAL MODULE: ./js_modules/controlCenterApi.js
-var controlCenterApi = __webpack_require__(44);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/control_center_dashboard.vue?vue&type=script&lang=js
 
 
 
 
-
+// Live API wiring (js_modules/controlCenterApi.js) stays in the codebase but is not
+// called right now — this page is intentionally running on demo data. To go live again,
+// restore the async getData()/loadEnergyTrend() that call controlCenterApi.*.
+// import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
+// import { pick, formatNumber, lastNMonths, monthLabel } from '~/js_modules/controlCenterApi.js'
 
 /* harmony default export */ var control_center_dashboardvue_type_script_lang_js = ({
   components: {
@@ -3235,16 +2869,26 @@ var controlCenterApi = __webpack_require__(44);
       error: null,
       /* top stat cards */
       online_feeders: '0',
-      kv11: '—',
-      kv33: '—',
+      kv11: '0',
+      kv33: '0',
       online_dts: '0',
       public_dts: '0',
-      private_dts: '—',
+      private_dts: '0',
+      total_complaints: '0',
+      open_complaints: '0',
+      closed_complaints: '0',
       nmd_value: '0',
+      nmd_total: '1,033,000',
       nmd_pct: '0%',
       md_value: '0',
+      md_total: '7,000',
       md_pct: '0%',
-      total_customers_display: '—',
+      /* vending stats */
+      total_customer_vended_today: '0',
+      amount_vended_today: '0',
+      amount_vended_mtd: '0',
+      total_collection_today: '0',
+      amount_collected_mtd: '0',
       /* loss */
       lossPctDisplay: '—',
       /* chart data */
@@ -3266,10 +2910,10 @@ var controlCenterApi = __webpack_require__(44);
       /* energy chart */
       energyChart: null,
       energyData: {
-        labels: [],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         datasets: [{
-          label: 'Feeder Energy Raw',
-          data: [],
+          label: 'Feeder Energy (MWh)',
+          data: [30, 25, 43, 38, 28, 32, 36],
           borderColor: '#5ebd8d',
           backgroundColor: 'rgba(235,250,243,0.6)',
           tension: 0.4,
@@ -3297,7 +2941,7 @@ var controlCenterApi = __webpack_require__(44);
           borderWidth: 1,
           callbacks: {
             label: function (tooltipItems) {
-              return Object(controlCenterApi["b" /* formatNumber */])(tooltipItems.yLabel) + ' (raw)';
+              return tooltipItems.yLabel + ' MWh';
             }
           }
         },
@@ -3320,93 +2964,99 @@ var controlCenterApi = __webpack_require__(44);
           }]
         }
       },
-      energyTotal: '—'
+      energyTotal: '—',
+      /* vending chart */
+      vendingChart: null,
+      vendingData: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          label: 'Vending',
+          data: [350, 250, 180, 320, 480, 400, 220, 150, 260, 380, 420, 380],
+          borderColor: '#5ebd8d',
+          backgroundColor: 'rgba(94,189,141,0.1)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 3,
+          pointBackgroundColor: '#5ebd8d'
+        }, {
+          label: 'Collection',
+          data: [200, 150, 200, 380, 280, 180, 150, 200, 320, 280, 350, 390],
+          borderColor: '#5b7cfa',
+          backgroundColor: 'rgba(91,124,250,0.08)',
+          tension: 0.4,
+          fill: true,
+          pointRadius: 3,
+          pointBackgroundColor: '#5b7cfa'
+        }]
+      },
+      vendingOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: true
+        },
+        tooltips: {
+          callbacks: {
+            label: function (tooltipItems) {
+              return tooltipItems.yLabel + ' MWh';
+            }
+          }
+        },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: false
+            },
+            ticks: {
+              fontColor: '#888'
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: false
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
     };
   },
   methods: {
-    async getData() {
+    getData() {
+      // DEMO MODE — hardcoded values for today's demo, no network calls.
       this.loading = true;
       this.error = null;
-      try {
-        var _pick, _pick2, _pick3, _pick4, _pick5, _pick6;
-        // control-center's own `cards`/`dt_status` sections don't carry the
-        // public/private DT split or the NMD/MD customer split — those only
-        // exist on /dashboard/overview, so pull it in parallel and fall back to it.
-        const [cc, overviewRes] = await Promise.all([controlCenterApi["d" /* getControlCenter */](), controlCenterApi["k" /* getOverview */]().catch(() => null)]);
-        const overview = Object(controlCenterApi["o" /* pick */])(overviewRes, ['data'], {}) || {};
-        console.log('=== CONTROL CENTER DASHBOARD: RAW API RESPONSE ===');
-        console.log(JSON.stringify(cc, null, 2));
-        this.online_feeders = Object(controlCenterApi["b" /* formatNumber */])(Object(controlCenterApi["o" /* pick */])(cc, ['cards.total_feeders', 'feeder_status.total_feeders', 'total_feeders'], 0));
-        const kv11Raw = Object(controlCenterApi["o" /* pick */])(cc, ['cards.feeders_11kv', 'feeder_status.feeders_11kv'], null);
-        const kv33Raw = Object(controlCenterApi["o" /* pick */])(cc, ['cards.feeders_33kv', 'feeder_status.feeders_33kv'], null);
-        this.kv11 = kv11Raw != null ? Object(controlCenterApi["b" /* formatNumber */])(kv11Raw) : '—';
-        this.kv33 = kv33Raw != null ? Object(controlCenterApi["b" /* formatNumber */])(kv33Raw) : '—';
-        this.online_dts = Object(controlCenterApi["b" /* formatNumber */])(Object(controlCenterApi["o" /* pick */])(cc, ['cards.total_dts', 'dt_status.total_dts', 'total_dts'], 0));
-        const publicDts = (_pick = Object(controlCenterApi["o" /* pick */])(cc, ['cards.public_dts', 'dt_status.public_dts', 'public_dts'], null)) !== null && _pick !== void 0 ? _pick : Object(controlCenterApi["o" /* pick */])(overview, ['public_dts'], 0);
-        this.public_dts = Object(controlCenterApi["b" /* formatNumber */])(publicDts);
-        const privatePublic = Number((_pick2 = Object(controlCenterApi["o" /* pick */])(cc, ['cards.private_public_dts', 'dt_status.private_public_dts', 'private_public_dts'], null)) !== null && _pick2 !== void 0 ? _pick2 : Object(controlCenterApi["o" /* pick */])(overview, ['private_public_dts'], 0));
-        const privateSingle = Number((_pick3 = Object(controlCenterApi["o" /* pick */])(cc, ['cards.private_single_dts', 'dt_status.private_single_dts', 'private_single_dts'], null)) !== null && _pick3 !== void 0 ? _pick3 : Object(controlCenterApi["o" /* pick */])(overview, ['private_single_dts'], 0));
-        this.private_dts = privatePublic || privateSingle ? Object(controlCenterApi["b" /* formatNumber */])(privatePublic + privateSingle) : '—';
-        const totalCustomers = (_pick4 = Object(controlCenterApi["o" /* pick */])(cc, ['cards.total_customers', 'total_customers'], null)) !== null && _pick4 !== void 0 ? _pick4 : Object(controlCenterApi["o" /* pick */])(overview, ['total_customers'], null);
-        const nmdCustomers = (_pick5 = Object(controlCenterApi["o" /* pick */])(cc, ['cards.nmd_customers', 'nmd_customers'], null)) !== null && _pick5 !== void 0 ? _pick5 : Object(controlCenterApi["o" /* pick */])(overview, ['nmd_customers'], null);
-        const mdCustomers = (_pick6 = Object(controlCenterApi["o" /* pick */])(cc, ['cards.md_customers', 'md_customers'], null)) !== null && _pick6 !== void 0 ? _pick6 : Object(controlCenterApi["o" /* pick */])(overview, ['md_customers'], null);
-        this.total_customers_display = totalCustomers != null ? Object(controlCenterApi["b" /* formatNumber */])(totalCustomers) : '—';
-        this.nmd_value = nmdCustomers != null ? Object(controlCenterApi["b" /* formatNumber */])(nmdCustomers) : '0';
-        this.md_value = mdCustomers != null ? Object(controlCenterApi["b" /* formatNumber */])(mdCustomers) : '0';
-        this.nmd_pct = totalCustomers && nmdCustomers != null ? `${Math.min(100, nmdCustomers / totalCustomers * 100)}%` : '0%';
-        this.md_pct = totalCustomers && mdCustomers != null ? `${Math.min(100, mdCustomers / totalCustomers * 100)}%` : '0%';
-        const lossPct = Object(controlCenterApi["o" /* pick */])(cc, ['monthly_energy.feeder_to_dt_loss_pct', 'monthly_energy.summary.feeder_to_dt_loss_pct'], null);
-        this.lossPctDisplay = lossPct != null ? `${lossPct}%` : '—';
-        const latestMonth = Object(controlCenterApi["o" /* pick */])(cc, ['monthly_energy.month_start', 'monthly_energy.summary.month_start'], null);
-        const latestFeederEnergy = Object(controlCenterApi["o" /* pick */])(cc, ['monthly_energy.total_feeder_energy_raw', 'monthly_energy.summary.total_feeder_energy_raw'], null);
-        this.energyTotal = latestFeederEnergy != null ? `${Object(controlCenterApi["b" /* formatNumber */])(latestFeederEnergy)} Raw` : '—';
-        const bandEntries = this.normalizeBandEntries(Object(controlCenterApi["o" /* pick */])(cc, ['energy_by_band'], null));
-        this.energyAllocationData = bandEntries.length ? {
-          labels: bandEntries.map(e => e.band),
-          datasets: [{
-            data: bandEntries.map(e => e.value),
-            backgroundColor: bandEntries.map((_, i) => this.bandColors[i % this.bandColors.length]),
-            borderWidth: 0
-          }]
-        } : null;
-        await this.loadEnergyTrend(latestMonth);
-      } catch (err) {
-        this.error = err.message;
-        console.error('control-center dashboard load failed', err);
-      } finally {
-        this.loading = false;
-      }
-    },
-    normalizeBandEntries(raw) {
-      if (!raw) return [];
-      const entries = Array.isArray(raw) ? raw : Object.entries(raw);
-      return entries.map(e => {
-        var _ref, _ref2, _e$band, _ref3, _ref4, _e$dt_energy_raw;
-        if (Array.isArray(e)) return {
-          band: String(e[0]),
-          value: Number(e[1]) || 0
-        };
-        const band = (_ref = (_ref2 = (_e$band = e.band) !== null && _e$band !== void 0 ? _e$band : e.band_code) !== null && _ref2 !== void 0 ? _ref2 : e.myto_band) !== null && _ref !== void 0 ? _ref : e.name;
-        const value = (_ref3 = (_ref4 = (_e$dt_energy_raw = e.dt_energy_raw) !== null && _e$dt_energy_raw !== void 0 ? _e$dt_energy_raw : e.energy_raw) !== null && _ref4 !== void 0 ? _ref4 : e.value) !== null && _ref3 !== void 0 ? _ref3 : e.total;
-        return {
-          band: String(band),
-          value: Number(value) || 0
-        };
-      }).filter(e => e.band && e.band !== 'undefined');
-    },
-    async loadEnergyTrend(latestMonth) {
-      const months = Object(controlCenterApi["m" /* lastNMonths */])(latestMonth, 6);
-      const responses = await Promise.all(months.map(m => controlCenterApi["i" /* getMonthlyEnergy */]({
-        month: m
-      }).catch(() => null)));
-      this.energyData = {
-        ...this.energyData,
-        labels: months.map(controlCenterApi["n" /* monthLabel */]),
+      this.online_feeders = '200';
+      this.kv11 = '150';
+      this.kv33 = '50';
+      this.online_dts = '1,200';
+      this.public_dts = '1,000';
+      this.private_dts = '200';
+      this.total_complaints = '50';
+      this.open_complaints = '20';
+      this.closed_complaints = '30';
+      this.nmd_value = '900,000';
+      this.nmd_pct = '87%';
+      this.md_value = '5,000';
+      this.md_pct = '71%';
+      this.total_customer_vended_today = '30,400,000';
+      this.amount_vended_today = '₦30,400,000';
+      this.amount_vended_mtd = '₦2,000,000,000';
+      this.total_collection_today = '₦50,000,000';
+      this.amount_collected_mtd = '₦7,000,000,000';
+      this.lossPctDisplay = '7.87%';
+      this.energyTotal = '350.00 MWh';
+      this.energyAllocationData = {
+        labels: ['Band A', 'Band B', 'Band C', 'Band D', 'Band E'],
         datasets: [{
-          ...this.energyData.datasets[0],
-          data: responses.map(r => Object(controlCenterApi["o" /* pick */])(r, ['summary.total_feeder_energy_raw', 'total_feeder_energy_raw'], null))
+          data: [35, 25, 20, 12, 8],
+          backgroundColor: this.bandColors,
+          borderWidth: 0
         }]
       };
+      this.loading = false;
     },
     initEnergyChart() {
       const canvas = document.getElementById('energyChart');
@@ -3417,6 +3067,16 @@ var controlCenterApi = __webpack_require__(44);
         data: this.energyData,
         options: this.energyOptions
       });
+    },
+    initVendingChart() {
+      const canvas = document.getElementById('vendingChart');
+      if (!canvas) return;
+      if (this.vendingChart) this.vendingChart.destroy();
+      this.vendingChart = new Chart_default.a(canvas.getContext('2d'), {
+        type: 'line',
+        data: this.vendingData,
+        options: this.vendingOptions
+      });
     }
   },
   computed: {
@@ -3424,9 +3084,12 @@ var controlCenterApi = __webpack_require__(44);
       return ['#5b7cfa', '#6dd4c7', '#c87dff', '#ff6b6b', '#ffa94e', '#4ecdc4'];
     }
   },
-  async mounted() {
-    await this.getData();
-    this.$nextTick(() => this.initEnergyChart());
+  mounted() {
+    this.getData();
+    this.$nextTick(() => {
+      this.initEnergyChart();
+      this.initVendingChart();
+    });
   }
 });
 // CONCATENATED MODULE: ./pages/control_center_dashboard.vue?vue&type=script&lang=js
@@ -3440,7 +3103,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(74)
+  var style0 = __webpack_require__(69)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -3453,7 +3116,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "e814f74c",
+  "692c7110",
   "6c7aa320"
   
 )
@@ -3461,7 +3124,7 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var control_center_dashboard = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {SideNav: __webpack_require__(42).default,PreLoader: __webpack_require__(52).default,AnimatedValue: __webpack_require__(55).default,CertificationBadge: __webpack_require__(54).default,ChartPie: __webpack_require__(53).default})
+installComponents(component, {SideNav: __webpack_require__(40).default,PreLoader: __webpack_require__(49).default,AnimatedValue: __webpack_require__(46).default,ChartPie: __webpack_require__(45).default})
 
 
 /***/ })
