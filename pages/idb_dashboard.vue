@@ -13,7 +13,7 @@
                         </li>
                         <li class="tab">
                             <a href="#feeder-loss" class="tab-link feeder-tab">
-                                <i class="material-icons tiny tab-icon">apps</i> Feeder to DT Loss Table
+                                <i class="material-icons tiny tab-icon">apps</i> High-Impact Feeders
                             </a>
                         </li>
                         <li class="tab">
@@ -101,24 +101,23 @@
                             <div class="progress red lighten-4">
                                 <div class="determinate red" :style="{ width: feeder_loss_pct }"></div>
                             </div>
+                            <CertificationBadge status="requires_validation" />
                         </div>
-                        <div class="card-panel mini-chart-card">
+                        <div class="card-panel mini-chart-card pending-card">
                             <p class="grey-text text-darken-2">Billing Efficiency</p>
-                            <h5><AnimatedValue :value="billing_eff" /></h5>
+                            <CertificationBadge status="pending" />
                         </div>
                     </div>
 
                     <div class="col s12 m4">
-                        <div class="card-panel mini-chart-card">
+                        <div class="card-panel mini-chart-card pending-card">
                             <p class="grey-text text-darken-2">Customer - to - DT Loss</p>
-                            <h5><AnimatedValue :value="customer_loss" /></h5>
-                            <p class="tiny-text grey-text">Loss (%) <span class="right">
-                                    <AnimatedValue :value="customer_loss_pct" />
-                                </span></p>
+                            <CertificationBadge status="pending" />
+                            <p class="pending-note">Requires customer consumption source</p>
                         </div>
-                        <div class="card-panel mini-chart-card">
+                        <div class="card-panel mini-chart-card pending-card">
                             <p class="grey-text text-darken-2">ATC &amp; C</p>
-                            <h5><AnimatedValue :value="atc_c" /></h5>
+                            <CertificationBadge status="pending" />
                         </div>
                     </div>
 
@@ -170,38 +169,37 @@
 
                     <div class="col s12 m3">
                         <div class="card-panel mini-chart-card">
-                            <p class="grey-text text-darken-2 center">Revenue</p>
-                            <ChartPie v-if="revenueData" chart-type="doughnut" :chart-data="revenueData"
-                                :chart-options="pieOptions" :center-text="revenue" />
+                            <p class="grey-text text-darken-2 center">IDB Prepaid Vending</p>
+                            <p class="idb-vending-value center"><AnimatedValue :value="idb_prepaid_total_amount" /></p>
                             <div class="chart-legend-list">
-                                <div class="cleg-item" v-for="item in revenueLegend" :key="item.label">
-                                    <span class="cleg-dot" :style="{ backgroundColor: item.color }"></span>
-                                    <span class="cleg-label">{{ item.label }}</span>
-                                    <span class="cleg-val">{{ item.value }}</span>
+                                <div class="cleg-item">
+                                    <span class="cleg-label">Accounts</span>
+                                    <span class="cleg-val">{{ idb_prepaid_accounts }}</span>
+                                </div>
+                                <div class="cleg-item">
+                                    <span class="cleg-label">Meters</span>
+                                    <span class="cleg-val">{{ idb_prepaid_meters }}</span>
+                                </div>
+                                <div class="cleg-item">
+                                    <span class="cleg-label">Total kWh</span>
+                                    <span class="cleg-val">{{ idb_prepaid_total_kwh }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m3">
-                        <div class="card-panel mini-chart-card">
+                        <div class="card-panel mini-chart-card pending-card" style="display:flex; flex-direction:column; justify-content:center;">
                             <p class="grey-text text-darken-2 center">Energy by Demand Type</p>
-                            <ChartPie v-if="demandData" chart-type="doughnut" :chart-data="demandData"
-                                :chart-options="pieOptions" />
-                            <div class="chart-legend-list">
-                                <div class="cleg-item" v-for="item in demandLegend" :key="item.label">
-                                    <span class="cleg-dot" :style="{ backgroundColor: item.color }"></span>
-                                    <span class="cleg-label">{{ item.label }}</span>
-                                    <span class="cleg-val">{{ item.value }}</span>
-                                </div>
-                            </div>
+                            <CertificationBadge status="pending" />
+                            <p class="pending-note center">MD/NMD energy split not yet available from this endpoint</p>
                         </div>
                     </div>
 
                     <div class="col s12 m3">
-                        <div class="card-panel mini-chart-card" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                        <div class="card-panel mini-chart-card pending-card" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
                             <p class="grey-text text-darken-2 center">Meter Communication</p>
-                            <MeterCommunication :percentage="meter_comm_pct" />
+                            <CertificationBadge status="pending" />
                         </div>
                     </div>
 
@@ -211,40 +209,33 @@
             <!-- dashboard ends here -->
 
 
-            <!-- feeder to DT loss table section -->
+            <!-- high-impact feeders section (doc §12 data_quality / §15 top_contributors) -->
             <div class="row" id="feeder-loss">
                 <div class="col s12">
+                    <p class="grey-text" style="margin: 0 0 10px 4px;">
+                        High-impact feeder rows dominate total feeder energy — treat contribution % as
+                        <CertificationBadge status="requires_validation" />
+                    </p>
                     <div class="table-wrapper">
                         <table class="rounded-header striped highlight">
                             <thead class="orange white-text" style="border: 1px solid #ff9800;">
                                 <tr>
                                     <th>Feeder</th>
-                                    <th>Date</th>
-                                    <th>Band</th>
-                                    <th>Total Public DTs</th>
-                                    <th>Public DTs</th>
-                                    <th>Total Private DTs</th>
-                                    <th>Private DTs Energy</th>
-                                    <th>Total DT Energy</th>
-                                    <th>Feeder Energy</th>
-                                    <th>Feeder to DT Loss</th>
-                                    <th>Feeder Loss</th>
+                                    <th>Feeder Energy Raw</th>
+                                    <th>Contribution %</th>
+                                    <th>P99 Flag</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr v-for="value in feeder_to_dt_loss_data" :key="value.feeder + value.date">
+                                <tr v-for="value in data_quality_rows" :key="value.feeder">
                                     <td style="font-size: 12px; font-weight: 600;">{{ value.feeder }}</td>
-                                    <td style="font-size: 12px;">{{ value.date }}</td>
-                                    <td style="font-size: 12px;">{{ value.band }}</td>
-                                    <td style="font-size: 12px;">{{ value.total_public_dts }}</td>
-                                    <td style="font-size: 12px;">{{ value.public_dts }}</td>
-                                    <td style="font-size: 12px;">{{ value.total_private_dts }}</td>
-                                    <td style="font-size: 12px;">{{ value.private_dts_energy }}</td>
-                                    <td style="font-size: 12px;">{{ value.total_dt_energy }}</td>
-                                    <td style="font-size: 12px;">{{ value.feeder_energy }}</td>
-                                    <td style="font-size: 12px;">{{ value.feeder_to_dt_loss }}</td>
-                                    <td style="font-size: 12px;">{{ value.feeder_loss }}</td>
+                                    <td style="font-size: 12px;">{{ value.energy }}</td>
+                                    <td style="font-size: 12px;">{{ value.contribution_pct }}</td>
+                                    <td style="font-size: 12px;">{{ value.p99_flag ? 'Yes' : 'No' }}</td>
+                                </tr>
+                                <tr v-if="!data_quality_rows.length">
+                                    <td colspan="4" class="center-align pending-note">No high-impact feeder rows returned</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -253,60 +244,17 @@
 
                 </div>
             </div>
-            <!-- end of feeder to DT loss table section -->
+            <!-- end of high-impact feeders section -->
 
 
 
 
-            <!-- customer dt to loss list section -->
+            <!-- customer dt to loss list section (pending — needs customer consumption source) -->
             <div class="row" id="customer-loss">
                 <div class="col s12">
-                    <div class="table-wrapper">
-                        <table class="rounded-header2 striped highlight">
-                            <thead class="red-accent-4 white-text" style="border: 1px solid #ff9800;">
-                                <tr>
-                                    <th>Feeders</th>
-                                    <th>All Customers</th>
-                                    <th>Post MD</th>
-                                    <th>Comms %</th>
-                                    <th>Total Meters Communicating</th>
-                                    <th>Prepaid MD</th>
-                                    <th>IDB Prepay</th>
-                                    <th>DT Consumption</th>
-                                    <th>IDB Prepay Consumption</th>
-                                    <th>MD Prepay Consumption</th>
-                                    <th>Postpaid Consumption</th>
-                                    <th>IDB MD Consumption</th>
-                                    <th>CE</th>
-                                    <th>BE</th>
-                                    <th>ATC</th>
-                                    <th>Current Loss</th>
-                                    <th>Customer to DT Loss</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr v-for="(value, i) in customer_loss_pct_data" :key="value.feeder + i">
-                                    <td>{{ value.feeder }}</td>
-                                    <td>{{ value.all_customers }}</td>
-                                    <td>{{ value.post_md }}</td>
-                                    <td>{{ value.comms_pct }}</td>
-                                    <td>{{ value.total_meters_communicating }}</td>
-                                    <td>{{ value.prepaid_md }}</td>
-                                    <td>{{ value.idb_prepay }}</td>
-                                    <td>{{ value.dt_consumption }}</td>
-                                    <td>{{ value.idb_prepay_consumption }}</td>
-                                    <td>{{ value.md_prepay_consumption }}</td>
-                                    <td>{{ value.postpaid_consumption }}</td>
-                                    <td>{{ value.idb_md_consumption }}</td>
-                                    <td>{{ value.ce }}</td>
-                                    <td>{{ value.be }}</td>
-                                    <td>{{ value.atc }}</td>
-                                    <td>{{ value.current_loss }}</td>
-                                    <td>{{ value.customer_to_dt_loss }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="card-panel pending-card">
+                        <CertificationBadge status="pending" />
+                        <p class="pending-note">Customer-to-DT loss data pending customer consumption source onboarding</p>
                     </div>
                 </div>
             </div>
@@ -323,117 +271,102 @@
 import SideNav from '~/components/SideNav/SideNav.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import ChartPie from '~/components/ChartPie.vue'
-import MeterCommunication from '~/components/MeterCommunication.vue';
-// Live API wiring (js_modules/controlCenterApi.js) stays in the codebase but is not
-// called right now — this page is intentionally running on demo data. To go live again,
-// restore the async getData() that calls controlCenterApi.getIdbDashboard().
-// import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
-// import { pick, formatNumber } from '~/js_modules/controlCenterApi.js'
+// Live API wiring — see static/control_center_api_doc.md §12 (IDB Dashboard). The IDB endpoint
+// is already scoped server-side to the certified Fakale Source / Apata feeder subset (§3.3).
+import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
+import { pick, formatNumber } from '~/js_modules/controlCenterApi.js'
 
 export default {
     components: {
         SideNav,
         AnimatedValue,
         ChartPie,
-        MeterCommunication,
     },
     data() {
         return {
             loading: true,
             error: null,
-            feeder_to_dt_loss_data: [],
-            customer_loss_pct_data: [],
+            data_quality_rows: [],
             energy_total: '0',
             total_feeders: '0',
             total_flagged: '—',
             feeder_loss: '0',
             feeder_loss_pct: '0%',
-            billing_eff: '0%',
-            customer_loss: '0',
-            customer_loss_pct: '0%',
-            atc_c: '0%',
             total_dts: '0',
             public_dts: '0',
             private_dts: '—',
             total_customers: '0',
-            revenue: '0',
-            meter_comm_pct: 0,
+            idb_prepaid_accounts: '0',
+            idb_prepaid_meters: '0',
+            idb_prepaid_total_amount: '0',
+            idb_prepaid_total_kwh: '0',
             doughnutData: null,
-            revenueData: null,
-            demandData: null,
             pieOptions: { responsive: true, maintainAspectRatio: false, legend: { display: false } },
-            customerLegend: [],
-            revenueLegend: [],
-            demandLegend: []
+            customerLegend: []
         }
     },
 
     methods: {
-        getData() {
-            // DEMO MODE — hardcoded values for today's demo, no network calls.
+        async getData() {
             this.loading = true
             this.error = null
+            try {
+                const idb = await controlCenterApi.getIdbDashboard()
 
-            this.energy_total = '1,917.66'
-            this.total_feeders = '2'
-            this.total_flagged = '32'
-            this.feeder_loss = '151.22'
-            this.feeder_loss_pct = '7.87%'
-            this.billing_eff = '85.75%'
-            this.customer_loss = '116.91'
-            this.customer_loss_pct = '7.87%'
-            this.atc_c = '7.87%'
-            this.total_dts = '61'
-            this.public_dts = '31'
-            this.private_dts = '30'
-            this.total_customers = '5,390'
-            this.revenue = '45,200'
-            this.meter_comm_pct = 87
+                this.energy_total = formatNumber(pick(idb, ['monthly_energy.total_feeder_energy_raw'], 0))
+                this.total_feeders = formatNumber(pick(idb, ['cards.total_feeders', 'availability.total_feeder_meters'], 0))
 
-            this.doughnutData = {
-                labels: ['NMD Customers', 'MD Customers'],
-                datasets: [{ data: [45, 30], backgroundColor: ['#5f82ef', '#93f1ba'] }]
+                const lossRaw = pick(idb, ['monthly_energy.feeder_to_dt_loss_raw'], null)
+                const lossPct = pick(idb, ['monthly_energy.feeder_to_dt_loss_pct'], null)
+                this.feeder_loss = lossRaw != null ? formatNumber(lossRaw) : '—'
+                this.feeder_loss_pct = lossPct != null ? `${lossPct}%` : '0%'
+
+                this.total_dts = formatNumber(pick(idb, ['cards.total_dts'], 0))
+                this.public_dts = formatNumber(pick(idb, ['cards.public_dts'], 0))
+                const privatePublic = Number(pick(idb, ['cards.private_public_dts'], 0))
+                const privateSingle = Number(pick(idb, ['cards.private_single_dts'], 0))
+                this.private_dts = (privatePublic || privateSingle) ? formatNumber(privatePublic + privateSingle) : '—'
+
+                const totalCustomers = pick(idb, ['cards.total_customers'], null)
+                const nmdCustomers = pick(idb, ['cards.nmd_customers'], null)
+                const mdCustomers = pick(idb, ['cards.md_customers'], null)
+                this.total_customers = totalCustomers != null ? formatNumber(totalCustomers) : '0'
+                if (nmdCustomers != null && mdCustomers != null) {
+                    this.doughnutData = {
+                        labels: ['NMD', 'MD'],
+                        datasets: [{ data: [nmdCustomers, mdCustomers], backgroundColor: ['#5f82ef', '#93f1ba'] }]
+                    }
+                    const total = nmdCustomers + mdCustomers || 1
+                    this.customerLegend = [
+                        { label: 'NMD Customers', color: '#5f82ef', value: `${formatNumber(nmdCustomers)} (${((nmdCustomers / total) * 100).toFixed(1)}%)` },
+                        { label: 'MD Customers', color: '#93f1ba', value: `${formatNumber(mdCustomers)} (${((mdCustomers / total) * 100).toFixed(1)}%)` }
+                    ]
+                }
+
+                // Certified IDB-prefixed vending fields — doc §12 "Frontend card fields for IDB vending".
+                this.idb_prepaid_accounts = formatNumber(pick(idb, ['cards.idb_prepaid_accounts'], 0))
+                this.idb_prepaid_meters = formatNumber(pick(idb, ['cards.idb_prepaid_meters'], 0))
+                this.idb_prepaid_total_amount = `₦${formatNumber(pick(idb, ['cards.idb_prepaid_total_amount'], 0))}`
+                this.idb_prepaid_total_kwh = formatNumber(pick(idb, ['cards.idb_prepaid_total_kwh'], 0))
+
+                const topContributors = pick(idb, ['data_quality.high_impact_feeders', 'data_quality.top_contributors'], [])
+                this.data_quality_rows = (topContributors || []).map(row => ({
+                    feeder: pick(row, ['line_name', 'feeder', 'feeder_name'], '—'),
+                    energy: formatNumber(pick(row, ['monthly_consumption', 'feeder_energy_raw', 'energy_raw', 'total_energy_raw'], 0)),
+                    contribution_pct: `${pick(row, ['contribution_pct', 'contribution'], 0)}%`,
+                    p99_flag: !!pick(row, ['above_p99_flag', 'p99_flag', 'is_p99'], false)
+                }))
+                this.total_flagged = this.data_quality_rows.length ? formatNumber(this.data_quality_rows.length) : '—'
+            } catch (err) {
+                this.error = err.message
+                console.error('idb dashboard load failed', err)
+            } finally {
+                this.loading = false
             }
-            this.customerLegend = [
-                { label: 'NMD Customers', color: '#5f82ef', value: '4,220 (78.29%)' },
-                { label: 'MD Customers', color: '#93f1ba', value: '1,170 (21.71%)' }
-            ]
-
-            this.revenueData = {
-                labels: ['Revenue Billed', 'Revenue Collected'],
-                datasets: [{ data: [50, 25], backgroundColor: ['#f2a10a', '#f191c5'] }]
-            }
-            this.revenueLegend = [
-                { label: 'Revenue Billed', color: '#f2a10a', value: '₦258.19M (78.29%)' },
-                { label: 'Revenue Collected', color: '#f191c5', value: '₦280.4M (21.71%)' }
-            ]
-
-            this.demandData = {
-                labels: ['MD Energy', 'NMD Energy'],
-                datasets: [{ data: [85.75, 35.75], backgroundColor: ['#7986cb', '#4ecdc4'] }]
-            }
-            this.demandLegend = [
-                { label: 'MD Energy', color: '#7986cb', value: '85.75%' },
-                { label: 'NMD Energy', color: '#4ecdc4', value: '35.75%' }
-            ]
-
-            this.feeder_to_dt_loss_data = [
-                { feeder: '11 - IgbobilNJ-T1 - Apata', date: '2024-01-01', band: 'A', total_public_dts: 10, public_dts: 8, total_private_dts: 5, private_dts_energy: '50 MWh', total_dt_energy: '100 MWh', feeder_energy: '1,291,260.00', feeder_to_dt_loss: '50,994.33', feeder_loss: '25%' },
-                { feeder: '11 - IgbobilNJ-T1 - Apata', date: '2024-01-02', band: 'B', total_public_dts: 15, public_dts: 12, total_private_dts: 7, private_dts_energy: '70 MWh', total_dt_energy: '140 MWh', feeder_energy: '1,291,260.00', feeder_to_dt_loss: '50,994.33', feeder_loss: '25%' },
-                { feeder: '11 - IgbobilNJ-T1 - Apata', date: '2024-01-03', band: 'C', total_public_dts: 20, public_dts: 18, total_private_dts: 10, private_dts_energy: '100 MWh', total_dt_energy: '200 MWh', feeder_energy: '1,291,260.00', feeder_to_dt_loss: '50,994.33', feeder_loss: '25%' }
-            ]
-
-            this.customer_loss_pct_data = [
-                { feeder: '11 - IgbobilNJ-T1 - Apata', all_customers: 1000, post_md: 800, comms_pct: '80%', total_meters_communicating: 900, prepaid_md: 700, idb_prepay: 50, dt_consumption: '81,807.62', idb_prepay_consumption: '48,000.42', md_prepay_consumption: '15.33', postpaid_consumption: '15,114.30', idb_md_consumption: '16,692.89', ce: '80.93%', be: '85.75%', atc: '7.87%', current_loss: '7.87%', customer_to_dt_loss: '18,0828.35' },
-                { feeder: '11 - IgbobilNJ-T1 - Apata', all_customers: 1500, post_md: 1200, comms_pct: '80%', total_meters_communicating: 1400, prepaid_md: 1100, idb_prepay: 70, dt_consumption: '81,807.62', idb_prepay_consumption: '48,000.42', md_prepay_consumption: '15.33', postpaid_consumption: '15,114.30', idb_md_consumption: '16,692.89', ce: '80.93%', be: '85.75%', atc: '7.87%', current_loss: '7.87%', customer_to_dt_loss: '18,0828.35' },
-                { feeder: '11 - IgbobilNJ-T1 - Apata', all_customers: 2000, post_md: 1800, comms_pct: '90%', total_meters_communicating: 1900, prepaid_md: 1700, idb_prepay: 100, dt_consumption: '81,807', idb_prepay_consumption: '48,000.42', md_prepay_consumption: '15.33', postpaid_consumption: '15,114.30', idb_md_consumption: '16,692.89', ce: '80.93%', be: '85.75%', atc: '7.87%', current_loss: '7.87%', customer_to_dt_loss: '18,0828.35' }
-            ]
-
-            this.loading = false
         }
     },
-    mounted() {
-        this.getData()
+    async mounted() {
+        await this.getData()
         this.$nextTick(() => {
             var el = document.querySelector('.tabs')
             if (el) M.Tabs.init(el, {})
@@ -607,6 +540,7 @@ export default {
 .filter-arrow { color: var(--text-muted); font-size: 20px !important; }
 
 /* Chart legend */
+.idb-vending-value { font-size: 20px; font-weight: 700; color: var(--text-primary); margin: 6px 0; }
 .chart-legend-list { margin-top: 10px; }
 .cleg-item { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
 .cleg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }

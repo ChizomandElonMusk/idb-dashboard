@@ -136,6 +136,10 @@ export function getIdbDashboard({ month, quality_limit } = {}) {
   return get('/dashboard/idb', { month, quality_limit })
 }
 
+export function getVendingCollection({ limit } = {}) {
+  return get('/dashboard/vending-collection', { limit })
+}
+
 export function getMytoDashboard({ month, date, limit } = {}) {
   return get('/dashboard/myto', { month, date, limit })
 }

@@ -3,49 +3,42 @@
     "name": "availability_summary",
     "path": "/availability_summary",
     "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/availability_summary.vue",
-    "chunkName": "pages/availability_summary",
-    "_name": "_084026bd"
+    "chunkName": "pages/availability_summary"
   },
   {
     "name": "control_center_dashboard",
     "path": "/control_center_dashboard",
     "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/control_center_dashboard.vue",
-    "chunkName": "pages/control_center_dashboard",
-    "_name": "_912cc572"
+    "chunkName": "pages/control_center_dashboard"
   },
   {
     "name": "dt_availability",
     "path": "/dt_availability",
     "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/dt_availability.vue",
-    "chunkName": "pages/dt_availability",
-    "_name": "_e62b2802"
+    "chunkName": "pages/dt_availability"
   },
   {
     "name": "idb_dashboard",
     "path": "/idb_dashboard",
     "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/idb_dashboard.vue",
-    "chunkName": "pages/idb_dashboard",
-    "_name": "_61667891"
+    "chunkName": "pages/idb_dashboard"
   },
   {
     "name": "idb_events",
     "path": "/idb_events",
     "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/idb_events.vue",
-    "chunkName": "pages/idb_events",
-    "_name": "_20bd9bec"
+    "chunkName": "pages/idb_events"
   },
   {
     "name": "myto_dashboard",
     "path": "/myto_dashboard",
     "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/myto_dashboard.vue",
-    "chunkName": "pages/myto_dashboard",
-    "_name": "_a9b92e92"
+    "chunkName": "pages/myto_dashboard"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_16c57c67"
+    "chunkName": "pages/index"
   }
 ]

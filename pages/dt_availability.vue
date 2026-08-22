@@ -46,15 +46,15 @@
                     <div class="col s12 m4">
                         <div class="row" style="margin-bottom: 0;">
                             <div class="col s6" style="padding: 0 6px 0 0;">
-                                <div class="card-panel metric-card">
+                                <div class="card-panel metric-card pending-card">
                                     <p class="metric-label">DT Target Availability (Hrs)</p>
-                                    <p class="metric-value"><AnimatedValue :value="dt_target_availability" /></p>
+                                    <CertificationBadge status="pending" />
                                 </div>
                             </div>
                             <div class="col s6" style="padding: 0 0 0 6px;">
-                                <div class="card-panel metric-card">
+                                <div class="card-panel metric-card pending-card">
                                     <p class="metric-label">Feeder Target Availability(Hrs)</p>
-                                    <p class="metric-value"><AnimatedValue :value="feeder_target_availability" /></p>
+                                    <CertificationBadge status="pending" />
                                 </div>
                             </div>
                         </div>
@@ -77,13 +77,13 @@
                         <div class="row" style="margin-bottom: 0;">
                             <div class="col s6" style="padding: 0 6px 0 0;">
                                 <div class="card-panel metric-card">
-                                    <p class="metric-label">DT Availability Rate(%)</p>
+                                    <p class="metric-label">DT Meeting 20h+ (%)</p>
                                     <p class="metric-value green-value"><AnimatedValue :value="dt_availability_rate" /></p>
                                 </div>
                             </div>
                             <div class="col s6" style="padding: 0 0 0 6px;">
                                 <div class="card-panel metric-card">
-                                    <p class="metric-label">Feeder Availability Rate (%)</p>
+                                    <p class="metric-label">Feeder Meeting 20h+ (%)</p>
                                     <p class="metric-value green-value"><AnimatedValue :value="feeder_availability_rate" /></p>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                     <div class="col s12 m8">
                         <div class="card-panel trend-card">
                             <div class="trend-header">
-                                <span class="trend-title">Availability Trend (last 12 months)</span>
+                                <span class="trend-title">Availability Trend (last 7 days)</span>
                             </div>
                             <div style="position: relative; height: 250px;">
                                 <canvas id="availabilityChart"></canvas>
@@ -167,11 +167,9 @@
 import Chart from '~/assets/js/Chart.js'
 import SideNav from '~/components/SideNav/SideNav.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
-// Live API wiring (js_modules/controlCenterApi.js) stays in the codebase but is not
-// called right now — this page is intentionally running on demo data. To go live again,
-// restore the async getData()/loadTrend() that call controlCenterApi.*.
-// import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
-// import { pick, formatNumber, lastNDays, dayLabel } from '~/js_modules/controlCenterApi.js'
+// Live API wiring — see static/control_center_api_doc.md §9 (DT Availability) and §10 (Feeder Availability).
+import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
+import { pick, formatNumber, lastNDays, dayLabel } from '~/js_modules/controlCenterApi.js'
 
 export default {
     components: { SideNav, AnimatedValue },
@@ -179,8 +177,6 @@ export default {
         return {
             loading: true,
             error: null,
-            dt_target_availability: '0',
-            feeder_target_availability: '0',
             dt_actual_availability: '0',
             feeder_actual_availability: '0',
             dt_availability_rate: '0',
@@ -191,35 +187,53 @@ export default {
         }
     },
     methods: {
-        getData() {
-            // DEMO MODE — hardcoded values for today's demo, no network calls.
+        async getData() {
             this.loading = true
             this.error = null
+            try {
+                const [dtAvail, feederAvail] = await Promise.all([
+                    controlCenterApi.getDtAvailability({ limit: 10 }),
+                    controlCenterApi.getFeederAvailability({ limit: 10 })
+                ])
 
-            this.dt_target_availability = '20.00'
-            this.feeder_target_availability = '20.00'
-            this.dt_actual_availability = '22.03'
-            this.feeder_actual_availability = '20.03'
-            this.dt_availability_rate = '110.16'
-            this.feeder_availability_rate = '100.15'
+                const dtAvgHours = pick(dtAvail, ['summary.avg_dt_availability_hours'], null)
+                const feederAvgHours = pick(feederAvail, ['summary.avg_feeder_availability_hours'], null)
+                this.dt_actual_availability = dtAvgHours != null ? Number(dtAvgHours).toFixed(2) : '0'
+                this.feeder_actual_availability = feederAvgHours != null ? Number(feederAvgHours).toFixed(2) : '0'
 
-            this.resolvedDate = '07/01/2026'
+                const dtMetPct = pick(dtAvail, ['summary.met_20_hours_pct'], null)
+                const feederMetPct = pick(feederAvail, ['summary.met_20_hours_pct'], null)
+                this.dt_availability_rate = dtMetPct != null ? `${dtMetPct}` : '0'
+                this.feeder_availability_rate = feederMetPct != null ? `${feederMetPct}` : '0'
 
-            this.dt_availability_data = Array.from({ length: 10 }, (_, i) => ({
-                dt_name: `11-OguduINJ-T1Ogudu-${94 + i} VICTORIA STREET CSP`,
-                feeder_name: '11-OguduINJ-T1-Ogudu',
-                band: ['A', 'B', 'C'][i % 3],
-                availability_hours: (19.35 - i * 0.2).toFixed(2)
-            }))
+                this.resolvedDate = pick(dtAvail, ['selected_date'], '—')
 
-            this.loading = false
-            this.$nextTick(() => this.initChart())
+                const worstMeters = pick(dtAvail, ['worst_dt_meters'], []) || []
+                this.dt_availability_data = worstMeters.map(row => ({
+                    dt_name: pick(row, ['dt_name', 'name', 'r_meter_id'], '—'),
+                    feeder_name: pick(row, ['feeder_name', 'feeder'], '—'),
+                    band: pick(row, ['band_code', 'band', 'myto_band'], '—'),
+                    availability_hours: formatNumber(pick(row, ['dt_availability_hours', 'dt_availability', 'availability_hours', 'hours'], 0))
+                }))
+
+                await this.loadTrend(pick(dtAvail, ['selected_date'], null))
+            } catch (err) {
+                this.error = err.message
+                console.error('dt availability load failed', err)
+            } finally {
+                this.loading = false
+            }
         },
-        initChart() {
+        async loadTrend(baseDate) {
+            const days = lastNDays(baseDate, 7)
+            const [dtResponses, feederResponses] = await Promise.all([
+                Promise.all(days.map(d => controlCenterApi.getDtAvailability({ date: d }).catch(() => null))),
+                Promise.all(days.map(d => controlCenterApi.getFeederAvailability({ date: d }).catch(() => null)))
+            ])
             this.renderTrendChart(
-                ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                [21, 20.5, 19.8, 21.2, 23.8, 21.5, 19.5, 19.2, 20, 22, 21.8, 21.2],
-                [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20]
+                days.map(dayLabel),
+                dtResponses.map(r => pick(r, ['summary.avg_dt_availability_hours'], null)),
+                feederResponses.map(r => pick(r, ['summary.avg_feeder_availability_hours'], null))
             )
         },
         renderTrendChart(labels, dtData, feederData) {
@@ -285,8 +299,8 @@ export default {
             })
         }
     },
-    mounted() {
-        this.getData()
+    async mounted() {
+        await this.getData()
         this.$nextTick(() => {
             const el = document.querySelector('.tabs')
             if (el) M.Tabs.init(el, {})

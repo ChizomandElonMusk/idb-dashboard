@@ -1678,13 +1678,13 @@ function shouldScrollToTop(route) {
 
 
 
-const _084026bd = () => interopDefault(__webpack_require__.e(/* import() | pages/availability_summary */ 13).then(__webpack_require__.bind(null, 86)));
-const _912cc572 = () => interopDefault(__webpack_require__.e(/* import() | pages/control_center_dashboard */ 14).then(__webpack_require__.bind(null, 87)));
-const _e62b2802 = () => interopDefault(__webpack_require__.e(/* import() | pages/dt_availability */ 15).then(__webpack_require__.bind(null, 88)));
-const _61667891 = () => interopDefault(__webpack_require__.e(/* import() | pages/idb_dashboard */ 16).then(__webpack_require__.bind(null, 89)));
-const _20bd9bec = () => interopDefault(__webpack_require__.e(/* import() | pages/idb_events */ 17).then(__webpack_require__.bind(null, 90)));
-const _a9b92e92 = () => interopDefault(__webpack_require__.e(/* import() | pages/myto_dashboard */ 19).then(__webpack_require__.bind(null, 91)));
-const _16c57c67 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 18).then(__webpack_require__.bind(null, 85)));
+const _084026bd = () => interopDefault(__webpack_require__.e(/* import() | pages/availability_summary */ 13).then(__webpack_require__.bind(null, 88)));
+const _912cc572 = () => interopDefault(__webpack_require__.e(/* import() | pages/control_center_dashboard */ 14).then(__webpack_require__.bind(null, 89)));
+const _e62b2802 = () => interopDefault(__webpack_require__.e(/* import() | pages/dt_availability */ 15).then(__webpack_require__.bind(null, 90)));
+const _61667891 = () => interopDefault(__webpack_require__.e(/* import() | pages/idb_dashboard */ 16).then(__webpack_require__.bind(null, 91)));
+const _20bd9bec = () => interopDefault(__webpack_require__.e(/* import() | pages/idb_events */ 17).then(__webpack_require__.bind(null, 92)));
+const _a9b92e92 = () => interopDefault(__webpack_require__.e(/* import() | pages/myto_dashboard */ 19).then(__webpack_require__.bind(null, 93)));
+const _16c57c67 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 18).then(__webpack_require__.bind(null, 87)));
 const emptyFn = () => {};
 external_vue_default.a.use(external_vue_router_default.a);
 const routerOptions = {
@@ -2650,19 +2650,19 @@ const layouts = {
 });
 // CONCATENATED MODULE: ./.nuxt/components/index.js
 const components_AdminNavBar = () => Promise.resolve(/* import() */).then(__webpack_require__.bind(null, 7)).then(c => wrapFunctional(c.default || c));
-const AnimatedValue = () => __webpack_require__.e(/* import() | components/animated-value */ 1).then(__webpack_require__.bind(null, 46)).then(c => wrapFunctional(c.default || c));
-const CertificationBadge = () => __webpack_require__.e(/* import() | components/certification-badge */ 2).then(__webpack_require__.bind(null, 92)).then(c => wrapFunctional(c.default || c));
-const ChartPie = () => __webpack_require__.e(/* import() | components/chart-pie */ 3).then(__webpack_require__.bind(null, 45)).then(c => wrapFunctional(c.default || c));
-const CustomSelect = () => __webpack_require__.e(/* import() | components/custom-select */ 4).then(__webpack_require__.bind(null, 93)).then(c => wrapFunctional(c.default || c));
-const Forgot = () => __webpack_require__.e(/* import() | components/forgot */ 5).then(__webpack_require__.bind(null, 94)).then(c => wrapFunctional(c.default || c));
-const Login = () => __webpack_require__.e(/* import() | components/login */ 6).then(__webpack_require__.bind(null, 95)).then(c => wrapFunctional(c.default || c));
-const Logo = () => __webpack_require__.e(/* import() | components/logo */ 7).then(__webpack_require__.bind(null, 96)).then(c => wrapFunctional(c.default || c));
-const MeterCommunication = () => __webpack_require__.e(/* import() | components/meter-communication */ 8).then(__webpack_require__.bind(null, 55)).then(c => wrapFunctional(c.default || c));
+const AnimatedValue = () => __webpack_require__.e(/* import() | components/animated-value */ 1).then(__webpack_require__.bind(null, 55)).then(c => wrapFunctional(c.default || c));
+const CertificationBadge = () => __webpack_require__.e(/* import() | components/certification-badge */ 2).then(__webpack_require__.bind(null, 54)).then(c => wrapFunctional(c.default || c));
+const ChartPie = () => __webpack_require__.e(/* import() | components/chart-pie */ 3).then(__webpack_require__.bind(null, 53)).then(c => wrapFunctional(c.default || c));
+const CustomSelect = () => __webpack_require__.e(/* import() | components/custom-select */ 4).then(__webpack_require__.bind(null, 94)).then(c => wrapFunctional(c.default || c));
+const Forgot = () => __webpack_require__.e(/* import() | components/forgot */ 5).then(__webpack_require__.bind(null, 95)).then(c => wrapFunctional(c.default || c));
+const Login = () => __webpack_require__.e(/* import() | components/login */ 6).then(__webpack_require__.bind(null, 96)).then(c => wrapFunctional(c.default || c));
+const Logo = () => __webpack_require__.e(/* import() | components/logo */ 7).then(__webpack_require__.bind(null, 97)).then(c => wrapFunctional(c.default || c));
+const MeterCommunication = () => __webpack_require__.e(/* import() | components/meter-communication */ 8).then(__webpack_require__.bind(null, 98)).then(c => wrapFunctional(c.default || c));
 const components_NavBar = () => Promise.resolve(/* import() */).then(__webpack_require__.bind(null, 8)).then(c => wrapFunctional(c.default || c));
-const PreLoader = () => __webpack_require__.e(/* import() | components/pre-loader */ 9).then(__webpack_require__.bind(null, 49)).then(c => wrapFunctional(c.default || c));
-const SignUp = () => __webpack_require__.e(/* import() | components/sign-up */ 11).then(__webpack_require__.bind(null, 97)).then(c => wrapFunctional(c.default || c));
-const ThemeToggle = () => __webpack_require__.e(/* import() | components/theme-toggle */ 12).then(__webpack_require__.bind(null, 38)).then(c => wrapFunctional(c.default || c));
-const SideNav = () => __webpack_require__.e(/* import() | components/side-nav */ 10).then(__webpack_require__.bind(null, 40)).then(c => wrapFunctional(c.default || c));
+const PreLoader = () => __webpack_require__.e(/* import() | components/pre-loader */ 9).then(__webpack_require__.bind(null, 52)).then(c => wrapFunctional(c.default || c));
+const SignUp = () => __webpack_require__.e(/* import() | components/sign-up */ 11).then(__webpack_require__.bind(null, 99)).then(c => wrapFunctional(c.default || c));
+const ThemeToggle = () => __webpack_require__.e(/* import() | components/theme-toggle */ 12).then(__webpack_require__.bind(null, 39)).then(c => wrapFunctional(c.default || c));
+const SideNav = () => __webpack_require__.e(/* import() | components/side-nav */ 10).then(__webpack_require__.bind(null, 42)).then(c => wrapFunctional(c.default || c));
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
@@ -3625,6 +3625,12 @@ const createNext = ssrContext => opts => {
   await beforeRender();
   return _app;
 });
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports) {
+
+module.exports = require("url");
 
 /***/ })
 /******/ ]);

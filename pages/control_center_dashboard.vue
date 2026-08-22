@@ -73,7 +73,7 @@
                         </div>
                     </div>
 
-                    <!-- Card 3: Total Customer Complaints -->
+                    <!-- Card 3: Total Customer Complaints (pending — not an Oracle-backed KPI yet) -->
                     <div class="col s12 m3">
                         <div class="card-panel top-stat-card">
                             <div class="top-stat-header">
@@ -81,21 +81,12 @@
                                     <i class="material-icons top-stat-icon blue-icon">group</i>
                                 </div>
                                 <div class="top-stat-info">
-                                    <p class="top-stat-value"><AnimatedValue :value="total_complaints" /></p>
-                                    <p class="top-stat-label">Total Customer Complaints</p>
+                                    <p class="top-stat-label" style="margin-bottom: 6px;">Total Customer Complaints</p>
+                                    <CertificationBadge status="pending" />
                                 </div>
                             </div>
                             <div class="top-stat-divider"></div>
-                            <div class="top-stat-sub-row">
-                                <div class="top-stat-sub border-right">
-                                    <p class="sub-label">Open</p>
-                                    <p class="sub-value"><AnimatedValue :value="open_complaints" /></p>
-                                </div>
-                                <div class="top-stat-sub">
-                                    <p class="sub-label">Closed</p>
-                                    <p class="sub-value"><AnimatedValue :value="closed_complaints" /></p>
-                                </div>
-                            </div>
+                            <p class="pending-note">Complaints data pending source onboarding</p>
                         </div>
                     </div>
 
@@ -107,7 +98,7 @@
                                 <div class="progress-label-row">
                                     <span class="progress-name">NMD</span>
                                     <span class="progress-fraction">
-                                        <AnimatedValue :value="nmd_value" />/{{ nmd_total }}
+                                        <AnimatedValue :value="nmd_value" />/{{ total_customers_display }}
                                     </span>
                                 </div>
                                 <div class="progress indigo lighten-4" style="height:8px; border-radius:4px;">
@@ -118,7 +109,7 @@
                                 <div class="progress-label-row">
                                     <span class="progress-name">MD</span>
                                     <span class="progress-fraction">
-                                        <AnimatedValue :value="md_value" />/{{ md_total }}
+                                        <AnimatedValue :value="md_value" />/{{ total_customers_display }}
                                     </span>
                                 </div>
                                 <div class="progress green lighten-4" style="height:8px; border-radius:4px;">
@@ -140,6 +131,7 @@
                                     <p class="energy-card-value">{{ energyTotal }}</p>
                                     <div class="loss-row">
                                         <span class="loss-label">Feeder&rarr;DT loss: {{ lossPctDisplay }}</span>
+                                        <CertificationBadge status="requires_validation" />
                                     </div>
                                 </div>
                             </div>
@@ -158,50 +150,19 @@
                                 :chart-data="energyAllocationData"
                                 :chart-options="pieOptions"
                             />
+                            <p v-else class="pending-note center">No band energy data returned</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Vending & Collection -->
+                <!-- Vending & Collection (pending — vending-collection endpoint is certified,
+                     but doesn't yet expose the day-level/MTD split these cards need) -->
                 <div class="row">
                     <div class="col s12">
-                        <div class="card-panel mini-chart-card" style="padding-bottom: 20px;">
+                        <div class="card-panel mini-chart-card pending-card">
                             <span class="vending-card-title">Vending &amp; Collection</span>
-                            <div style="position: relative; height:160px; padding-bottom:20px; overflow:visible; margin-top: 14px;">
-                                <canvas id="vendingChart"></canvas>
-                            </div>
-                            <hr style="margin-top: 40px;">
-                            <div class="vending-stats-grid">
-                                <div class="vending-stats-col">
-                                    <div class="vending-stat-row">
-                                        <span class="vstat-dot vstat-dot-green"></span>
-                                        <span class="vstat-label">Total Customers Vended Today</span>
-                                        <span class="vstat-value">{{ total_customer_vended_today }}</span>
-                                    </div>
-                                    <div class="vending-stat-row">
-                                        <span class="vstat-dot vstat-dot-green"></span>
-                                        <span class="vstat-label">Amount Vended Today</span>
-                                        <span class="vstat-value">{{ amount_vended_today }}</span>
-                                    </div>
-                                    <div class="vending-stat-row">
-                                        <span class="vstat-dot vstat-dot-green"></span>
-                                        <span class="vstat-label">Amount Vended MTD</span>
-                                        <span class="vstat-value">{{ amount_vended_mtd }}</span>
-                                    </div>
-                                </div>
-                                <div class="vending-stats-col">
-                                    <div class="vending-stat-row">
-                                        <span class="vstat-dot vstat-dot-blue"></span>
-                                        <span class="vstat-label">Total Collection Today</span>
-                                        <span class="vstat-value">{{ total_collection_today }}</span>
-                                    </div>
-                                    <div class="vending-stat-row">
-                                        <span class="vstat-dot vstat-dot-blue"></span>
-                                        <span class="vstat-label">Amount Collected MTD</span>
-                                        <span class="vstat-value">{{ amount_collected_mtd }}</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <CertificationBadge status="pending" />
+                            <p class="pending-note">Day-level and MTD vending/collection breakdown pending business confirmation of reporting granularity</p>
                         </div>
                     </div>
                 </div>
@@ -218,11 +179,12 @@ import SideNav from '~/components/SideNav/SideNav.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import ChartPie from '~/components/ChartPie.vue'
 import Chart from '~/assets/js/Chart.js'
-// Live API wiring (js_modules/controlCenterApi.js) stays in the codebase but is not
-// called right now — this page is intentionally running on demo data. To go live again,
-// restore the async getData()/loadEnergyTrend() that call controlCenterApi.*.
-// import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
-// import { pick, formatNumber, lastNMonths, monthLabel } from '~/js_modules/controlCenterApi.js'
+// Live API wiring — see static/control_center_api_doc.md (§7 Control Center Dashboard,
+// §6 Overview) for the certified response shape. control-center's own `cards`/`feeder_summary`
+// sections don't document a public/private DT or NMD/MD customer split, so those fall back
+// to /dashboard/overview's confirmed field names.
+import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
+import { pick, formatNumber, lastNMonths, monthLabel } from '~/js_modules/controlCenterApi.js'
 
 export default {
     components: { SideNav, AnimatedValue, ChartPie },
@@ -232,26 +194,16 @@ export default {
             error: null,
             /* top stat cards */
             online_feeders: '0',
-            kv11: '0',
-            kv33: '0',
+            kv11: '—',
+            kv33: '—',
             online_dts: '0',
             public_dts: '0',
-            private_dts: '0',
-            total_complaints: '0',
-            open_complaints: '0',
-            closed_complaints: '0',
+            private_dts: '—',
             nmd_value: '0',
-            nmd_total: '1,033,000',
             nmd_pct: '0%',
             md_value: '0',
-            md_total: '7,000',
             md_pct: '0%',
-            /* vending stats */
-            total_customer_vended_today: '0',
-            amount_vended_today: '0',
-            amount_vended_mtd: '0',
-            total_collection_today: '0',
-            amount_collected_mtd: '0',
+            total_customers_display: '—',
             /* loss */
             lossPctDisplay: '—',
             /* chart data */
@@ -267,10 +219,10 @@ export default {
             /* energy chart */
             energyChart: null,
             energyData: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                labels: [],
                 datasets: [{
-                    label: 'Feeder Energy (MWh)',
-                    data: [30, 25, 43, 38, 28, 32, 36],
+                    label: 'Feeder Energy Raw',
+                    data: [],
                     borderColor: '#5ebd8d',
                     backgroundColor: 'rgba(235,250,243,0.6)',
                     tension: 0.4,
@@ -295,7 +247,7 @@ export default {
                     borderColor: '#eee',
                     borderWidth: 1,
                     callbacks: {
-                        label: function(tooltipItems) { return tooltipItems.yLabel + ' MWh' }
+                        label: function(tooltipItems) { return formatNumber(tooltipItems.yLabel) + ' (raw)' }
                     }
                 },
                 scales: {
@@ -303,87 +255,93 @@ export default {
                     yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)' }, ticks: { display: false } }]
                 }
             },
-            energyTotal: '—',
-            /* vending chart */
-            vendingChart: null,
-            vendingData: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [
-                    {
-                        label: 'Vending',
-                        data: [350, 250, 180, 320, 480, 400, 220, 150, 260, 380, 420, 380],
-                        borderColor: '#5ebd8d',
-                        backgroundColor: 'rgba(94,189,141,0.1)',
-                        tension: 0.4,
-                        fill: true,
-                        pointRadius: 3,
-                        pointBackgroundColor: '#5ebd8d'
-                    },
-                    {
-                        label: 'Collection',
-                        data: [200, 150, 200, 380, 280, 180, 150, 200, 320, 280, 350, 390],
-                        borderColor: '#5b7cfa',
-                        backgroundColor: 'rgba(91,124,250,0.08)',
-                        tension: 0.4,
-                        fill: true,
-                        pointRadius: 3,
-                        pointBackgroundColor: '#5b7cfa'
-                    }
-                ]
-            },
-            vendingOptions: {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: { display: true },
-                tooltips: {
-                    callbacks: {
-                        label: function(tooltipItems) { return tooltipItems.yLabel + ' MWh' }
-                    }
-                },
-                scales: {
-                    xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#888' } }],
-                    yAxes: [{ gridLines: { display: false }, ticks: { beginAtZero: true } }]
-                }
-            }
+            energyTotal: '—'
         }
     },
     methods: {
-        getData() {
-            // DEMO MODE — hardcoded values for today's demo, no network calls.
+        async getData() {
             this.loading = true
             this.error = null
+            try {
+                const [cc, overviewRes] = await Promise.all([
+                    controlCenterApi.getControlCenter(),
+                    controlCenterApi.getOverview().catch(() => null)
+                ])
+                const overview = pick(overviewRes, ['data'], {}) || {}
 
-            this.online_feeders = '200'
-            this.kv11 = '150'
-            this.kv33 = '50'
-            this.online_dts = '1,200'
-            this.public_dts = '1,000'
-            this.private_dts = '200'
-            this.total_complaints = '50'
-            this.open_complaints = '20'
-            this.closed_complaints = '30'
-            this.nmd_value = '900,000'
-            this.nmd_pct = '87%'
-            this.md_value = '5,000'
-            this.md_pct = '71%'
-            this.total_customer_vended_today = '30,400,000'
-            this.amount_vended_today = '₦30,400,000'
-            this.amount_vended_mtd = '₦2,000,000,000'
-            this.total_collection_today = '₦50,000,000'
-            this.amount_collected_mtd = '₦7,000,000,000'
-            this.lossPctDisplay = '7.87%'
-            this.energyTotal = '350.00 MWh'
+                this.online_feeders = formatNumber(pick(cc, ['cards.total_feeders', 'feeder_summary.total_feeders', 'total_feeders'], 0))
+                const kv11Raw = pick(cc, ['cards.feeders_11kv', 'feeder_summary.feeders_11kv'], null)
+                const kv33Raw = pick(cc, ['cards.feeders_33kv', 'feeder_summary.feeders_33kv'], null)
+                this.kv11 = kv11Raw != null ? formatNumber(kv11Raw) : '—'
+                this.kv33 = kv33Raw != null ? formatNumber(kv33Raw) : '—'
 
-            this.energyAllocationData = {
-                labels: ['Band A', 'Band B', 'Band C', 'Band D', 'Band E'],
+                this.online_dts = formatNumber(pick(cc, ['cards.total_dts', 'total_dts'], null) ?? pick(overview, ['total_dts'], 0))
+                const publicDts = pick(cc, ['cards.public_dts', 'public_dts'], null) ?? pick(overview, ['public_dts'], 0)
+                this.public_dts = formatNumber(publicDts)
+                const privatePublic = Number(pick(cc, ['cards.private_public_dts', 'private_public_dts'], null) ?? pick(overview, ['private_public_dts'], 0))
+                const privateSingle = Number(pick(cc, ['cards.private_single_dts', 'private_single_dts'], null) ?? pick(overview, ['private_single_dts'], 0))
+                this.private_dts = (privatePublic || privateSingle) ? formatNumber(privatePublic + privateSingle) : '—'
+
+                const totalCustomers = pick(cc, ['cards.total_customers', 'total_customers'], null) ?? pick(overview, ['total_customers'], null)
+                const nmdCustomers = pick(cc, ['cards.nmd_customers', 'nmd_customers'], null) ?? pick(overview, ['nmd_customers'], null)
+                const mdCustomers = pick(cc, ['cards.md_customers', 'md_customers'], null) ?? pick(overview, ['md_customers'], null)
+                this.total_customers_display = totalCustomers != null ? formatNumber(totalCustomers) : '—'
+                this.nmd_value = nmdCustomers != null ? formatNumber(nmdCustomers) : '0'
+                this.md_value = mdCustomers != null ? formatNumber(mdCustomers) : '0'
+                this.nmd_pct = (totalCustomers && nmdCustomers != null) ? `${Math.min(100, (nmdCustomers / totalCustomers) * 100)}%` : '0%'
+                this.md_pct = (totalCustomers && mdCustomers != null) ? `${Math.min(100, (mdCustomers / totalCustomers) * 100)}%` : '0%'
+
+                // Feeder-to-DT loss is API-confirmed but flagged requires_business_validation
+                // (doc §3.2) — always show the CertificationBadge alongside this value.
+                const lossPct = pick(cc, ['monthly_energy.feeder_to_dt_loss_pct', 'monthly_energy.summary.feeder_to_dt_loss_pct'], null)
+                this.lossPctDisplay = lossPct != null ? `${lossPct}%` : '—'
+
+                // Energy values are raw source-derived numbers (doc §3.1) — do not label as kWh/MWh/GWh.
+                const latestMonth = pick(cc, ['monthly_energy.month_start', 'monthly_energy.summary.month_start'], null)
+                const latestFeederEnergy = pick(cc, ['monthly_energy.total_feeder_energy_raw', 'monthly_energy.summary.total_feeder_energy_raw'], null)
+                this.energyTotal = latestFeederEnergy != null ? `${formatNumber(latestFeederEnergy)} Raw` : '—'
+
+                const bandEntries = this.normalizeBandEntries(pick(cc, ['energy_by_band', 'monthly_energy.energy_by_band'], null))
+                this.energyAllocationData = bandEntries.length ? {
+                    labels: bandEntries.map(e => e.band),
+                    datasets: [{
+                        data: bandEntries.map(e => e.value),
+                        backgroundColor: bandEntries.map((_, i) => this.bandColors[i % this.bandColors.length]),
+                        borderWidth: 0
+                    }]
+                } : null
+
+                await this.loadEnergyTrend(latestMonth)
+            } catch (err) {
+                this.error = err.message
+                console.error('control-center dashboard load failed', err)
+            } finally {
+                this.loading = false
+            }
+        },
+        normalizeBandEntries(raw) {
+            if (!raw) return []
+            const entries = Array.isArray(raw) ? raw : Object.entries(raw)
+            return entries.map(e => {
+                if (Array.isArray(e)) return { band: String(e[0]), value: Number(e[1]) || 0 }
+                const band = e.band ?? e.band_code ?? e.myto_band ?? e.name
+                const value = e.dt_energy_raw ?? e.energy_raw ?? e.value ?? e.total
+                return { band: String(band), value: Number(value) || 0 }
+            }).filter(e => e.band && e.band !== 'undefined')
+        },
+        async loadEnergyTrend(latestMonth) {
+            const months = lastNMonths(latestMonth, 7)
+            const responses = await Promise.all(
+                months.map(m => controlCenterApi.getMonthlyEnergy({ month: m }).catch(() => null))
+            )
+            this.energyData = {
+                ...this.energyData,
+                labels: months.map(monthLabel),
                 datasets: [{
-                    data: [35, 25, 20, 12, 8],
-                    backgroundColor: this.bandColors,
-                    borderWidth: 0
+                    ...this.energyData.datasets[0],
+                    data: responses.map(r => pick(r, ['summary.total_feeder_energy_raw', 'total_feeder_energy_raw'], null))
                 }]
             }
-
-            this.loading = false
         },
         initEnergyChart() {
             const canvas = document.getElementById('energyChart')
@@ -394,16 +352,6 @@ export default {
                 data: this.energyData,
                 options: this.energyOptions
             })
-        },
-        initVendingChart() {
-            const canvas = document.getElementById('vendingChart')
-            if (!canvas) return
-            if (this.vendingChart) this.vendingChart.destroy()
-            this.vendingChart = new Chart(canvas.getContext('2d'), {
-                type: 'line',
-                data: this.vendingData,
-                options: this.vendingOptions
-            })
         }
     },
     computed: {
@@ -411,12 +359,9 @@ export default {
             return ['#5b7cfa', '#6dd4c7', '#c87dff', '#ff6b6b', '#ffa94e', '#4ecdc4']
         }
     },
-    mounted() {
-        this.getData()
-        this.$nextTick(() => {
-            this.initEnergyChart()
-            this.initVendingChart()
-        })
+    async mounted() {
+        await this.getData()
+        this.$nextTick(() => this.initEnergyChart())
     }
 }
 </script>
