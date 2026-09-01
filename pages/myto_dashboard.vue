@@ -4,128 +4,97 @@
         <main class="main-content">
             <div class="avail-header">
                 <h5 class="avail-title">Feeders MYTO Energy Dashboard</h5>
-            </div>
-
-            <!-- Filter Row -->
-            <div class="row filter-row">
-                <div class="col s3 offset-s9">
-                    <div class="filter-pill">
-                        <span class="filter-label">Feeder Band</span>
-                        <i class="material-icons filter-arrow">arrow_drop_down</i>
-                    </div>
+                <div class="filter-pill">
+                    <span class="filter-label">Feeder Band</span>
+                    <i class="material-icons filter-arrow">arrow_drop_down</i>
                 </div>
             </div>
 
-            <div v-if="loading" class="state-panel">
-                <PreLoader />
-            </div>
-            <div v-else-if="error" class="state-panel">
-                <p class="state-message">Could not load MYTO dashboard data: {{ error }}</p>
-                <button class="btn-flat retry-btn" @click="getData">Retry</button>
-            </div>
-
-            <div v-else class="row">
-                <!-- LEFT: Summary + Band Cards -->
-                <div class="col s12 m4">
-
-                    <!-- Total Consumption Card -->
-                    <div class="card-panel total-card">
-                        <div class="total-card-inner">
-                            <div class="total-icon">
-                                <i class="material-icons white-text">bolt</i>
+            <div class="row">
+                <!-- Left column -->
+                <div class="col s12 m5">
+                    <div class="card-panel top-stat-card">
+                        <div class="top-stat-header">
+                            <div class="top-stat-icon-wrap amber-icon-wrap">
+                                <i class="material-icons top-stat-icon amber-icon">bolt</i>
                             </div>
-                            <div class="total-info">
-                                <p class="total-value"><AnimatedValue :value="total_consumption" /></p>
-                                <p class="total-label">Total DT Energy Raw</p>
-                                <p class="total-date">{{ consumption_date }}</p>
+                            <div class="top-stat-info">
+                                <p class="top-stat-value"><AnimatedValue :value="total_consumption" /></p>
+                                <p class="top-stat-label">Total Consumption (MWh)</p>
                             </div>
+                        </div>
+                        <div class="top-stat-footer">
+                            <span class="footer-month">{{ consumption_month }}</span>
+                            <span class="footer-pill footer-pill-up">{{ consumption_change }} <i class="material-icons tiny">arrow_upward</i></span>
                         </div>
                     </div>
 
-                    <!-- Band Cards (chunked 2 per row) -->
-                    <div class="row band-row" v-for="(chunk, ci) in bandChunks" :key="ci">
-                        <div
-                            class="col s6"
-                            v-for="(band, bi) in chunk"
-                            :key="bi"
-                            :style="bi === 0 ? 'padding-right:5px;' : 'padding-left:5px;'"
-                        >
+                    <div class="row" style="margin-bottom: 0;">
+                        <div class="col s6" style="padding: 0 6px 0 0;" v-for="band in bandsRow1" :key="band.name">
                             <div class="card-panel band-card">
                                 <p class="band-name">{{ band.name }}</p>
-                                <p class="band-pct"><AnimatedValue :value="band.pct" /></p>
-                                <p class="band-target">share of total DT energy</p>
-                                <p class="band-target">DTs in band: {{ band.count }}</p>
+                                <p class="band-pct">{{ band.pct }}</p>
+                                <p class="band-status" :style="{ color: band.color }">{{ band.status }}</p>
+                                <p class="band-target">NERC Target {{ band.target }}</p>
                             </div>
                         </div>
                     </div>
-                    <p v-if="!bands.length" class="pending-note">No band energy data returned</p>
+                    <div class="row" style="margin-bottom: 0;">
+                        <div class="col s6" style="padding: 0 6px 0 0;" v-for="band in bandsRow2" :key="band.name">
+                            <div class="card-panel band-card">
+                                <p class="band-name">{{ band.name }}</p>
+                                <p class="band-pct">{{ band.pct }}</p>
+                                <p class="band-status" :style="{ color: band.color }">{{ band.status }}</p>
+                                <p class="band-target">NERC Target {{ band.target }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6" style="padding: 0 6px 0 0;" v-for="band in bandsRow3" :key="band.name">
+                            <div class="card-panel band-card">
+                                <p class="band-name">{{ band.name }}</p>
+                                <p class="band-pct">{{ band.pct }}</p>
+                                <p class="band-status" :style="{ color: band.color }">{{ band.status }}</p>
+                                <p class="band-target">NERC Target {{ band.target }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- RIGHT: Charts -->
-                <div class="col s12 m8">
-
-                    <!-- Energy Consumption Trend -->
+                <!-- Right column -->
+                <div class="col s12 m7">
                     <div class="card-panel trend-card">
                         <div class="trend-header">
-                            <span class="trend-title">DT Energy Raw Trend (last 6 months)</span>
+                            <span class="trend-title">Energy Consumption Trend</span>
+                            <div class="chart-tabs">
+                                <span class="chart-tab" :class="{ active: trendTab === 'Day' }" @click="trendTab = 'Day'">Day</span>
+                                <span class="chart-tab" :class="{ active: trendTab === 'Week' }" @click="trendTab = 'Week'">Week</span>
+                                <span class="chart-tab" :class="{ active: trendTab === 'Month' }" @click="trendTab = 'Month'">Month</span>
+                                <span class="chart-icon-btn"><i class="material-icons tiny">calendar_today</i></span>
+                            </div>
                         </div>
-                        <div style="position: relative; height: 200px;">
-                            <canvas id="energyTrendChart"></canvas>
+                        <div style="position: relative; height: 220px;">
+                            <canvas id="consumptionTrendChart"></canvas>
                         </div>
                     </div>
 
-                    <!-- Bottom Row: Doughnut + Gauge -->
-                    <div class="row" style="margin-bottom: 0;">
+                    <div class="row">
                         <div class="col s12 m6">
-                            <div class="card-panel mini-card">
-                                <p class="mini-title">DT Energy Raw by Band</p>
+                            <div class="card-panel mini-chart-card">
+                                <p class="pie-card-title center">Energy Per Feeder (MWh)</p>
                                 <ChartPie
-                                    v-if="energyPerFeederData"
                                     chart-type="doughnut"
                                     :chart-data="energyPerFeederData"
                                     :chart-options="doughnutOptions"
+                                    :show-value-legend="true"
+                                    :legend-cols="2"
                                 />
-                                <div class="feeder-legend">
-                                    <div class="feeder-legend-item" v-for="item in energyLegend" :key="item.name">
-                                        <span class="fleg-dot" :style="{ backgroundColor: item.color }"></span>
-                                        <span class="fleg-name">{{ item.name }}</span>
-                                        <span class="fleg-val">{{ item.value }}</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="col s12 m6">
-                            <div class="card-panel mini-card pending-card">
-                                <p class="mini-title">Feeder Communication Status</p>
-                                <CertificationBadge status="pending" />
-                                <p class="pending-note">Meter communication data pending source onboarding</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-bottom: 0;">
-                        <div class="col s12">
-                            <div class="card-panel mini-card">
-                                <p class="mini-title">Availability by Band <CertificationBadge status="ready" /></p>
-                                <div class="table-wrapper">
-                                    <table class="band-avail-table striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Band</th>
-                                                <th>Avg DT Availability (Hrs)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="band in bandAvailability" :key="band.name">
-                                                <td>{{ band.name }}</td>
-                                                <td>{{ band.avail_hours }}</td>
-                                            </tr>
-                                            <tr v-if="!bandAvailability.length">
-                                                <td colspan="2" class="center-align pending-note">No band availability data returned</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="card-panel mini-chart-card">
+                                <p class="pie-card-title center">Feeder Communication Status</p>
+                                <MeterCommunication :percentage="70" />
                             </div>
                         </div>
                     </div>
@@ -139,139 +108,58 @@
 <script>
 import Chart from '~/assets/js/Chart.js'
 import SideNav from '~/components/SideNav/SideNav.vue'
-import ChartPie from '~/components/ChartPie.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
-// Live API wiring — see static/control_center_api_doc.md §11 (MYTO Dashboard). band_summary now
-// carries DT availability per band too (certification_status.dt_availability_by_band is certified).
-import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
-import { pick, formatNumber, lastNMonths, monthLabel } from '~/js_modules/controlCenterApi.js'
+import ChartPie from '~/components/ChartPie.vue'
+import MeterCommunication from '~/components/MeterCommunication.vue'
+// UI-first rebuild to match the Figma "Feeders MYTO Energy Dashboard" screen exactly. Data below
+// is static mock content taken from the Figma mockup — real API wiring will be reintroduced once
+// the backend team ships the matching endpoint shape.
 
-const BAND_COLORS = ['#5b7cfa', '#6dd4c7', '#c87dff', '#e74c3c', '#ffa94e', '#4ecdc4']
+const FEEDER_BAND_COLORS = ['#5b7cfa', '#3ec9a7', '#a56ef0', '#e74c3c']
 
 export default {
-    components: { SideNav, ChartPie, AnimatedValue },
+    components: { SideNav, AnimatedValue, ChartPie, MeterCommunication },
     data() {
         return {
-            loading: true,
-            error: null,
-            total_consumption: '0',
-            consumption_date: '',
-            bands: [],
-            bandAvailability: [],
-            energyPerFeederData: null,
+            trendTab: 'Day',
+            total_consumption: '48,060.44',
+            consumption_month: 'Jan 2026',
+            consumption_change: '+13.6%',
+            bandsRow1: [
+                { name: 'Band A', pct: '37.10%', status: 'Not met', target: '45%', color: '#c0392b' },
+                { name: 'Band B', pct: '25.00%', status: 'Exceeded', target: '22.98%', color: '#27ae60' }
+            ],
+            bandsRow2: [
+                { name: 'Band C', pct: '20.41%', status: 'Met', target: '20.41%', color: '#d4a017' },
+                { name: 'Band D', pct: '1.49%', status: 'Not met', target: '11.46%', color: '#c0392b' }
+            ],
+            bandsRow3: [
+                { name: 'Band E', pct: '0.1%', status: 'Not met', target: '0.15%', color: '#c0392b' }
+            ],
+            energyPerFeederData: {
+                labels: ['Band A', 'Band B', 'Band C', 'Band D'],
+                datasets: [{ data: [17737.08, 14636.88, 11125.60, 4306.36], backgroundColor: FEEDER_BAND_COLORS, borderWidth: 0 }]
+            },
             doughnutOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
-                legend: { display: false },
-                cutoutPercentage: 65
+                cutoutPercentage: 65,
+                legend: { display: false }
             },
-            energyLegend: [],
             trendChart: null
         }
     },
-    computed: {
-        bandChunks() {
-            const result = []
-            for (let i = 0; i < this.bands.length; i += 2) {
-                result.push(this.bands.slice(i, i + 2))
-            }
-            return result
-        }
-    },
     methods: {
-        async getData() {
-            this.loading = true
-            this.error = null
-            try {
-                const myto = await controlCenterApi.getMytoDashboard()
-
-                const totalDtEnergy = pick(myto, ['summary.total_dt_energy_raw'], null)
-                this.total_consumption = totalDtEnergy != null ? formatNumber(totalDtEnergy) : '0'
-
-                const monthStart = pick(myto, ['month', 'summary.month_start'], null)
-                this.consumption_date = this.formatMonth(monthStart)
-
-                // band_summary is an array of per-band rows (band_code, total_dts, dt_energy_raw,
-                // avg_dt_availability_hours, ...), not an object keyed by band name
-                const bandSummary = pick(myto, ['band_summary'], []) || []
-                this.bands = this.buildBands(bandSummary, totalDtEnergy)
-                this.bandAvailability = this.buildBandAvailability(bandSummary)
-
-                if (this.bands.length) {
-                    this.energyLegend = this.bands.map((b, i) => ({
-                        name: b.name,
-                        color: BAND_COLORS[i % BAND_COLORS.length],
-                        value: formatNumber(b.energy)
-                    }))
-                    this.energyPerFeederData = {
-                        labels: this.bands.map(b => b.name),
-                        datasets: [{
-                            data: this.bands.map(b => b.energy),
-                            backgroundColor: this.bands.map((_, i) => BAND_COLORS[i % BAND_COLORS.length]),
-                            borderWidth: 0
-                        }]
-                    }
-                } else {
-                    this.energyLegend = []
-                    this.energyPerFeederData = null
-                }
-
-                await this.loadTrend(monthStart)
-            } catch (err) {
-                this.error = err.message
-                console.error('myto dashboard load failed', err)
-            } finally {
-                this.loading = false
-            }
-        },
-        formatMonth(monthStr) {
-            const d = monthStr ? new Date(monthStr) : new Date()
-            return Number.isNaN(d.getTime()) ? '' : d.toLocaleString('en-US', { month: 'short', year: 'numeric' })
-        },
-        buildBands(bandSummary, totalEnergy) {
-            const denom = totalEnergy || bandSummary.reduce((sum, b) => sum + (Number(pick(b, ['dt_energy_raw'], 0)) || 0), 0) || 1
-            return bandSummary.map(b => {
-                const energy = Number(pick(b, ['dt_energy_raw'], 0)) || 0
-                const totalDts = pick(b, ['total_dts'], null)
-                const count = totalDts != null ? formatNumber(totalDts) : '—'
-                const pct = denom ? (energy / denom) * 100 : 0
-                return {
-                    name: `Band ${pick(b, ['band_code'], '—')}`,
-                    pct: `${pct.toFixed(2)}%`,
-                    count,
-                    energy
-                }
-            })
-        },
-        buildBandAvailability(bandSummary) {
-            return bandSummary
-                .map(b => {
-                    const hours = pick(b, ['avg_dt_availability_hours', 'dt_availability_hours', 'avg_availability_hours'], null)
-                    return hours != null ? { name: `Band ${pick(b, ['band_code'], '—')}`, avail_hours: Number(hours).toFixed(2) } : null
-                })
-                .filter(Boolean)
-        },
-        async loadTrend(baseMonth) {
-            const months = lastNMonths(baseMonth, 6)
-            const responses = await Promise.all(
-                months.map(m => controlCenterApi.getMytoDashboard({ month: m }).catch(() => null))
-            )
-            this.renderTrendChart(
-                months.map(monthLabel),
-                responses.map(r => pick(r, ['summary.total_dt_energy_raw'], null))
-            )
-        },
-        renderTrendChart(labels, data) {
-            const canvas = document.getElementById('energyTrendChart')
+        renderTrendChart() {
+            const canvas = document.getElementById('consumptionTrendChart')
             if (!canvas) return
             if (this.trendChart) this.trendChart.destroy()
             this.trendChart = new Chart(canvas.getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels,
+                    labels: ['Jan 01', 'Jan 02', 'Jan 03', 'Jan 04', 'Jan 05', 'Jan 06'],
                     datasets: [{
-                        label: 'DT Energy Raw',
-                        data,
+                        data: [40, 45, 60, 48, 65, 30],
                         borderColor: '#4ecb71',
                         backgroundColor: 'rgba(78,203,113,0.08)',
                         pointBackgroundColor: '#4ecb71',
@@ -287,29 +175,17 @@ export default {
                     responsive: true,
                     maintainAspectRatio: false,
                     legend: { display: false },
-                    tooltips: {
-                        mode: 'index',
-                        intersect: false,
-                        backgroundColor: '#fff',
-                        titleFontColor: '#9b9faa',
-                        bodyFontColor: '#222',
-                        bodyFontStyle: 'bold',
-                        borderColor: '#eee',
-                        borderWidth: 1,
-                        callbacks: {
-                            label: function(tooltipItems) { return Number(tooltipItems.yLabel).toLocaleString() + ' (raw)' }
-                        }
-                    },
+                    tooltips: { enabled: false },
                     scales: {
-                        yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)' }, ticks: { display: false } }],
-                        xAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)', borderDash: [4, 4] } }]
+                        xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#aaa' } }],
+                        yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)' }, ticks: { display: false } }]
                     }
                 }
             })
         }
     },
-    async mounted() {
-        await this.getData()
+    mounted() {
+        this.$nextTick(() => this.renderTrendChart())
     }
 }
 </script>
@@ -339,52 +215,6 @@ export default {
     margin: 0;
 }
 
-.state-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-    gap: 12px;
-}
-
-.state-message {
-    color: var(--text-secondary);
-    text-align: center;
-}
-
-.retry-btn {
-    color: var(--text-primary);
-    border: 1px solid var(--border-strong);
-    border-radius: 6px;
-}
-
-.pending-card {
-    text-align: center;
-}
-
-.band-avail-table {
-    width: 100%;
-    font-size: 13px;
-}
-
-.band-status {
-    font-weight: 600;
-}
-
-.status-red    { color: #e74c3c; }
-.status-green  { color: #27ae60; }
-.status-orange { color: #f39c12; }
-
-.pending-note {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin: 8px 0 0 0;
-}
-
-/* Filter */
-.filter-row { margin-bottom: 10px; }
-
 .filter-pill {
     display: flex;
     align-items: center;
@@ -394,89 +224,132 @@ export default {
     padding: 8px 12px;
     background: var(--bg-card);
     cursor: pointer;
+    min-width: 140px;
 }
 
-.filter-label { font-size: 13px; color: var(--text-secondary); }
-.filter-arrow { color: var(--text-muted); font-size: 20px !important; }
-
-/* Total Consumption Card */
-.total-card {
-    border-radius: 12px;
-    padding: 18px;
-    margin-bottom: 8px;
-    position: relative;
+.filter-label {
+    font-size: 13px;
+    color: var(--text-secondary);
 }
 
-.total-card-inner {
+.filter-arrow {
+    color: var(--text-muted);
+    font-size: 20px !important;
+}
+
+/* Total Consumption card */
+.top-stat-card {
+    border-radius: 14px;
+    padding: 18px 16px 14px;
+    margin-bottom: 12px;
+    background: var(--bg-card);
+}
+
+.top-stat-header {
     display: flex;
-    align-items: center;
-    gap: 14px;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
 }
 
-.total-icon {
-    width: 52px;
-    height: 52px;
+.top-stat-icon-wrap {
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    background-color: #f39c12;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
 
-.total-value {
+.amber-icon-wrap { background-color: #fdf1de; }
+.top-stat-icon { font-size: 22px !important; }
+.amber-icon { color: #f5a623; }
+
+.top-stat-info { flex: 1; }
+
+.top-stat-value {
     font-size: 26px;
     font-weight: 700;
-    margin: 0 0 2px 0;
     color: var(--text-primary);
-}
-
-.total-label {
-    font-size: 12px;
-    color: var(--text-secondary);
     margin: 0 0 2px 0;
+    line-height: 1.1;
 }
 
-.total-date {
+.top-stat-label {
     font-size: 12px;
     color: var(--text-muted);
     margin: 0;
 }
 
-/* Band Cards */
-.band-row { margin-bottom: 0; }
+.top-stat-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
+.footer-month {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.footer-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.footer-pill-up {
+    color: #1b8a5a;
+    background: rgba(27, 138, 90, 0.12);
+}
+
+.footer-pill-up .material-icons { font-size: 13px !important; }
+
+/* Band cards */
 .band-card {
     border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+    text-align: center;
+    background: var(--bg-card);
 }
 
 .band-name {
     font-size: 13px;
     color: var(--text-secondary);
-    margin: 0 0 4px 0;
-    font-weight: 500;
+    margin: 0 0 8px 0;
 }
 
 .band-pct {
     font-size: 22px;
     font-weight: 700;
     color: var(--text-primary);
-    margin: 0 0 2px 0;
+    margin: 0 0 4px 0;
+}
+
+.band-status {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 6px 0;
 }
 
 .band-target {
     font-size: 11px;
-    color: var(--text-faint);
-    margin: 4px 0 0 0;
+    color: var(--text-muted);
+    margin: 0;
 }
 
-/* Trend Chart Card */
+/* Trend card */
 .trend-card {
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    background: var(--bg-card);
 }
 
 .trend-header {
@@ -492,53 +365,61 @@ export default {
     color: var(--text-primary);
 }
 
-/* Mini Cards (bottom row) */
-.mini-card {
-    border-radius: 12px;
-    padding: 16px;
-}
-
-.mini-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0 0 12px 0;
-}
-
-/* Feeder Legend */
-.feeder-legend {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px 4px;
-    margin-top: 12px;
-}
-
-.feeder-legend-item {
+.chart-tabs {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 14px;
 }
 
-.fleg-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    flex-shrink: 0;
+.chart-tab {
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px 6px;
 }
 
-.fleg-name {
-    font-size: 12px;
-    color: var(--text-secondary);
-    flex: 1;
-}
-
-.fleg-val {
-    font-size: 12px;
-    font-weight: 700;
+.chart-tab.active {
     color: var(--text-primary);
+    font-weight: 600;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    padding: 4px 10px;
+}
+
+.chart-icon-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: var(--bg-card-alt, rgba(0,0,0,0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+/* Mini chart cards */
+.mini-chart-card {
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 12px;
+    background: var(--bg-card);
+}
+
+.pie-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 0 0 10px 0;
 }
 
 @media only screen and (max-width: 992px) {
-    .main-content { padding-left: 20px; }
+    .main-content {
+        padding-left: 20px;
+    }
+    .avail-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
 }
 </style>

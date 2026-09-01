@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/monthly_energy", {data:[{}],fetch:{},mutations:void 0});

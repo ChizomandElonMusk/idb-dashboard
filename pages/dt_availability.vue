@@ -20,16 +20,6 @@
                 </div>
             </div>
 
-            <div v-if="loading" class="state-panel">
-                <PreLoader />
-            </div>
-            <div v-else-if="error" class="state-panel">
-                <p class="state-message">Could not load availability data: {{ error }}</p>
-                <button class="btn-flat retry-btn" @click="getData">Retry</button>
-            </div>
-
-            <template v-else>
-
             <!-- Dashboard Tab -->
             <div id="dt-dashboard">
                 <div class="row filter-row">
@@ -46,15 +36,15 @@
                     <div class="col s12 m4">
                         <div class="row" style="margin-bottom: 0;">
                             <div class="col s6" style="padding: 0 6px 0 0;">
-                                <div class="card-panel metric-card pending-card">
+                                <div class="card-panel metric-card">
                                     <p class="metric-label">DT Target Availability (Hrs)</p>
-                                    <CertificationBadge status="pending" />
+                                    <p class="metric-value">{{ dt_target_availability }}</p>
                                 </div>
                             </div>
                             <div class="col s6" style="padding: 0 0 0 6px;">
-                                <div class="card-panel metric-card pending-card">
+                                <div class="card-panel metric-card">
                                     <p class="metric-label">Feeder Target Availability(Hrs)</p>
-                                    <CertificationBadge status="pending" />
+                                    <p class="metric-value">{{ feeder_target_availability }}</p>
                                 </div>
                             </div>
                         </div>
@@ -77,14 +67,14 @@
                         <div class="row" style="margin-bottom: 0;">
                             <div class="col s6" style="padding: 0 6px 0 0;">
                                 <div class="card-panel metric-card">
-                                    <p class="metric-label">DT Meeting 20h+ (%)</p>
+                                    <p class="metric-label">Availability Rate(%)</p>
                                     <p class="metric-value green-value"><AnimatedValue :value="dt_availability_rate" /></p>
                                 </div>
                             </div>
                             <div class="col s6" style="padding: 0 0 0 6px;">
                                 <div class="card-panel metric-card">
-                                    <p class="metric-label">Feeder Meeting 20h+ (%)</p>
-                                    <p class="metric-value green-value"><AnimatedValue :value="feeder_availability_rate" /></p>
+                                    <p class="metric-label">Availability Rate(%)</p>
+                                    <p class="metric-value green-value">{{ feeder_availability_status }}</p>
                                 </div>
                             </div>
                         </div>
@@ -94,19 +84,31 @@
                     <div class="col s12 m8">
                         <div class="card-panel trend-card">
                             <div class="trend-header">
-                                <span class="trend-title">Availability Trend (last 7 days)</span>
+                                <span class="trend-title">Availability Trend</span>
+                                <div class="chart-tabs">
+                                    <span class="chart-tab" :class="{ active: trendTab === 'Day' }" @click="trendTab = 'Day'">Day</span>
+                                    <span class="chart-tab" :class="{ active: trendTab === 'Week' }" @click="trendTab = 'Week'">Week</span>
+                                    <span class="chart-tab" :class="{ active: trendTab === 'Month' }" @click="trendTab = 'Month'">Month</span>
+                                    <span class="chart-icon-btn"><i class="material-icons tiny">calendar_today</i></span>
+                                </div>
                             </div>
-                            <div style="position: relative; height: 250px;">
-                                <canvas id="availabilityChart"></canvas>
+                            <div class="chart-callout-wrap">
+                                <div style="position: relative; height: 250px;">
+                                    <canvas id="availabilityChart"></canvas>
+                                </div>
+                                <div class="chart-callout" style="left: 58%; top: 20px;">
+                                    <span class="callout-title">July 16</span>
+                                    <span class="callout-value">21.5</span>
+                                </div>
                             </div>
                             <div class="trend-legend">
                                 <span class="legend-item">
                                     <span class="legend-ring green-ring"></span>
-                                    <span class="legend-text">Average DT Availability</span>
+                                    <span class="legend-text">Average Availability</span>
                                 </span>
                                 <span class="legend-item">
                                     <span class="legend-ring blue-ring"></span>
-                                    <span class="legend-text">Average Feeder Availability</span>
+                                    <span class="legend-text">Average Target</span>
                                 </span>
                             </div>
                         </div>
@@ -130,34 +132,32 @@
                         </div>
                     </div>
                 </div>
-                <p class="pending-note" style="margin: 0 0 10px 4px;">Worst-performing DT meters for {{ resolvedDate }}</p>
 
                 <div class="table-wrapper">
                     <table class="dt-table">
                         <thead>
                             <tr>
+                                <th>Date</th>
                                 <th>DT Name</th>
-                                <th>Feeder</th>
+                                <th>Name_Of_Feeder</th>
                                 <th>Band</th>
-                                <th>Availability (Hrs)</th>
+                                <th>Consumption</th>
+                                <th>DT Actual Availability</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(row, i) in dt_availability_data" :key="i">
+                            <tr v-for="(row, i) in dt_availability_rows" :key="i">
+                                <td>{{ row.date }}</td>
                                 <td>{{ row.dt_name }}</td>
                                 <td>{{ row.feeder_name }}</td>
                                 <td>{{ row.band }}</td>
-                                <td>{{ row.availability_hours }}</td>
-                            </tr>
-                            <tr v-if="!dt_availability_data.length">
-                                <td colspan="4" class="center-align pending-note">No worst-performer rows returned</td>
+                                <td>{{ row.consumption }}</td>
+                                <td>{{ row.availability }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
-            </template>
 
         </main>
     </div>
@@ -167,87 +167,45 @@
 import Chart from '~/assets/js/Chart.js'
 import SideNav from '~/components/SideNav/SideNav.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
-// Live API wiring — see static/control_center_api_doc.md §9 (DT Availability) and §10 (Feeder Availability).
-import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
-import { pick, formatNumber, lastNDays, dayLabel } from '~/js_modules/controlCenterApi.js'
+// UI-first rebuild to match the Figma "DT Availability Dashboard" screen exactly. Data below is
+// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
+// the backend team ships the matching endpoint shape.
 
 export default {
     components: { SideNav, AnimatedValue },
     data() {
         return {
-            loading: true,
-            error: null,
-            dt_actual_availability: '0',
-            feeder_actual_availability: '0',
-            dt_availability_rate: '0',
-            feeder_availability_rate: '0',
-            dt_availability_data: [],
-            resolvedDate: '',
+            trendTab: 'Month',
+            dt_target_availability: '20.00',
+            feeder_target_availability: '20.00',
+            dt_actual_availability: '22.03',
+            feeder_actual_availability: '20.03',
+            dt_availability_rate: '110.16',
+            feeder_availability_status: 'Exceeded',
+            dt_availability_rows: Array.from({ length: 8 }, () => ({
+                date: '07/01/2026',
+                dt_name: '11-OgudulNJ-T1Ogudu-94 VICTORIA STREET CSP',
+                feeder_name: '11-OgudulNJ-T1-Ogudu',
+                band: 'A',
+                consumption: '10.90',
+                availability: '19.35'
+            })),
             trendChart: null
         }
     },
     methods: {
-        async getData() {
-            this.loading = true
-            this.error = null
-            try {
-                const [dtAvail, feederAvail] = await Promise.all([
-                    controlCenterApi.getDtAvailability({ limit: 10 }),
-                    controlCenterApi.getFeederAvailability({ limit: 10 })
-                ])
-
-                const dtAvgHours = pick(dtAvail, ['summary.avg_dt_availability_hours'], null)
-                const feederAvgHours = pick(feederAvail, ['summary.avg_feeder_availability_hours'], null)
-                this.dt_actual_availability = dtAvgHours != null ? Number(dtAvgHours).toFixed(2) : '0'
-                this.feeder_actual_availability = feederAvgHours != null ? Number(feederAvgHours).toFixed(2) : '0'
-
-                const dtMetPct = pick(dtAvail, ['summary.met_20_hours_pct'], null)
-                const feederMetPct = pick(feederAvail, ['summary.met_20_hours_pct'], null)
-                this.dt_availability_rate = dtMetPct != null ? `${dtMetPct}` : '0'
-                this.feeder_availability_rate = feederMetPct != null ? `${feederMetPct}` : '0'
-
-                this.resolvedDate = pick(dtAvail, ['selected_date'], '—')
-
-                const worstMeters = pick(dtAvail, ['worst_dt_meters'], []) || []
-                this.dt_availability_data = worstMeters.map(row => ({
-                    dt_name: pick(row, ['dt_name', 'name', 'r_meter_id'], '—'),
-                    feeder_name: pick(row, ['feeder_name', 'feeder'], '—'),
-                    band: pick(row, ['band_code', 'band', 'myto_band'], '—'),
-                    availability_hours: formatNumber(pick(row, ['dt_availability_hours', 'dt_availability', 'availability_hours', 'hours'], 0))
-                }))
-
-                await this.loadTrend(pick(dtAvail, ['selected_date'], null))
-            } catch (err) {
-                this.error = err.message
-                console.error('dt availability load failed', err)
-            } finally {
-                this.loading = false
-            }
-        },
-        async loadTrend(baseDate) {
-            const days = lastNDays(baseDate, 7)
-            const [dtResponses, feederResponses] = await Promise.all([
-                Promise.all(days.map(d => controlCenterApi.getDtAvailability({ date: d }).catch(() => null))),
-                Promise.all(days.map(d => controlCenterApi.getFeederAvailability({ date: d }).catch(() => null)))
-            ])
-            this.renderTrendChart(
-                days.map(dayLabel),
-                dtResponses.map(r => pick(r, ['summary.avg_dt_availability_hours'], null)),
-                feederResponses.map(r => pick(r, ['summary.avg_feeder_availability_hours'], null))
-            )
-        },
-        renderTrendChart(labels, dtData, feederData) {
+        renderTrendChart() {
             const canvas = document.getElementById('availabilityChart')
             if (!canvas) return
             if (this.trendChart) this.trendChart.destroy()
             this.trendChart = new Chart(canvas.getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels,
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     datasets: [
                         {
-                            label: 'Average DT Availability',
-                            data: dtData,
+                            label: 'Average Availability',
+                            data: [21, 20.5, 19, 21, 22.5, 24, 22.5, 20, 19.5, 21.5, 23, 22.5],
                             borderColor: '#4ecb71',
                             backgroundColor: 'rgba(78,203,113,0.08)',
                             pointBackgroundColor: '#4ecb71',
@@ -259,8 +217,8 @@ export default {
                             fill: false
                         },
                         {
-                            label: 'Average Feeder Availability',
-                            data: feederData,
+                            label: 'Average Target',
+                            data: Array(12).fill(20),
                             borderColor: '#5b7cfa',
                             backgroundColor: 'rgba(91,124,250,0.08)',
                             pointBackgroundColor: '#5b7cfa',
@@ -299,9 +257,9 @@ export default {
             })
         }
     },
-    async mounted() {
-        await this.getData()
+    mounted() {
         this.$nextTick(() => {
+            this.renderTrendChart()
             const el = document.querySelector('.tabs')
             if (el) M.Tabs.init(el, {})
         })
@@ -325,37 +283,6 @@ export default {
     font-weight: 600;
     color: var(--text-primary);
     margin: 0;
-}
-
-.state-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-    gap: 12px;
-}
-
-.state-message {
-    color: var(--text-secondary);
-    text-align: center;
-}
-
-.retry-btn {
-    color: var(--text-primary);
-    border: 1px solid var(--border-strong);
-    border-radius: 6px;
-}
-
-.pending-card {
-    text-align: center;
-    justify-content: center !important;
-}
-
-.pending-note {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin: 8px 0 0 0;
 }
 
 /* Tabs */
@@ -440,6 +367,7 @@ export default {
     font-size: 22px;
     font-weight: 700;
     margin: 0;
+    color: var(--text-primary);
 }
 
 .green-value {
@@ -464,6 +392,56 @@ export default {
     font-weight: 600;
     color: var(--text-primary);
 }
+
+.chart-tabs {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.chart-tab {
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px 6px;
+}
+
+.chart-tab.active {
+    color: var(--text-primary);
+    font-weight: 600;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    padding: 4px 10px;
+}
+
+.chart-icon-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: var(--bg-card-alt, rgba(0,0,0,0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+.chart-callout-wrap { position: relative; }
+
+.chart-callout {
+    position: absolute;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px 12px;
+    box-shadow: 0 2px 8px var(--shadow-color, rgba(0,0,0,0.08));
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+    pointer-events: none;
+}
+
+.callout-title { font-size: 11px; color: var(--text-muted); }
+.callout-value { font-size: 13px; font-weight: 700; color: var(--text-primary); }
 
 .trend-legend {
     display: flex;

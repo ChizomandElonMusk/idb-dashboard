@@ -6,169 +6,225 @@
                 <h5 class="avail-title">Control Center Dashboard</h5>
             </div>
 
-            <div v-if="loading" class="state-panel">
-                <PreLoader />
-            </div>
-
-            <div v-else-if="error" class="state-panel">
-                <p class="state-message">Could not load Control Center data: {{ error }}</p>
-                <button class="btn-flat retry-btn" @click="getData">Retry</button>
-            </div>
-
-            <!-- dashboard section -->
-            <div v-else class="row" id="dashboard">
-
-                <!-- Top Stats Row -->
-                <div class="row top-cards-row">
-
-                    <!-- Card 1: Total Feeders -->
-                    <div class="col s12 m3">
-                        <div class="card-panel top-stat-card">
-                            <div class="top-stat-header">
-                                <div class="top-stat-icon-wrap red-icon-wrap">
-                                    <i class="material-icons top-stat-icon red-icon">device_hub</i>
-                                </div>
-                                <div class="top-stat-info">
-                                    <p class="top-stat-value"><AnimatedValue :value="online_feeders" /></p>
-                                    <p class="top-stat-label">Total feeders</p>
-                                </div>
+            <div class="row">
+                <!-- Card 1: Online Feeders -->
+                <div class="col s12 m3">
+                    <div class="card-panel top-stat-card">
+                        <div class="top-stat-header">
+                            <div class="top-stat-icon-wrap red-icon-wrap">
+                                <i class="material-icons top-stat-icon red-icon">device_hub</i>
                             </div>
-                            <div class="top-stat-divider"></div>
-                            <div class="top-stat-sub-row">
-                                <div class="top-stat-sub border-right">
-                                    <p class="sub-label">11kv</p>
-                                    <p class="sub-value">{{ kv11 }}</p>
-                                </div>
-                                <div class="top-stat-sub">
-                                    <p class="sub-label">33kv</p>
-                                    <p class="sub-value">{{ kv33 }}</p>
-                                </div>
+                            <div class="top-stat-info">
+                                <p class="top-stat-value"><AnimatedValue :value="online_feeders" /></p>
+                                <p class="top-stat-label">Online feeders</p>
+                            </div>
+                        </div>
+                        <div class="top-stat-divider"></div>
+                        <div class="top-stat-sub-row">
+                            <div class="top-stat-sub border-right">
+                                <p class="sub-label">11kv</p>
+                                <p class="sub-value">{{ kv11 }}</p>
+                            </div>
+                            <div class="top-stat-sub">
+                                <p class="sub-label">33kv</p>
+                                <p class="sub-value">{{ kv33 }}</p>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Card 2: Total DTs -->
-                    <div class="col s12 m3">
-                        <div class="card-panel top-stat-card">
-                            <div class="top-stat-header">
-                                <div class="top-stat-icon-wrap red-icon-wrap">
-                                    <i class="material-icons top-stat-icon red-icon">bolt</i>
-                                </div>
-                                <div class="top-stat-info">
-                                    <p class="top-stat-value"><AnimatedValue :value="online_dts" /></p>
-                                    <p class="top-stat-label">Total DTs</p>
-                                </div>
-                            </div>
-                            <div class="top-stat-divider"></div>
-                            <div class="top-stat-sub-row">
-                                <div class="top-stat-sub border-right">
-                                    <p class="sub-label">Public</p>
-                                    <p class="sub-value"><AnimatedValue :value="public_dts" /></p>
-                                </div>
-                                <div class="top-stat-sub">
-                                    <p class="sub-label">Private</p>
-                                    <p class="sub-value">{{ private_dts }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: Total Customer Complaints (pending — not an Oracle-backed KPI yet) -->
-                    <div class="col s12 m3">
-                        <div class="card-panel top-stat-card">
-                            <div class="top-stat-header">
-                                <div class="top-stat-icon-wrap blue-icon-wrap">
-                                    <i class="material-icons top-stat-icon blue-icon">group</i>
-                                </div>
-                                <div class="top-stat-info">
-                                    <p class="top-stat-label" style="margin-bottom: 6px;">Total Customer Complaints</p>
-                                    <CertificationBadge status="pending" />
-                                </div>
-                            </div>
-                            <div class="top-stat-divider"></div>
-                            <p class="pending-note">Complaints data pending source onboarding</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 4: Total Customers -->
-                    <div class="col s12 m3">
-                        <div class="card-panel top-stat-card">
-                            <p class="customers-card-title">Total Customers</p>
-                            <div class="progress-item">
-                                <div class="progress-label-row">
-                                    <span class="progress-name">NMD</span>
-                                    <span class="progress-fraction">
-                                        <AnimatedValue :value="nmd_value" />/{{ total_customers_display }}
-                                    </span>
-                                </div>
-                                <div class="progress indigo lighten-4" style="height:8px; border-radius:4px;">
-                                    <div class="determinate indigo accent-2" :style="{ width: nmd_pct }"></div>
-                                </div>
-                            </div>
-                            <div class="progress-item" style="margin-top: 14px;">
-                                <div class="progress-label-row">
-                                    <span class="progress-name">MD</span>
-                                    <span class="progress-fraction">
-                                        <AnimatedValue :value="md_value" />/{{ total_customers_display }}
-                                    </span>
-                                </div>
-                                <div class="progress green lighten-4" style="height:8px; border-radius:4px;">
-                                    <div class="determinate green" :style="{ width: md_pct }"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
-                <!-- Energy + Pie Row -->
-                <div class="row">
-                    <div class="col s12 m9">
-                        <div class="card-panel mini-chart-card" style="padding-bottom: 20px;">
-                            <div class="energy-card-header">
-                                <div>
-                                    <p class="energy-card-title">Energy</p>
-                                    <p class="energy-card-value">{{ energyTotal }}</p>
-                                    <div class="loss-row">
-                                        <span class="loss-label">Feeder&rarr;DT loss: {{ lossPctDisplay }}</span>
-                                        <CertificationBadge status="requires_validation" />
-                                    </div>
-                                </div>
+                <!-- Card 2: Online DTs -->
+                <div class="col s12 m3">
+                    <div class="card-panel top-stat-card">
+                        <div class="top-stat-header">
+                            <div class="top-stat-icon-wrap red-icon-wrap">
+                                <i class="material-icons top-stat-icon red-icon">bolt</i>
                             </div>
-                            <div style="position: relative; height:180px; overflow:visible;">
+                            <div class="top-stat-info">
+                                <p class="top-stat-value"><AnimatedValue :value="online_dts" /></p>
+                                <p class="top-stat-label">Online DTs</p>
+                            </div>
+                        </div>
+                        <div class="top-stat-divider"></div>
+                        <div class="top-stat-sub-row">
+                            <div class="top-stat-sub border-right">
+                                <p class="sub-label">Public</p>
+                                <p class="sub-value">{{ public_dts }}</p>
+                            </div>
+                            <div class="top-stat-sub">
+                                <p class="sub-label">Private</p>
+                                <p class="sub-value">{{ private_dts }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Total Customer Complaints -->
+                <div class="col s12 m3">
+                    <div class="card-panel top-stat-card">
+                        <div class="top-stat-header">
+                            <div class="top-stat-icon-wrap blue-icon-wrap">
+                                <i class="material-icons top-stat-icon blue-icon">group</i>
+                            </div>
+                            <div class="top-stat-info">
+                                <p class="top-stat-value"><AnimatedValue :value="complaints_total" /></p>
+                                <p class="top-stat-label">Total Customer Complaints</p>
+                            </div>
+                        </div>
+                        <div class="top-stat-divider"></div>
+                        <div class="top-stat-sub-row">
+                            <div class="top-stat-sub border-right">
+                                <p class="sub-label">Open</p>
+                                <p class="sub-value">{{ complaints_open }}</p>
+                            </div>
+                            <div class="top-stat-sub">
+                                <p class="sub-label">Closed</p>
+                                <p class="sub-value">{{ complaints_closed }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Total Customers -->
+                <div class="col s12 m3">
+                    <div class="card-panel top-stat-card">
+                        <p class="customers-card-title">Total Customers</p>
+                        <div class="progress-item">
+                            <div class="progress-label-row">
+                                <span class="progress-name">Metered NMD</span>
+                                <span class="progress-fraction">{{ nmd_value }}/{{ nmd_total }}</span>
+                            </div>
+                            <div class="progress indigo lighten-4" style="height:8px; border-radius:4px;">
+                                <div class="determinate indigo accent-2" :style="{ width: nmd_pct }"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item" style="margin-top: 14px;">
+                            <div class="progress-label-row">
+                                <span class="progress-name">Metered MD</span>
+                                <span class="progress-fraction">{{ md_value }}/{{ md_total }}</span>
+                            </div>
+                            <div class="progress green lighten-4" style="height:8px; border-radius:4px;">
+                                <div class="determinate green" :style="{ width: md_pct }"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Energy + Allocation Row -->
+            <div class="row">
+                <div class="col s12 m7">
+                    <div class="card-panel mini-chart-card energy-card">
+                        <div class="energy-card-header">
+                            <p class="energy-card-title">Energy</p>
+                            <div class="chart-tabs">
+                                <span class="chart-tab" :class="{ active: energyTab === 'Day' }" @click="energyTab = 'Day'">Day</span>
+                                <span class="chart-tab" :class="{ active: energyTab === 'Week' }" @click="energyTab = 'Week'">Week</span>
+                                <span class="chart-tab" :class="{ active: energyTab === 'Month' }" @click="energyTab = 'Month'">Month</span>
+                                <span class="chart-icon-btn"><i class="material-icons tiny">calendar_today</i></span>
+                                <span class="chart-icon-btn chart-icon-btn-accent"><i class="material-icons tiny">description</i></span>
+                            </div>
+                        </div>
+                        <p class="energy-card-value">{{ energyTotal }}</p>
+                        <div class="chart-callout-wrap">
+                            <div style="position: relative; height:190px;">
                                 <canvas id="energyChart"></canvas>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="col s12 m3">
-                        <div class="card-panel mini-chart-card">
-                            <p class="pie-card-title center">Energy Allocation per MYTO Band</p>
-                            <ChartPie
-                                v-if="energyAllocationData"
-                                chart-type="pie"
-                                :chart-data="energyAllocationData"
-                                :chart-options="pieOptions"
-                            />
-                            <p v-else class="pending-note center">No band energy data returned</p>
+                            <div class="chart-callout" style="left: 40%; top: 6px;">
+                                <span class="callout-title">March</span>
+                                <span class="callout-value">43.00 MWh</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Vending & Collection (pending — vending-collection endpoint is certified,
-                     but doesn't yet expose the day-level/MTD split these cards need) -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="card-panel mini-chart-card pending-card">
-                            <span class="vending-card-title">Vending &amp; Collection</span>
-                            <CertificationBadge status="pending" />
-                            <p class="pending-note">Day-level and MTD vending/collection breakdown pending business confirmation of reporting granularity</p>
+                <div class="col s12 m5">
+                    <div class="card-panel mini-chart-card">
+                        <p class="pie-card-title center">Energy Allocation per Feeder Band</p>
+                        <ChartPie
+                            chart-type="pie"
+                            :chart-data="energyAllocationData"
+                            :chart-options="pieOptions"
+                        />
+                        <div class="band-pct-legend">
+                            <span v-for="item in bandPctLegend" :key="item.label" class="band-pct-item" :style="{ color: item.color }">
+                                {{ item.label }} {{ item.pct }}
+                            </span>
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!-- dashboard ends here -->
+
+            <!-- Vending & Total Feeder Row -->
+            <div class="row">
+                <div class="col s12 m7">
+                    <div class="card-panel mini-chart-card energy-card">
+                        <div class="energy-card-header">
+                            <p class="energy-card-title">Vending &amp; Collection</p>
+                            <div class="chart-tabs">
+                                <span class="chart-tab" :class="{ active: vendingTab === 'Day' }" @click="vendingTab = 'Day'">Day</span>
+                                <span class="chart-tab" :class="{ active: vendingTab === 'Week' }" @click="vendingTab = 'Week'">Week</span>
+                                <span class="chart-tab" :class="{ active: vendingTab === 'Month' }" @click="vendingTab = 'Month'">Month</span>
+                                <span class="chart-icon-btn"><i class="material-icons tiny">calendar_today</i></span>
+                            </div>
+                        </div>
+                        <div class="chart-callout-wrap">
+                            <div style="position: relative; height:190px;">
+                                <canvas id="vendingChart"></canvas>
+                            </div>
+                            <div class="chart-callout" style="left: 46%; top: 6px;">
+                                <span class="callout-title">June 16</span>
+                                <span class="callout-value">400,000,000</span>
+                            </div>
+                        </div>
+                        <div class="vending-stats-grid">
+                            <div class="vending-stats-col">
+                                <div class="vending-stat-row">
+                                    <span class="vstat-dot vstat-dot-green"></span>
+                                    <span class="vstat-label">Total customer Vended Today</span>
+                                    <span class="vstat-value">30,400,000</span>
+                                </div>
+                                <div class="vending-stat-row">
+                                    <span class="vstat-dot vstat-dot-green"></span>
+                                    <span class="vstat-label">Amount Vended Today</span>
+                                    <span class="vstat-value">30,400,000</span>
+                                </div>
+                                <div class="vending-stat-row">
+                                    <span class="vstat-dot vstat-dot-green"></span>
+                                    <span class="vstat-label">Amount Vended MTD</span>
+                                    <span class="vstat-value">2,000,000,000</span>
+                                </div>
+                            </div>
+                            <div class="vending-stats-col">
+                                <div class="vending-stat-row">
+                                    <span class="vstat-dot vstat-dot-blue"></span>
+                                    <span class="vstat-label">Total Collection Today</span>
+                                    <span class="vstat-value">50,000,000</span>
+                                </div>
+                                <div class="vending-stat-row">
+                                    <span class="vstat-dot vstat-dot-blue"></span>
+                                    <span class="vstat-label">Amount Collected MTD</span>
+                                    <span class="vstat-value">7,000,000,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m5">
+                    <div class="card-panel mini-chart-card">
+                        <p class="pie-card-title center">Total Feeder</p>
+                        <ChartPie
+                            chart-type="doughnut"
+                            :chart-data="totalFeederData"
+                            :chart-options="doughnutOptions"
+                            center-text="421"
+                            :show-value-legend="true"
+                            :legend-cols="2"
+                        />
+                    </div>
+                </div>
+            </div>
 
         </main>
     </div>
@@ -179,189 +235,150 @@ import SideNav from '~/components/SideNav/SideNav.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import ChartPie from '~/components/ChartPie.vue'
 import Chart from '~/assets/js/Chart.js'
-// Live API wiring — see static/control_center_api_doc.md (§7 Control Center Dashboard,
-// §6 Overview) for the certified response shape. control-center's own `cards`/`feeder_summary`
-// sections don't document a public/private DT or NMD/MD customer split, so those fall back
-// to /dashboard/overview's confirmed field names.
-import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
-import { pick, formatNumber, lastNMonths, monthLabel } from '~/js_modules/controlCenterApi.js'
+// UI-first rebuild to match the Figma "Control Center Dashboard" screen exactly. Data below is
+// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
+// the backend team ships the matching endpoint shape.
+
+const BAND_COLORS = ['#5b7cfa', '#3ec9a7', '#a56ef0', '#e74c3c', '#f5a623']
 
 export default {
     components: { SideNav, AnimatedValue, ChartPie },
     data() {
         return {
-            loading: true,
-            error: null,
-            /* top stat cards */
-            online_feeders: '0',
-            kv11: '—',
-            kv33: '—',
-            online_dts: '0',
-            public_dts: '0',
-            private_dts: '—',
-            nmd_value: '0',
-            nmd_pct: '0%',
-            md_value: '0',
-            md_pct: '0%',
-            total_customers_display: '—',
-            /* loss */
-            lossPctDisplay: '—',
-            /* chart data */
-            energyAllocationData: null,
+            online_feeders: '200',
+            kv11: '150',
+            kv33: '50',
+            online_dts: '1200',
+            public_dts: '1000',
+            private_dts: '200',
+            complaints_total: '50',
+            complaints_open: '20',
+            complaints_closed: '30',
+            nmd_value: '900000',
+            nmd_total: '1033000',
+            nmd_pct: `${((900000 / 1033000) * 100).toFixed(2)}%`,
+            md_value: '5000',
+            md_total: '7000',
+            md_pct: `${((5000 / 7000) * 100).toFixed(2)}%`,
+            energyTotal: '350.00MWh',
+            energyTab: 'Month',
+            vendingTab: 'Month',
+            bandPctLegend: [
+                { label: 'A', pct: '40%', color: BAND_COLORS[0] },
+                { label: 'B', pct: '25%', color: BAND_COLORS[1] },
+                { label: 'C', pct: '15%', color: BAND_COLORS[2] },
+                { label: 'D', pct: '15%', color: BAND_COLORS[3] },
+                { label: 'E', pct: '5%', color: BAND_COLORS[4] }
+            ],
+            energyAllocationData: {
+                labels: ['A', 'B', 'C', 'D', 'E'],
+                datasets: [{ data: [40, 25, 15, 15, 5], backgroundColor: BAND_COLORS, borderWidth: 0 }]
+            },
             pieOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
-                legend: { display: false },
-                plugins: {
-                    labels: { render: 'label', fontColor: '#fff', fontSize: 11 }
-                }
+                legend: { display: false }
             },
-            /* energy chart */
-            energyChart: null,
-            energyData: {
-                labels: [],
-                datasets: [{
-                    label: 'Feeder Energy Raw',
-                    data: [],
-                    borderColor: '#5ebd8d',
-                    backgroundColor: 'rgba(235,250,243,0.6)',
-                    tension: 0.4,
-                    fill: true,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#5ebd8d',
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2
-                }]
+            totalFeederData: {
+                labels: ['Band A', 'Band B', 'Band C', 'Band D', 'Band E'],
+                datasets: [{ data: [188, 78, 132, 18, 5], backgroundColor: BAND_COLORS, borderWidth: 0 }]
             },
-            energyOptions: {
+            doughnutOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
-                legend: { display: false },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                    backgroundColor: '#fff',
-                    titleFontColor: '#9b9faa',
-                    bodyFontColor: '#222',
-                    bodyFontStyle: 'bold',
-                    borderColor: '#eee',
-                    borderWidth: 1,
-                    callbacks: {
-                        label: function(tooltipItems) { return formatNumber(tooltipItems.yLabel) + ' (raw)' }
-                    }
-                },
-                scales: {
-                    xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#aaa' } }],
-                    yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)' }, ticks: { display: false } }]
-                }
+                cutoutPercentage: 68,
+                legend: { display: false }
             },
-            energyTotal: '—'
+            energyChart: null,
+            vendingChart: null
         }
     },
     methods: {
-        async getData() {
-            this.loading = true
-            this.error = null
-            try {
-                const [cc, overviewRes] = await Promise.all([
-                    controlCenterApi.getControlCenter(),
-                    controlCenterApi.getOverview().catch(() => null)
-                ])
-                const overview = pick(overviewRes, ['data'], {}) || {}
-
-                this.online_feeders = formatNumber(pick(cc, ['cards.total_feeders', 'feeder_summary.total_feeders', 'total_feeders'], 0))
-                const kv11Raw = pick(cc, ['cards.feeders_11kv', 'feeder_summary.feeders_11kv'], null)
-                const kv33Raw = pick(cc, ['cards.feeders_33kv', 'feeder_summary.feeders_33kv'], null)
-                this.kv11 = kv11Raw != null ? formatNumber(kv11Raw) : '—'
-                this.kv33 = kv33Raw != null ? formatNumber(kv33Raw) : '—'
-
-                this.online_dts = formatNumber(pick(cc, ['cards.total_dts', 'total_dts'], null) ?? pick(overview, ['total_dts'], 0))
-                const publicDts = pick(cc, ['cards.public_dts', 'public_dts'], null) ?? pick(overview, ['public_dts'], 0)
-                this.public_dts = formatNumber(publicDts)
-                const privatePublic = Number(pick(cc, ['cards.private_public_dts', 'private_public_dts'], null) ?? pick(overview, ['private_public_dts'], 0))
-                const privateSingle = Number(pick(cc, ['cards.private_single_dts', 'private_single_dts'], null) ?? pick(overview, ['private_single_dts'], 0))
-                this.private_dts = (privatePublic || privateSingle) ? formatNumber(privatePublic + privateSingle) : '—'
-
-                const totalCustomers = pick(cc, ['cards.total_customers', 'total_customers'], null) ?? pick(overview, ['total_customers'], null)
-                const nmdCustomers = pick(cc, ['cards.nmd_customers', 'nmd_customers'], null) ?? pick(overview, ['nmd_customers'], null)
-                const mdCustomers = pick(cc, ['cards.md_customers', 'md_customers'], null) ?? pick(overview, ['md_customers'], null)
-                this.total_customers_display = totalCustomers != null ? formatNumber(totalCustomers) : '—'
-                this.nmd_value = nmdCustomers != null ? formatNumber(nmdCustomers) : '0'
-                this.md_value = mdCustomers != null ? formatNumber(mdCustomers) : '0'
-                this.nmd_pct = (totalCustomers && nmdCustomers != null) ? `${Math.min(100, (nmdCustomers / totalCustomers) * 100)}%` : '0%'
-                this.md_pct = (totalCustomers && mdCustomers != null) ? `${Math.min(100, (mdCustomers / totalCustomers) * 100)}%` : '0%'
-
-                // Feeder-to-DT loss is API-confirmed but flagged requires_business_validation
-                // (doc §3.2) — always show the CertificationBadge alongside this value.
-                const lossPct = pick(cc, ['monthly_energy.feeder_to_dt_loss_pct', 'monthly_energy.summary.feeder_to_dt_loss_pct'], null)
-                this.lossPctDisplay = lossPct != null ? `${lossPct}%` : '—'
-
-                // Energy values are raw source-derived numbers (doc §3.1) — do not label as kWh/MWh/GWh.
-                const latestMonth = pick(cc, ['monthly_energy.month_start', 'monthly_energy.summary.month_start'], null)
-                const latestFeederEnergy = pick(cc, ['monthly_energy.total_feeder_energy_raw', 'monthly_energy.summary.total_feeder_energy_raw'], null)
-                this.energyTotal = latestFeederEnergy != null ? `${formatNumber(latestFeederEnergy)} Raw` : '—'
-
-                const bandEntries = this.normalizeBandEntries(pick(cc, ['energy_by_band', 'monthly_energy.energy_by_band'], null))
-                this.energyAllocationData = bandEntries.length ? {
-                    labels: bandEntries.map(e => e.band),
-                    datasets: [{
-                        data: bandEntries.map(e => e.value),
-                        backgroundColor: bandEntries.map((_, i) => this.bandColors[i % this.bandColors.length]),
-                        borderWidth: 0
-                    }]
-                } : null
-
-                await this.loadEnergyTrend(latestMonth)
-            } catch (err) {
-                this.error = err.message
-                console.error('control-center dashboard load failed', err)
-            } finally {
-                this.loading = false
-            }
-        },
-        normalizeBandEntries(raw) {
-            if (!raw) return []
-            const entries = Array.isArray(raw) ? raw : Object.entries(raw)
-            return entries.map(e => {
-                if (Array.isArray(e)) return { band: String(e[0]), value: Number(e[1]) || 0 }
-                const band = e.band ?? e.band_code ?? e.myto_band ?? e.name
-                const value = e.dt_energy_raw ?? e.energy_raw ?? e.value ?? e.total
-                return { band: String(band), value: Number(value) || 0 }
-            }).filter(e => e.band && e.band !== 'undefined')
-        },
-        async loadEnergyTrend(latestMonth) {
-            const months = lastNMonths(latestMonth, 7)
-            const responses = await Promise.all(
-                months.map(m => controlCenterApi.getMonthlyEnergy({ month: m }).catch(() => null))
-            )
-            this.energyData = {
-                ...this.energyData,
-                labels: months.map(monthLabel),
-                datasets: [{
-                    ...this.energyData.datasets[0],
-                    data: responses.map(r => pick(r, ['summary.total_feeder_energy_raw', 'total_feeder_energy_raw'], null))
-                }]
-            }
-        },
         initEnergyChart() {
             const canvas = document.getElementById('energyChart')
             if (!canvas) return
             if (this.energyChart) this.energyChart.destroy()
             this.energyChart = new Chart(canvas.getContext('2d'), {
                 type: 'line',
-                data: this.energyData,
-                options: this.energyOptions
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul'],
+                    datasets: [{
+                        data: [55, 40, 68, 45, 50, 62],
+                        borderColor: '#4ecb71',
+                        backgroundColor: 'rgba(78,203,113,0.08)',
+                        pointBackgroundColor: '#4ecb71',
+                        pointBorderColor: '#fff',
+                        pointRadius: (ctx) => ctx.dataIndex === 2 ? 6 : 3,
+                        pointBorderWidth: 2,
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: { display: false },
+                    tooltips: { enabled: false },
+                    scales: {
+                        xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#aaa' } }],
+                        yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)' }, ticks: { display: false } }]
+                    }
+                }
+            })
+        },
+        initVendingChart() {
+            const canvas = document.getElementById('vendingChart')
+            if (!canvas) return
+            if (this.vendingChart) this.vendingChart.destroy()
+            this.vendingChart = new Chart(canvas.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [
+                        {
+                            label: 'Vending',
+                            data: [40, 25, 15, 55, 80, 95, 70, 50, 60, 75, 60],
+                            borderColor: '#4ecb71',
+                            backgroundColor: 'rgba(78,203,113,0.06)',
+                            pointRadius: (ctx) => ctx.dataIndex === 4 ? 6 : 0,
+                            pointBackgroundColor: '#4ecb71',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: 'Collection',
+                            data: [70, 55, 30, 15, 25, 55, 70, 60, 45, 55, 70],
+                            borderColor: '#5b7cfa',
+                            backgroundColor: 'transparent',
+                            pointRadius: 0,
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: { display: false },
+                    tooltips: { enabled: false },
+                    scales: {
+                        xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#aaa' } }],
+                        yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)' }, ticks: { display: false } }]
+                    }
+                }
             })
         }
     },
-    computed: {
-        bandColors() {
-            return ['#5b7cfa', '#6dd4c7', '#c87dff', '#ff6b6b', '#ffa94e', '#4ecdc4']
-        }
-    },
-    async mounted() {
-        await this.getData()
-        this.$nextTick(() => this.initEnergyChart())
+    mounted() {
+        this.$nextTick(() => {
+            this.initEnergyChart()
+            this.initVendingChart()
+        })
     }
 }
 </script>
@@ -391,54 +408,7 @@ export default {
     margin: 0;
 }
 
-.state-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-    gap: 12px;
-}
-
-.state-message {
-    color: var(--text-secondary);
-    text-align: center;
-}
-
-.retry-btn {
-    color: var(--text-primary);
-    border: 1px solid var(--border-strong);
-    border-radius: 6px;
-}
-
-.pending-note {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin: 8px 0 0 0;
-}
-
-.pending-card {
-    padding: 20px;
-    text-align: center;
-}
-
-.loss-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 4px;
-}
-
-.loss-label {
-    font-size: 11px;
-    color: var(--text-muted);
-}
-
-/* ── Top Stat Cards ── */
-.top-cards-row {
-    margin-bottom: 0;
-}
-
+/* Top Stat Cards */
 .top-stat-card {
     border-radius: 14px;
     padding: 18px 16px 14px;
@@ -456,7 +426,7 @@ export default {
 .top-stat-icon-wrap {
     width: 46px;
     height: 46px;
-    border-radius: 10px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -470,12 +440,10 @@ export default {
 .red-icon  { color: #c0392b; }
 .blue-icon { color: #4a5fa5; }
 
-.top-stat-info {
-    flex: 1;
-}
+.top-stat-info { flex: 1; }
 
 .top-stat-value {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
     color: var(--text-primary);
     margin: 0 0 2px 0;
@@ -494,14 +462,8 @@ export default {
     margin-bottom: 12px;
 }
 
-.top-stat-sub-row {
-    display: flex;
-}
-
-.top-stat-sub {
-    flex: 1;
-    text-align: center;
-}
+.top-stat-sub-row { display: flex; }
+.top-stat-sub { flex: 1; text-align: center; }
 
 .sub-label {
     font-size: 12px;
@@ -516,11 +478,9 @@ export default {
     margin: 0;
 }
 
-.border-right {
-    border-right: 1px solid var(--border-color);
-}
+.border-right { border-right: 1px solid var(--border-color); }
 
-/* ── Total Customers Card ── */
+/* Total Customers Card */
 .customers-card-title {
     font-size: 13px;
     font-weight: 600;
@@ -538,43 +498,92 @@ export default {
     margin-bottom: 4px;
 }
 
-.progress-name {
-    font-size: 12px;
-    color: var(--text-secondary);
-}
+.progress-name { font-size: 12px; color: var(--text-secondary); }
+.progress-fraction { font-size: 11px; color: var(--text-muted); }
 
-.progress-fraction {
-    font-size: 11px;
-    color: var(--text-muted);
-}
-
-/* ── Energy Chart Card ── */
+/* Chart Cards */
 .mini-chart-card {
     border-radius: 14px;
+    padding: 20px;
     margin-bottom: 12px;
     background: var(--bg-card);
 }
 
 .energy-card-header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .energy-card-title {
     font-size: 15px;
     font-weight: 600;
     color: var(--text-primary);
-    margin: 0 0 2px 0;
+    margin: 0;
 }
 
 .energy-card-value {
     font-size: 22px;
     font-weight: 700;
     color: var(--text-primary);
-    margin: 0;
+    margin: 0 0 8px 0;
 }
+
+.chart-tabs {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.chart-tab {
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px 6px;
+}
+
+.chart-tab.active {
+    color: var(--text-primary);
+    font-weight: 600;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    padding: 4px 10px;
+}
+
+.chart-icon-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: var(--bg-card-alt, rgba(0,0,0,0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+}
+
+.chart-icon-btn-accent {
+    background: #d7f5e3;
+    color: #27ae60;
+}
+
+.chart-callout-wrap { position: relative; }
+
+.chart-callout {
+    position: absolute;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px 12px;
+    box-shadow: 0 2px 8px var(--shadow-color, rgba(0,0,0,0.08));
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+    pointer-events: none;
+}
+
+.callout-title { font-size: 11px; color: var(--text-muted); }
+.callout-value { font-size: 13px; font-weight: 700; color: var(--text-primary); }
 
 .pie-card-title {
     font-size: 13px;
@@ -583,18 +592,26 @@ export default {
     margin: 0 0 10px 0;
 }
 
-/* ── Vending Section ── */
-.vending-card-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-right: 8px;
+.band-pct-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
 }
 
+.band-pct-item {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Vending Section */
 .vending-stats-grid {
     display: flex;
     gap: 20px;
-    margin-top: 12px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--divider);
 }
 
 .vending-stats-col {
@@ -612,27 +629,14 @@ export default {
 }
 
 .vstat-dot {
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    border: 2px solid;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.vstat-dot::after {
-    content: '';
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-}
-
-.vstat-dot-green { border-color: #5ebd8d; }
-.vstat-dot-green::after { background-color: #5ebd8d; }
-.vstat-dot-blue { border-color: #5b7cfa; }
-.vstat-dot-blue::after { background-color: #5b7cfa; }
+.vstat-dot-green { background-color: #4ecb71; }
+.vstat-dot-blue { background-color: #5b7cfa; }
 
 .vstat-label { color: var(--text-secondary); flex: 1; }
 .vstat-value { font-weight: 700; color: var(--text-primary); white-space: nowrap; }

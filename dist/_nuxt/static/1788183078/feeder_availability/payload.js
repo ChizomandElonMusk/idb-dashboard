@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/feeder_availability", {data:[{}],fetch:{},mutations:void 0});

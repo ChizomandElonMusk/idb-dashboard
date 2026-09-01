@@ -11,72 +11,83 @@
                         <span class="filter-label">Date</span>
                         <i class="material-icons filter-icon">calendar_today</i>
                     </div>
+                    <div class="filter-input">
+                        <span class="filter-label">Feeder Band</span>
+                        <i class="material-icons filter-icon">arrow_drop_down</i>
+                    </div>
+                    <div class="filter-input">
+                        <span class="filter-label">Business Unit</span>
+                        <i class="material-icons filter-icon">arrow_drop_down</i>
+                    </div>
                 </div>
             </div>
-
-            <div v-if="loading" class="state-panel">
-                <PreLoader />
-            </div>
-            <div v-else-if="error" class="state-panel">
-                <p class="state-message">Could not load availability summary: {{ error }}</p>
-                <button class="btn-flat retry-btn" @click="getData">Retry</button>
-            </div>
-
-            <template v-else>
 
             <!-- top 3 cards -->
             <div class="row">
                 <!-- Feeders Availability Status -->
                 <div class="col s12 m4">
                     <div class="card-panel avail-card">
-                        <p class="avail-card-title center-align">Feeders Meeting 20h+ ({{ feeder_date }})</p>
-                        <ChartPie v-if="feedersAvailData" chart-type="doughnut"
+                        <p class="avail-card-title center-align">Feeders Availability Status</p>
+                        <ChartPie chart-type="doughnut"
                             :chart-data="feedersAvailData"
                             :chart-options="doughnutOptions"
-                            :center-text="feeders_total"
+                            center-text="392"
                             :show-value-legend="true"
                             :legend-cols="1">
                         </ChartPie>
                     </div>
                 </div>
 
-                <!-- DTs Availability Status -->
+                <!-- Total DTs -->
                 <div class="col s12 m4">
                     <div class="card-panel avail-card">
-                        <p class="avail-card-title center-align">DTs Meeting 20h+ ({{ dt_date }})</p>
-                        <ChartPie v-if="dtsAvailData" chart-type="doughnut"
-                            :chart-data="dtsAvailData"
+                        <p class="avail-card-title center-align">Total DTs</p>
+                        <ChartPie chart-type="doughnut"
+                            :chart-data="totalDtsData"
                             :chart-options="doughnutOptions"
-                            :center-text="total_dts"
+                            center-text="5,390"
                             :show-value-legend="true"
                             :legend-cols="1">
                         </ChartPie>
                     </div>
                 </div>
 
-                <!-- DT Availability Bands -->
+                <!-- DT Availability Status -->
                 <div class="col s12 m4">
                     <div class="card-panel avail-card">
-                        <p class="avail-card-title center-align">DT Availability Bands</p>
-                        <div style="position: relative; height: 200px;">
-                            <canvas id="dtAvailChart"></canvas>
+                        <p class="avail-card-title center-align">DT Availability Status</p>
+                        <div class="dt-status-row">
+                            <div class="dt-status-chart">
+                                <canvas id="dtAvailChart"></canvas>
+                            </div>
+                            <div class="dt-status-legend">
+                                <span class="dt-status-legend-item"><span class="legend-dot" style="background:#1a2b5c;"></span> Met</span>
+                                <span class="dt-status-legend-item"><span class="legend-dot" style="background:#c0392b;"></span> Not Met</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- bottom section: no business-unit / geographic breakdown available yet -->
+            <!-- horizontal bar charts -->
             <div class="row">
-                <div class="col s12">
-                    <div class="card-panel avail-card pending-card">
-                        <p class="avail-card-title center-align">Feeders &amp; DTs By Business Unit</p>
-                        <CertificationBadge status="pending" />
-                        <p class="pending-note">Business unit / geographic breakdown not provided by the current endpoints</p>
+                <div class="col s12 m6">
+                    <div class="card-panel avail-card">
+                        <p class="avail-card-title center-align">Feeders By Business Unit</p>
+                        <div style="position: relative; height: 220px;">
+                            <canvas id="feedersByBuChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="card-panel avail-card">
+                        <p class="avail-card-title center-align">DTs By Business Units</p>
+                        <div style="position: relative; height: 220px;">
+                            <canvas id="dtsByBuChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            </template>
 
         </main>
     </div>
@@ -86,129 +97,153 @@
 import SideNav from '~/components/SideNav/SideNav.vue'
 import ChartPie from '~/components/ChartPie.vue'
 import Chart from '~/assets/js/Chart.js'
-// Live API wiring — see static/control_center_api_doc.md §8 (Availability Summary).
-import * as controlCenterApi from '~/js_modules/controlCenterApi.js'
-import { pick, formatNumber } from '~/js_modules/controlCenterApi.js'
+// UI-first rebuild to match the Figma "Availability Summary" screen exactly. Data below is
+// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
+// the backend team ships the matching endpoint shape.
 
 const valueLabelPlugin = {
     afterDatasetsDraw(chart) {
-        const ctx = chart.ctx;
+        const ctx = chart.ctx
         chart.data.datasets.forEach((dataset, i) => {
-            const meta = chart.getDatasetMeta(i);
-            if (!meta.hidden) {
-                meta.data.forEach((bar, index) => {
-                    const value = dataset.data[index];
-                    const model = bar._model;
-                    ctx.save();
-                    ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ececf2' : '#333';
-                    ctx.font = 'bold 11px sans-serif';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'bottom';
-                    ctx.fillText(value.toLocaleString(), model.x, model.y - 3);
-                    ctx.restore();
-                });
-            }
-        });
+            const meta = chart.getDatasetMeta(i)
+            if (meta.hidden) return
+            meta.data.forEach((bar, index) => {
+                const value = dataset.data[index]
+                const model = bar._model
+                ctx.save()
+                ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ececf2' : '#333'
+                ctx.font = 'bold 11px sans-serif'
+                ctx.textAlign = 'center'
+                ctx.textBaseline = 'bottom'
+                ctx.fillText(value.toLocaleString(), model.x, model.y - 3)
+                ctx.restore()
+            })
+        })
     }
-};
+}
+
+const horizontalValueLabelPlugin = {
+    afterDatasetsDraw(chart) {
+        const ctx = chart.ctx
+        chart.data.datasets.forEach((dataset, i) => {
+            const meta = chart.getDatasetMeta(i)
+            if (meta.hidden) return
+            meta.data.forEach((bar, index) => {
+                const value = dataset.data[index]
+                const model = bar._model
+                ctx.save()
+                ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ececf2' : '#333'
+                ctx.font = 'bold 11px sans-serif'
+                ctx.textAlign = 'left'
+                ctx.textBaseline = 'middle'
+                ctx.fillText(value.toLocaleString(), model.x + 8, model.y)
+                ctx.restore()
+            })
+        })
+    }
+}
 
 export default {
     components: { SideNav, ChartPie },
     data() {
         return {
-            loading: true,
-            error: null,
-            feeders_total: '0',
-            total_dts: '0',
-            feeder_date: '—',
-            dt_date: '—',
-            feedersAvailData: null,
-            dtsAvailData: null,
-            dtBands: null,
+            feedersAvailData: {
+                labels: ['Met', 'Not Met'],
+                datasets: [{ data: [256, 136], backgroundColor: ['#1a2b5c', '#c0392b'] }]
+            },
+            totalDtsData: {
+                labels: ['Public DTs', 'Private DTs'],
+                datasets: [{ data: [5113, 188], backgroundColor: ['#7b8cf0', '#8de8c5'] }]
+            },
             doughnutOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
                 cutoutPercentage: 70,
                 legend: { display: false }
             },
-            barCharts: [],
-        }
-    },
-    watch: {
-        '$theme.value'() {
-            this.barCharts.forEach(chart => chart && chart.update());
+            barCharts: []
         }
     },
     methods: {
-        async getData() {
-            this.loading = true
-            this.error = null
-            try {
-                const summaryRes = await controlCenterApi.getAvailabilitySummary()
-                // /dashboard/availability-summary wraps its fields in a `data` envelope
-                const summary = pick(summaryRes, ['data'], summaryRes)
-
-                const totalFeederMeters = Number(pick(summary, ['total_feeder_meters'], 0))
-                const feederMet20 = Number(pick(summary, ['feeder_met_20_hours'], 0))
-                this.feeders_total = formatNumber(totalFeederMeters)
-                this.feeder_date = pick(summary, ['feeder_availability_date'], '—')
-                this.feedersAvailData = {
-                    labels: ['Met 20h+', 'Not Met'],
-                    datasets: [{ data: [feederMet20, Math.max(totalFeederMeters - feederMet20, 0)], backgroundColor: ['#1a237e', '#c62828'] }]
-                }
-
-                const totalDtMeters = Number(pick(summary, ['total_dt_meters'], 0))
-                const dtMet20 = Number(pick(summary, ['dt_met_20_hours'], 0))
-                this.total_dts = formatNumber(totalDtMeters)
-                this.dt_date = pick(summary, ['dt_availability_date'], '—')
-                this.dtsAvailData = {
-                    labels: ['Met 20h+', 'Not Met'],
-                    datasets: [{ data: [dtMet20, Math.max(totalDtMeters - dtMet20, 0)], backgroundColor: ['#7986cb', '#80cbc4'] }]
-                }
-
-                const dtZero = Number(pick(summary, ['dt_zero_hours'], 0))
-                const dtBelow12 = Number(pick(summary, ['dt_below_12_hours'], 0))
-                const dt12to20 = Number(pick(summary, ['dt_12_to_20_hours'], 0))
-                const dtFull24 = Number(pick(summary, ['dt_full_24_hours'], 0))
-                const dt20to24 = Math.max(dtMet20 - dtFull24, 0)
-                this.dtBands = { labels: ['0h', '0-12h', '12-20h', '20-24h', '24h'], data: [dtZero, dtBelow12, dt12to20, dt20to24, dtFull24] }
-
-                this.$nextTick(() => this.initCharts())
-            } catch (err) {
-                this.error = err.message
-                console.error('availability summary load failed', err)
-            } finally {
-                this.loading = false
-            }
-        },
         initCharts() {
             this.barCharts.forEach(chart => chart && chart.destroy())
             this.barCharts = []
 
-            const canvas = document.getElementById('dtAvailChart')
-            if (!canvas || !this.dtBands) return
+            const statusCanvas = document.getElementById('dtAvailChart')
+            if (statusCanvas) {
+                this.barCharts.push(new Chart(statusCanvas.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Private DTs', 'Public DTs'],
+                        datasets: [
+                            { label: 'Met', data: [150, 2639], backgroundColor: '#1a2b5c' },
+                            { label: 'Not Met', data: [38, 2494], backgroundColor: '#c0392b' }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{ gridLines: { display: false } }],
+                            yAxes: [{ gridLines: { display: false }, ticks: { beginAtZero: true } }]
+                        }
+                    },
+                    plugins: [valueLabelPlugin]
+                }))
+            }
 
-            this.barCharts.push(new Chart(canvas.getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: this.dtBands.labels,
-                    datasets: [{ data: this.dtBands.data, backgroundColor: ['#c62828', '#e8941a', '#f5a623', '#7986cb', '#1a237e'] }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    legend: { display: false },
-                    scales: {
-                        xAxes: [{ gridLines: { display: false } }],
-                        yAxes: [{ gridLines: { display: false }, ticks: { beginAtZero: true } }]
-                    }
-                },
-                plugins: [valueLabelPlugin]
-            }))
+            const feedersByBuCanvas = document.getElementById('feedersByBuChart')
+            if (feedersByBuCanvas) {
+                this.barCharts.push(new Chart(feedersByBuCanvas.getContext('2d'), {
+                    type: 'horizontalBar',
+                    data: {
+                        labels: ['Ikeja', 'Akowonjo', 'Oshodi', 'Ikorodu', 'Shomolu', 'Abule Egba'],
+                        datasets: [{
+                            data: [3719, 3446, 2870, 2724, 2447, 1844],
+                            backgroundColor: '#f5a623'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{ gridLines: { display: false }, ticks: { display: false, suggestedMax: 4300 } }],
+                            yAxes: [{ gridLines: { display: false } }]
+                        }
+                    },
+                    plugins: [horizontalValueLabelPlugin]
+                }))
+            }
+
+            const dtsByBuCanvas = document.getElementById('dtsByBuChart')
+            if (dtsByBuCanvas) {
+                this.barCharts.push(new Chart(dtsByBuCanvas.getContext('2d'), {
+                    type: 'horizontalBar',
+                    data: {
+                        labels: ['Oshodi', 'Shomolu', 'Ikeja', 'Akowonjo', 'Ikorodu', 'Abule Egba'],
+                        datasets: [{
+                            data: [83, 82, 74, 71, 60, 41],
+                            backgroundColor: '#a13a3a'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: { display: false },
+                        scales: {
+                            xAxes: [{ gridLines: { display: false }, ticks: { display: false, suggestedMax: 95 } }],
+                            yAxes: [{ gridLines: { display: false } }]
+                        }
+                    },
+                    plugins: [horizontalValueLabelPlugin]
+                }))
+            }
         }
     },
-    async mounted() {
-        await this.getData()
+    mounted() {
+        this.$nextTick(() => this.initCharts())
     }
 }
 </script>
@@ -267,36 +302,6 @@ export default {
     color: var(--text-muted);
 }
 
-.state-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-    gap: 12px;
-}
-
-.state-message {
-    color: var(--text-secondary);
-    text-align: center;
-}
-
-.retry-btn {
-    color: var(--text-primary);
-    border: 1px solid var(--border-strong);
-    border-radius: 6px;
-}
-
-.pending-card {
-    text-align: center;
-}
-
-.pending-note {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin: 8px 0 0 0;
-}
-
 /* cards */
 .avail-card {
     border-radius: 14px;
@@ -311,6 +316,40 @@ export default {
     font-weight: 600;
     color: var(--text-secondary);
     margin: 0 0 12px;
+}
+
+.dt-status-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dt-status-chart {
+    position: relative;
+    height: 200px;
+    flex: 1;
+}
+
+.dt-status-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.dt-status-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
 }
 
 @media only screen and (max-width: 992px) {

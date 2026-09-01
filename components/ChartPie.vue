@@ -9,7 +9,7 @@
         <div class="legend-item" v-for="(label, i) in chartData.labels" :key="i">
           <span class="legend-dot" :style="{ backgroundColor: chartData.datasets[0].backgroundColor[i] }"></span>
           <span class="legend-label">{{ label }}</span>
-          <span class="legend-value">{{ chartData.datasets[0].data[i] }}</span>
+          <span class="legend-value">{{ valueLabels && valueLabels[i] != null ? valueLabels[i] : chartData.datasets[0].data[i] }}</span>
         </div>
       </div>
     </div>
@@ -45,6 +45,10 @@ export default {
     legendCols: {
       type: Number,
       default: 2
+    },
+    valueLabels: {
+      type: Array,
+      default: null
     }
   },
   data() {

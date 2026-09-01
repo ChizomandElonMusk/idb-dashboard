@@ -35,7 +35,7 @@ export default {
     statusColor() {
       const p = parseFloat(this.percentage);
       if (p < 40) return '#ea3e3e'; // Red
-      if (p < 75) return '#fdd835'; // Yellow/Gold
+      if (p < 70) return '#fdd835'; // Yellow/Gold
       return '#2e7d32'; // Green
     },
     gradientStyle() {
