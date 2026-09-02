@@ -1,17 +1,17 @@
-export { default as AdminNavBar } from '../../components/AdminNavBar.vue'
-export { default as AnimatedValue } from '../../components/AnimatedValue.vue'
-export { default as CertificationBadge } from '../../components/CertificationBadge.vue'
-export { default as ChartPie } from '../../components/ChartPie.vue'
-export { default as CustomSelect } from '../../components/CustomSelect.vue'
-export { default as Forgot } from '../../components/Forgot.vue'
-export { default as Login } from '../../components/Login.vue'
-export { default as Logo } from '../../components/Logo.vue'
-export { default as MeterCommunication } from '../../components/MeterCommunication.vue'
-export { default as NavBar } from '../../components/NavBar.vue'
-export { default as PreLoader } from '../../components/PreLoader.vue'
-export { default as SignUp } from '../../components/SignUp.vue'
-export { default as ThemeToggle } from '../../components/ThemeToggle.vue'
-export { default as SideNav } from '../../components/SideNav/SideNav.vue'
+export const AdminNavBar = () => import('../../components/AdminNavBar.vue' /* webpackChunkName: "components/admin-nav-bar" */).then(c => wrapFunctional(c.default || c))
+export const AnimatedValue = () => import('../../components/AnimatedValue.vue' /* webpackChunkName: "components/animated-value" */).then(c => wrapFunctional(c.default || c))
+export const CertificationBadge = () => import('../../components/CertificationBadge.vue' /* webpackChunkName: "components/certification-badge" */).then(c => wrapFunctional(c.default || c))
+export const ChartPie = () => import('../../components/ChartPie.vue' /* webpackChunkName: "components/chart-pie" */).then(c => wrapFunctional(c.default || c))
+export const CustomSelect = () => import('../../components/CustomSelect.vue' /* webpackChunkName: "components/custom-select" */).then(c => wrapFunctional(c.default || c))
+export const Forgot = () => import('../../components/Forgot.vue' /* webpackChunkName: "components/forgot" */).then(c => wrapFunctional(c.default || c))
+export const Login = () => import('../../components/Login.vue' /* webpackChunkName: "components/login" */).then(c => wrapFunctional(c.default || c))
+export const Logo = () => import('../../components/Logo.vue' /* webpackChunkName: "components/logo" */).then(c => wrapFunctional(c.default || c))
+export const MeterCommunication = () => import('../../components/MeterCommunication.vue' /* webpackChunkName: "components/meter-communication" */).then(c => wrapFunctional(c.default || c))
+export const NavBar = () => import('../../components/NavBar.vue' /* webpackChunkName: "components/nav-bar" */).then(c => wrapFunctional(c.default || c))
+export const PreLoader = () => import('../../components/PreLoader.vue' /* webpackChunkName: "components/pre-loader" */).then(c => wrapFunctional(c.default || c))
+export const SignUp = () => import('../../components/SignUp.vue' /* webpackChunkName: "components/sign-up" */).then(c => wrapFunctional(c.default || c))
+export const ThemeToggle = () => import('../../components/ThemeToggle.vue' /* webpackChunkName: "components/theme-toggle" */).then(c => wrapFunctional(c.default || c))
+export const SideNav = () => import('../../components/SideNav/SideNav.vue' /* webpackChunkName: "components/side-nav" */).then(c => wrapFunctional(c.default || c))
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

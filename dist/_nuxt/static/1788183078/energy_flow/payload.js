@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/energy_flow", {data:[{}],fetch:{},mutations:void 0});
