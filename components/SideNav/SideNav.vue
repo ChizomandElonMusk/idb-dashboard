@@ -37,8 +37,8 @@ export default {
     data() {
         return {
             menuItems: [
-                // { title: 'End-To-End Energy Dashboard', icon: 'dashboard' },
-                // { title: 'Energy Flow Diagram', icon: 'dashboard' },
+                { title: 'End-To-End Energy Dashboard', icon: 'dashboard', url: '/end_to_end_energy_dashboard' },
+                { title: 'Energy Flow Diagram', icon: 'dashboard', url: '/energy_flow_diagram' },
                 { title: 'Control Center Dashboard', icon: 'dashboard', url: '/control_center_dashboard' },
                 { title: 'Availability Summary', icon: 'dashboard', url: '/availability_summary' },
                 { title: 'DT Availability', icon: 'dashboard', url: '/dt_availability' },
@@ -66,6 +66,21 @@ export default {
     width: 260px;
     border-right: 1px solid var(--border-color);
     background-color: var(--bg-sidenav);
+}
+
+.sidenav li > a {
+    height: auto;
+    min-height: 48px;
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+    padding: 10px 32px;
+}
+
+.sidenav li > a > i.material-icons {
+    height: auto;
+    line-height: 1.3;
+    flex-shrink: 0;
 }
 
 .theme-toggle-container {

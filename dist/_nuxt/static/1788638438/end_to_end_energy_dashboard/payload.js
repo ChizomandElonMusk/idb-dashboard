@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/end_to_end_energy_dashboard", {data:[{}],fetch:{},mutations:void 0});

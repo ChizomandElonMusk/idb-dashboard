@@ -1,7 +1,205 @@
-exports.ids = [15,1,10,12];
+exports.ids = [16,1,11,13];
 exports.modules = {
 
-/***/ 38:
+/***/ 105:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/dt_availability.vue?vue&type=template&id=4b5060be&scoped=true
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "dashboard-wrapper"
+  }, [_c('SideNav'), _vm._ssrNode(" "), _vm._ssrNode("<main class=\"main-content\" data-v-4b5060be>", "</main>", [_vm._ssrNode("<div class=\"row header-row\" style=\"margin-bottom: 0;\" data-v-4b5060be><div class=\"col s12\" data-v-4b5060be><h5 class=\"avail-title\" data-v-4b5060be>DT Availability Dashboard</h5> <ul class=\"tabs\" data-v-4b5060be><li class=\"tab\" data-v-4b5060be><a href=\"#dt-dashboard\" class=\"active tab-link dashboard-tab\" data-v-4b5060be><i class=\"material-icons tiny tab-icon\" data-v-4b5060be>speed</i> Dashboard\n                        </a></li> <li class=\"tab\" data-v-4b5060be><a href=\"#dt-table\" class=\"tab-link table-tab\" data-v-4b5060be><i class=\"material-icons tiny tab-icon\" data-v-4b5060be>apps</i> DT Availability Table\n                        </a></li></ul></div></div> "), _vm._ssrNode("<div id=\"dt-dashboard\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"row filter-row\" data-v-4b5060be><div class=\"col s3 offset-s9\" data-v-4b5060be><div class=\"filter-pill\" data-v-4b5060be><span class=\"filter-label\" data-v-4b5060be>DT Name</span> <i class=\"material-icons filter-arrow\" data-v-4b5060be>arrow_drop_down</i></div></div></div> "), _vm._ssrNode("<div class=\"row\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"col s12 m4\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"row\" style=\"margin-bottom: 0;\" data-v-4b5060be><div class=\"col s6\" style=\"padding: 0 6px 0 0;\" data-v-4b5060be><div class=\"card-panel metric-card\" data-v-4b5060be><p class=\"metric-label\" data-v-4b5060be>DT Target Availability (Hrs)</p> <p class=\"metric-value\" data-v-4b5060be>" + _vm._ssrEscape(_vm._s(_vm.dt_target_availability)) + "</p></div></div> <div class=\"col s6\" style=\"padding: 0 0 0 6px;\" data-v-4b5060be><div class=\"card-panel metric-card\" data-v-4b5060be><p class=\"metric-label\" data-v-4b5060be>Feeder Target Availability(Hrs)</p> <p class=\"metric-value\" data-v-4b5060be>" + _vm._ssrEscape(_vm._s(_vm.feeder_target_availability)) + "</p></div></div></div> "), _vm._ssrNode("<div class=\"row\" style=\"margin-bottom: 0;\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"col s6\" style=\"padding: 0 6px 0 0;\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"card-panel metric-card\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<p class=\"metric-label\" data-v-4b5060be>DT Actual Availability (Hrs)</p> "), _vm._ssrNode("<p class=\"metric-value green-value\" data-v-4b5060be>", "</p>", [_c('AnimatedValue', {
+    attrs: {
+      "value": _vm.dt_actual_availability
+    }
+  })], 1)], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s6\" style=\"padding: 0 0 0 6px;\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"card-panel metric-card\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<p class=\"metric-label\" data-v-4b5060be>Feeder Actual Availability (Hrs)</p> "), _vm._ssrNode("<p class=\"metric-value green-value\" data-v-4b5060be>", "</p>", [_c('AnimatedValue', {
+    staticClass: "value",
+    attrs: {
+      "value": _vm.feeder_actual_availability
+    }
+  })], 1)], 2)])], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"row\" style=\"margin-bottom: 0;\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"col s6\" style=\"padding: 0 6px 0 0;\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"card-panel metric-card\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<p class=\"metric-label\" data-v-4b5060be>Availability Rate(%)</p> "), _vm._ssrNode("<p class=\"metric-value green-value\" data-v-4b5060be>", "</p>", [_c('AnimatedValue', {
+    attrs: {
+      "value": _vm.dt_availability_rate
+    }
+  })], 1)], 2)]), _vm._ssrNode(" <div class=\"col s6\" style=\"padding: 0 0 0 6px;\" data-v-4b5060be><div class=\"card-panel metric-card\" data-v-4b5060be><p class=\"metric-label\" data-v-4b5060be>Availability Rate(%)</p> <p class=\"metric-value green-value\" data-v-4b5060be>" + _vm._ssrEscape(_vm._s(_vm.feeder_availability_status)) + "</p></div></div>")], 2)], 2), _vm._ssrNode(" <div class=\"col s12 m8\" data-v-4b5060be><div class=\"card-panel trend-card\" data-v-4b5060be><div class=\"trend-header\" data-v-4b5060be><span class=\"trend-title\" data-v-4b5060be>Availability Trend</span> <div class=\"chart-tabs\" data-v-4b5060be><span" + _vm._ssrClass("chart-tab", {
+    active: _vm.trendTab === 'Day'
+  }) + " data-v-4b5060be>Day</span> <span" + _vm._ssrClass("chart-tab", {
+    active: _vm.trendTab === 'Week'
+  }) + " data-v-4b5060be>Week</span> <span" + _vm._ssrClass("chart-tab", {
+    active: _vm.trendTab === 'Month'
+  }) + " data-v-4b5060be>Month</span> <span class=\"chart-icon-btn\" data-v-4b5060be><i class=\"material-icons tiny\" data-v-4b5060be>calendar_today</i></span></div></div> <div class=\"chart-callout-wrap\" data-v-4b5060be><div style=\"position: relative; height: 250px;\" data-v-4b5060be><canvas id=\"availabilityChart\" data-v-4b5060be></canvas></div> <div class=\"chart-callout\" style=\"left: 58%; top: 20px;\" data-v-4b5060be><span class=\"callout-title\" data-v-4b5060be>July 16</span> <span class=\"callout-value\" data-v-4b5060be>21.5</span></div></div> <div class=\"trend-legend\" data-v-4b5060be><span class=\"legend-item\" data-v-4b5060be><span class=\"legend-ring green-ring\" data-v-4b5060be></span> <span class=\"legend-text\" data-v-4b5060be>Average Availability</span></span> <span class=\"legend-item\" data-v-4b5060be><span class=\"legend-ring blue-ring\" data-v-4b5060be></span> <span class=\"legend-text\" data-v-4b5060be>Average Target</span></span></div></div></div>")], 2)], 2), _vm._ssrNode(" <div id=\"dt-table\" data-v-4b5060be><div class=\"row filter-row\" data-v-4b5060be><div class=\"col s3 offset-s6\" data-v-4b5060be><div class=\"filter-pill\" data-v-4b5060be><span class=\"filter-label\" data-v-4b5060be>All DTs</span> <i class=\"material-icons filter-arrow\" data-v-4b5060be>arrow_drop_down</i></div></div> <div class=\"col s3\" data-v-4b5060be><div class=\"filter-pill\" data-v-4b5060be><span class=\"filter-label\" data-v-4b5060be>Date</span> <i class=\"material-icons filter-arrow\" style=\"font-size:18px;\" data-v-4b5060be>calendar_today</i></div></div></div> <div class=\"table-wrapper\" data-v-4b5060be><table class=\"dt-table\" data-v-4b5060be><thead data-v-4b5060be><tr data-v-4b5060be><th data-v-4b5060be>Date</th> <th data-v-4b5060be>DT Name</th> <th data-v-4b5060be>Name_Of_Feeder</th> <th data-v-4b5060be>Band</th> <th data-v-4b5060be>Consumption</th> <th data-v-4b5060be>DT Actual Availability</th></tr></thead> <tbody data-v-4b5060be>" + _vm._ssrList(_vm.dt_availability_rows, function (row, i) {
+    return "<tr data-v-4b5060be><td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.date)) + "</td> <td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.dt_name)) + "</td> <td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.feeder_name)) + "</td> <td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.band)) + "</td> <td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.consumption)) + "</td> <td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.availability)) + "</td></tr>";
+  }) + "</tbody></table></div></div>")], 2)], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./pages/dt_availability.vue?vue&type=template&id=4b5060be&scoped=true
+
+// EXTERNAL MODULE: ./assets/js/Chart.js
+var Chart = __webpack_require__(54);
+var Chart_default = /*#__PURE__*/__webpack_require__.n(Chart);
+
+// EXTERNAL MODULE: ./components/SideNav/SideNav.vue + 4 modules
+var SideNav = __webpack_require__(47);
+
+// EXTERNAL MODULE: ./components/AnimatedValue.vue + 4 modules
+var AnimatedValue = __webpack_require__(50);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/dt_availability.vue?vue&type=script&lang=js
+
+
+
+// UI-first rebuild to match the Figma "DT Availability Dashboard" screen exactly. Data below is
+// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
+// the backend team ships the matching endpoint shape.
+
+/* harmony default export */ var dt_availabilityvue_type_script_lang_js = ({
+  components: {
+    SideNav: SideNav["default"],
+    AnimatedValue: AnimatedValue["default"]
+  },
+  data() {
+    return {
+      trendTab: 'Month',
+      dt_target_availability: '20.00',
+      feeder_target_availability: '20.00',
+      dt_actual_availability: '22.03',
+      feeder_actual_availability: '20.03',
+      dt_availability_rate: '110.16',
+      feeder_availability_status: 'Exceeded',
+      dt_availability_rows: Array.from({
+        length: 8
+      }, () => ({
+        date: '07/01/2026',
+        dt_name: '11-OgudulNJ-T1Ogudu-94 VICTORIA STREET CSP',
+        feeder_name: '11-OgudulNJ-T1-Ogudu',
+        band: 'A',
+        consumption: '10.90',
+        availability: '19.35'
+      })),
+      trendChart: null
+    };
+  },
+  methods: {
+    renderTrendChart() {
+      const canvas = document.getElementById('availabilityChart');
+      if (!canvas) return;
+      if (this.trendChart) this.trendChart.destroy();
+      this.trendChart = new Chart_default.a(canvas.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          datasets: [{
+            label: 'Average Availability',
+            data: [21, 20.5, 19, 21, 22.5, 24, 22.5, 20, 19.5, 21.5, 23, 22.5],
+            borderColor: '#4ecb71',
+            backgroundColor: 'rgba(78,203,113,0.08)',
+            pointBackgroundColor: '#4ecb71',
+            pointBorderColor: '#fff',
+            pointRadius: 6,
+            pointBorderWidth: 2,
+            borderWidth: 2,
+            tension: 0.4,
+            fill: false
+          }, {
+            label: 'Average Target',
+            data: Array(12).fill(20),
+            borderColor: '#5b7cfa',
+            backgroundColor: 'rgba(91,124,250,0.08)',
+            pointBackgroundColor: '#5b7cfa',
+            pointBorderColor: '#fff',
+            pointRadius: 6,
+            pointBorderWidth: 2,
+            borderWidth: 2,
+            tension: 0.4,
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            display: false
+          },
+          tooltips: {
+            mode: 'index',
+            intersect: false,
+            backgroundColor: '#fff',
+            titleFontColor: '#9b9faa',
+            bodyFontColor: '#222',
+            bodyFontStyle: 'bold',
+            borderColor: '#eee',
+            borderWidth: 1
+          },
+          scales: {
+            yAxes: [{
+              gridLines: {
+                color: 'rgba(0,0,0,0.05)'
+              }
+            }],
+            xAxes: [{
+              gridLines: {
+                color: 'rgba(0,0,0,0.05)',
+                borderDash: [4, 4]
+              }
+            }]
+          }
+        }
+      });
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.renderTrendChart();
+      const el = document.querySelector('.tabs');
+      if (el) M.Tabs.init(el, {});
+    });
+  }
+});
+// CONCATENATED MODULE: ./pages/dt_availability.vue?vue&type=script&lang=js
+ /* harmony default export */ var pages_dt_availabilityvue_type_script_lang_js = (dt_availabilityvue_type_script_lang_js); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./pages/dt_availability.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(84)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  pages_dt_availabilityvue_type_script_lang_js,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "4b5060be",
+  "42b7be06"
+  
+)
+
+/* harmony default export */ var dt_availability = __webpack_exports__["default"] = (component.exports);
+
+/* nuxt-component-imports */
+installComponents(component, {SideNav: __webpack_require__(47).default,AnimatedValue: __webpack_require__(50).default})
+
+
+/***/ }),
+
+/***/ 45:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78,39 +276,39 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 39:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(48);
+var content = __webpack_require__(52);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(4).default
 module.exports.__inject__ = function (context) {
-  add("75e2181a", content, true, context)
+  add("3fada58a", content, true, context)
 };
 
 /***/ }),
 
-/***/ 40:
+/***/ 47:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=template&id=2c494de8&scoped=true
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=template&id=8411a820&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-2c494de8>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-2c494de8><img" + _vm._ssrAttr("src", __webpack_require__(41)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-2c494de8></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-2c494de8>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
+  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-8411a820>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-8411a820><img" + _vm._ssrAttr("src", __webpack_require__(48)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-8411a820></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-8411a820>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
     return _vm._ssrNode("<li" + _vm._ssrClass(null, {
       active: _vm.isActive(item)
-    }) + " data-v-2c494de8>", "</li>", [_c('nuxt-link', {
+    }) + " data-v-8411a820>", "</li>", [_c('nuxt-link', {
       class: {
         'red-text text-darken-2': _vm.isActive(item)
       },
@@ -125,7 +323,7 @@ var render = function render() {
         "font-size": "10px"
       }
     }, [_vm._v("\n                    " + _vm._s(item.title) + "\n                ")])])], 1);
-  }), _vm._ssrNode(" "), _vm._ssrNode("<li data-v-2c494de8>", "</li>", [_c('nuxt-link', {
+  }), _vm._ssrNode(" "), _vm._ssrNode("<li data-v-8411a820>", "</li>", [_c('nuxt-link', {
     staticClass: "red-text",
     attrs: {
       "to": "/"
@@ -141,10 +339,10 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=template&id=2c494de8&scoped=true
+// CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=template&id=8411a820&scoped=true
 
 // EXTERNAL MODULE: ./components/ThemeToggle.vue + 4 modules
-var ThemeToggle = __webpack_require__(38);
+var ThemeToggle = __webpack_require__(45);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=script&lang=js
 
@@ -155,10 +353,15 @@ var ThemeToggle = __webpack_require__(38);
   },
   data() {
     return {
-      menuItems: [
-      // { title: 'End-To-End Energy Dashboard', icon: 'dashboard' },
-      // { title: 'Energy Flow Diagram', icon: 'dashboard' },
-      {
+      menuItems: [{
+        title: 'End-To-End Energy Dashboard',
+        icon: 'dashboard',
+        url: '/end_to_end_energy_dashboard'
+      }, {
+        title: 'Energy Flow Diagram',
+        icon: 'dashboard',
+        url: '/energy_flow_diagram'
+      }, {
         title: 'Control Center Dashboard',
         icon: 'dashboard',
         url: '/control_center_dashboard'
@@ -202,7 +405,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(47)
+  var style0 = __webpack_require__(51)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -215,7 +418,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "2c494de8",
+  "8411a820",
   "0f3f648e"
   
 )
@@ -223,25 +426,25 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var SideNav = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {ThemeToggle: __webpack_require__(38).default})
+installComponents(component, {ThemeToggle: __webpack_require__(45).default})
 
 
 /***/ }),
 
-/***/ 41:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/logo.d2f3c61.png";
 
 /***/ }),
 
-/***/ 43:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(52);
+var content = __webpack_require__(57);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -253,7 +456,160 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 44:
+/***/ 50:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/AnimatedValue.vue?vue&type=template&id=f5293d52&scoped=true
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('span', {
+    class: {
+      counting: _vm.counting
+    }
+  }, [_vm._ssrNode(_vm._ssrEscape(_vm._s(_vm.display)))]);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/AnimatedValue.vue?vue&type=template&id=f5293d52&scoped=true
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/AnimatedValue.vue?vue&type=script&lang=js
+/* harmony default export */ var AnimatedValuevue_type_script_lang_js = ({
+  name: 'AnimatedValue',
+  props: {
+    value: {
+      type: [String, Number],
+      required: true
+    }
+  },
+  data() {
+    return {
+      display: '',
+      counting: false
+    };
+  },
+  watch: {
+    value(newVal, oldVal) {
+      this.animate(oldVal === undefined ? '' : oldVal.toString(), newVal.toString());
+    }
+  },
+  mounted() {
+    this.display = this.value.toString();
+  },
+  methods: {
+    animate(oldStr, newStr) {
+      const parseParts = str => {
+        const m = str.match(/([^0-9.,-]*)([-\d.,]+)(.*)/);
+        if (m) return {
+          prefix: m[1],
+          num: m[2],
+          suffix: m[3]
+        };
+        return {
+          prefix: '',
+          num: str,
+          suffix: ''
+        };
+      };
+      const formatNumber = n => {
+        // determine decimal length from newStr
+        const decMatch = newStr.match(/\.(\d+)/);
+        const decimals = decMatch ? decMatch[1].length : 0;
+        return n.toLocaleString(undefined, {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        });
+      };
+      const oldParts = parseParts(oldStr);
+      const newParts = parseParts(newStr);
+      const start = parseFloat(oldParts.num.replace(/,/g, '')) || 0;
+      const end = parseFloat(newParts.num.replace(/,/g, '')) || 0;
+      const duration = 1000;
+      const frameRate = 60;
+      const totalFrames = Math.round(duration / (1000 / frameRate));
+      let frame = 0;
+      this.counting = true;
+      const counter = setInterval(() => {
+        frame++;
+        const progress = frame / totalFrames;
+        const current = start + (end - start) * progress;
+        this.display = oldParts.prefix + formatNumber(current) + newParts.suffix;
+        if (frame >= totalFrames) {
+          clearInterval(counter);
+          this.display = newStr;
+          setTimeout(() => {
+            this.counting = false;
+          }, 300);
+        }
+      }, 1000 / frameRate);
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/AnimatedValue.vue?vue&type=script&lang=js
+ /* harmony default export */ var components_AnimatedValuevue_type_script_lang_js = (AnimatedValuevue_type_script_lang_js); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./components/AnimatedValue.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(56)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_AnimatedValuevue_type_script_lang_js,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "f5293d52",
+  "3e049d5e"
+  
+)
+
+/* harmony default export */ var AnimatedValue = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ 51:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ 52:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-8411a820]{min-height:100vh}.dashboard-wrapper[data-v-8411a820],.sidenav[data-v-8411a820]{background-color:var(--bg-sidenav)}.sidenav[data-v-8411a820]{border-right:1px solid var(--border-color);width:260px}.sidenav li>a[data-v-8411a820]{align-items:center;display:flex;height:auto;line-height:1.3;min-height:48px;padding:10px 32px}.sidenav li>a>i.material-icons[data-v-8411a820]{flex-shrink:0;height:auto;line-height:1.3}.theme-toggle-container[data-v-8411a820]{padding:0 16px}.main-content[data-v-8411a820]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-8411a820]{border-radius:12px;position:relative}.icon-circle[data-v-8411a820]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-8411a820]{font-size:24px;font-weight:700}.stats-text p[data-v-8411a820]{font-size:12px;margin:0}.badge[data-v-8411a820]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-8411a820]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-8411a820]{font-size:11px;margin-bottom:5px}.border-right[data-v-8411a820]{border-right:1px solid var(--border-color)}.tabs[data-v-8411a820]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-8411a820]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-8411a820]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-8411a820]{padding-left:20px}}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -2322,172 +2678,19 @@ for(var k in plugins){if(plugins.hasOwnProperty(k)){core_controller.plugins.regi
 
 /***/ }),
 
-/***/ 46:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/AnimatedValue.vue?vue&type=template&id=f5293d52&scoped=true
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('span', {
-    class: {
-      counting: _vm.counting
-    }
-  }, [_vm._ssrNode(_vm._ssrEscape(_vm._s(_vm.display)))]);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/AnimatedValue.vue?vue&type=template&id=f5293d52&scoped=true
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/AnimatedValue.vue?vue&type=script&lang=js
-/* harmony default export */ var AnimatedValuevue_type_script_lang_js = ({
-  name: 'AnimatedValue',
-  props: {
-    value: {
-      type: [String, Number],
-      required: true
-    }
-  },
-  data() {
-    return {
-      display: '',
-      counting: false
-    };
-  },
-  watch: {
-    value(newVal, oldVal) {
-      this.animate(oldVal === undefined ? '' : oldVal.toString(), newVal.toString());
-    }
-  },
-  mounted() {
-    this.display = this.value.toString();
-  },
-  methods: {
-    animate(oldStr, newStr) {
-      const parseParts = str => {
-        const m = str.match(/([^0-9.,-]*)([-\d.,]+)(.*)/);
-        if (m) return {
-          prefix: m[1],
-          num: m[2],
-          suffix: m[3]
-        };
-        return {
-          prefix: '',
-          num: str,
-          suffix: ''
-        };
-      };
-      const formatNumber = n => {
-        // determine decimal length from newStr
-        const decMatch = newStr.match(/\.(\d+)/);
-        const decimals = decMatch ? decMatch[1].length : 0;
-        return n.toLocaleString(undefined, {
-          minimumFractionDigits: decimals,
-          maximumFractionDigits: decimals
-        });
-      };
-      const oldParts = parseParts(oldStr);
-      const newParts = parseParts(newStr);
-      const start = parseFloat(oldParts.num.replace(/,/g, '')) || 0;
-      const end = parseFloat(newParts.num.replace(/,/g, '')) || 0;
-      const duration = 1000;
-      const frameRate = 60;
-      const totalFrames = Math.round(duration / (1000 / frameRate));
-      let frame = 0;
-      this.counting = true;
-      const counter = setInterval(() => {
-        frame++;
-        const progress = frame / totalFrames;
-        const current = start + (end - start) * progress;
-        this.display = oldParts.prefix + formatNumber(current) + newParts.suffix;
-        if (frame >= totalFrames) {
-          clearInterval(counter);
-          this.display = newStr;
-          setTimeout(() => {
-            this.counting = false;
-          }, 300);
-        }
-      }, 1000 / frameRate);
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/AnimatedValue.vue?vue&type=script&lang=js
- /* harmony default export */ var components_AnimatedValuevue_type_script_lang_js = (AnimatedValuevue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./components/AnimatedValue.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(51)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_AnimatedValuevue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "f5293d52",
-  "3e049d5e"
-  
-)
-
-/* harmony default export */ var AnimatedValue = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ 47:
+/***/ 56:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 48:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-2c494de8]{min-height:100vh}.dashboard-wrapper[data-v-2c494de8],.sidenav[data-v-2c494de8]{background-color:var(--bg-sidenav)}.sidenav[data-v-2c494de8]{border-right:1px solid var(--border-color);width:260px}.theme-toggle-container[data-v-2c494de8]{padding:0 16px}.main-content[data-v-2c494de8]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-2c494de8]{border-radius:12px;position:relative}.icon-circle[data-v-2c494de8]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-2c494de8]{font-size:24px;font-weight:700}.stats-text p[data-v-2c494de8]{font-size:12px;margin:0}.badge[data-v-2c494de8]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-2c494de8]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-2c494de8]{font-size:11px;margin-bottom:5px}.border-right[data-v-2c494de8]{border-right:1px solid var(--border-color)}.tabs[data-v-2c494de8]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-2c494de8]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-2c494de8]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-2c494de8]{padding-left:20px}}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 51:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(49);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 52:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2502,13 +2705,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 60:
+/***/ 71:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(72);
+var content = __webpack_require__(85);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -2520,19 +2723,19 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 71:
+/***/ 84:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_dt_availability_vue_vue_type_style_index_0_id_4b5060be_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(60);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_dt_availability_vue_vue_type_style_index_0_id_4b5060be_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(71);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_dt_availability_vue_vue_type_style_index_0_id_4b5060be_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_dt_availability_vue_vue_type_style_index_0_id_4b5060be_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_dt_availability_vue_vue_type_style_index_0_id_4b5060be_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_dt_availability_vue_vue_type_style_index_0_id_4b5060be_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 72:
+/***/ 85:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2543,204 +2746,6 @@ ___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-4b5060be]{bac
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 88:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/dt_availability.vue?vue&type=template&id=4b5060be&scoped=true
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', {
-    staticClass: "dashboard-wrapper"
-  }, [_c('SideNav'), _vm._ssrNode(" "), _vm._ssrNode("<main class=\"main-content\" data-v-4b5060be>", "</main>", [_vm._ssrNode("<div class=\"row header-row\" style=\"margin-bottom: 0;\" data-v-4b5060be><div class=\"col s12\" data-v-4b5060be><h5 class=\"avail-title\" data-v-4b5060be>DT Availability Dashboard</h5> <ul class=\"tabs\" data-v-4b5060be><li class=\"tab\" data-v-4b5060be><a href=\"#dt-dashboard\" class=\"active tab-link dashboard-tab\" data-v-4b5060be><i class=\"material-icons tiny tab-icon\" data-v-4b5060be>speed</i> Dashboard\n                        </a></li> <li class=\"tab\" data-v-4b5060be><a href=\"#dt-table\" class=\"tab-link table-tab\" data-v-4b5060be><i class=\"material-icons tiny tab-icon\" data-v-4b5060be>apps</i> DT Availability Table\n                        </a></li></ul></div></div> "), _vm._ssrNode("<div id=\"dt-dashboard\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"row filter-row\" data-v-4b5060be><div class=\"col s3 offset-s9\" data-v-4b5060be><div class=\"filter-pill\" data-v-4b5060be><span class=\"filter-label\" data-v-4b5060be>DT Name</span> <i class=\"material-icons filter-arrow\" data-v-4b5060be>arrow_drop_down</i></div></div></div> "), _vm._ssrNode("<div class=\"row\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"col s12 m4\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"row\" style=\"margin-bottom: 0;\" data-v-4b5060be><div class=\"col s6\" style=\"padding: 0 6px 0 0;\" data-v-4b5060be><div class=\"card-panel metric-card\" data-v-4b5060be><p class=\"metric-label\" data-v-4b5060be>DT Target Availability (Hrs)</p> <p class=\"metric-value\" data-v-4b5060be>" + _vm._ssrEscape(_vm._s(_vm.dt_target_availability)) + "</p></div></div> <div class=\"col s6\" style=\"padding: 0 0 0 6px;\" data-v-4b5060be><div class=\"card-panel metric-card\" data-v-4b5060be><p class=\"metric-label\" data-v-4b5060be>Feeder Target Availability(Hrs)</p> <p class=\"metric-value\" data-v-4b5060be>" + _vm._ssrEscape(_vm._s(_vm.feeder_target_availability)) + "</p></div></div></div> "), _vm._ssrNode("<div class=\"row\" style=\"margin-bottom: 0;\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"col s6\" style=\"padding: 0 6px 0 0;\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"card-panel metric-card\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<p class=\"metric-label\" data-v-4b5060be>DT Actual Availability (Hrs)</p> "), _vm._ssrNode("<p class=\"metric-value green-value\" data-v-4b5060be>", "</p>", [_c('AnimatedValue', {
-    attrs: {
-      "value": _vm.dt_actual_availability
-    }
-  })], 1)], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s6\" style=\"padding: 0 0 0 6px;\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"card-panel metric-card\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<p class=\"metric-label\" data-v-4b5060be>Feeder Actual Availability (Hrs)</p> "), _vm._ssrNode("<p class=\"metric-value green-value\" data-v-4b5060be>", "</p>", [_c('AnimatedValue', {
-    staticClass: "value",
-    attrs: {
-      "value": _vm.feeder_actual_availability
-    }
-  })], 1)], 2)])], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"row\" style=\"margin-bottom: 0;\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"col s6\" style=\"padding: 0 6px 0 0;\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<div class=\"card-panel metric-card\" data-v-4b5060be>", "</div>", [_vm._ssrNode("<p class=\"metric-label\" data-v-4b5060be>Availability Rate(%)</p> "), _vm._ssrNode("<p class=\"metric-value green-value\" data-v-4b5060be>", "</p>", [_c('AnimatedValue', {
-    attrs: {
-      "value": _vm.dt_availability_rate
-    }
-  })], 1)], 2)]), _vm._ssrNode(" <div class=\"col s6\" style=\"padding: 0 0 0 6px;\" data-v-4b5060be><div class=\"card-panel metric-card\" data-v-4b5060be><p class=\"metric-label\" data-v-4b5060be>Availability Rate(%)</p> <p class=\"metric-value green-value\" data-v-4b5060be>" + _vm._ssrEscape(_vm._s(_vm.feeder_availability_status)) + "</p></div></div>")], 2)], 2), _vm._ssrNode(" <div class=\"col s12 m8\" data-v-4b5060be><div class=\"card-panel trend-card\" data-v-4b5060be><div class=\"trend-header\" data-v-4b5060be><span class=\"trend-title\" data-v-4b5060be>Availability Trend</span> <div class=\"chart-tabs\" data-v-4b5060be><span" + _vm._ssrClass("chart-tab", {
-    active: _vm.trendTab === 'Day'
-  }) + " data-v-4b5060be>Day</span> <span" + _vm._ssrClass("chart-tab", {
-    active: _vm.trendTab === 'Week'
-  }) + " data-v-4b5060be>Week</span> <span" + _vm._ssrClass("chart-tab", {
-    active: _vm.trendTab === 'Month'
-  }) + " data-v-4b5060be>Month</span> <span class=\"chart-icon-btn\" data-v-4b5060be><i class=\"material-icons tiny\" data-v-4b5060be>calendar_today</i></span></div></div> <div class=\"chart-callout-wrap\" data-v-4b5060be><div style=\"position: relative; height: 250px;\" data-v-4b5060be><canvas id=\"availabilityChart\" data-v-4b5060be></canvas></div> <div class=\"chart-callout\" style=\"left: 58%; top: 20px;\" data-v-4b5060be><span class=\"callout-title\" data-v-4b5060be>July 16</span> <span class=\"callout-value\" data-v-4b5060be>21.5</span></div></div> <div class=\"trend-legend\" data-v-4b5060be><span class=\"legend-item\" data-v-4b5060be><span class=\"legend-ring green-ring\" data-v-4b5060be></span> <span class=\"legend-text\" data-v-4b5060be>Average Availability</span></span> <span class=\"legend-item\" data-v-4b5060be><span class=\"legend-ring blue-ring\" data-v-4b5060be></span> <span class=\"legend-text\" data-v-4b5060be>Average Target</span></span></div></div></div>")], 2)], 2), _vm._ssrNode(" <div id=\"dt-table\" data-v-4b5060be><div class=\"row filter-row\" data-v-4b5060be><div class=\"col s3 offset-s6\" data-v-4b5060be><div class=\"filter-pill\" data-v-4b5060be><span class=\"filter-label\" data-v-4b5060be>All DTs</span> <i class=\"material-icons filter-arrow\" data-v-4b5060be>arrow_drop_down</i></div></div> <div class=\"col s3\" data-v-4b5060be><div class=\"filter-pill\" data-v-4b5060be><span class=\"filter-label\" data-v-4b5060be>Date</span> <i class=\"material-icons filter-arrow\" style=\"font-size:18px;\" data-v-4b5060be>calendar_today</i></div></div></div> <div class=\"table-wrapper\" data-v-4b5060be><table class=\"dt-table\" data-v-4b5060be><thead data-v-4b5060be><tr data-v-4b5060be><th data-v-4b5060be>Date</th> <th data-v-4b5060be>DT Name</th> <th data-v-4b5060be>Name_Of_Feeder</th> <th data-v-4b5060be>Band</th> <th data-v-4b5060be>Consumption</th> <th data-v-4b5060be>DT Actual Availability</th></tr></thead> <tbody data-v-4b5060be>" + _vm._ssrList(_vm.dt_availability_rows, function (row, i) {
-    return "<tr data-v-4b5060be><td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.date)) + "</td> <td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.dt_name)) + "</td> <td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.feeder_name)) + "</td> <td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.band)) + "</td> <td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.consumption)) + "</td> <td data-v-4b5060be>" + _vm._ssrEscape(_vm._s(row.availability)) + "</td></tr>";
-  }) + "</tbody></table></div></div>")], 2)], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./pages/dt_availability.vue?vue&type=template&id=4b5060be&scoped=true
-
-// EXTERNAL MODULE: ./assets/js/Chart.js
-var Chart = __webpack_require__(44);
-var Chart_default = /*#__PURE__*/__webpack_require__.n(Chart);
-
-// EXTERNAL MODULE: ./components/SideNav/SideNav.vue + 4 modules
-var SideNav = __webpack_require__(40);
-
-// EXTERNAL MODULE: ./components/AnimatedValue.vue + 4 modules
-var AnimatedValue = __webpack_require__(46);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/dt_availability.vue?vue&type=script&lang=js
-
-
-
-// UI-first rebuild to match the Figma "DT Availability Dashboard" screen exactly. Data below is
-// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
-// the backend team ships the matching endpoint shape.
-
-/* harmony default export */ var dt_availabilityvue_type_script_lang_js = ({
-  components: {
-    SideNav: SideNav["default"],
-    AnimatedValue: AnimatedValue["default"]
-  },
-  data() {
-    return {
-      trendTab: 'Month',
-      dt_target_availability: '20.00',
-      feeder_target_availability: '20.00',
-      dt_actual_availability: '22.03',
-      feeder_actual_availability: '20.03',
-      dt_availability_rate: '110.16',
-      feeder_availability_status: 'Exceeded',
-      dt_availability_rows: Array.from({
-        length: 8
-      }, () => ({
-        date: '07/01/2026',
-        dt_name: '11-OgudulNJ-T1Ogudu-94 VICTORIA STREET CSP',
-        feeder_name: '11-OgudulNJ-T1-Ogudu',
-        band: 'A',
-        consumption: '10.90',
-        availability: '19.35'
-      })),
-      trendChart: null
-    };
-  },
-  methods: {
-    renderTrendChart() {
-      const canvas = document.getElementById('availabilityChart');
-      if (!canvas) return;
-      if (this.trendChart) this.trendChart.destroy();
-      this.trendChart = new Chart_default.a(canvas.getContext('2d'), {
-        type: 'line',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          datasets: [{
-            label: 'Average Availability',
-            data: [21, 20.5, 19, 21, 22.5, 24, 22.5, 20, 19.5, 21.5, 23, 22.5],
-            borderColor: '#4ecb71',
-            backgroundColor: 'rgba(78,203,113,0.08)',
-            pointBackgroundColor: '#4ecb71',
-            pointBorderColor: '#fff',
-            pointRadius: 6,
-            pointBorderWidth: 2,
-            borderWidth: 2,
-            tension: 0.4,
-            fill: false
-          }, {
-            label: 'Average Target',
-            data: Array(12).fill(20),
-            borderColor: '#5b7cfa',
-            backgroundColor: 'rgba(91,124,250,0.08)',
-            pointBackgroundColor: '#5b7cfa',
-            pointBorderColor: '#fff',
-            pointRadius: 6,
-            pointBorderWidth: 2,
-            borderWidth: 2,
-            tension: 0.4,
-            fill: false
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-          tooltips: {
-            mode: 'index',
-            intersect: false,
-            backgroundColor: '#fff',
-            titleFontColor: '#9b9faa',
-            bodyFontColor: '#222',
-            bodyFontStyle: 'bold',
-            borderColor: '#eee',
-            borderWidth: 1
-          },
-          scales: {
-            yAxes: [{
-              gridLines: {
-                color: 'rgba(0,0,0,0.05)'
-              }
-            }],
-            xAxes: [{
-              gridLines: {
-                color: 'rgba(0,0,0,0.05)',
-                borderDash: [4, 4]
-              }
-            }]
-          }
-        }
-      });
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.renderTrendChart();
-      const el = document.querySelector('.tabs');
-      if (el) M.Tabs.init(el, {});
-    });
-  }
-});
-// CONCATENATED MODULE: ./pages/dt_availability.vue?vue&type=script&lang=js
- /* harmony default export */ var pages_dt_availabilityvue_type_script_lang_js = (dt_availabilityvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./pages/dt_availability.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(71)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  pages_dt_availabilityvue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "4b5060be",
-  "42b7be06"
-  
-)
-
-/* harmony default export */ var dt_availability = __webpack_exports__["default"] = (component.exports);
-
-/* nuxt-component-imports */
-installComponents(component, {SideNav: __webpack_require__(40).default,AnimatedValue: __webpack_require__(46).default})
 
 
 /***/ })

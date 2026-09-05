@@ -9,6 +9,8 @@ import '../assets/css/materialize.css'
 
 import '../assets/css/style.css'
 
+import '../node_modules/leaflet/dist/leaflet.css'
+
 import _4df9051f from '../layouts/admin_main.vue'
 import _6f6c098b from '../layouts/default.vue'
 import _2d26a6af from '../layouts/main.vue'

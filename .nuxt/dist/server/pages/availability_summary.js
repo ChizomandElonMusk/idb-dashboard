@@ -1,7 +1,296 @@
-exports.ids = [13,3,10,12];
+exports.ids = [14,3,11,13];
 exports.modules = {
 
-/***/ 38:
+/***/ 103:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/availability_summary.vue?vue&type=template&id=609c0b5c&scoped=true
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "dashboard-wrapper"
+  }, [_c('SideNav'), _vm._ssrNode(" "), _vm._ssrNode("<main class=\"main-content\" data-v-609c0b5c>", "</main>", [_vm._ssrNode("<div class=\"avail-header\" data-v-609c0b5c><h5 class=\"avail-title\" data-v-609c0b5c>Availability Summary</h5> <div class=\"avail-filters\" data-v-609c0b5c><div class=\"filter-input\" data-v-609c0b5c><span class=\"filter-label\" data-v-609c0b5c>Date</span> <i class=\"material-icons filter-icon\" data-v-609c0b5c>calendar_today</i></div> <div class=\"filter-input\" data-v-609c0b5c><span class=\"filter-label\" data-v-609c0b5c>Feeder Band</span> <i class=\"material-icons filter-icon\" data-v-609c0b5c>arrow_drop_down</i></div> <div class=\"filter-input\" data-v-609c0b5c><span class=\"filter-label\" data-v-609c0b5c>Business Unit</span> <i class=\"material-icons filter-icon\" data-v-609c0b5c>arrow_drop_down</i></div></div></div> "), _vm._ssrNode("<div class=\"row\" data-v-609c0b5c>", "</div>", [_vm._ssrNode("<div class=\"col s12 m4\" data-v-609c0b5c>", "</div>", [_vm._ssrNode("<div class=\"card-panel avail-card\" data-v-609c0b5c>", "</div>", [_vm._ssrNode("<p class=\"avail-card-title center-align\" data-v-609c0b5c>Feeders Availability Status</p> "), _c('ChartPie', {
+    attrs: {
+      "chart-type": "doughnut",
+      "chart-data": _vm.feedersAvailData,
+      "chart-options": _vm.doughnutOptions,
+      "center-text": "392",
+      "show-value-legend": true,
+      "legend-cols": 1
+    }
+  })], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m4\" data-v-609c0b5c>", "</div>", [_vm._ssrNode("<div class=\"card-panel avail-card\" data-v-609c0b5c>", "</div>", [_vm._ssrNode("<p class=\"avail-card-title center-align\" data-v-609c0b5c>Total DTs</p> "), _c('ChartPie', {
+    attrs: {
+      "chart-type": "doughnut",
+      "chart-data": _vm.totalDtsData,
+      "chart-options": _vm.doughnutOptions,
+      "center-text": "5,390",
+      "show-value-legend": true,
+      "legend-cols": 1
+    }
+  })], 2)]), _vm._ssrNode(" <div class=\"col s12 m4\" data-v-609c0b5c><div class=\"card-panel avail-card\" data-v-609c0b5c><p class=\"avail-card-title center-align\" data-v-609c0b5c>DT Availability Status</p> <div class=\"dt-status-row\" data-v-609c0b5c><div class=\"dt-status-chart\" data-v-609c0b5c><canvas id=\"dtAvailChart\" data-v-609c0b5c></canvas></div> <div class=\"dt-status-legend\" data-v-609c0b5c><span class=\"dt-status-legend-item\" data-v-609c0b5c><span class=\"legend-dot\" style=\"background:#1a2b5c;\" data-v-609c0b5c></span> Met</span> <span class=\"dt-status-legend-item\" data-v-609c0b5c><span class=\"legend-dot\" style=\"background:#c0392b;\" data-v-609c0b5c></span> Not Met</span></div></div></div></div>")], 2), _vm._ssrNode(" <div class=\"row\" data-v-609c0b5c><div class=\"col s12 m6\" data-v-609c0b5c><div class=\"card-panel avail-card\" data-v-609c0b5c><p class=\"avail-card-title center-align\" data-v-609c0b5c>Feeders By Business Unit</p> <div style=\"position: relative; height: 220px;\" data-v-609c0b5c><canvas id=\"feedersByBuChart\" data-v-609c0b5c></canvas></div></div></div> <div class=\"col s12 m6\" data-v-609c0b5c><div class=\"card-panel avail-card\" data-v-609c0b5c><p class=\"avail-card-title center-align\" data-v-609c0b5c>DTs By Business Units</p> <div style=\"position: relative; height: 220px;\" data-v-609c0b5c><canvas id=\"dtsByBuChart\" data-v-609c0b5c></canvas></div></div></div></div>")], 2)], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./pages/availability_summary.vue?vue&type=template&id=609c0b5c&scoped=true
+
+// EXTERNAL MODULE: ./components/SideNav/SideNav.vue + 4 modules
+var SideNav = __webpack_require__(47);
+
+// EXTERNAL MODULE: ./components/ChartPie.vue + 4 modules
+var ChartPie = __webpack_require__(55);
+
+// EXTERNAL MODULE: ./assets/js/Chart.js
+var Chart = __webpack_require__(54);
+var Chart_default = /*#__PURE__*/__webpack_require__.n(Chart);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/availability_summary.vue?vue&type=script&lang=js
+
+
+
+// UI-first rebuild to match the Figma "Availability Summary" screen exactly. Data below is
+// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
+// the backend team ships the matching endpoint shape.
+
+const valueLabelPlugin = {
+  afterDatasetsDraw(chart) {
+    const ctx = chart.ctx;
+    chart.data.datasets.forEach((dataset, i) => {
+      const meta = chart.getDatasetMeta(i);
+      if (meta.hidden) return;
+      meta.data.forEach((bar, index) => {
+        const value = dataset.data[index];
+        const model = bar._model;
+        ctx.save();
+        ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ececf2' : '#333';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(value.toLocaleString(), model.x, model.y - 3);
+        ctx.restore();
+      });
+    });
+  }
+};
+const horizontalValueLabelPlugin = {
+  afterDatasetsDraw(chart) {
+    const ctx = chart.ctx;
+    chart.data.datasets.forEach((dataset, i) => {
+      const meta = chart.getDatasetMeta(i);
+      if (meta.hidden) return;
+      meta.data.forEach((bar, index) => {
+        const value = dataset.data[index];
+        const model = bar._model;
+        ctx.save();
+        ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ececf2' : '#333';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(value.toLocaleString(), model.x + 8, model.y);
+        ctx.restore();
+      });
+    });
+  }
+};
+/* harmony default export */ var availability_summaryvue_type_script_lang_js = ({
+  components: {
+    SideNav: SideNav["default"],
+    ChartPie: ChartPie["default"]
+  },
+  data() {
+    return {
+      feedersAvailData: {
+        labels: ['Met', 'Not Met'],
+        datasets: [{
+          data: [256, 136],
+          backgroundColor: ['#1a2b5c', '#c0392b']
+        }]
+      },
+      totalDtsData: {
+        labels: ['Public DTs', 'Private DTs'],
+        datasets: [{
+          data: [5113, 188],
+          backgroundColor: ['#7b8cf0', '#8de8c5']
+        }]
+      },
+      doughnutOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutoutPercentage: 70,
+        legend: {
+          display: false
+        }
+      },
+      barCharts: []
+    };
+  },
+  methods: {
+    initCharts() {
+      this.barCharts.forEach(chart => chart && chart.destroy());
+      this.barCharts = [];
+      const statusCanvas = document.getElementById('dtAvailChart');
+      if (statusCanvas) {
+        this.barCharts.push(new Chart_default.a(statusCanvas.getContext('2d'), {
+          type: 'bar',
+          data: {
+            labels: ['Private DTs', 'Public DTs'],
+            datasets: [{
+              label: 'Met',
+              data: [150, 2639],
+              backgroundColor: '#1a2b5c'
+            }, {
+              label: 'Not Met',
+              data: [38, 2494],
+              backgroundColor: '#c0392b'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+              display: false
+            },
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  display: false
+                }
+              }],
+              yAxes: [{
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          },
+          plugins: [valueLabelPlugin]
+        }));
+      }
+      const feedersByBuCanvas = document.getElementById('feedersByBuChart');
+      if (feedersByBuCanvas) {
+        this.barCharts.push(new Chart_default.a(feedersByBuCanvas.getContext('2d'), {
+          type: 'horizontalBar',
+          data: {
+            labels: ['Ikeja', 'Akowonjo', 'Oshodi', 'Ikorodu', 'Shomolu', 'Abule Egba'],
+            datasets: [{
+              data: [3719, 3446, 2870, 2724, 2447, 1844],
+              backgroundColor: '#f5a623'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+              display: false
+            },
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  display: false,
+                  suggestedMax: 4300
+                }
+              }],
+              yAxes: [{
+                gridLines: {
+                  display: false
+                }
+              }]
+            }
+          },
+          plugins: [horizontalValueLabelPlugin]
+        }));
+      }
+      const dtsByBuCanvas = document.getElementById('dtsByBuChart');
+      if (dtsByBuCanvas) {
+        this.barCharts.push(new Chart_default.a(dtsByBuCanvas.getContext('2d'), {
+          type: 'horizontalBar',
+          data: {
+            labels: ['Oshodi', 'Shomolu', 'Ikeja', 'Akowonjo', 'Ikorodu', 'Abule Egba'],
+            datasets: [{
+              data: [83, 82, 74, 71, 60, 41],
+              backgroundColor: '#a13a3a'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+              display: false
+            },
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  display: false,
+                  suggestedMax: 95
+                }
+              }],
+              yAxes: [{
+                gridLines: {
+                  display: false
+                }
+              }]
+            }
+          },
+          plugins: [horizontalValueLabelPlugin]
+        }));
+      }
+    }
+  },
+  mounted() {
+    this.$nextTick(() => this.initCharts());
+  }
+});
+// CONCATENATED MODULE: ./pages/availability_summary.vue?vue&type=script&lang=js
+ /* harmony default export */ var pages_availability_summaryvue_type_script_lang_js = (availability_summaryvue_type_script_lang_js); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./pages/availability_summary.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(80)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  pages_availability_summaryvue_type_script_lang_js,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "609c0b5c",
+  "382ffdd4"
+  
+)
+
+/* harmony default export */ var availability_summary = __webpack_exports__["default"] = (component.exports);
+
+/* nuxt-component-imports */
+installComponents(component, {SideNav: __webpack_require__(47).default,ChartPie: __webpack_require__(55).default})
+
+
+/***/ }),
+
+/***/ 45:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78,39 +367,39 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 39:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(48);
+var content = __webpack_require__(52);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(4).default
 module.exports.__inject__ = function (context) {
-  add("75e2181a", content, true, context)
+  add("3fada58a", content, true, context)
 };
 
 /***/ }),
 
-/***/ 40:
+/***/ 47:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=template&id=2c494de8&scoped=true
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=template&id=8411a820&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-2c494de8>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-2c494de8><img" + _vm._ssrAttr("src", __webpack_require__(41)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-2c494de8></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-2c494de8>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
+  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-8411a820>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-8411a820><img" + _vm._ssrAttr("src", __webpack_require__(48)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-8411a820></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-8411a820>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
     return _vm._ssrNode("<li" + _vm._ssrClass(null, {
       active: _vm.isActive(item)
-    }) + " data-v-2c494de8>", "</li>", [_c('nuxt-link', {
+    }) + " data-v-8411a820>", "</li>", [_c('nuxt-link', {
       class: {
         'red-text text-darken-2': _vm.isActive(item)
       },
@@ -125,7 +414,7 @@ var render = function render() {
         "font-size": "10px"
       }
     }, [_vm._v("\n                    " + _vm._s(item.title) + "\n                ")])])], 1);
-  }), _vm._ssrNode(" "), _vm._ssrNode("<li data-v-2c494de8>", "</li>", [_c('nuxt-link', {
+  }), _vm._ssrNode(" "), _vm._ssrNode("<li data-v-8411a820>", "</li>", [_c('nuxt-link', {
     staticClass: "red-text",
     attrs: {
       "to": "/"
@@ -141,10 +430,10 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=template&id=2c494de8&scoped=true
+// CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=template&id=8411a820&scoped=true
 
 // EXTERNAL MODULE: ./components/ThemeToggle.vue + 4 modules
-var ThemeToggle = __webpack_require__(38);
+var ThemeToggle = __webpack_require__(45);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=script&lang=js
 
@@ -155,10 +444,15 @@ var ThemeToggle = __webpack_require__(38);
   },
   data() {
     return {
-      menuItems: [
-      // { title: 'End-To-End Energy Dashboard', icon: 'dashboard' },
-      // { title: 'Energy Flow Diagram', icon: 'dashboard' },
-      {
+      menuItems: [{
+        title: 'End-To-End Energy Dashboard',
+        icon: 'dashboard',
+        url: '/end_to_end_energy_dashboard'
+      }, {
+        title: 'Energy Flow Diagram',
+        icon: 'dashboard',
+        url: '/energy_flow_diagram'
+      }, {
         title: 'Control Center Dashboard',
         icon: 'dashboard',
         url: '/control_center_dashboard'
@@ -202,7 +496,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(47)
+  var style0 = __webpack_require__(51)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -215,7 +509,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "2c494de8",
+  "8411a820",
   "0f3f648e"
   
 )
@@ -223,25 +517,52 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var SideNav = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {ThemeToggle: __webpack_require__(38).default})
+installComponents(component, {ThemeToggle: __webpack_require__(45).default})
 
 
 /***/ }),
 
-/***/ 41:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/logo.d2f3c61.png";
 
 /***/ }),
 
-/***/ 42:
+/***/ 51:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ 52:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-8411a820]{min-height:100vh}.dashboard-wrapper[data-v-8411a820],.sidenav[data-v-8411a820]{background-color:var(--bg-sidenav)}.sidenav[data-v-8411a820]{border-right:1px solid var(--border-color);width:260px}.sidenav li>a[data-v-8411a820]{align-items:center;display:flex;height:auto;line-height:1.3;min-height:48px;padding:10px 32px}.sidenav li>a>i.material-icons[data-v-8411a820]{flex-shrink:0;height:auto;line-height:1.3}.theme-toggle-container[data-v-8411a820]{padding:0 16px}.main-content[data-v-8411a820]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-8411a820]{border-radius:12px;position:relative}.icon-circle[data-v-8411a820]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-8411a820]{font-size:24px;font-weight:700}.stats-text p[data-v-8411a820]{font-size:12px;margin:0}.badge[data-v-8411a820]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-8411a820]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-8411a820]{font-size:11px;margin-bottom:5px}.border-right[data-v-8411a820]{border-right:1px solid var(--border-color)}.tabs[data-v-8411a820]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-8411a820]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-8411a820]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-8411a820]{padding-left:20px}}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 53:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(50);
+var content = __webpack_require__(59);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -253,7 +574,7 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 44:
+/***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -2322,7 +2643,7 @@ for(var k in plugins){if(plugins.hasOwnProperty(k)){core_controller.plugins.regi
 
 /***/ }),
 
-/***/ 45:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2348,7 +2669,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/ChartPie.vue?vue&type=template&id=126592f8&scoped=true
 
 // EXTERNAL MODULE: ./assets/js/Chart.js
-var Chart = __webpack_require__(44);
+var Chart = __webpack_require__(54);
 var Chart_default = /*#__PURE__*/__webpack_require__.n(Chart);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ChartPie.vue?vue&type=script&lang=js
@@ -2434,7 +2755,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(49)
+  var style0 = __webpack_require__(58)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2456,46 +2777,19 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 47:
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 48:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-2c494de8]{min-height:100vh}.dashboard-wrapper[data-v-2c494de8],.sidenav[data-v-2c494de8]{background-color:var(--bg-sidenav)}.sidenav[data-v-2c494de8]{border-right:1px solid var(--border-color);width:260px}.theme-toggle-container[data-v-2c494de8]{padding:0 16px}.main-content[data-v-2c494de8]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-2c494de8]{border-radius:12px;position:relative}.icon-circle[data-v-2c494de8]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-2c494de8]{font-size:24px;font-weight:700}.stats-text p[data-v-2c494de8]{font-size:12px;margin:0}.badge[data-v-2c494de8]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-2c494de8]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-2c494de8]{font-size:11px;margin-bottom:5px}.border-right[data-v-2c494de8]{border-right:1px solid var(--border-color)}.tabs[data-v-2c494de8]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-2c494de8]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-2c494de8]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-2c494de8]{padding-left:20px}}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 49:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(53);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 50:
+/***/ 59:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2510,13 +2804,13 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 58:
+/***/ 69:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(68);
+var content = __webpack_require__(81);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -2528,19 +2822,19 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 67:
+/***/ 80:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_availability_summary_vue_vue_type_style_index_0_id_609c0b5c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(58);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_availability_summary_vue_vue_type_style_index_0_id_609c0b5c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(69);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_availability_summary_vue_vue_type_style_index_0_id_609c0b5c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_availability_summary_vue_vue_type_style_index_0_id_609c0b5c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_availability_summary_vue_vue_type_style_index_0_id_609c0b5c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_availability_summary_vue_vue_type_style_index_0_id_609c0b5c_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 68:
+/***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2551,295 +2845,6 @@ ___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-609c0b5c]{bac
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 86:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/availability_summary.vue?vue&type=template&id=609c0b5c&scoped=true
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', {
-    staticClass: "dashboard-wrapper"
-  }, [_c('SideNav'), _vm._ssrNode(" "), _vm._ssrNode("<main class=\"main-content\" data-v-609c0b5c>", "</main>", [_vm._ssrNode("<div class=\"avail-header\" data-v-609c0b5c><h5 class=\"avail-title\" data-v-609c0b5c>Availability Summary</h5> <div class=\"avail-filters\" data-v-609c0b5c><div class=\"filter-input\" data-v-609c0b5c><span class=\"filter-label\" data-v-609c0b5c>Date</span> <i class=\"material-icons filter-icon\" data-v-609c0b5c>calendar_today</i></div> <div class=\"filter-input\" data-v-609c0b5c><span class=\"filter-label\" data-v-609c0b5c>Feeder Band</span> <i class=\"material-icons filter-icon\" data-v-609c0b5c>arrow_drop_down</i></div> <div class=\"filter-input\" data-v-609c0b5c><span class=\"filter-label\" data-v-609c0b5c>Business Unit</span> <i class=\"material-icons filter-icon\" data-v-609c0b5c>arrow_drop_down</i></div></div></div> "), _vm._ssrNode("<div class=\"row\" data-v-609c0b5c>", "</div>", [_vm._ssrNode("<div class=\"col s12 m4\" data-v-609c0b5c>", "</div>", [_vm._ssrNode("<div class=\"card-panel avail-card\" data-v-609c0b5c>", "</div>", [_vm._ssrNode("<p class=\"avail-card-title center-align\" data-v-609c0b5c>Feeders Availability Status</p> "), _c('ChartPie', {
-    attrs: {
-      "chart-type": "doughnut",
-      "chart-data": _vm.feedersAvailData,
-      "chart-options": _vm.doughnutOptions,
-      "center-text": "392",
-      "show-value-legend": true,
-      "legend-cols": 1
-    }
-  })], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m4\" data-v-609c0b5c>", "</div>", [_vm._ssrNode("<div class=\"card-panel avail-card\" data-v-609c0b5c>", "</div>", [_vm._ssrNode("<p class=\"avail-card-title center-align\" data-v-609c0b5c>Total DTs</p> "), _c('ChartPie', {
-    attrs: {
-      "chart-type": "doughnut",
-      "chart-data": _vm.totalDtsData,
-      "chart-options": _vm.doughnutOptions,
-      "center-text": "5,390",
-      "show-value-legend": true,
-      "legend-cols": 1
-    }
-  })], 2)]), _vm._ssrNode(" <div class=\"col s12 m4\" data-v-609c0b5c><div class=\"card-panel avail-card\" data-v-609c0b5c><p class=\"avail-card-title center-align\" data-v-609c0b5c>DT Availability Status</p> <div class=\"dt-status-row\" data-v-609c0b5c><div class=\"dt-status-chart\" data-v-609c0b5c><canvas id=\"dtAvailChart\" data-v-609c0b5c></canvas></div> <div class=\"dt-status-legend\" data-v-609c0b5c><span class=\"dt-status-legend-item\" data-v-609c0b5c><span class=\"legend-dot\" style=\"background:#1a2b5c;\" data-v-609c0b5c></span> Met</span> <span class=\"dt-status-legend-item\" data-v-609c0b5c><span class=\"legend-dot\" style=\"background:#c0392b;\" data-v-609c0b5c></span> Not Met</span></div></div></div></div>")], 2), _vm._ssrNode(" <div class=\"row\" data-v-609c0b5c><div class=\"col s12 m6\" data-v-609c0b5c><div class=\"card-panel avail-card\" data-v-609c0b5c><p class=\"avail-card-title center-align\" data-v-609c0b5c>Feeders By Business Unit</p> <div style=\"position: relative; height: 220px;\" data-v-609c0b5c><canvas id=\"feedersByBuChart\" data-v-609c0b5c></canvas></div></div></div> <div class=\"col s12 m6\" data-v-609c0b5c><div class=\"card-panel avail-card\" data-v-609c0b5c><p class=\"avail-card-title center-align\" data-v-609c0b5c>DTs By Business Units</p> <div style=\"position: relative; height: 220px;\" data-v-609c0b5c><canvas id=\"dtsByBuChart\" data-v-609c0b5c></canvas></div></div></div></div>")], 2)], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./pages/availability_summary.vue?vue&type=template&id=609c0b5c&scoped=true
-
-// EXTERNAL MODULE: ./components/SideNav/SideNav.vue + 4 modules
-var SideNav = __webpack_require__(40);
-
-// EXTERNAL MODULE: ./components/ChartPie.vue + 4 modules
-var ChartPie = __webpack_require__(45);
-
-// EXTERNAL MODULE: ./assets/js/Chart.js
-var Chart = __webpack_require__(44);
-var Chart_default = /*#__PURE__*/__webpack_require__.n(Chart);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/availability_summary.vue?vue&type=script&lang=js
-
-
-
-// UI-first rebuild to match the Figma "Availability Summary" screen exactly. Data below is
-// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
-// the backend team ships the matching endpoint shape.
-
-const valueLabelPlugin = {
-  afterDatasetsDraw(chart) {
-    const ctx = chart.ctx;
-    chart.data.datasets.forEach((dataset, i) => {
-      const meta = chart.getDatasetMeta(i);
-      if (meta.hidden) return;
-      meta.data.forEach((bar, index) => {
-        const value = dataset.data[index];
-        const model = bar._model;
-        ctx.save();
-        ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ececf2' : '#333';
-        ctx.font = 'bold 11px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'bottom';
-        ctx.fillText(value.toLocaleString(), model.x, model.y - 3);
-        ctx.restore();
-      });
-    });
-  }
-};
-const horizontalValueLabelPlugin = {
-  afterDatasetsDraw(chart) {
-    const ctx = chart.ctx;
-    chart.data.datasets.forEach((dataset, i) => {
-      const meta = chart.getDatasetMeta(i);
-      if (meta.hidden) return;
-      meta.data.forEach((bar, index) => {
-        const value = dataset.data[index];
-        const model = bar._model;
-        ctx.save();
-        ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'dark' ? '#ececf2' : '#333';
-        ctx.font = 'bold 11px sans-serif';
-        ctx.textAlign = 'left';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(value.toLocaleString(), model.x + 8, model.y);
-        ctx.restore();
-      });
-    });
-  }
-};
-/* harmony default export */ var availability_summaryvue_type_script_lang_js = ({
-  components: {
-    SideNav: SideNav["default"],
-    ChartPie: ChartPie["default"]
-  },
-  data() {
-    return {
-      feedersAvailData: {
-        labels: ['Met', 'Not Met'],
-        datasets: [{
-          data: [256, 136],
-          backgroundColor: ['#1a2b5c', '#c0392b']
-        }]
-      },
-      totalDtsData: {
-        labels: ['Public DTs', 'Private DTs'],
-        datasets: [{
-          data: [5113, 188],
-          backgroundColor: ['#7b8cf0', '#8de8c5']
-        }]
-      },
-      doughnutOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutoutPercentage: 70,
-        legend: {
-          display: false
-        }
-      },
-      barCharts: []
-    };
-  },
-  methods: {
-    initCharts() {
-      this.barCharts.forEach(chart => chart && chart.destroy());
-      this.barCharts = [];
-      const statusCanvas = document.getElementById('dtAvailChart');
-      if (statusCanvas) {
-        this.barCharts.push(new Chart_default.a(statusCanvas.getContext('2d'), {
-          type: 'bar',
-          data: {
-            labels: ['Private DTs', 'Public DTs'],
-            datasets: [{
-              label: 'Met',
-              data: [150, 2639],
-              backgroundColor: '#1a2b5c'
-            }, {
-              label: 'Not Met',
-              data: [38, 2494],
-              backgroundColor: '#c0392b'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              display: false
-            },
-            scales: {
-              xAxes: [{
-                gridLines: {
-                  display: false
-                }
-              }],
-              yAxes: [{
-                gridLines: {
-                  display: false
-                },
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
-          },
-          plugins: [valueLabelPlugin]
-        }));
-      }
-      const feedersByBuCanvas = document.getElementById('feedersByBuChart');
-      if (feedersByBuCanvas) {
-        this.barCharts.push(new Chart_default.a(feedersByBuCanvas.getContext('2d'), {
-          type: 'horizontalBar',
-          data: {
-            labels: ['Ikeja', 'Akowonjo', 'Oshodi', 'Ikorodu', 'Shomolu', 'Abule Egba'],
-            datasets: [{
-              data: [3719, 3446, 2870, 2724, 2447, 1844],
-              backgroundColor: '#f5a623'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              display: false
-            },
-            scales: {
-              xAxes: [{
-                gridLines: {
-                  display: false
-                },
-                ticks: {
-                  display: false,
-                  suggestedMax: 4300
-                }
-              }],
-              yAxes: [{
-                gridLines: {
-                  display: false
-                }
-              }]
-            }
-          },
-          plugins: [horizontalValueLabelPlugin]
-        }));
-      }
-      const dtsByBuCanvas = document.getElementById('dtsByBuChart');
-      if (dtsByBuCanvas) {
-        this.barCharts.push(new Chart_default.a(dtsByBuCanvas.getContext('2d'), {
-          type: 'horizontalBar',
-          data: {
-            labels: ['Oshodi', 'Shomolu', 'Ikeja', 'Akowonjo', 'Ikorodu', 'Abule Egba'],
-            datasets: [{
-              data: [83, 82, 74, 71, 60, 41],
-              backgroundColor: '#a13a3a'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-              display: false
-            },
-            scales: {
-              xAxes: [{
-                gridLines: {
-                  display: false
-                },
-                ticks: {
-                  display: false,
-                  suggestedMax: 95
-                }
-              }],
-              yAxes: [{
-                gridLines: {
-                  display: false
-                }
-              }]
-            }
-          },
-          plugins: [horizontalValueLabelPlugin]
-        }));
-      }
-    }
-  },
-  mounted() {
-    this.$nextTick(() => this.initCharts());
-  }
-});
-// CONCATENATED MODULE: ./pages/availability_summary.vue?vue&type=script&lang=js
- /* harmony default export */ var pages_availability_summaryvue_type_script_lang_js = (availability_summaryvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./pages/availability_summary.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(67)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  pages_availability_summaryvue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "609c0b5c",
-  "382ffdd4"
-  
-)
-
-/* harmony default export */ var availability_summary = __webpack_exports__["default"] = (component.exports);
-
-/* nuxt-component-imports */
-installComponents(component, {SideNav: __webpack_require__(40).default,ChartPie: __webpack_require__(45).default})
 
 
 /***/ })

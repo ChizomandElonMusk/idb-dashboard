@@ -1,7 +1,336 @@
-exports.ids = [14,1,3,10,12];
+exports.ids = [15,1,3,11,13];
 exports.modules = {
 
-/***/ 38:
+/***/ 104:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/control_center_dashboard.vue?vue&type=template&id=7f7230a6&scoped=true
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "dashboard-wrapper"
+  }, [_c('SideNav'), _vm._ssrNode(" "), _vm._ssrNode("<main class=\"main-content\" data-v-7f7230a6>", "</main>", [_vm._ssrNode("<div class=\"avail-header\" data-v-7f7230a6><h5 class=\"avail-title\" data-v-7f7230a6>Control Center Dashboard</h5></div> "), _vm._ssrNode("<div class=\"row\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"col s12 m3\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap red-icon-wrap\" data-v-7f7230a6><i class=\"material-icons top-stat-icon red-icon\" data-v-7f7230a6>device_hub</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-7f7230a6>", "</p>", [_c('AnimatedValue', {
+    attrs: {
+      "value": _vm.online_feeders
+    }
+  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-7f7230a6>Online feeders</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-7f7230a6></div> <div class=\"top-stat-sub-row\" data-v-7f7230a6><div class=\"top-stat-sub border-right\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>11kv</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.kv11)) + "</p></div> <div class=\"top-stat-sub\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>33kv</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.kv33)) + "</p></div></div>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap red-icon-wrap\" data-v-7f7230a6><i class=\"material-icons top-stat-icon red-icon\" data-v-7f7230a6>bolt</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-7f7230a6>", "</p>", [_c('AnimatedValue', {
+    attrs: {
+      "value": _vm.online_dts
+    }
+  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-7f7230a6>Online DTs</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-7f7230a6></div> <div class=\"top-stat-sub-row\" data-v-7f7230a6><div class=\"top-stat-sub border-right\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>Public</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.public_dts)) + "</p></div> <div class=\"top-stat-sub\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>Private</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.private_dts)) + "</p></div></div>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap blue-icon-wrap\" data-v-7f7230a6><i class=\"material-icons top-stat-icon blue-icon\" data-v-7f7230a6>group</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-7f7230a6>", "</p>", [_c('AnimatedValue', {
+    attrs: {
+      "value": _vm.complaints_total
+    }
+  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-7f7230a6>Total Customer Complaints</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-7f7230a6></div> <div class=\"top-stat-sub-row\" data-v-7f7230a6><div class=\"top-stat-sub border-right\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>Open</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.complaints_open)) + "</p></div> <div class=\"top-stat-sub\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>Closed</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.complaints_closed)) + "</p></div></div>")], 2)]), _vm._ssrNode(" <div class=\"col s12 m3\" data-v-7f7230a6><div class=\"card-panel top-stat-card\" data-v-7f7230a6><p class=\"customers-card-title\" data-v-7f7230a6>Total Customers</p> <div class=\"progress-item\" data-v-7f7230a6><div class=\"progress-label-row\" data-v-7f7230a6><span class=\"progress-name\" data-v-7f7230a6>Metered NMD</span> <span class=\"progress-fraction\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.nmd_value) + "/" + _vm._s(_vm.nmd_total)) + "</span></div> <div class=\"progress indigo lighten-4\" style=\"height:8px; border-radius:4px;\" data-v-7f7230a6><div class=\"determinate indigo accent-2\"" + _vm._ssrStyle(null, {
+    width: _vm.nmd_pct
+  }, null) + " data-v-7f7230a6></div></div></div> <div class=\"progress-item\" style=\"margin-top: 14px;\" data-v-7f7230a6><div class=\"progress-label-row\" data-v-7f7230a6><span class=\"progress-name\" data-v-7f7230a6>Metered MD</span> <span class=\"progress-fraction\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.md_value) + "/" + _vm._s(_vm.md_total)) + "</span></div> <div class=\"progress green lighten-4\" style=\"height:8px; border-radius:4px;\" data-v-7f7230a6><div class=\"determinate green\"" + _vm._ssrStyle(null, {
+    width: _vm.md_pct
+  }, null) + " data-v-7f7230a6></div></div></div></div></div>")], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"row\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"col s12 m7\" data-v-7f7230a6><div class=\"card-panel mini-chart-card energy-card\" data-v-7f7230a6><div class=\"energy-card-header\" data-v-7f7230a6><p class=\"energy-card-title\" data-v-7f7230a6>Energy</p> <div class=\"chart-tabs\" data-v-7f7230a6><span" + _vm._ssrClass("chart-tab", {
+    active: _vm.energyTab === 'Day'
+  }) + " data-v-7f7230a6>Day</span> <span" + _vm._ssrClass("chart-tab", {
+    active: _vm.energyTab === 'Week'
+  }) + " data-v-7f7230a6>Week</span> <span" + _vm._ssrClass("chart-tab", {
+    active: _vm.energyTab === 'Month'
+  }) + " data-v-7f7230a6>Month</span> <span class=\"chart-icon-btn\" data-v-7f7230a6><i class=\"material-icons tiny\" data-v-7f7230a6>calendar_today</i></span> <span class=\"chart-icon-btn chart-icon-btn-accent\" data-v-7f7230a6><i class=\"material-icons tiny\" data-v-7f7230a6>description</i></span></div></div> <p class=\"energy-card-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.energyTotal)) + "</p> <div class=\"chart-callout-wrap\" data-v-7f7230a6><div style=\"position: relative; height:190px;\" data-v-7f7230a6><canvas id=\"energyChart\" data-v-7f7230a6></canvas></div> <div class=\"chart-callout\" style=\"left: 40%; top: 6px;\" data-v-7f7230a6><span class=\"callout-title\" data-v-7f7230a6>March</span> <span class=\"callout-value\" data-v-7f7230a6>43.00 MWh</span></div></div></div></div> "), _vm._ssrNode("<div class=\"col s12 m5\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"card-panel mini-chart-card\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<p class=\"pie-card-title center\" data-v-7f7230a6>Energy Allocation per Feeder Band</p> "), _c('ChartPie', {
+    attrs: {
+      "chart-type": "pie",
+      "chart-data": _vm.energyAllocationData,
+      "chart-options": _vm.pieOptions
+    }
+  }), _vm._ssrNode(" <div class=\"band-pct-legend\" data-v-7f7230a6>" + _vm._ssrList(_vm.bandPctLegend, function (item) {
+    return "<span class=\"band-pct-item\"" + _vm._ssrStyle(null, {
+      color: item.color
+    }, null) + " data-v-7f7230a6>" + _vm._ssrEscape("\n                            " + _vm._s(item.label) + " " + _vm._s(item.pct) + "\n                        ") + "</span>";
+  }) + "</div>")], 2)])], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"row\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"col s12 m7\" data-v-7f7230a6><div class=\"card-panel mini-chart-card energy-card\" data-v-7f7230a6><div class=\"energy-card-header\" data-v-7f7230a6><p class=\"energy-card-title\" data-v-7f7230a6>Vending &amp; Collection</p> <div class=\"chart-tabs\" data-v-7f7230a6><span" + _vm._ssrClass("chart-tab", {
+    active: _vm.vendingTab === 'Day'
+  }) + " data-v-7f7230a6>Day</span> <span" + _vm._ssrClass("chart-tab", {
+    active: _vm.vendingTab === 'Week'
+  }) + " data-v-7f7230a6>Week</span> <span" + _vm._ssrClass("chart-tab", {
+    active: _vm.vendingTab === 'Month'
+  }) + " data-v-7f7230a6>Month</span> <span class=\"chart-icon-btn\" data-v-7f7230a6><i class=\"material-icons tiny\" data-v-7f7230a6>calendar_today</i></span></div></div> <div class=\"chart-callout-wrap\" data-v-7f7230a6><div style=\"position: relative; height:190px;\" data-v-7f7230a6><canvas id=\"vendingChart\" data-v-7f7230a6></canvas></div> <div class=\"chart-callout\" style=\"left: 46%; top: 6px;\" data-v-7f7230a6><span class=\"callout-title\" data-v-7f7230a6>June 16</span> <span class=\"callout-value\" data-v-7f7230a6>400,000,000</span></div></div> <div class=\"vending-stats-grid\" data-v-7f7230a6><div class=\"vending-stats-col\" data-v-7f7230a6><div class=\"vending-stat-row\" data-v-7f7230a6><span class=\"vstat-dot vstat-dot-green\" data-v-7f7230a6></span> <span class=\"vstat-label\" data-v-7f7230a6>Total customer Vended Today</span> <span class=\"vstat-value\" data-v-7f7230a6>30,400,000</span></div> <div class=\"vending-stat-row\" data-v-7f7230a6><span class=\"vstat-dot vstat-dot-green\" data-v-7f7230a6></span> <span class=\"vstat-label\" data-v-7f7230a6>Amount Vended Today</span> <span class=\"vstat-value\" data-v-7f7230a6>30,400,000</span></div> <div class=\"vending-stat-row\" data-v-7f7230a6><span class=\"vstat-dot vstat-dot-green\" data-v-7f7230a6></span> <span class=\"vstat-label\" data-v-7f7230a6>Amount Vended MTD</span> <span class=\"vstat-value\" data-v-7f7230a6>2,000,000,000</span></div></div> <div class=\"vending-stats-col\" data-v-7f7230a6><div class=\"vending-stat-row\" data-v-7f7230a6><span class=\"vstat-dot vstat-dot-blue\" data-v-7f7230a6></span> <span class=\"vstat-label\" data-v-7f7230a6>Total Collection Today</span> <span class=\"vstat-value\" data-v-7f7230a6>50,000,000</span></div> <div class=\"vending-stat-row\" data-v-7f7230a6><span class=\"vstat-dot vstat-dot-blue\" data-v-7f7230a6></span> <span class=\"vstat-label\" data-v-7f7230a6>Amount Collected MTD</span> <span class=\"vstat-value\" data-v-7f7230a6>7,000,000,000</span></div></div></div></div></div> "), _vm._ssrNode("<div class=\"col s12 m5\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"card-panel mini-chart-card\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<p class=\"pie-card-title center\" data-v-7f7230a6>Total Feeder</p> "), _c('ChartPie', {
+    attrs: {
+      "chart-type": "doughnut",
+      "chart-data": _vm.totalFeederData,
+      "chart-options": _vm.doughnutOptions,
+      "center-text": "421",
+      "show-value-legend": true,
+      "legend-cols": 2
+    }
+  })], 2)])], 2)], 2)], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./pages/control_center_dashboard.vue?vue&type=template&id=7f7230a6&scoped=true
+
+// EXTERNAL MODULE: ./components/SideNav/SideNav.vue + 4 modules
+var SideNav = __webpack_require__(47);
+
+// EXTERNAL MODULE: ./components/AnimatedValue.vue + 4 modules
+var AnimatedValue = __webpack_require__(50);
+
+// EXTERNAL MODULE: ./components/ChartPie.vue + 4 modules
+var ChartPie = __webpack_require__(55);
+
+// EXTERNAL MODULE: ./assets/js/Chart.js
+var Chart = __webpack_require__(54);
+var Chart_default = /*#__PURE__*/__webpack_require__.n(Chart);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/control_center_dashboard.vue?vue&type=script&lang=js
+
+
+
+
+// UI-first rebuild to match the Figma "Control Center Dashboard" screen exactly. Data below is
+// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
+// the backend team ships the matching endpoint shape.
+
+const BAND_COLORS = ['#5b7cfa', '#3ec9a7', '#a56ef0', '#e74c3c', '#f5a623'];
+/* harmony default export */ var control_center_dashboardvue_type_script_lang_js = ({
+  components: {
+    SideNav: SideNav["default"],
+    AnimatedValue: AnimatedValue["default"],
+    ChartPie: ChartPie["default"]
+  },
+  data() {
+    return {
+      online_feeders: '200',
+      kv11: '150',
+      kv33: '50',
+      online_dts: '1200',
+      public_dts: '1000',
+      private_dts: '200',
+      complaints_total: '50',
+      complaints_open: '20',
+      complaints_closed: '30',
+      nmd_value: '900000',
+      nmd_total: '1033000',
+      nmd_pct: `${(900000 / 1033000 * 100).toFixed(2)}%`,
+      md_value: '5000',
+      md_total: '7000',
+      md_pct: `${(5000 / 7000 * 100).toFixed(2)}%`,
+      energyTotal: '350.00MWh',
+      energyTab: 'Month',
+      vendingTab: 'Month',
+      bandPctLegend: [{
+        label: 'A',
+        pct: '40%',
+        color: BAND_COLORS[0]
+      }, {
+        label: 'B',
+        pct: '25%',
+        color: BAND_COLORS[1]
+      }, {
+        label: 'C',
+        pct: '15%',
+        color: BAND_COLORS[2]
+      }, {
+        label: 'D',
+        pct: '15%',
+        color: BAND_COLORS[3]
+      }, {
+        label: 'E',
+        pct: '5%',
+        color: BAND_COLORS[4]
+      }],
+      energyAllocationData: {
+        labels: ['A', 'B', 'C', 'D', 'E'],
+        datasets: [{
+          data: [40, 25, 15, 15, 5],
+          backgroundColor: BAND_COLORS,
+          borderWidth: 0
+        }]
+      },
+      pieOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        }
+      },
+      totalFeederData: {
+        labels: ['Band A', 'Band B', 'Band C', 'Band D', 'Band E'],
+        datasets: [{
+          data: [188, 78, 132, 18, 5],
+          backgroundColor: BAND_COLORS,
+          borderWidth: 0
+        }]
+      },
+      doughnutOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutoutPercentage: 68,
+        legend: {
+          display: false
+        }
+      },
+      energyChart: null,
+      vendingChart: null
+    };
+  },
+  methods: {
+    initEnergyChart() {
+      const canvas = document.getElementById('energyChart');
+      if (!canvas) return;
+      if (this.energyChart) this.energyChart.destroy();
+      this.energyChart = new Chart_default.a(canvas.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul'],
+          datasets: [{
+            data: [55, 40, 68, 45, 50, 62],
+            borderColor: '#4ecb71',
+            backgroundColor: 'rgba(78,203,113,0.08)',
+            pointBackgroundColor: '#4ecb71',
+            pointBorderColor: '#fff',
+            pointRadius: ctx => ctx.dataIndex === 2 ? 6 : 3,
+            pointBorderWidth: 2,
+            borderWidth: 2,
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            display: false
+          },
+          tooltips: {
+            enabled: false
+          },
+          scales: {
+            xAxes: [{
+              gridLines: {
+                display: false
+              },
+              ticks: {
+                fontColor: '#aaa'
+              }
+            }],
+            yAxes: [{
+              gridLines: {
+                color: 'rgba(0,0,0,0.04)'
+              },
+              ticks: {
+                display: false
+              }
+            }]
+          }
+        }
+      });
+    },
+    initVendingChart() {
+      const canvas = document.getElementById('vendingChart');
+      if (!canvas) return;
+      if (this.vendingChart) this.vendingChart.destroy();
+      this.vendingChart = new Chart_default.a(canvas.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          datasets: [{
+            label: 'Vending',
+            data: [40, 25, 15, 55, 80, 95, 70, 50, 60, 75, 60],
+            borderColor: '#4ecb71',
+            backgroundColor: 'rgba(78,203,113,0.06)',
+            pointRadius: ctx => ctx.dataIndex === 4 ? 6 : 0,
+            pointBackgroundColor: '#4ecb71',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            borderWidth: 2,
+            tension: 0.4,
+            fill: true
+          }, {
+            label: 'Collection',
+            data: [70, 55, 30, 15, 25, 55, 70, 60, 45, 55, 70],
+            borderColor: '#5b7cfa',
+            backgroundColor: 'transparent',
+            pointRadius: 0,
+            borderWidth: 2,
+            tension: 0.4,
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            display: false
+          },
+          tooltips: {
+            enabled: false
+          },
+          scales: {
+            xAxes: [{
+              gridLines: {
+                display: false
+              },
+              ticks: {
+                fontColor: '#aaa'
+              }
+            }],
+            yAxes: [{
+              gridLines: {
+                color: 'rgba(0,0,0,0.04)'
+              },
+              ticks: {
+                display: false
+              }
+            }]
+          }
+        }
+      });
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.initEnergyChart();
+      this.initVendingChart();
+    });
+  }
+});
+// CONCATENATED MODULE: ./pages/control_center_dashboard.vue?vue&type=script&lang=js
+ /* harmony default export */ var pages_control_center_dashboardvue_type_script_lang_js = (control_center_dashboardvue_type_script_lang_js); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./pages/control_center_dashboard.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(82)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  pages_control_center_dashboardvue_type_script_lang_js,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "7f7230a6",
+  "6c7aa320"
+  
+)
+
+/* harmony default export */ var control_center_dashboard = __webpack_exports__["default"] = (component.exports);
+
+/* nuxt-component-imports */
+installComponents(component, {SideNav: __webpack_require__(47).default,AnimatedValue: __webpack_require__(50).default,ChartPie: __webpack_require__(55).default})
+
+
+/***/ }),
+
+/***/ 45:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78,39 +407,39 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 39:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(48);
+var content = __webpack_require__(52);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(4).default
 module.exports.__inject__ = function (context) {
-  add("75e2181a", content, true, context)
+  add("3fada58a", content, true, context)
 };
 
 /***/ }),
 
-/***/ 40:
+/***/ 47:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=template&id=2c494de8&scoped=true
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=template&id=8411a820&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-2c494de8>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-2c494de8><img" + _vm._ssrAttr("src", __webpack_require__(41)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-2c494de8></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-2c494de8>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
+  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-8411a820>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-8411a820><img" + _vm._ssrAttr("src", __webpack_require__(48)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-8411a820></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-8411a820>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
     return _vm._ssrNode("<li" + _vm._ssrClass(null, {
       active: _vm.isActive(item)
-    }) + " data-v-2c494de8>", "</li>", [_c('nuxt-link', {
+    }) + " data-v-8411a820>", "</li>", [_c('nuxt-link', {
       class: {
         'red-text text-darken-2': _vm.isActive(item)
       },
@@ -125,7 +454,7 @@ var render = function render() {
         "font-size": "10px"
       }
     }, [_vm._v("\n                    " + _vm._s(item.title) + "\n                ")])])], 1);
-  }), _vm._ssrNode(" "), _vm._ssrNode("<li data-v-2c494de8>", "</li>", [_c('nuxt-link', {
+  }), _vm._ssrNode(" "), _vm._ssrNode("<li data-v-8411a820>", "</li>", [_c('nuxt-link', {
     staticClass: "red-text",
     attrs: {
       "to": "/"
@@ -141,10 +470,10 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=template&id=2c494de8&scoped=true
+// CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=template&id=8411a820&scoped=true
 
 // EXTERNAL MODULE: ./components/ThemeToggle.vue + 4 modules
-var ThemeToggle = __webpack_require__(38);
+var ThemeToggle = __webpack_require__(45);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=script&lang=js
 
@@ -155,10 +484,15 @@ var ThemeToggle = __webpack_require__(38);
   },
   data() {
     return {
-      menuItems: [
-      // { title: 'End-To-End Energy Dashboard', icon: 'dashboard' },
-      // { title: 'Energy Flow Diagram', icon: 'dashboard' },
-      {
+      menuItems: [{
+        title: 'End-To-End Energy Dashboard',
+        icon: 'dashboard',
+        url: '/end_to_end_energy_dashboard'
+      }, {
+        title: 'Energy Flow Diagram',
+        icon: 'dashboard',
+        url: '/energy_flow_diagram'
+      }, {
         title: 'Control Center Dashboard',
         icon: 'dashboard',
         url: '/control_center_dashboard'
@@ -202,7 +536,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(47)
+  var style0 = __webpack_require__(51)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -215,7 +549,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "2c494de8",
+  "8411a820",
   "0f3f648e"
   
 )
@@ -223,43 +557,25 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var SideNav = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {ThemeToggle: __webpack_require__(38).default})
+installComponents(component, {ThemeToggle: __webpack_require__(45).default})
 
 
 /***/ }),
 
-/***/ 41:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "img/logo.d2f3c61.png";
 
 /***/ }),
 
-/***/ 42:
+/***/ 49:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(50);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(4).default
-module.exports.__inject__ = function (context) {
-  add("9786feb6", content, true, context)
-};
-
-/***/ }),
-
-/***/ 43:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(52);
+var content = __webpack_require__(57);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -271,7 +587,178 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 44:
+/***/ 50:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/AnimatedValue.vue?vue&type=template&id=f5293d52&scoped=true
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('span', {
+    class: {
+      counting: _vm.counting
+    }
+  }, [_vm._ssrNode(_vm._ssrEscape(_vm._s(_vm.display)))]);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/AnimatedValue.vue?vue&type=template&id=f5293d52&scoped=true
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/AnimatedValue.vue?vue&type=script&lang=js
+/* harmony default export */ var AnimatedValuevue_type_script_lang_js = ({
+  name: 'AnimatedValue',
+  props: {
+    value: {
+      type: [String, Number],
+      required: true
+    }
+  },
+  data() {
+    return {
+      display: '',
+      counting: false
+    };
+  },
+  watch: {
+    value(newVal, oldVal) {
+      this.animate(oldVal === undefined ? '' : oldVal.toString(), newVal.toString());
+    }
+  },
+  mounted() {
+    this.display = this.value.toString();
+  },
+  methods: {
+    animate(oldStr, newStr) {
+      const parseParts = str => {
+        const m = str.match(/([^0-9.,-]*)([-\d.,]+)(.*)/);
+        if (m) return {
+          prefix: m[1],
+          num: m[2],
+          suffix: m[3]
+        };
+        return {
+          prefix: '',
+          num: str,
+          suffix: ''
+        };
+      };
+      const formatNumber = n => {
+        // determine decimal length from newStr
+        const decMatch = newStr.match(/\.(\d+)/);
+        const decimals = decMatch ? decMatch[1].length : 0;
+        return n.toLocaleString(undefined, {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        });
+      };
+      const oldParts = parseParts(oldStr);
+      const newParts = parseParts(newStr);
+      const start = parseFloat(oldParts.num.replace(/,/g, '')) || 0;
+      const end = parseFloat(newParts.num.replace(/,/g, '')) || 0;
+      const duration = 1000;
+      const frameRate = 60;
+      const totalFrames = Math.round(duration / (1000 / frameRate));
+      let frame = 0;
+      this.counting = true;
+      const counter = setInterval(() => {
+        frame++;
+        const progress = frame / totalFrames;
+        const current = start + (end - start) * progress;
+        this.display = oldParts.prefix + formatNumber(current) + newParts.suffix;
+        if (frame >= totalFrames) {
+          clearInterval(counter);
+          this.display = newStr;
+          setTimeout(() => {
+            this.counting = false;
+          }, 300);
+        }
+      }, 1000 / frameRate);
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/AnimatedValue.vue?vue&type=script&lang=js
+ /* harmony default export */ var components_AnimatedValuevue_type_script_lang_js = (AnimatedValuevue_type_script_lang_js); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./components/AnimatedValue.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(56)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_AnimatedValuevue_type_script_lang_js,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "f5293d52",
+  "3e049d5e"
+  
+)
+
+/* harmony default export */ var AnimatedValue = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ 51:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ 52:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-8411a820]{min-height:100vh}.dashboard-wrapper[data-v-8411a820],.sidenav[data-v-8411a820]{background-color:var(--bg-sidenav)}.sidenav[data-v-8411a820]{border-right:1px solid var(--border-color);width:260px}.sidenav li>a[data-v-8411a820]{align-items:center;display:flex;height:auto;line-height:1.3;min-height:48px;padding:10px 32px}.sidenav li>a>i.material-icons[data-v-8411a820]{flex-shrink:0;height:auto;line-height:1.3}.theme-toggle-container[data-v-8411a820]{padding:0 16px}.main-content[data-v-8411a820]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-8411a820]{border-radius:12px;position:relative}.icon-circle[data-v-8411a820]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-8411a820]{font-size:24px;font-weight:700}.stats-text p[data-v-8411a820]{font-size:12px;margin:0}.badge[data-v-8411a820]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-8411a820]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-8411a820]{font-size:11px;margin-bottom:5px}.border-right[data-v-8411a820]{border-right:1px solid var(--border-color)}.tabs[data-v-8411a820]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-8411a820]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-8411a820]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-8411a820]{padding-left:20px}}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 53:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(59);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add CSS to SSR context
+var add = __webpack_require__(4).default
+module.exports.__inject__ = function (context) {
+  add("9786feb6", content, true, context)
+};
+
+/***/ }),
+
+/***/ 54:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -2340,7 +2827,7 @@ for(var k in plugins){if(plugins.hasOwnProperty(k)){core_controller.plugins.regi
 
 /***/ }),
 
-/***/ 45:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2366,7 +2853,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/ChartPie.vue?vue&type=template&id=126592f8&scoped=true
 
 // EXTERNAL MODULE: ./assets/js/Chart.js
-var Chart = __webpack_require__(44);
+var Chart = __webpack_require__(54);
 var Chart_default = /*#__PURE__*/__webpack_require__.n(Chart);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ChartPie.vue?vue&type=script&lang=js
@@ -2452,7 +2939,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(49)
+  var style0 = __webpack_require__(58)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2474,199 +2961,19 @@ var component = Object(componentNormalizer["a" /* default */])(
 
 /***/ }),
 
-/***/ 46:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/AnimatedValue.vue?vue&type=template&id=f5293d52&scoped=true
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('span', {
-    class: {
-      counting: _vm.counting
-    }
-  }, [_vm._ssrNode(_vm._ssrEscape(_vm._s(_vm.display)))]);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/AnimatedValue.vue?vue&type=template&id=f5293d52&scoped=true
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/AnimatedValue.vue?vue&type=script&lang=js
-/* harmony default export */ var AnimatedValuevue_type_script_lang_js = ({
-  name: 'AnimatedValue',
-  props: {
-    value: {
-      type: [String, Number],
-      required: true
-    }
-  },
-  data() {
-    return {
-      display: '',
-      counting: false
-    };
-  },
-  watch: {
-    value(newVal, oldVal) {
-      this.animate(oldVal === undefined ? '' : oldVal.toString(), newVal.toString());
-    }
-  },
-  mounted() {
-    this.display = this.value.toString();
-  },
-  methods: {
-    animate(oldStr, newStr) {
-      const parseParts = str => {
-        const m = str.match(/([^0-9.,-]*)([-\d.,]+)(.*)/);
-        if (m) return {
-          prefix: m[1],
-          num: m[2],
-          suffix: m[3]
-        };
-        return {
-          prefix: '',
-          num: str,
-          suffix: ''
-        };
-      };
-      const formatNumber = n => {
-        // determine decimal length from newStr
-        const decMatch = newStr.match(/\.(\d+)/);
-        const decimals = decMatch ? decMatch[1].length : 0;
-        return n.toLocaleString(undefined, {
-          minimumFractionDigits: decimals,
-          maximumFractionDigits: decimals
-        });
-      };
-      const oldParts = parseParts(oldStr);
-      const newParts = parseParts(newStr);
-      const start = parseFloat(oldParts.num.replace(/,/g, '')) || 0;
-      const end = parseFloat(newParts.num.replace(/,/g, '')) || 0;
-      const duration = 1000;
-      const frameRate = 60;
-      const totalFrames = Math.round(duration / (1000 / frameRate));
-      let frame = 0;
-      this.counting = true;
-      const counter = setInterval(() => {
-        frame++;
-        const progress = frame / totalFrames;
-        const current = start + (end - start) * progress;
-        this.display = oldParts.prefix + formatNumber(current) + newParts.suffix;
-        if (frame >= totalFrames) {
-          clearInterval(counter);
-          this.display = newStr;
-          setTimeout(() => {
-            this.counting = false;
-          }, 300);
-        }
-      }, 1000 / frameRate);
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/AnimatedValue.vue?vue&type=script&lang=js
- /* harmony default export */ var components_AnimatedValuevue_type_script_lang_js = (AnimatedValuevue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./components/AnimatedValue.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(51)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_AnimatedValuevue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "f5293d52",
-  "3e049d5e"
-  
-)
-
-/* harmony default export */ var AnimatedValue = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ 47:
+/***/ 56:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(39);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_2c494de8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 48:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-2c494de8]{min-height:100vh}.dashboard-wrapper[data-v-2c494de8],.sidenav[data-v-2c494de8]{background-color:var(--bg-sidenav)}.sidenav[data-v-2c494de8]{border-right:1px solid var(--border-color);width:260px}.theme-toggle-container[data-v-2c494de8]{padding:0 16px}.main-content[data-v-2c494de8]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-2c494de8]{border-radius:12px;position:relative}.icon-circle[data-v-2c494de8]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-2c494de8]{font-size:24px;font-weight:700}.stats-text p[data-v-2c494de8]{font-size:12px;margin:0}.badge[data-v-2c494de8]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-2c494de8]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-2c494de8]{font-size:11px;margin-bottom:5px}.border-right[data-v-2c494de8]{border-right:1px solid var(--border-color)}.tabs[data-v-2c494de8]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-2c494de8]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-2c494de8]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-2c494de8]{padding-left:20px}}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 49:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(42);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 50:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".chart-pie-wrapper[data-v-126592f8]{width:100%}.chart-canvas-container[data-v-126592f8]{height:200px;position:relative}.chart-center-text[data-v-126592f8]{color:var(--text-primary);font-size:1rem;font-weight:700;left:50%;pointer-events:none;position:absolute;top:50%;transform:translate(-50%,-50%)}.chart-legend[data-v-126592f8]{margin-top:16px}.legend-grid[data-v-126592f8]{display:grid;grid-gap:8px 16px;gap:8px 16px}.legend-item[data-v-126592f8]{align-items:center;display:flex;font-size:12px;gap:6px}.legend-dot[data-v-126592f8]{border-radius:50%;flex-shrink:0;height:12px;width:12px}.legend-label[data-v-126592f8]{color:var(--text-secondary);flex:1}.legend-value[data-v-126592f8]{color:var(--text-primary);font-weight:700}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 51:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(43);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(49);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimatedValue_vue_vue_type_style_index_0_id_f5293d52_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 52:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2681,13 +2988,40 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
+/***/ 58:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(53);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartPie_vue_vue_type_style_index_0_id_126592f8_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
 /***/ 59:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".chart-pie-wrapper[data-v-126592f8]{width:100%}.chart-canvas-container[data-v-126592f8]{height:200px;position:relative}.chart-center-text[data-v-126592f8]{color:var(--text-primary);font-size:1rem;font-weight:700;left:50%;pointer-events:none;position:absolute;top:50%;transform:translate(-50%,-50%)}.chart-legend[data-v-126592f8]{margin-top:16px}.legend-grid[data-v-126592f8]{display:grid;grid-gap:8px 16px;gap:8px 16px}.legend-item[data-v-126592f8]{align-items:center;display:flex;font-size:12px;gap:6px}.legend-dot[data-v-126592f8]{border-radius:50%;flex-shrink:0;height:12px;width:12px}.legend-label[data-v-126592f8]{color:var(--text-secondary);flex:1}.legend-value[data-v-126592f8]{color:var(--text-primary);font-weight:700}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 70:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(70);
+var content = __webpack_require__(83);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -2699,19 +3033,19 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 69:
+/***/ 82:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_7f7230a6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(59);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_7f7230a6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(70);
 /* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_7f7230a6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_7f7230a6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_7f7230a6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_control_center_dashboard_vue_vue_type_style_index_0_id_7f7230a6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 70:
+/***/ 83:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
@@ -2722,335 +3056,6 @@ ___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-7f7230a6]{bac
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 87:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/control_center_dashboard.vue?vue&type=template&id=7f7230a6&scoped=true
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', {
-    staticClass: "dashboard-wrapper"
-  }, [_c('SideNav'), _vm._ssrNode(" "), _vm._ssrNode("<main class=\"main-content\" data-v-7f7230a6>", "</main>", [_vm._ssrNode("<div class=\"avail-header\" data-v-7f7230a6><h5 class=\"avail-title\" data-v-7f7230a6>Control Center Dashboard</h5></div> "), _vm._ssrNode("<div class=\"row\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"col s12 m3\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap red-icon-wrap\" data-v-7f7230a6><i class=\"material-icons top-stat-icon red-icon\" data-v-7f7230a6>device_hub</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-7f7230a6>", "</p>", [_c('AnimatedValue', {
-    attrs: {
-      "value": _vm.online_feeders
-    }
-  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-7f7230a6>Online feeders</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-7f7230a6></div> <div class=\"top-stat-sub-row\" data-v-7f7230a6><div class=\"top-stat-sub border-right\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>11kv</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.kv11)) + "</p></div> <div class=\"top-stat-sub\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>33kv</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.kv33)) + "</p></div></div>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap red-icon-wrap\" data-v-7f7230a6><i class=\"material-icons top-stat-icon red-icon\" data-v-7f7230a6>bolt</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-7f7230a6>", "</p>", [_c('AnimatedValue', {
-    attrs: {
-      "value": _vm.online_dts
-    }
-  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-7f7230a6>Online DTs</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-7f7230a6></div> <div class=\"top-stat-sub-row\" data-v-7f7230a6><div class=\"top-stat-sub border-right\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>Public</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.public_dts)) + "</p></div> <div class=\"top-stat-sub\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>Private</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.private_dts)) + "</p></div></div>")], 2)]), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"col s12 m3\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"card-panel top-stat-card\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-header\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"top-stat-icon-wrap blue-icon-wrap\" data-v-7f7230a6><i class=\"material-icons top-stat-icon blue-icon\" data-v-7f7230a6>group</i></div> "), _vm._ssrNode("<div class=\"top-stat-info\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<p class=\"top-stat-value\" data-v-7f7230a6>", "</p>", [_c('AnimatedValue', {
-    attrs: {
-      "value": _vm.complaints_total
-    }
-  })], 1), _vm._ssrNode(" <p class=\"top-stat-label\" data-v-7f7230a6>Total Customer Complaints</p>")], 2)], 2), _vm._ssrNode(" <div class=\"top-stat-divider\" data-v-7f7230a6></div> <div class=\"top-stat-sub-row\" data-v-7f7230a6><div class=\"top-stat-sub border-right\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>Open</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.complaints_open)) + "</p></div> <div class=\"top-stat-sub\" data-v-7f7230a6><p class=\"sub-label\" data-v-7f7230a6>Closed</p> <p class=\"sub-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.complaints_closed)) + "</p></div></div>")], 2)]), _vm._ssrNode(" <div class=\"col s12 m3\" data-v-7f7230a6><div class=\"card-panel top-stat-card\" data-v-7f7230a6><p class=\"customers-card-title\" data-v-7f7230a6>Total Customers</p> <div class=\"progress-item\" data-v-7f7230a6><div class=\"progress-label-row\" data-v-7f7230a6><span class=\"progress-name\" data-v-7f7230a6>Metered NMD</span> <span class=\"progress-fraction\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.nmd_value) + "/" + _vm._s(_vm.nmd_total)) + "</span></div> <div class=\"progress indigo lighten-4\" style=\"height:8px; border-radius:4px;\" data-v-7f7230a6><div class=\"determinate indigo accent-2\"" + _vm._ssrStyle(null, {
-    width: _vm.nmd_pct
-  }, null) + " data-v-7f7230a6></div></div></div> <div class=\"progress-item\" style=\"margin-top: 14px;\" data-v-7f7230a6><div class=\"progress-label-row\" data-v-7f7230a6><span class=\"progress-name\" data-v-7f7230a6>Metered MD</span> <span class=\"progress-fraction\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.md_value) + "/" + _vm._s(_vm.md_total)) + "</span></div> <div class=\"progress green lighten-4\" style=\"height:8px; border-radius:4px;\" data-v-7f7230a6><div class=\"determinate green\"" + _vm._ssrStyle(null, {
-    width: _vm.md_pct
-  }, null) + " data-v-7f7230a6></div></div></div></div></div>")], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"row\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"col s12 m7\" data-v-7f7230a6><div class=\"card-panel mini-chart-card energy-card\" data-v-7f7230a6><div class=\"energy-card-header\" data-v-7f7230a6><p class=\"energy-card-title\" data-v-7f7230a6>Energy</p> <div class=\"chart-tabs\" data-v-7f7230a6><span" + _vm._ssrClass("chart-tab", {
-    active: _vm.energyTab === 'Day'
-  }) + " data-v-7f7230a6>Day</span> <span" + _vm._ssrClass("chart-tab", {
-    active: _vm.energyTab === 'Week'
-  }) + " data-v-7f7230a6>Week</span> <span" + _vm._ssrClass("chart-tab", {
-    active: _vm.energyTab === 'Month'
-  }) + " data-v-7f7230a6>Month</span> <span class=\"chart-icon-btn\" data-v-7f7230a6><i class=\"material-icons tiny\" data-v-7f7230a6>calendar_today</i></span> <span class=\"chart-icon-btn chart-icon-btn-accent\" data-v-7f7230a6><i class=\"material-icons tiny\" data-v-7f7230a6>description</i></span></div></div> <p class=\"energy-card-value\" data-v-7f7230a6>" + _vm._ssrEscape(_vm._s(_vm.energyTotal)) + "</p> <div class=\"chart-callout-wrap\" data-v-7f7230a6><div style=\"position: relative; height:190px;\" data-v-7f7230a6><canvas id=\"energyChart\" data-v-7f7230a6></canvas></div> <div class=\"chart-callout\" style=\"left: 40%; top: 6px;\" data-v-7f7230a6><span class=\"callout-title\" data-v-7f7230a6>March</span> <span class=\"callout-value\" data-v-7f7230a6>43.00 MWh</span></div></div></div></div> "), _vm._ssrNode("<div class=\"col s12 m5\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"card-panel mini-chart-card\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<p class=\"pie-card-title center\" data-v-7f7230a6>Energy Allocation per Feeder Band</p> "), _c('ChartPie', {
-    attrs: {
-      "chart-type": "pie",
-      "chart-data": _vm.energyAllocationData,
-      "chart-options": _vm.pieOptions
-    }
-  }), _vm._ssrNode(" <div class=\"band-pct-legend\" data-v-7f7230a6>" + _vm._ssrList(_vm.bandPctLegend, function (item) {
-    return "<span class=\"band-pct-item\"" + _vm._ssrStyle(null, {
-      color: item.color
-    }, null) + " data-v-7f7230a6>" + _vm._ssrEscape("\n                            " + _vm._s(item.label) + " " + _vm._s(item.pct) + "\n                        ") + "</span>";
-  }) + "</div>")], 2)])], 2), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"row\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"col s12 m7\" data-v-7f7230a6><div class=\"card-panel mini-chart-card energy-card\" data-v-7f7230a6><div class=\"energy-card-header\" data-v-7f7230a6><p class=\"energy-card-title\" data-v-7f7230a6>Vending &amp; Collection</p> <div class=\"chart-tabs\" data-v-7f7230a6><span" + _vm._ssrClass("chart-tab", {
-    active: _vm.vendingTab === 'Day'
-  }) + " data-v-7f7230a6>Day</span> <span" + _vm._ssrClass("chart-tab", {
-    active: _vm.vendingTab === 'Week'
-  }) + " data-v-7f7230a6>Week</span> <span" + _vm._ssrClass("chart-tab", {
-    active: _vm.vendingTab === 'Month'
-  }) + " data-v-7f7230a6>Month</span> <span class=\"chart-icon-btn\" data-v-7f7230a6><i class=\"material-icons tiny\" data-v-7f7230a6>calendar_today</i></span></div></div> <div class=\"chart-callout-wrap\" data-v-7f7230a6><div style=\"position: relative; height:190px;\" data-v-7f7230a6><canvas id=\"vendingChart\" data-v-7f7230a6></canvas></div> <div class=\"chart-callout\" style=\"left: 46%; top: 6px;\" data-v-7f7230a6><span class=\"callout-title\" data-v-7f7230a6>June 16</span> <span class=\"callout-value\" data-v-7f7230a6>400,000,000</span></div></div> <div class=\"vending-stats-grid\" data-v-7f7230a6><div class=\"vending-stats-col\" data-v-7f7230a6><div class=\"vending-stat-row\" data-v-7f7230a6><span class=\"vstat-dot vstat-dot-green\" data-v-7f7230a6></span> <span class=\"vstat-label\" data-v-7f7230a6>Total customer Vended Today</span> <span class=\"vstat-value\" data-v-7f7230a6>30,400,000</span></div> <div class=\"vending-stat-row\" data-v-7f7230a6><span class=\"vstat-dot vstat-dot-green\" data-v-7f7230a6></span> <span class=\"vstat-label\" data-v-7f7230a6>Amount Vended Today</span> <span class=\"vstat-value\" data-v-7f7230a6>30,400,000</span></div> <div class=\"vending-stat-row\" data-v-7f7230a6><span class=\"vstat-dot vstat-dot-green\" data-v-7f7230a6></span> <span class=\"vstat-label\" data-v-7f7230a6>Amount Vended MTD</span> <span class=\"vstat-value\" data-v-7f7230a6>2,000,000,000</span></div></div> <div class=\"vending-stats-col\" data-v-7f7230a6><div class=\"vending-stat-row\" data-v-7f7230a6><span class=\"vstat-dot vstat-dot-blue\" data-v-7f7230a6></span> <span class=\"vstat-label\" data-v-7f7230a6>Total Collection Today</span> <span class=\"vstat-value\" data-v-7f7230a6>50,000,000</span></div> <div class=\"vending-stat-row\" data-v-7f7230a6><span class=\"vstat-dot vstat-dot-blue\" data-v-7f7230a6></span> <span class=\"vstat-label\" data-v-7f7230a6>Amount Collected MTD</span> <span class=\"vstat-value\" data-v-7f7230a6>7,000,000,000</span></div></div></div></div></div> "), _vm._ssrNode("<div class=\"col s12 m5\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<div class=\"card-panel mini-chart-card\" data-v-7f7230a6>", "</div>", [_vm._ssrNode("<p class=\"pie-card-title center\" data-v-7f7230a6>Total Feeder</p> "), _c('ChartPie', {
-    attrs: {
-      "chart-type": "doughnut",
-      "chart-data": _vm.totalFeederData,
-      "chart-options": _vm.doughnutOptions,
-      "center-text": "421",
-      "show-value-legend": true,
-      "legend-cols": 2
-    }
-  })], 2)])], 2)], 2)], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./pages/control_center_dashboard.vue?vue&type=template&id=7f7230a6&scoped=true
-
-// EXTERNAL MODULE: ./components/SideNav/SideNav.vue + 4 modules
-var SideNav = __webpack_require__(40);
-
-// EXTERNAL MODULE: ./components/AnimatedValue.vue + 4 modules
-var AnimatedValue = __webpack_require__(46);
-
-// EXTERNAL MODULE: ./components/ChartPie.vue + 4 modules
-var ChartPie = __webpack_require__(45);
-
-// EXTERNAL MODULE: ./assets/js/Chart.js
-var Chart = __webpack_require__(44);
-var Chart_default = /*#__PURE__*/__webpack_require__.n(Chart);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/control_center_dashboard.vue?vue&type=script&lang=js
-
-
-
-
-// UI-first rebuild to match the Figma "Control Center Dashboard" screen exactly. Data below is
-// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
-// the backend team ships the matching endpoint shape.
-
-const BAND_COLORS = ['#5b7cfa', '#3ec9a7', '#a56ef0', '#e74c3c', '#f5a623'];
-/* harmony default export */ var control_center_dashboardvue_type_script_lang_js = ({
-  components: {
-    SideNav: SideNav["default"],
-    AnimatedValue: AnimatedValue["default"],
-    ChartPie: ChartPie["default"]
-  },
-  data() {
-    return {
-      online_feeders: '200',
-      kv11: '150',
-      kv33: '50',
-      online_dts: '1200',
-      public_dts: '1000',
-      private_dts: '200',
-      complaints_total: '50',
-      complaints_open: '20',
-      complaints_closed: '30',
-      nmd_value: '900000',
-      nmd_total: '1033000',
-      nmd_pct: `${(900000 / 1033000 * 100).toFixed(2)}%`,
-      md_value: '5000',
-      md_total: '7000',
-      md_pct: `${(5000 / 7000 * 100).toFixed(2)}%`,
-      energyTotal: '350.00MWh',
-      energyTab: 'Month',
-      vendingTab: 'Month',
-      bandPctLegend: [{
-        label: 'A',
-        pct: '40%',
-        color: BAND_COLORS[0]
-      }, {
-        label: 'B',
-        pct: '25%',
-        color: BAND_COLORS[1]
-      }, {
-        label: 'C',
-        pct: '15%',
-        color: BAND_COLORS[2]
-      }, {
-        label: 'D',
-        pct: '15%',
-        color: BAND_COLORS[3]
-      }, {
-        label: 'E',
-        pct: '5%',
-        color: BAND_COLORS[4]
-      }],
-      energyAllocationData: {
-        labels: ['A', 'B', 'C', 'D', 'E'],
-        datasets: [{
-          data: [40, 25, 15, 15, 5],
-          backgroundColor: BAND_COLORS,
-          borderWidth: 0
-        }]
-      },
-      pieOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        }
-      },
-      totalFeederData: {
-        labels: ['Band A', 'Band B', 'Band C', 'Band D', 'Band E'],
-        datasets: [{
-          data: [188, 78, 132, 18, 5],
-          backgroundColor: BAND_COLORS,
-          borderWidth: 0
-        }]
-      },
-      doughnutOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutoutPercentage: 68,
-        legend: {
-          display: false
-        }
-      },
-      energyChart: null,
-      vendingChart: null
-    };
-  },
-  methods: {
-    initEnergyChart() {
-      const canvas = document.getElementById('energyChart');
-      if (!canvas) return;
-      if (this.energyChart) this.energyChart.destroy();
-      this.energyChart = new Chart_default.a(canvas.getContext('2d'), {
-        type: 'line',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul'],
-          datasets: [{
-            data: [55, 40, 68, 45, 50, 62],
-            borderColor: '#4ecb71',
-            backgroundColor: 'rgba(78,203,113,0.08)',
-            pointBackgroundColor: '#4ecb71',
-            pointBorderColor: '#fff',
-            pointRadius: ctx => ctx.dataIndex === 2 ? 6 : 3,
-            pointBorderWidth: 2,
-            borderWidth: 2,
-            tension: 0.4,
-            fill: true
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-          tooltips: {
-            enabled: false
-          },
-          scales: {
-            xAxes: [{
-              gridLines: {
-                display: false
-              },
-              ticks: {
-                fontColor: '#aaa'
-              }
-            }],
-            yAxes: [{
-              gridLines: {
-                color: 'rgba(0,0,0,0.04)'
-              },
-              ticks: {
-                display: false
-              }
-            }]
-          }
-        }
-      });
-    },
-    initVendingChart() {
-      const canvas = document.getElementById('vendingChart');
-      if (!canvas) return;
-      if (this.vendingChart) this.vendingChart.destroy();
-      this.vendingChart = new Chart_default.a(canvas.getContext('2d'), {
-        type: 'line',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          datasets: [{
-            label: 'Vending',
-            data: [40, 25, 15, 55, 80, 95, 70, 50, 60, 75, 60],
-            borderColor: '#4ecb71',
-            backgroundColor: 'rgba(78,203,113,0.06)',
-            pointRadius: ctx => ctx.dataIndex === 4 ? 6 : 0,
-            pointBackgroundColor: '#4ecb71',
-            pointBorderColor: '#fff',
-            pointBorderWidth: 2,
-            borderWidth: 2,
-            tension: 0.4,
-            fill: true
-          }, {
-            label: 'Collection',
-            data: [70, 55, 30, 15, 25, 55, 70, 60, 45, 55, 70],
-            borderColor: '#5b7cfa',
-            backgroundColor: 'transparent',
-            pointRadius: 0,
-            borderWidth: 2,
-            tension: 0.4,
-            fill: false
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-          tooltips: {
-            enabled: false
-          },
-          scales: {
-            xAxes: [{
-              gridLines: {
-                display: false
-              },
-              ticks: {
-                fontColor: '#aaa'
-              }
-            }],
-            yAxes: [{
-              gridLines: {
-                color: 'rgba(0,0,0,0.04)'
-              },
-              ticks: {
-                display: false
-              }
-            }]
-          }
-        }
-      });
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.initEnergyChart();
-      this.initVendingChart();
-    });
-  }
-});
-// CONCATENATED MODULE: ./pages/control_center_dashboard.vue?vue&type=script&lang=js
- /* harmony default export */ var pages_control_center_dashboardvue_type_script_lang_js = (control_center_dashboardvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./pages/control_center_dashboard.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(69)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  pages_control_center_dashboardvue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "7f7230a6",
-  "6c7aa320"
-  
-)
-
-/* harmony default export */ var control_center_dashboard = __webpack_exports__["default"] = (component.exports);
-
-/* nuxt-component-imports */
-installComponents(component, {SideNav: __webpack_require__(40).default,AnimatedValue: __webpack_require__(46).default,ChartPie: __webpack_require__(45).default})
 
 
 /***/ })

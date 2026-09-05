@@ -21,6 +21,20 @@
     "_name": "_e62b2802"
   },
   {
+    "name": "end_to_end_energy_dashboard",
+    "path": "/end_to_end_energy_dashboard",
+    "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/end_to_end_energy_dashboard.vue",
+    "chunkName": "pages/end_to_end_energy_dashboard",
+    "_name": "_511c64b6"
+  },
+  {
+    "name": "energy_flow_diagram",
+    "path": "/energy_flow_diagram",
+    "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/energy_flow_diagram.vue",
+    "chunkName": "pages/energy_flow_diagram",
+    "_name": "_d6ea8f24"
+  },
+  {
     "name": "idb_dashboard",
     "path": "/idb_dashboard",
     "component": "/Users/chizom/Dev/office/ie_idb_dashboard/pages/idb_dashboard.vue",

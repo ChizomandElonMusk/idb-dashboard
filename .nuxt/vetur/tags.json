@@ -17,6 +17,9 @@
   "Forgot": {
     "description": "Auto imported from components/Forgot.vue"
   },
+  "GridNetworkMap": {
+    "description": "Auto imported from components/GridNetworkMap.vue"
+  },
   "Login": {
     "description": "Auto imported from components/Login.vue"
   },

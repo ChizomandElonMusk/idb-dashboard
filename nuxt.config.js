@@ -36,6 +36,7 @@ export default {
   css: [
     '~/assets/css/materialize.css',
     '~/assets/css/style.css',
+    'leaflet/dist/leaflet.css',
 
   ],
 
