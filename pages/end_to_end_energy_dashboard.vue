@@ -34,7 +34,13 @@
                             <span class="kpi-date">{{ kpi.date }}</span>
                             <span class="kpi-trend" :class="kpi.up ? 'trend-up' : 'trend-down'">
                                 {{ kpi.trend }}
-                                <i class="material-icons tiny">{{ kpi.up ? 'arrow_upward' : 'arrow_downward' }}</i>
+                                <img
+                                    v-if="kpi.customArrow"
+                                    :src="kpi.up ? '/mdi_arrow-up-bold.png' : '/mdi_arrow-down-bold.png'"
+                                    :alt="kpi.up ? 'up' : 'down'"
+                                    class="kpi-trend-icon"
+                                />
+                                <i v-else class="material-icons tiny">{{ kpi.up ? 'arrow_upward' : 'arrow_downward' }}</i>
                             </span>
                         </div>
                     </div>
@@ -86,7 +92,7 @@
                     </div>
 
                     <div class="gn-map">
-                        <GridNetworkMap :markers="mapMarkers" :center="mapCenter" :zoom="14" />
+                        <GridNetworkMap :markers="mapMarkers" :center="mapCenter" :zoom="14" @marker-click="selectedMarker = $event" />
                         <div class="gn-map-legend">
                             <span><i class="marker-dot green"></i> Online</span>
                             <span><i class="marker-dot red"></i> Offline</span>
@@ -97,6 +103,8 @@
             </div>
 
         </main>
+
+        <DTDetailsModal :marker="selectedMarker" @close="selectedMarker = null" />
     </div>
 </template>
 
@@ -104,6 +112,7 @@
 import SideNav from '~/components/SideNav/SideNav.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import GridNetworkMap from '~/components/GridNetworkMap.vue'
+import DTDetailsModal from '~/components/DTDetailsModal.vue'
 // UI-first rebuild to match the Figma "End-To-End Energy Dashboard" (Overview) screen exactly.
 // Data below is static mock content taken from the Figma mockup — real API wiring will be
 // reintroduced once the backend team ships the matching endpoint shape. The map uses Leaflet +
@@ -111,9 +120,10 @@ import GridNetworkMap from '~/components/GridNetworkMap.vue'
 // Lagos — the area referenced in the Figma mockup.
 
 export default {
-    components: { SideNav, AnimatedValue, GridNetworkMap },
+    components: { SideNav, AnimatedValue, GridNetworkMap, DTDetailsModal },
     data() {
         return {
+            selectedMarker: null,
             kpis: [
                 {
                     label: 'Total Energy on Grid (MWh)',
@@ -129,7 +139,8 @@ export default {
                     date: 'Jan 2026',
                     trend: '+3.6%',
                     up: true,
-                    icon: '/Total energy on DTs(MWh).svg'
+                    icon: '/Total energy on DTs(MWh).svg',
+                    customArrow: true
                 },
                 {
                     label: 'Total Grid  to DT loss(MWh)',
@@ -137,7 +148,8 @@ export default {
                     date: 'Jan 2026',
                     trend: '-13.6%',
                     up: false,
-                    icon: '/Total Grid to DT loss(MWh).svg'
+                    icon: '/Total Grid to DT loss(MWh).svg',
+                    customArrow: true
                 }
             ],
             gnStats: [
@@ -316,6 +328,7 @@ export default {
 .trend-up   { color: #2fa360; background: #e3f7ea; }
 .trend-down { color: #c0392b; background: #fdeaeb; }
 .kpi-trend .material-icons { font-size: 13px !important; }
+.kpi-trend-icon { width: 14px; height: 14px; }
 
 /* Grid Network card */
 .grid-network-card {

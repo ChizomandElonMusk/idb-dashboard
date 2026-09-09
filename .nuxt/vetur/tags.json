@@ -14,6 +14,9 @@
   "CustomSelect": {
     "description": "Auto imported from components/CustomSelect.vue"
   },
+  "DTDetailsModal": {
+    "description": "Auto imported from components/DTDetailsModal.vue"
+  },
   "Forgot": {
     "description": "Auto imported from components/Forgot.vue"
   },

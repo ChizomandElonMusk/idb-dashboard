@@ -67,9 +67,7 @@ export default {
 
             this.markers.forEach((m) => {
                 const marker = L.marker([m.lat, m.lng], { icon: icons[m.status] || icons.online })
-                if (m.label) {
-                    marker.bindPopup(`<b>${m.label}</b><br/>Status: ${m.status}`)
-                }
+                marker.on('click', () => this.$emit('marker-click', m))
                 marker.addTo(this.map)
             })
         }

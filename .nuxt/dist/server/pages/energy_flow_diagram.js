@@ -1,53 +1,54 @@
-exports.ids = [18,11,13];
+exports.ids = [19,12,14];
 exports.modules = {
 
-/***/ 107:
+/***/ 111:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/energy_flow_diagram.vue?vue&type=template&id=71add4d6&scoped=true
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/energy_flow_diagram.vue?vue&type=template&id=366deb61&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
     staticClass: "dashboard-wrapper"
-  }, [_c('SideNav'), _vm._ssrNode(" <main class=\"main-content\" data-v-71add4d6><div class=\"avail-header\" data-v-71add4d6><h5 class=\"avail-title\" data-v-71add4d6>Energy Flow Diagram</h5></div> <div class=\"card-panel flow-panel\" data-v-71add4d6><div class=\"flow-scroll\" data-v-71add4d6><div class=\"flow-canvas\" data-v-71add4d6>" + _vm._ssrList(_vm.connectors, function (c) {
-    return "<div" + _vm._ssrClass(null, ['connector', c.type]) + _vm._ssrStyle(null, {
-      gridColumn: c.col,
-      gridRow: c.row
-    }, null) + " data-v-71add4d6></div>";
-  }) + " " + _vm._ssrList(_vm.flowCards, function (card) {
-    return "<div class=\"flow-card\"" + _vm._ssrStyle(null, {
-      gridColumn: card.col,
-      gridRow: card.row
-    }, null) + " data-v-71add4d6><p class=\"flow-card-title\" data-v-71add4d6>" + _vm._ssrEscape(_vm._s(card.title)) + "</p> <div class=\"flow-filters\" data-v-71add4d6>" + _vm._ssrList(card.filters, function (f, i) {
-      return "<div class=\"flow-filter\" data-v-71add4d6><span data-v-71add4d6>" + _vm._ssrEscape(_vm._s(f)) + "</span> <i class=\"material-icons tiny\" data-v-71add4d6>arrow_drop_down</i></div>";
-    }) + "</div> <p class=\"flow-total-label\" data-v-71add4d6>Total Energy</p> <p class=\"flow-total-value\" data-v-71add4d6>" + _vm._ssrEscape(_vm._s(card.total)) + "</p> " + (!card.single ? "<div class=\"flow-bar\" data-v-71add4d6><div class=\"flow-bar-fill\"" + _vm._ssrStyle(null, {
+  }, [_c('SideNav'), _vm._ssrNode(" <main class=\"main-content\" data-v-366deb61><div class=\"avail-header\" data-v-366deb61><h5 class=\"avail-title\" data-v-366deb61>Energy Flow Diagram</h5> <div class=\"flow-path-tabs\" data-v-366deb61>" + _vm._ssrList(_vm.pathOptions, function (opt) {
+    return "<button type=\"button\"" + _vm._ssrClass(null, ['flow-tab', {
+      active: _vm.selectedPath === opt.key
+    }]) + " data-v-366deb61>" + _vm._ssrEscape("\n                    " + _vm._s(opt.label) + "\n                ") + "</button>";
+  }) + "</div></div> <div class=\"card-panel flow-panel\" data-v-366deb61><div class=\"flow-path-row\" data-v-366deb61><p class=\"flow-path-desc\" data-v-366deb61>" + _vm._ssrEscape(_vm._s(_vm.activePath.description)) + "</p> " + (_vm.revealedCount > 1 ? "<button type=\"button\" class=\"flow-reset-btn\" data-v-366deb61><i class=\"material-icons tiny\" data-v-366deb61>replay</i> Reset\n                </button>" : "<!---->") + "</div> <div class=\"flow-scroll\" data-v-366deb61><div class=\"flow-canvas\" data-v-366deb61>" + _vm._ssrList(_vm.visibleCards, function (card, i) {
+    return "<div" + _vm._ssrClass(null, ['flow-card', {
+      'is-frontier': _vm.isFrontier(i)
+    }]) + " data-v-366deb61>" + (_vm.isFrontier(i) ? "<span class=\"flow-card-hint\" data-v-366deb61>Click to continue</span>" : i === _vm.visibleCards.length - 1 ? "<span class=\"flow-card-hint complete\" data-v-366deb61>Flow complete</span>" : "<!---->") + " <p class=\"flow-card-title\" data-v-366deb61>" + _vm._ssrEscape(_vm._s(card.title)) + "</p> <div class=\"flow-filters\" data-v-366deb61>" + _vm._ssrList(card.filters, function (f, fi) {
+      return "<div class=\"flow-filter\" data-v-366deb61><span data-v-366deb61>" + _vm._ssrEscape(_vm._s(f)) + "</span> <i class=\"material-icons tiny\" data-v-366deb61>arrow_drop_down</i></div>";
+    }) + "</div> <p class=\"flow-total-label\" data-v-366deb61>Total Energy</p> <p class=\"flow-total-value\" data-v-366deb61>" + _vm._ssrEscape(_vm._s(card.total)) + "</p> " + (!card.single ? "<div class=\"flow-bar\" data-v-366deb61><div class=\"flow-bar-fill\"" + _vm._ssrStyle(null, {
       width: card.leftPct + '%'
-    }, null) + " data-v-71add4d6></div> <div class=\"flow-bar-loss\"" + _vm._ssrStyle(null, {
+    }, null) + " data-v-366deb61></div> <div class=\"flow-bar-loss\"" + _vm._ssrStyle(null, {
       width: card.rightPct + '%'
-    }, null) + " data-v-71add4d6></div></div> <div class=\"flow-stats-row\" data-v-71add4d6><div class=\"flow-stat\" data-v-71add4d6><span class=\"flow-stat-pct\" data-v-71add4d6>" + _vm._ssrEscape(_vm._s(card.leftPct) + "% " + _vm._s(card.leftLabel)) + "</span> <span class=\"flow-stat-val\" data-v-71add4d6>" + _vm._ssrEscape(_vm._s(card.leftVal)) + "</span></div> <div class=\"flow-stat right\" data-v-71add4d6><span class=\"flow-stat-pct loss\" data-v-71add4d6>" + _vm._ssrEscape(_vm._s(card.rightPct) + "% " + _vm._s(card.rightLabel)) + "</span> <span class=\"flow-stat-val\" data-v-71add4d6>" + _vm._ssrEscape(_vm._s(card.rightVal)) + "</span></div></div>" : "<div class=\"flow-bar single\" data-v-71add4d6><div class=\"flow-bar-fill\"" + _vm._ssrStyle(null, {
+    }, null) + " data-v-366deb61></div></div> <div class=\"flow-stats-row\" data-v-366deb61><div class=\"flow-stat\" data-v-366deb61><span class=\"flow-stat-pct\" data-v-366deb61>" + _vm._ssrEscape(_vm._s(card.leftPct) + "% " + _vm._s(card.leftLabel)) + "</span> <span class=\"flow-stat-val\" data-v-366deb61>" + _vm._ssrEscape(_vm._s(card.leftVal)) + "</span></div> <div class=\"flow-stat right\" data-v-366deb61><span class=\"flow-stat-pct loss\" data-v-366deb61>" + _vm._ssrEscape(_vm._s(card.rightPct) + "% " + _vm._s(card.rightLabel)) + "</span> <span class=\"flow-stat-val\" data-v-366deb61>" + _vm._ssrEscape(_vm._s(card.rightVal)) + "</span></div></div>" : "<div class=\"flow-bar single\" data-v-366deb61><div class=\"flow-bar-fill\"" + _vm._ssrStyle(null, {
       width: card.fillPct + '%'
-    }, null) + " data-v-71add4d6></div></div>") + " <div class=\"flow-divider\" data-v-71add4d6></div> " + (card.bottomRows ? _vm._ssrList(card.bottomRows, function (b, i) {
-      return "<div class=\"flow-bottom-row\" data-v-71add4d6><span data-v-71add4d6>" + _vm._ssrEscape(_vm._s(b.label)) + "</span> <b data-v-71add4d6>" + _vm._ssrEscape(_vm._s(b.val)) + "</b></div>";
-    }) : "<div class=\"flow-bottom-row\" data-v-71add4d6><span data-v-71add4d6>" + _vm._ssrEscape(_vm._s(card.bottomLabel)) + "</span> <b data-v-71add4d6>" + _vm._ssrEscape(_vm._s(card.bottomVal)) + "</b></div>") + "</div>";
+    }, null) + " data-v-366deb61></div></div>") + " <div class=\"flow-divider\" data-v-366deb61></div> " + (card.bottomRows ? _vm._ssrList(card.bottomRows, function (b, bi) {
+      return "<div class=\"flow-bottom-row\" data-v-366deb61><span data-v-366deb61>" + _vm._ssrEscape(_vm._s(b.label)) + "</span> <b data-v-366deb61>" + _vm._ssrEscape(_vm._s(b.val)) + "</b></div>";
+    }) : "<div class=\"flow-bottom-row\" data-v-366deb61><span data-v-366deb61>" + _vm._ssrEscape(_vm._s(card.bottomLabel)) + "</span> <b data-v-366deb61>" + _vm._ssrEscape(_vm._s(card.bottomVal)) + "</b></div>") + "</div> " + (i < _vm.visibleCards.length - 1 ? "<div class=\"flow-arrow\" data-v-366deb61><i class=\"material-icons\" data-v-366deb61>arrow_forward</i></div>" : "<!---->");
   }) + "</div></div></div></main>")], 2);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/energy_flow_diagram.vue?vue&type=template&id=71add4d6&scoped=true
+// CONCATENATED MODULE: ./pages/energy_flow_diagram.vue?vue&type=template&id=366deb61&scoped=true
 
 // EXTERNAL MODULE: ./components/SideNav/SideNav.vue + 4 modules
 var SideNav = __webpack_require__(47);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/energy_flow_diagram.vue?vue&type=script&lang=js
 
-// UI-first rebuild to match the Figma "Energy Flow Diagram" screen exactly. Data below is static
-// mock content taken from the Figma mockup — real API wiring will be reintroduced once the
-// backend team ships the matching endpoint shape.
+// The diagram renders one of two real network chains end-to-end, picked via the Path A / Path B
+// tabs. Each node only declares its loss % and a starting total lives on the path (TS incoming
+// energy); `computeChain` derives every other node's total from the previous node's outgoing
+// energy, so the numbers on screen always satisfy outgoing + loss = total and
+// nodeN.total === nodeN-1.outgoing — that invariant is what makes the view testable rather than
+// a set of disconnected mock numbers.
 
 /* harmony default export */ var energy_flow_diagramvue_type_script_lang_js = ({
   components: {
@@ -55,226 +56,209 @@ var SideNav = __webpack_require__(47);
   },
   data() {
     return {
-      flowCards: [{
-        id: 'tc',
-        title: 'Transformer Capacity',
-        filters: ['All'],
-        total: '265,899 MWH',
-        leftLabel: 'Outgoing',
-        rightLabel: 'Loss',
-        leftPct: 90,
-        rightPct: 10,
-        leftVal: '216,487.71 MWH',
-        rightVal: '0 MWH',
-        bottomLabel: 'Total Feeder',
-        bottomVal: 3,
-        col: 1,
-        row: 1
+      selectedPath: 'A',
+      revealedCount: 1,
+      pathOptions: [{
+        key: 'A',
+        label: 'Path A'
       }, {
-        id: 'ofeeders',
-        title: '33KVA Outgoing Feeders',
-        filters: ['All'],
-        total: '240,043 MWH',
-        leftLabel: 'Outgoing',
-        rightLabel: 'Loss',
-        leftPct: 85,
-        rightPct: 15,
-        leftVal: '216,487.71 MWH',
-        rightVal: '0 MWH',
-        bottomLabel: 'Total Feeder',
-        bottomVal: 300,
-        col: 3,
-        row: 1
-      }, {
-        id: 'iss',
-        title: 'ISS',
-        filters: ['All'],
-        total: '203,890 MWH',
-        leftLabel: 'Outgoing',
-        rightLabel: 'Loss',
-        leftPct: 90,
-        rightPct: 10,
-        leftVal: '190,543 MWH',
-        rightVal: '20,832 MWH',
-        bottomLabel: 'Total Feeder',
-        bottomVal: 30,
-        col: 5,
-        row: 1
-      }, {
-        id: 'transformer',
-        title: 'Transformer',
-        filters: ['T2'],
-        total: '170,890 MWH',
-        leftLabel: 'Incoming',
-        rightLabel: 'Loss',
-        leftPct: 90,
-        rightPct: 10,
-        leftVal: '158,000 MWH',
-        rightVal: '0 MWH',
-        bottomLabel: 'Total Feeder',
-        bottomVal: 15,
-        col: 7,
-        row: 1
-      }, {
-        id: 'ts',
-        title: 'TS Incoming Energy',
-        filters: ['Alausa TS'],
-        total: '465,899 MWH',
-        leftLabel: 'Incoming',
-        rightLabel: 'Loss',
-        leftPct: 100,
-        rightPct: 0,
-        leftVal: '465,899 MWH',
-        rightVal: '0 MWH',
-        bottomLabel: 'Total Feeder',
-        bottomVal: 30,
-        col: 1,
-        row: 3
-      }, {
-        id: 'dtsAll',
-        title: 'DTs',
-        filters: ['All DTs', 'Public & Private'],
-        total: '40,320 MWH',
-        leftLabel: 'Incoming',
-        rightLabel: 'Loss',
-        leftPct: 80,
-        rightPct: 20,
-        leftVal: '216,487.71 MWH',
-        rightVal: '0 MWH',
-        bottomRows: [{
-          label: 'Total Public DTs',
-          val: 3
-        }, {
-          label: 'Total Private DTs',
-          val: 4
-        }],
-        col: 3,
-        row: 3
-      }, {
-        id: 'cust1',
-        title: 'Customer',
-        filters: ['T2'],
-        total: '10,396.77 MWH',
-        single: true,
-        fillPct: 88,
-        bottomLabel: 'Total Customers',
-        bottomVal: '200000',
-        col: 5,
-        row: 3
-      }, {
-        id: 'incomer',
-        title: '11KVA Incomer',
-        filters: ['All'],
-        total: '10,396.77 MWH',
-        leftLabel: 'Incoming',
-        rightLabel: 'Loss',
-        leftPct: 60,
-        rightPct: 40,
-        leftVal: '216,487.71 MWH',
-        rightVal: '0 MWH',
-        bottomLabel: 'Total Feeder',
-        bottomVal: 12,
-        col: 7,
-        row: 3
-      }, {
-        id: 'cust2',
-        title: 'Customer',
-        filters: ['T2'],
-        total: '10,396.77 MWH',
-        single: true,
-        fillPct: 88,
-        bottomLabel: 'Total Customers',
-        bottomVal: '200000',
-        col: 3,
-        row: 5
-      }, {
-        id: 'dtsT2',
-        title: 'DTs',
-        filters: ['T2'],
-        total: '10,396.77 MWH',
-        leftLabel: 'Incoming',
-        rightLabel: 'Loss',
-        leftPct: 80,
-        rightPct: 20,
-        leftVal: '216,487.71 MWH',
-        rightVal: '0 MWH',
-        bottomLabel: 'Total Feeder',
-        bottomVal: 23,
-        col: 5,
-        row: 5
-      }, {
-        id: 'outFeeder',
-        title: '11KVA Outgoing Feeder',
-        filters: ['T2'],
-        total: '10,396.77 MWH',
-        leftLabel: 'Incoming',
-        rightLabel: 'Loss',
-        leftPct: 70,
-        rightPct: 30,
-        leftVal: '216,487.71 MWH',
-        rightVal: '0 MWH',
-        bottomLabel: 'Total Feeder',
-        bottomVal: 23,
-        col: 7,
-        row: 5
+        key: 'B',
+        label: 'Path B'
       }],
-      connectors: [{
-        id: 'c1',
-        type: 'h',
-        col: 2,
-        row: 1
-      }, {
-        id: 'c2',
-        type: 'h',
-        col: 4,
-        row: 1
-      }, {
-        id: 'c3',
-        type: 'h',
-        col: 6,
-        row: 1
-      }, {
-        id: 'c4',
-        type: 'v',
-        col: 1,
-        row: 2
-      }, {
-        id: 'c5',
-        type: 'v',
-        col: 3,
-        row: 2
-      }, {
-        id: 'c6',
-        type: 'h',
-        col: 4,
-        row: 3
-      }, {
-        id: 'c7',
-        type: 'v',
-        col: 7,
-        row: 2
-      }, {
-        id: 'c8',
-        type: 'v',
-        col: 3,
-        row: 4
-      }, {
-        id: 'c9',
-        type: 'h',
-        col: 4,
-        row: 5
-      }, {
-        id: 'c10',
-        type: 'h',
-        col: 6,
-        row: 5
-      }, {
-        id: 'c11',
-        type: 'v',
-        col: 7,
-        row: 4
-      }]
+      pathDefs: {
+        A: {
+          description: 'TS → Transformer → 33kV Feeder → ISS → Transformer 2 → 11kV Incomer → 11kV Outgoing Feeder → DT → Customer',
+          startTotal: 465899,
+          nodes: [{
+            id: 'a-ts',
+            title: 'TS Incoming Energy',
+            filters: ['Alausa TS'],
+            lossPct: 0,
+            bottomLabel: 'Total Feeder',
+            bottomVal: 15
+          }, {
+            id: 'a-transformer',
+            title: 'Transformer',
+            filters: ['T1'],
+            lossPct: 3,
+            bottomLabel: 'Total Feeder',
+            bottomVal: 85
+          }, {
+            id: 'a-feeder33',
+            title: '33kV Feeder',
+            filters: ['All'],
+            lossPct: 8,
+            bottomLabel: 'Total Feeder',
+            bottomVal: 108
+          }, {
+            id: 'a-iss',
+            title: 'ISS',
+            filters: ['All'],
+            lossPct: 6,
+            bottomLabel: 'Total ISS',
+            bottomVal: 356
+          }, {
+            id: 'a-transformer2',
+            title: 'Transformer 2',
+            filters: ['T2'],
+            lossPct: 4,
+            bottomLabel: 'Total Transformer',
+            bottomVal: 16712
+          }, {
+            id: 'a-incomer11',
+            title: '11kV Incomer',
+            filters: ['All'],
+            lossPct: 5,
+            bottomLabel: 'Total Incomer',
+            bottomVal: 345
+          }, {
+            id: 'a-outfeeder11',
+            title: '11kV Outgoing Feeder',
+            filters: ['All'],
+            lossPct: 4,
+            bottomLabel: 'Total Feeder',
+            bottomVal: 85
+          }, {
+            id: 'a-dt',
+            title: 'DT',
+            filters: ['All DTs', 'Public & Private'],
+            lossPct: 15,
+            bottomRows: [{
+              label: 'Total Public DTs',
+              val: 9
+            }, {
+              label: 'Total Private DTs',
+              val: 6
+            }]
+          }, {
+            id: 'a-customer',
+            title: 'Customer',
+            filters: ['All'],
+            customer: true,
+            fillPct: 92,
+            bottomLabel: 'Total Customers',
+            bottomVal: '200,000'
+          }]
+        },
+        B: {
+          description: 'TS → Transformer → 33kV Feeder → DT → Customer',
+          startTotal: 92450,
+          nodes: [{
+            id: 'b-ts',
+            title: 'TS Incoming Energy',
+            filters: ['Ikeja TS'],
+            lossPct: 0,
+            bottomLabel: 'Total Feeder',
+            bottomVal: 4
+          }, {
+            id: 'b-transformer',
+            title: 'Transformer',
+            filters: ['T1'],
+            lossPct: 3,
+            bottomLabel: 'Total Feeder',
+            bottomVal: 20
+          }, {
+            id: 'b-feeder33',
+            title: '33kV Feeder',
+            filters: ['All'],
+            lossPct: 8,
+            bottomLabel: 'Total Feeder',
+            bottomVal: 26
+          }, {
+            id: 'b-dt',
+            title: 'DT',
+            filters: ['All DTs'],
+            lossPct: 15,
+            bottomRows: [{
+              label: 'Total Public DTs',
+              val: 3
+            }, {
+              label: 'Total Private DTs',
+              val: 2
+            }]
+          }, {
+            id: 'b-customer',
+            title: 'Customer',
+            filters: ['All'],
+            customer: true,
+            fillPct: 90,
+            bottomLabel: 'Total Customers',
+            bottomVal: '48,500'
+          }]
+        }
+      }
     };
+  },
+  computed: {
+    activePath() {
+      return this.pathDefs[this.selectedPath];
+    },
+    flowCards() {
+      return this.computeChain(this.activePath);
+    },
+    visibleCards() {
+      return this.flowCards.slice(0, this.revealedCount);
+    }
+  },
+  watch: {
+    selectedPath() {
+      this.revealedCount = 1;
+    }
+  },
+  methods: {
+    isFrontier(i) {
+      return i === this.visibleCards.length - 1 && this.revealedCount < this.flowCards.length;
+    },
+    selectCard(i) {
+      if (this.isFrontier(i)) {
+        this.revealedCount++;
+      }
+    },
+    resetFlow() {
+      this.revealedCount = 1;
+    },
+    computeChain(pathDef) {
+      let runningTotal = pathDef.startTotal;
+      return pathDef.nodes.map(n => {
+        if (n.customer) {
+          return {
+            id: n.id,
+            title: n.title,
+            filters: n.filters,
+            total: this.fmt(runningTotal) + ' MWH',
+            single: true,
+            fillPct: n.fillPct,
+            bottomLabel: n.bottomLabel,
+            bottomVal: n.bottomVal
+          };
+        }
+        const total = runningTotal;
+        const outgoingPct = 100 - n.lossPct;
+        const outgoingVal = total * outgoingPct / 100;
+        const lossVal = total - outgoingVal;
+        runningTotal = outgoingVal;
+        return {
+          id: n.id,
+          title: n.title,
+          filters: n.filters,
+          total: this.fmt(total) + ' MWH',
+          leftLabel: 'Outgoing',
+          rightLabel: 'Loss',
+          leftPct: outgoingPct,
+          rightPct: n.lossPct,
+          leftVal: this.fmt(outgoingVal) + ' MWH',
+          rightVal: this.fmt(lossVal) + ' MWH',
+          bottomLabel: n.bottomLabel,
+          bottomVal: n.bottomVal,
+          bottomRows: n.bottomRows
+        };
+      });
+    },
+    fmt(n) {
+      return Number(n).toLocaleString('en-US', {
+        maximumFractionDigits: 2
+      });
+    }
   }
 });
 // CONCATENATED MODULE: ./pages/energy_flow_diagram.vue?vue&type=script&lang=js
@@ -288,7 +272,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(88)
+  var style0 = __webpack_require__(92)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -301,7 +285,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "71add4d6",
+  "366deb61",
   "1fc1aef5"
   
 )
@@ -404,7 +388,7 @@ if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(4).default
 module.exports.__inject__ = function (context) {
-  add("3fada58a", content, true, context)
+  add("7fba223a", content, true, context)
 };
 
 /***/ }),
@@ -416,14 +400,14 @@ module.exports.__inject__ = function (context) {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=template&id=8411a820&scoped=true
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=template&id=28ee225a&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-8411a820>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-8411a820><img" + _vm._ssrAttr("src", __webpack_require__(48)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-8411a820></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-8411a820>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
+  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-28ee225a>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-28ee225a><img" + _vm._ssrAttr("src", __webpack_require__(48)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-28ee225a></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-28ee225a>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
     return _vm._ssrNode("<li" + _vm._ssrClass(null, {
       active: _vm.isActive(item)
-    }) + " data-v-8411a820>", "</li>", [_c('nuxt-link', {
+    }) + " data-v-28ee225a>", "</li>", [_c('nuxt-link', {
       class: {
         'red-text text-darken-2': _vm.isActive(item)
       },
@@ -438,7 +422,7 @@ var render = function render() {
         "font-size": "10px"
       }
     }, [_vm._v("\n                    " + _vm._s(item.title) + "\n                ")])])], 1);
-  }), _vm._ssrNode(" "), _vm._ssrNode("<li data-v-8411a820>", "</li>", [_c('nuxt-link', {
+  }), _vm._ssrNode(" "), _vm._ssrNode("<li data-v-28ee225a>", "</li>", [_c('nuxt-link', {
     staticClass: "red-text",
     attrs: {
       "to": "/"
@@ -454,7 +438,7 @@ var render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=template&id=8411a820&scoped=true
+// CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=template&id=28ee225a&scoped=true
 
 // EXTERNAL MODULE: ./components/ThemeToggle.vue + 4 modules
 var ThemeToggle = __webpack_require__(45);
@@ -472,11 +456,9 @@ var ThemeToggle = __webpack_require__(45);
         title: 'End-To-End Energy Dashboard',
         icon: 'dashboard',
         url: '/end_to_end_energy_dashboard'
-      }, {
-        title: 'Energy Flow Diagram',
-        icon: 'dashboard',
-        url: '/energy_flow_diagram'
-      }, {
+      },
+      // { title: 'Energy Flow Diagram', icon: 'dashboard', url: '/energy_flow_diagram' },
+      {
         title: 'Control Center Dashboard',
         icon: 'dashboard',
         url: '/control_center_dashboard'
@@ -533,7 +515,7 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "8411a820",
+  "28ee225a",
   "0f3f648e"
   
 )
@@ -558,9 +540,9 @@ module.exports = __webpack_require__.p + "img/logo.d2f3c61.png";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_28ee225a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(46);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_28ee225a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_28ee225a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_28ee225a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_28ee225a_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
@@ -572,7 +554,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-8411a820]{min-height:100vh}.dashboard-wrapper[data-v-8411a820],.sidenav[data-v-8411a820]{background-color:var(--bg-sidenav)}.sidenav[data-v-8411a820]{border-right:1px solid var(--border-color);width:260px}.sidenav li>a[data-v-8411a820]{align-items:center;display:flex;height:auto;line-height:1.3;min-height:48px;padding:10px 32px}.sidenav li>a>i.material-icons[data-v-8411a820]{flex-shrink:0;height:auto;line-height:1.3}.theme-toggle-container[data-v-8411a820]{padding:0 16px}.main-content[data-v-8411a820]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-8411a820]{border-radius:12px;position:relative}.icon-circle[data-v-8411a820]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-8411a820]{font-size:24px;font-weight:700}.stats-text p[data-v-8411a820]{font-size:12px;margin:0}.badge[data-v-8411a820]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-8411a820]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-8411a820]{font-size:11px;margin-bottom:5px}.border-right[data-v-8411a820]{border-right:1px solid var(--border-color)}.tabs[data-v-8411a820]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-8411a820]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-8411a820]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-8411a820]{padding-left:20px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-28ee225a]{min-height:100vh}.dashboard-wrapper[data-v-28ee225a],.sidenav[data-v-28ee225a]{background-color:var(--bg-sidenav)}.sidenav[data-v-28ee225a]{border-right:1px solid var(--border-color);width:260px}.sidenav li>a[data-v-28ee225a]{align-items:center;display:flex;height:auto;line-height:1.3;min-height:48px;padding:10px 32px}.sidenav li>a>i.material-icons[data-v-28ee225a]{flex-shrink:0;height:auto;line-height:1.3}.theme-toggle-container[data-v-28ee225a]{padding:0 16px}.main-content[data-v-28ee225a]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-28ee225a]{border-radius:12px;position:relative}.icon-circle[data-v-28ee225a]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-28ee225a]{font-size:24px;font-weight:700}.stats-text p[data-v-28ee225a]{font-size:12px;margin:0}.badge[data-v-28ee225a]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-28ee225a]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-28ee225a]{font-size:11px;margin-bottom:5px}.border-right[data-v-28ee225a]{border-right:1px solid var(--border-color)}.tabs[data-v-28ee225a]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-28ee225a]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-28ee225a]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-28ee225a]{padding-left:20px}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -580,44 +562,44 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 73:
+/***/ 77:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(89);
+var content = __webpack_require__(93);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(4).default
 module.exports.__inject__ = function (context) {
-  add("90334422", content, true, context)
+  add("2fde15f9", content, true, context)
 };
 
 /***/ }),
 
-/***/ 88:
+/***/ 92:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_71add4d6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(73);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_71add4d6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_71add4d6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_71add4d6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_71add4d6_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_366deb61_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(77);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_366deb61_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_366deb61_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_366deb61_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_366deb61_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 89:
+/***/ 93:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-71add4d6]{background-color:var(--bg-page);min-height:100vh}.main-content[data-v-71add4d6]{padding-left:280px;padding-right:20px;padding-top:20px}.avail-header[data-v-71add4d6]{align-items:center;display:flex;justify-content:space-between;margin-bottom:20px}.avail-title[data-v-71add4d6]{color:var(--text-primary);font-weight:600;margin:0}.flow-panel[data-v-71add4d6]{background:var(--bg-card);border-radius:14px;padding:24px}.flow-scroll[data-v-71add4d6]{overflow-x:auto;padding-bottom:8px}.flow-canvas[data-v-71add4d6]{display:grid;grid-template-columns:230px 36px 230px 36px 230px 36px 230px;grid-template-rows:minmax(180px,auto) 40px minmax(200px,auto) 40px minmax(170px,auto);min-width:1080px}.connector.h[data-v-71add4d6]{align-self:center;height:2px;width:100%}.connector.h[data-v-71add4d6],.connector.v[data-v-71add4d6]{background:var(--border-strong)}.connector.v[data-v-71add4d6]{height:100%;justify-self:center;width:2px}.flow-card[data-v-71add4d6]{align-self:start;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;box-shadow:0 2px 8px var(--shadow-color);padding:14px 16px}.flow-card-title[data-v-71add4d6]{color:var(--text-primary);font-size:13px;font-weight:600;margin:0 0 10px;text-align:center}.flow-filters[data-v-71add4d6]{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}.flow-filter[data-v-71add4d6]{align-items:center;border:1px solid var(--border-color);border-radius:6px;color:var(--text-secondary);display:flex;font-size:12px;justify-content:space-between;padding:4px 8px}.flow-filter .material-icons[data-v-71add4d6]{color:var(--text-muted);font-size:16px!important}.flow-total-label[data-v-71add4d6]{color:var(--text-muted);font-size:11px;margin:0}.flow-total-value[data-v-71add4d6]{color:#2fa360;font-size:15px;font-weight:700;margin:2px 0 8px}.flow-bar[data-v-71add4d6]{background:var(--border-color);border-radius:4px;display:flex;height:6px;margin-bottom:8px;overflow:hidden}.flow-bar-fill[data-v-71add4d6]{background:#3ec97a;height:100%}.flow-bar-loss[data-v-71add4d6]{background:#e05353;height:100%}.flow-stats-row[data-v-71add4d6]{display:flex;font-size:11px;gap:8px;justify-content:space-between;margin-bottom:8px}.flow-stat[data-v-71add4d6]{display:flex;flex-direction:column;gap:2px}.flow-stat.right[data-v-71add4d6]{align-items:flex-end;text-align:right}.flow-stat-pct[data-v-71add4d6]{color:var(--text-secondary);font-weight:600}.flow-stat-pct.loss[data-v-71add4d6]{color:#c0392b}.flow-stat-val[data-v-71add4d6]{color:var(--text-muted)}.flow-divider[data-v-71add4d6]{background:var(--divider);height:1px;margin:6px 0}.flow-bottom-row[data-v-71add4d6]{color:var(--text-secondary);display:flex;font-size:12px;justify-content:space-between;padding-top:4px}.flow-bottom-row b[data-v-71add4d6]{color:var(--text-primary)}@media only screen and (max-width:992px){.main-content[data-v-71add4d6]{padding-left:20px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-366deb61]{background-color:var(--bg-page);min-height:100vh}.main-content[data-v-366deb61]{padding-left:280px;padding-right:20px;padding-top:20px}.avail-header[data-v-366deb61]{align-items:center;display:flex;justify-content:space-between;margin-bottom:20px}.avail-title[data-v-366deb61]{color:var(--text-primary);font-weight:600;margin:0}.flow-path-tabs[data-v-366deb61]{display:flex;gap:8px}.flow-tab[data-v-366deb61]{background:var(--bg-card);border:1px solid var(--border-color);border-radius:8px;color:var(--text-secondary);cursor:pointer;font-size:13px;font-weight:600;padding:7px 16px}.flow-tab.active[data-v-366deb61]{background:#26e;border-color:#26e;color:#fff}.flow-panel[data-v-366deb61]{background:var(--bg-card);border-radius:14px;padding:24px}.flow-path-row[data-v-366deb61]{align-items:center;display:flex;gap:12px;justify-content:space-between;margin-bottom:18px}.flow-path-desc[data-v-366deb61]{color:var(--text-secondary);font-size:13px;margin:0}.flow-reset-btn[data-v-366deb61]{align-items:center;background:none;border:1px solid var(--border-color);border-radius:8px;color:var(--text-secondary);cursor:pointer;display:flex;flex-shrink:0;font-size:12px;font-weight:600;gap:4px;padding:5px 12px}.flow-reset-btn[data-v-366deb61]:hover{color:var(--text-primary)}.flow-scroll[data-v-366deb61]{overflow-x:auto;padding-bottom:8px}.flow-canvas[data-v-366deb61]{min-width:-moz-max-content;min-width:max-content}.flow-arrow[data-v-366deb61],.flow-canvas[data-v-366deb61]{align-items:center;display:flex}.flow-arrow[data-v-366deb61]{color:var(--border-strong);flex-shrink:0;justify-content:center;width:36px}.flow-card[data-v-366deb61]{align-self:flex-start;animation:flow-card-in-366deb61 .25s ease;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;box-shadow:0 2px 8px var(--shadow-color);flex-shrink:0;padding:14px 16px;position:relative;width:230px}.flow-card.is-frontier[data-v-366deb61]{border-color:#26e;box-shadow:0 0 0 3px rgba(34,102,238,.15),0 2px 8px var(--shadow-color);cursor:pointer}.flow-card.is-frontier[data-v-366deb61]:hover{box-shadow:0 0 0 4px rgba(34,102,238,.22),0 2px 8px var(--shadow-color)}.flow-card-hint[data-v-366deb61]{background:#26e;border-radius:10px;color:#fff;font-size:10px;font-weight:700;left:50%;padding:3px 10px;position:absolute;top:-11px;transform:translateX(-50%);white-space:nowrap}.flow-card-hint.complete[data-v-366deb61]{background:#2fa360}@keyframes flow-card-in-366deb61{0%{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}.flow-card-title[data-v-366deb61]{color:var(--text-primary);font-size:13px;font-weight:600;margin:0 0 10px;text-align:center}.flow-filters[data-v-366deb61]{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}.flow-filter[data-v-366deb61]{align-items:center;border:1px solid var(--border-color);border-radius:6px;color:var(--text-secondary);display:flex;font-size:12px;justify-content:space-between;padding:4px 8px}.flow-filter .material-icons[data-v-366deb61]{color:var(--text-muted);font-size:16px!important}.flow-total-label[data-v-366deb61]{color:var(--text-muted);font-size:11px;margin:0}.flow-total-value[data-v-366deb61]{color:#2fa360;font-size:15px;font-weight:700;margin:2px 0 8px}.flow-bar[data-v-366deb61]{background:var(--border-color);border-radius:4px;display:flex;height:6px;margin-bottom:8px;overflow:hidden}.flow-bar-fill[data-v-366deb61]{background:#3ec97a;height:100%}.flow-bar-loss[data-v-366deb61]{background:#e05353;height:100%}.flow-stats-row[data-v-366deb61]{display:flex;font-size:11px;gap:8px;justify-content:space-between;margin-bottom:8px}.flow-stat[data-v-366deb61]{display:flex;flex-direction:column;gap:2px}.flow-stat.right[data-v-366deb61]{align-items:flex-end;text-align:right}.flow-stat-pct[data-v-366deb61]{color:var(--text-secondary);font-weight:600}.flow-stat-pct.loss[data-v-366deb61]{color:#c0392b}.flow-stat-val[data-v-366deb61]{color:var(--text-muted)}.flow-divider[data-v-366deb61]{background:var(--divider);height:1px;margin:6px 0}.flow-bottom-row[data-v-366deb61]{color:var(--text-secondary);display:flex;font-size:12px;justify-content:space-between;padding-top:4px}.flow-bottom-row b[data-v-366deb61]{color:var(--text-primary)}@media only screen and (max-width:992px){.main-content[data-v-366deb61]{padding-left:20px}.avail-header[data-v-366deb61]{align-items:flex-start;flex-direction:column;gap:12px}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;

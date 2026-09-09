@@ -145,7 +145,7 @@ export default {
   methods: {
     signIn() {
       M.toast({ html: '<b class="yellow-text">Please wait...</b>' })
-      this.$router.push('./control_center_dashboard')
+      this.$router.push('./end_to_end_energy_dashboard')
       this.username = this.username.trim()
       this.password = this.password.trim()
       this.user_test = this.user_test.trim()
