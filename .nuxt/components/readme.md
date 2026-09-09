@@ -12,6 +12,8 @@ You can directly use them in pages and other components without the need to impo
 - `<ChartPie>` | `<chart-pie>` (components/ChartPie.vue)
 - `<CustomSelect>` | `<custom-select>` (components/CustomSelect.vue)
 - `<DTDetailsModal>` | `<d-t-details-modal>` (components/DTDetailsModal.vue)
+- `<FlowDiagramCanvas>` | `<flow-diagram-canvas>` (components/FlowDiagramCanvas.vue)
+- `<FlowLane>` | `<flow-lane>` (components/FlowLane.vue)
 - `<Forgot>` | `<forgot>` (components/Forgot.vue)
 - `<GridNetworkMap>` | `<grid-network-map>` (components/GridNetworkMap.vue)
 - `<Login>` | `<login>` (components/Login.vue)

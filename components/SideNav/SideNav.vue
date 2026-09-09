@@ -38,7 +38,7 @@ export default {
         return {
             menuItems: [
                 { title: 'End-To-End Energy Dashboard', icon: 'dashboard', url: '/end_to_end_energy_dashboard' },
-                // { title: 'Energy Flow Diagram', icon: 'dashboard', url: '/energy_flow_diagram' },
+                { title: 'Energy Flow Diagram', icon: 'dashboard', url: '/energy_flow_diagram' },
                 { title: 'Control Center Dashboard', icon: 'dashboard', url: '/control_center_dashboard' },
                 { title: 'Availability Summary', icon: 'dashboard', url: '/availability_summary' },
                 { title: 'DT Availability', icon: 'dashboard', url: '/dt_availability' },

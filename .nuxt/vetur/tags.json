@@ -17,6 +17,12 @@
   "DTDetailsModal": {
     "description": "Auto imported from components/DTDetailsModal.vue"
   },
+  "FlowDiagramCanvas": {
+    "description": "Auto imported from components/FlowDiagramCanvas.vue"
+  },
+  "FlowLane": {
+    "description": "Auto imported from components/FlowLane.vue"
+  },
   "Forgot": {
     "description": "Auto imported from components/Forgot.vue"
   },
