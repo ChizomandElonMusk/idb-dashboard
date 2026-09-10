@@ -16,6 +16,7 @@ You can directly use them in pages and other components without the need to impo
 - `<FlowLane>` | `<flow-lane>` (components/FlowLane.vue)
 - `<Forgot>` | `<forgot>` (components/Forgot.vue)
 - `<GridNetworkMap>` | `<grid-network-map>` (components/GridNetworkMap.vue)
+- `<LoadingOverlay>` | `<loading-overlay>` (components/LoadingOverlay.vue)
 - `<Login>` | `<login>` (components/Login.vue)
 - `<Logo>` | `<logo>` (components/Logo.vue)
 - `<MeterCommunication>` | `<meter-communication>` (components/MeterCommunication.vue)

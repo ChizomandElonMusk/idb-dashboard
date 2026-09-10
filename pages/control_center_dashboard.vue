@@ -2,8 +2,15 @@
     <div class="dashboard-wrapper">
         <SideNav />
         <main class="main-content">
+            <LoadingOverlay :visible="loading" />
+
             <div class="avail-header">
                 <h5 class="avail-title">Control Center Dashboard</h5>
+            </div>
+
+            <div v-if="error" class="cc-error">
+                Couldn't load live data: {{ error }}
+                <button class="cc-retry" @click="loadSummary">Retry</button>
             </div>
 
             <div class="row">
@@ -118,9 +125,10 @@
                         <div class="energy-card-header">
                             <p class="energy-card-title">Energy</p>
                             <div class="chart-tabs">
-                                <span class="chart-tab" :class="{ active: energyTab === 'Day' }" @click="energyTab = 'Day'">Day</span>
-                                <span class="chart-tab" :class="{ active: energyTab === 'Week' }" @click="energyTab = 'Week'">Week</span>
-                                <span class="chart-tab" :class="{ active: energyTab === 'Month' }" @click="energyTab = 'Month'">Month</span>
+                                <!-- control-center/summary's energy.trend is fixed at monthly grain (no
+                                     day/week breakdown exists to switch to), so this isn't a clickable
+                                     filter — it just states what's being shown. -->
+                                <span class="chart-tab active">Month</span>
                                 <span class="chart-icon-btn"><i class="material-icons tiny">calendar_today</i></span>
                                 <span class="chart-icon-btn chart-icon-btn-accent"><i class="material-icons tiny">description</i></span>
                             </div>
@@ -130,9 +138,9 @@
                             <div style="position: relative; height:190px;">
                                 <canvas id="energyChart"></canvas>
                             </div>
-                            <div class="chart-callout" style="left: 40%; top: 6px;">
-                                <span class="callout-title">March</span>
-                                <span class="callout-value">43.00 MWh</span>
+                            <div v-if="energyCallout" class="chart-callout" :style="{ left: energyCallout.leftPct + '%', top: '6px' }">
+                                <span class="callout-title">{{ energyCallout.title }}</span>
+                                <span class="callout-value">{{ energyCallout.value }}</span>
                             </div>
                         </div>
                     </div>
@@ -162,9 +170,9 @@
                         <div class="energy-card-header">
                             <p class="energy-card-title">Vending &amp; Collection</p>
                             <div class="chart-tabs">
-                                <span class="chart-tab" :class="{ active: vendingTab === 'Day' }" @click="vendingTab = 'Day'">Day</span>
-                                <span class="chart-tab" :class="{ active: vendingTab === 'Week' }" @click="vendingTab = 'Week'">Week</span>
-                                <span class="chart-tab" :class="{ active: vendingTab === 'Month' }" @click="vendingTab = 'Month'">Month</span>
+                                <span class="chart-tab" :class="{ active: vendingTab === 'Day' }" @click="setVendingTab('Day')">Day</span>
+                                <span class="chart-tab" :class="{ active: vendingTab === 'Week' }" @click="setVendingTab('Week')">Week</span>
+                                <span class="chart-tab" :class="{ active: vendingTab === 'Month' }" @click="setVendingTab('Month')">Month</span>
                                 <span class="chart-icon-btn"><i class="material-icons tiny">calendar_today</i></span>
                             </div>
                         </div>
@@ -172,9 +180,9 @@
                             <div style="position: relative; height:190px;">
                                 <canvas id="vendingChart"></canvas>
                             </div>
-                            <div class="chart-callout" style="left: 46%; top: 6px;">
-                                <span class="callout-title">June 16</span>
-                                <span class="callout-value">400,000,000</span>
+                            <div v-if="vendingCallout" class="chart-callout" :style="{ left: vendingCallout.leftPct + '%', top: '6px' }">
+                                <span class="callout-title">{{ vendingCallout.title }}</span>
+                                <span class="callout-value">{{ vendingCallout.value }}</span>
                             </div>
                         </div>
                         <div class="vending-stats-grid">
@@ -182,29 +190,29 @@
                                 <div class="vending-stat-row">
                                     <span class="vstat-dot vstat-dot-green"></span>
                                     <span class="vstat-label">Total customer Vended Today</span>
-                                    <span class="vstat-value">30,400,000</span>
+                                    <span class="vstat-value">{{ vendingStats.customerVendedToday }}</span>
                                 </div>
                                 <div class="vending-stat-row">
                                     <span class="vstat-dot vstat-dot-green"></span>
                                     <span class="vstat-label">Amount Vended Today</span>
-                                    <span class="vstat-value">30,400,000</span>
+                                    <span class="vstat-value">{{ vendingStats.amountVendedToday }}</span>
                                 </div>
                                 <div class="vending-stat-row">
                                     <span class="vstat-dot vstat-dot-green"></span>
                                     <span class="vstat-label">Amount Vended MTD</span>
-                                    <span class="vstat-value">2,000,000,000</span>
+                                    <span class="vstat-value">{{ vendingStats.amountVendedMtd }}</span>
                                 </div>
                             </div>
                             <div class="vending-stats-col">
                                 <div class="vending-stat-row">
                                     <span class="vstat-dot vstat-dot-blue"></span>
                                     <span class="vstat-label">Total Collection Today</span>
-                                    <span class="vstat-value">50,000,000</span>
+                                    <span class="vstat-value">{{ vendingStats.totalCollectionToday }}</span>
                                 </div>
                                 <div class="vending-stat-row">
                                     <span class="vstat-dot vstat-dot-blue"></span>
                                     <span class="vstat-label">Amount Collected MTD</span>
-                                    <span class="vstat-value">7,000,000,000</span>
+                                    <span class="vstat-value">{{ vendingStats.amountCollectedMtd }}</span>
                                 </div>
                             </div>
                         </div>
@@ -218,7 +226,7 @@
                             chart-type="doughnut"
                             :chart-data="totalFeederData"
                             :chart-options="doughnutOptions"
-                            center-text="421"
+                            :center-text="totalFeederCenterText"
                             :show-value-legend="true"
                             :legend-cols="2"
                         />
@@ -232,56 +240,89 @@
 
 <script>
 import SideNav from '~/components/SideNav/SideNav.vue'
+import LoadingOverlay from '~/components/LoadingOverlay.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import ChartPie from '~/components/ChartPie.vue'
 import Chart from '~/assets/js/Chart.js'
-// UI-first rebuild to match the Figma "Control Center Dashboard" screen exactly. Data below is
-// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
-// the backend team ships the matching endpoint shape.
+import { getControlCenterSummary, formatNumber, monthLabel, buildTrendCallout, bandColor, aggregateDailyTrend } from '~/js_modules/controlCenterApi'
+// Matches the Figma "Control Center Dashboard" screen, wired to GET /api/v1/control-center/summary
+// (see static/api_live_responses3.md #3). That endpoint takes no query params and always returns
+// the latest snapshot, so there's nothing to filter on this screen.
 
-const BAND_COLORS = ['#5b7cfa', '#3ec9a7', '#a56ef0', '#e74c3c', '#f5a623']
+// customers.metered_*_target can't be assumed non-zero; a zero/blank target would
+// otherwise divide-by-zero into a NaN width on the progress bar.
+function pctString(actual, target) {
+    const a = Number(actual)
+    const t = Number(target)
+    if (!Number.isFinite(a) || !Number.isFinite(t) || t <= 0) return '0%'
+    return `${((a / t) * 100).toFixed(2)}%`
+}
+
+
 
 export default {
-    components: { SideNav, AnimatedValue, ChartPie },
+    components: { SideNav, AnimatedValue, ChartPie, LoadingOverlay },
     data() {
         return {
-            online_feeders: '200',
-            kv11: '150',
-            kv33: '50',
-            online_dts: '1200',
-            public_dts: '1000',
-            private_dts: '200',
-            complaints_total: '50',
-            complaints_open: '20',
-            complaints_closed: '30',
-            nmd_value: '900000',
-            nmd_total: '1033000',
-            nmd_pct: `${((900000 / 1033000) * 100).toFixed(2)}%`,
-            md_value: '5000',
-            md_total: '7000',
-            md_pct: `${((5000 / 7000) * 100).toFixed(2)}%`,
-            energyTotal: '350.00MWh',
-            energyTab: 'Month',
-            vendingTab: 'Month',
-            bandPctLegend: [
-                { label: 'A', pct: '40%', color: BAND_COLORS[0] },
-                { label: 'B', pct: '25%', color: BAND_COLORS[1] },
-                { label: 'C', pct: '15%', color: BAND_COLORS[2] },
-                { label: 'D', pct: '15%', color: BAND_COLORS[3] },
-                { label: 'E', pct: '5%', color: BAND_COLORS[4] }
-            ],
+            loading: true,
+            error: null,
+
+            online_feeders: '—',
+            kv11: '—',
+            kv33: '—',
+            online_dts: '—',
+            public_dts: '—',
+            private_dts: '—',
+
+            complaints_total: '—',
+            complaints_open: '—',
+            complaints_closed: '—',
+
+            nmd_value: '—',
+            nmd_total: '—',
+            nmd_pct: '0%',
+            md_value: '—',
+            md_total: '—',
+            md_pct: '0%',
+
+            energyTotal: '—',
+            energyChartLabels: [],
+            energyChartValues: [],
+            energyCallout: null,
+
+            // vending_collection.trend is real daily data, so Day/Week/Month here are genuine
+            // client-side aggregations of it (see aggregateVendingTrend below) rather than
+            // separate API calls — this endpoint has no period param to ask the server for
+            // different granularities.
+            vendingTab: 'Day',
+            vendingRawTrend: [],
+            vendingChartLabels: [],
+            vendingVendedValues: [],
+            vendingCollectedValues: [],
+            vendingCallout: null,
+            vendingStats: {
+                customerVendedToday: '—',
+                amountVendedToday: '—',
+                amountVendedMtd: '—',
+                totalCollectionToday: '—',
+                amountCollectedMtd: '—'
+            },
+
+            bandPctLegend: [],
             energyAllocationData: {
-                labels: ['A', 'B', 'C', 'D', 'E'],
-                datasets: [{ data: [40, 25, 15, 15, 5], backgroundColor: BAND_COLORS, borderWidth: 0 }]
+                labels: [],
+                datasets: [{ data: [], backgroundColor: [], borderWidth: 0 }]
             },
             pieOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
                 legend: { display: false }
             },
+
+            totalFeederCenterText: '—',
             totalFeederData: {
-                labels: ['Band A', 'Band B', 'Band C', 'Band D', 'Band E'],
-                datasets: [{ data: [188, 78, 132, 18, 5], backgroundColor: BAND_COLORS, borderWidth: 0 }]
+                labels: [],
+                datasets: [{ data: [], backgroundColor: [], borderWidth: 0 }]
             },
             doughnutOptions: {
                 responsive: true,
@@ -289,11 +330,101 @@ export default {
                 cutoutPercentage: 68,
                 legend: { display: false }
             },
+
             energyChart: null,
             vendingChart: null
         }
     },
+    async mounted() {
+        await this.loadSummary()
+    },
     methods: {
+        async loadSummary() {
+            this.loading = true
+            this.error = null
+            try {
+                const data = await getControlCenterSummary()
+                this.applySummary(data)
+            } catch (err) {
+                this.error = err.message || 'Failed to load Control Center summary'
+            } finally {
+                this.loading = false
+            }
+        },
+        applySummary(data) {
+            const feeder = data.feederDTinfo || {}
+            this.online_feeders = formatNumber(feeder.online_feeders)
+            this.kv11 = formatNumber(feeder.online_feeders_11kv)
+            this.kv33 = formatNumber(feeder.online_feeders_33kv)
+            this.online_dts = formatNumber(feeder.online_dts)
+            this.public_dts = formatNumber(feeder.online_dts_public)
+            this.private_dts = formatNumber(feeder.online_dts_private)
+
+            // total/open/closed have no source system and are always null per the API doc —
+            // formatNumber renders that as "—" rather than a misleading "0".
+            const complaints = data.customercomplaints || {}
+            this.complaints_total = formatNumber(complaints.total)
+            this.complaints_open = formatNumber(complaints.open)
+            this.complaints_closed = formatNumber(complaints.closed)
+
+            const customers = data.customers || {}
+            this.nmd_value = formatNumber(customers.metered_nmd_actual)
+            this.nmd_total = formatNumber(customers.metered_nmd_target)
+            this.nmd_pct = pctString(customers.metered_nmd_actual, customers.metered_nmd_target)
+            this.md_value = formatNumber(customers.metered_md_actual)
+            this.md_total = formatNumber(customers.metered_md_target)
+            this.md_pct = pctString(customers.metered_md_actual, customers.metered_md_target)
+
+            const energy = data.energy || {}
+            this.energyTotal = `${formatNumber(energy.total_mwh)}MWh`
+            const energyTrend = energy.trend || []
+            this.energyChartLabels = energyTrend.map((t) => monthLabel(t.date))
+            this.energyChartValues = energyTrend.map((t) => t.mwh)
+            this.energyCallout = buildTrendCallout(energyTrend, 'mwh', (t) => monthLabel(t.date), (v) => `${formatNumber(v)} MWh`)
+
+            const allocation = data.energy_allocation_by_band || []
+            this.bandPctLegend = allocation.map((a) => ({ label: a.band, pct: `${a.pct}%`, color: bandColor(a.band) }))
+            this.energyAllocationData = {
+                labels: allocation.map((a) => a.band),
+                datasets: [{ data: allocation.map((a) => a.pct), backgroundColor: allocation.map((a) => bandColor(a.band)), borderWidth: 0 }]
+            }
+
+            const vending = data.vending_collection || {}
+            this.vendingStats = {
+                customerVendedToday: formatNumber(vending.customer_vended_today),
+                amountVendedToday: formatNumber(vending.amount_vended_today),
+                amountVendedMtd: formatNumber(vending.amount_vended_mtd),
+                totalCollectionToday: formatNumber(vending.total_collection_today),
+                amountCollectedMtd: formatNumber(vending.amount_collected_mtd)
+            }
+            this.vendingRawTrend = vending.trend || []
+            this.updateVendingView()
+
+            const feedersByBand = data.feeders_by_band || {}
+            this.totalFeederCenterText = formatNumber(feedersByBand.total)
+            const breakdown = feedersByBand.breakdown || []
+            this.totalFeederData = {
+                labels: breakdown.map((b) => `Band ${b.band}`),
+                datasets: [{ data: breakdown.map((b) => b.count), backgroundColor: breakdown.map((b) => bandColor(b.band)), borderWidth: 0 }]
+            }
+
+            this.$nextTick(() => {
+                this.initEnergyChart()
+                this.initVendingChart()
+            })
+        },
+        updateVendingView() {
+            const points = aggregateDailyTrend(this.vendingRawTrend, this.vendingTab, ['vended', 'collected'])
+            this.vendingChartLabels = points.map((p) => p.label)
+            this.vendingVendedValues = points.map((p) => p.vended)
+            this.vendingCollectedValues = points.map((p) => p.collected)
+            this.vendingCallout = buildTrendCallout(points, 'vended', (p) => p.label, (v) => formatNumber(v))
+        },
+        setVendingTab(tab) {
+            this.vendingTab = tab
+            this.updateVendingView()
+            this.$nextTick(() => this.initVendingChart())
+        },
         initEnergyChart() {
             const canvas = document.getElementById('energyChart')
             if (!canvas) return
@@ -301,14 +432,14 @@ export default {
             this.energyChart = new Chart(canvas.getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul'],
+                    labels: this.energyChartLabels,
                     datasets: [{
-                        data: [55, 40, 68, 45, 50, 62],
+                        data: this.energyChartValues,
                         borderColor: '#4ecb71',
                         backgroundColor: 'rgba(78,203,113,0.08)',
                         pointBackgroundColor: '#4ecb71',
                         pointBorderColor: '#fff',
-                        pointRadius: (ctx) => ctx.dataIndex === 2 ? 6 : 3,
+                        pointRadius: 3,
                         pointBorderWidth: 2,
                         borderWidth: 2,
                         tension: 0.4,
@@ -334,14 +465,14 @@ export default {
             this.vendingChart = new Chart(canvas.getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: this.vendingChartLabels,
                     datasets: [
                         {
                             label: 'Vending',
-                            data: [40, 25, 15, 55, 80, 95, 70, 50, 60, 75, 60],
+                            data: this.vendingVendedValues,
                             borderColor: '#4ecb71',
                             backgroundColor: 'rgba(78,203,113,0.06)',
-                            pointRadius: (ctx) => ctx.dataIndex === 4 ? 6 : 0,
+                            pointRadius: 0,
                             pointBackgroundColor: '#4ecb71',
                             pointBorderColor: '#fff',
                             pointBorderWidth: 2,
@@ -351,7 +482,7 @@ export default {
                         },
                         {
                             label: 'Collection',
-                            data: [70, 55, 30, 15, 25, 55, 70, 60, 45, 55, 70],
+                            data: this.vendingCollectedValues,
                             borderColor: '#5b7cfa',
                             backgroundColor: 'transparent',
                             pointRadius: 0,
@@ -367,18 +498,12 @@ export default {
                     legend: { display: false },
                     tooltips: { enabled: false },
                     scales: {
-                        xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#aaa' } }],
+                        xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#aaa', maxRotation: 0, autoSkip: true, maxTicksLimit: 8 } }],
                         yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)' }, ticks: { display: false } }]
                     }
                 }
             })
         }
-    },
-    mounted() {
-        this.$nextTick(() => {
-            this.initEnergyChart()
-            this.initVendingChart()
-        })
     }
 }
 </script>
@@ -393,6 +518,8 @@ export default {
     padding-left: 280px;
     padding-right: 20px;
     padding-top: 20px;
+    position: relative;
+    min-height: 100vh;
 }
 
 .avail-header {
@@ -640,6 +767,29 @@ export default {
 
 .vstat-label { color: var(--text-secondary); flex: 1; }
 .vstat-value { font-weight: 700; color: var(--text-primary); white-space: nowrap; }
+
+.cc-error {
+    background: #fdecec;
+    color: #c0392b;
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.cc-retry {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
 
 @media only screen and (max-width: 992px) {
     .main-content { padding-left: 20px; }

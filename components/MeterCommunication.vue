@@ -75,14 +75,16 @@ export default {
   display: flex;
   justify-content: center;
   width: 100%;
-  /* add some breathing room inside the card */
-  padding: 12px 50px 10px 50px;
+  /* Previously 50px each side, which needed a ~300px-wide card to avoid overflow —
+     narrower cards (e.g. a 4-up row) pushed the meter off-center. */
+  padding: 12px 16px 10px 16px;
+  box-sizing: border-box;
 }
 
 .meter-box {
   width: 200px;
-  /* ensure meter is centered and spaced away from card edges */
-  margin: 0 8px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .meter {

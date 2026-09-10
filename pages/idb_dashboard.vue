@@ -27,21 +27,37 @@
 
             <div class="row filter-row">
                 <div class="col s3 offset-s6">
-                    <div class="filter-pill">
-                        <span class="filter-label">All feeders</span>
+                    <div class="filter-pill filter-pill-select">
+                        <select class="filter-pill-input" v-model="selectedFeeder" @change="onFilterChange">
+                            <option value="All">All feeders</option>
+                            <option v-for="name in knownFeeders" :key="name" :value="name">{{ name }}</option>
+                        </select>
                         <i class="material-icons filter-arrow">arrow_drop_down</i>
                     </div>
                 </div>
                 <div class="col s3">
-                    <div class="filter-pill">
-                        <span class="filter-label">Date</span>
+                    <div class="filter-pill filter-pill-date" @click="openDatePicker">
+                        <input
+                            type="month"
+                            class="filter-pill-input"
+                            :value="selectedDate"
+                            :max="maxMonth"
+                            @change="onDateChange"
+                        />
                         <i class="material-icons filter-arrow" style="font-size:18px;">calendar_today</i>
                     </div>
                 </div>
             </div>
+            <p v-if="resolvedPeriod" class="resolved-period">Showing: {{ resolvedPeriod }} · {{ selectedFeeder }}</p>
 
             <!-- Dashboard Tab -->
-            <div id="idb-dashboard">
+            <div id="idb-dashboard" class="tab-panel">
+                <LoadingOverlay :visible="loading" />
+                <div v-if="error" class="idb-status-banner idb-error">
+                    Couldn't load IDB dashboard: {{ error }}
+                    <button class="idb-retry" @click="loadDashboard">Retry</button>
+                </div>
+
                 <div class="row">
                     <div class="col s12 m4">
                         <div class="card-panel top-stat-card">
@@ -53,9 +69,6 @@
                                     <p class="top-stat-value"><AnimatedValue :value="total_energy" /></p>
                                     <p class="top-stat-label">Total Energy (MWh)</p>
                                 </div>
-                            </div>
-                            <div class="top-stat-footer-right">
-                                <span class="footer-pill footer-pill-up">{{ total_energy_change }} <i class="material-icons tiny">arrow_upward</i></span>
                             </div>
                         </div>
                     </div>
@@ -70,9 +83,6 @@
                                     <p class="top-stat-label">Total Feeders</p>
                                 </div>
                             </div>
-                            <div class="top-stat-footer-right">
-                                <span class="footer-pill footer-pill-up">{{ total_feeders_change }} <i class="material-icons tiny">arrow_upward</i></span>
-                            </div>
                         </div>
                     </div>
                     <div class="col s12 m4">
@@ -86,9 +96,6 @@
                                     <p class="top-stat-label">Total flagged IDB meters</p>
                                 </div>
                             </div>
-                            <div class="top-stat-footer-right">
-                                <span class="footer-pill footer-pill-up">{{ flagged_meters_change }} <i class="material-icons tiny">arrow_upward</i></span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,9 +107,9 @@
                             <p class="progress-card-value">{{ feeder_dt_loss }} <span class="unit">MWh</span></p>
                             <div class="progress-row">
                                 <span class="progress-label">Loss (%)</span>
-                                <span class="progress-pct">{{ feeder_dt_loss_pct }}</span>
+                                <span class="progress-pct">{{ feeder_dt_loss_pct.toFixed(2) }}%</span>
                             </div>
-                            <div class="mini-track"><span class="mini-thumb red-thumb" style="left: 0%;"></span></div>
+                            <div class="mini-track"><span class="mini-thumb red-thumb" :style="{ left: clampPct(feeder_dt_loss_pct) + '%' }"></span></div>
                         </div>
                     </div>
                     <div class="col s12 m4">
@@ -111,9 +118,9 @@
                             <p class="progress-card-value">{{ customer_dt_loss }} <span class="unit">MWh</span></p>
                             <div class="progress-row">
                                 <span class="progress-label">Loss (%)</span>
-                                <span class="progress-pct">{{ customer_dt_loss_pct }}</span>
+                                <span class="progress-pct">{{ customer_dt_loss_pct.toFixed(2) }}%</span>
                             </div>
-                            <div class="mini-track"><span class="mini-thumb red-thumb" style="left: 0%;"></span></div>
+                            <div class="mini-track"><span class="mini-thumb red-thumb" :style="{ left: clampPct(customer_dt_loss_pct) + '%' }"></span></div>
                         </div>
                     </div>
                     <div class="col s12 m4">
@@ -148,9 +155,9 @@
                             <p class="progress-card-title">Biling Efficiency</p>
                             <div class="progress-row">
                                 <span class="progress-label">Biling Efficiency</span>
-                                <span class="progress-pct">{{ billing_efficiency }}</span>
+                                <span class="progress-pct">{{ billing_efficiency_pct.toFixed(2) }}%</span>
                             </div>
-                            <div class="mini-track"><span class="mini-fill green-fill" :style="{ width: billing_efficiency }"></span></div>
+                            <div class="mini-track"><span class="mini-fill green-fill" :style="{ width: clampPct(billing_efficiency_pct) + '%' }"></span></div>
                         </div>
                     </div>
                     <div class="col s12 m6">
@@ -158,9 +165,9 @@
                             <p class="progress-card-title">ATC &amp; C</p>
                             <div class="progress-row">
                                 <span class="progress-label">ATC &amp; C</span>
-                                <span class="progress-pct">{{ atc_c }}</span>
+                                <span class="progress-pct">{{ atc_c_pct.toFixed(2) }}%</span>
                             </div>
-                            <div class="mini-track"><span class="mini-thumb red-thumb" style="left: 0%;"></span></div>
+                            <div class="mini-track"><span class="mini-thumb red-thumb" :style="{ left: clampPct(atc_c_pct) + '%' }"></span></div>
                         </div>
                     </div>
                 </div>
@@ -170,8 +177,8 @@
                         <div class="card-panel mini-chart-card">
                             <p class="pie-card-title center">Total Customers</p>
                             <ChartPie chart-type="doughnut" :chart-data="totalCustomersData" :chart-options="doughnutOptions"
-                                center-text="5,390" :show-value-legend="true" :legend-cols="1"
-                                :value-labels="['88k(78.29%)', '24.4k(21.71%)']" />
+                                :center-text="totalCustomersCenterText" :show-value-legend="true" :legend-cols="1"
+                                :value-labels="totalCustomersValueLabels" />
                         </div>
                     </div>
                     <div class="col s12 m3">
@@ -179,33 +186,38 @@
                             <p class="pie-card-title center">Revenue</p>
                             <ChartPie chart-type="pie" :chart-data="revenueData" :chart-options="pieOptions"
                                 :show-value-legend="true" :legend-cols="1"
-                                :value-labels="['258.19M(78.29%)', '280.4M(21.71%)']" />
+                                :value-labels="revenueValueLabels" />
                         </div>
                     </div>
                     <div class="col s12 m3">
                         <div class="card-panel mini-chart-card">
                             <p class="pie-card-title center">Energy</p>
                             <div class="bars-stack">
-                                <div class="bar-track"><span class="bar-fill" style="width:80.93%; background:#5b7cfa;"></span></div>
-                                <div class="bar-track"><span class="bar-fill" style="width:19.07%; background:#4ecb71;"></span></div>
+                                <div class="bar-track"><span class="bar-fill" :style="{ width: clampPct(energyBreakdown.mdPct) + '%', background: '#5b7cfa' }"></span></div>
+                                <div class="bar-track"><span class="bar-fill" :style="{ width: clampPct(energyBreakdown.nmdPct) + '%', background: '#4ecb71' }"></span></div>
                             </div>
                             <div class="bars-legend">
-                                <div class="bars-legend-item"><span class="legend-dot" style="background:#5b7cfa;"></span> MD Energy<br><b>336.79</b><br><span class="muted">80.93%</span></div>
-                                <div class="bars-legend-item"><span class="legend-dot" style="background:#4ecb71;"></span> NMD Energy<br><b>1,429.65k</b><br><span class="muted">19.07%</span></div>
+                                <div class="bars-legend-item"><span class="legend-dot" style="background:#5b7cfa;"></span> MD Energy (MWh)<br><b>{{ energyBreakdown.mdValue }}</b><br><span class="muted">{{ energyBreakdown.mdPct.toFixed(2) }}%</span></div>
+                                <div class="bars-legend-item"><span class="legend-dot" style="background:#4ecb71;"></span> NMD Energy (kWh)<br><b>{{ energyBreakdown.nmdValue }}</b><br><span class="muted">{{ energyBreakdown.nmdPct.toFixed(2) }}%</span></div>
                             </div>
                         </div>
                     </div>
                     <div class="col s12 m3">
                         <div class="card-panel mini-chart-card">
                             <p class="pie-card-title center">Meter Communication</p>
-                            <MeterCommunication :percentage="93.21" />
+                            <MeterCommunication :percentage="meterCommunicationPct" />
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Feeder to DT loss Table Tab -->
-            <div id="idb-feeder-loss">
+            <div id="idb-feeder-loss" class="tab-panel">
+                <LoadingOverlay :visible="feederLossLoading" />
+                <div v-if="feederLossError" class="idb-status-banner idb-error">
+                    Couldn't load Feeder to DT loss table: {{ feederLossError }}
+                </div>
+
                 <div class="table-wrapper">
                     <table class="idb-table amber-header">
                         <thead>
@@ -237,13 +249,29 @@
                                 <td>{{ row.feeder_to_dt_loss }}</td>
                                 <td>{{ row.feeder_loss_pct }}</td>
                             </tr>
+                            <tr v-if="!feederLossLoading && !feederLossRows.length">
+                                <td colspan="11" class="idb-table-empty">No rows for this filter combination.</td>
+                            </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="table-pagination">
+                    <span class="table-pagination-info">{{ feederLossPaginationLabel }}</span>
+                    <div class="table-pagination-btns">
+                        <button class="pagination-btn" :disabled="feederLossPage <= 1" @click="goToFeederLossPage(-1)">Prev</button>
+                        <button class="pagination-btn" :disabled="feederLossTotalPages > 0 && feederLossPage >= feederLossTotalPages" @click="goToFeederLossPage(1)">Next</button>
+                    </div>
                 </div>
             </div>
 
             <!-- Customer to DT loss Table Tab -->
-            <div id="idb-customer-loss">
+            <div id="idb-customer-loss" class="tab-panel">
+                <LoadingOverlay :visible="customerLossLoading" />
+                <div v-if="customerLossError" class="idb-status-banner idb-error">
+                    Couldn't load Customer to DT loss table: {{ customerLossError }}
+                </div>
+
                 <div class="table-wrapper">
                     <table class="idb-table red-header">
                         <thead>
@@ -287,8 +315,19 @@
                                 <td>{{ row.current_loss_pct }}</td>
                                 <td>{{ row.customer_to_dt_loss }}</td>
                             </tr>
+                            <tr v-if="!customerLossLoading && !customerLossRows.length">
+                                <td colspan="17" class="idb-table-empty">No rows for this filter combination.</td>
+                            </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="table-pagination">
+                    <span class="table-pagination-info">{{ customerLossPaginationLabel }}</span>
+                    <div class="table-pagination-btns">
+                        <button class="pagination-btn" :disabled="customerLossPage <= 1" @click="goToCustomerLossPage(-1)">Prev</button>
+                        <button class="pagination-btn" :disabled="customerLossTotalPages > 0 && customerLossPage >= customerLossTotalPages" @click="goToCustomerLossPage(1)">Next</button>
+                    </div>
                 </div>
             </div>
 
@@ -298,40 +337,66 @@
 
 <script>
 import SideNav from '~/components/SideNav/SideNav.vue'
+import LoadingOverlay from '~/components/LoadingOverlay.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import ChartPie from '~/components/ChartPie.vue'
 import MeterCommunication from '~/components/MeterCommunication.vue'
-// UI-first rebuild to match the Figma "IDB Dashboard" screen exactly. Data below is static mock
-// content taken from the Figma mockup — real API wiring will be reintroduced once the backend
-// team ships the matching endpoint shape.
+import {
+    getIdbDashboard,
+    getIdbFeederDtLoss,
+    getIdbCustomerDtLoss,
+    formatNumber,
+    formatPct,
+    currentMonthStr,
+    openDatePicker
+} from '~/js_modules/controlCenterApi'
+// Matches the Figma "IDB Dashboard" screen, wired to three endpoints that share one filter row
+// above the tabs (see static/api_live_responses3.md #8, #9, #10):
+//   - Dashboard tab: GET /idb/dashboard?feeder=...&date=YYYY-MM
+//   - Feeder to DT loss Table tab: GET /idb/feeder-dt-loss?feeder=...&date=YYYY-MM&page=...&page_size=...
+//   - Customer to DT loss Table tab: GET /idb/customer-dt-loss?feeder=...&date=YYYY-MM&page=...&page_size=...
+// Changing feeder/date refetches all three together since the filter row isn't per-tab.
+
+const IDB_PAGE_SIZE = 50
 
 export default {
-    components: { SideNav, AnimatedValue, ChartPie, MeterCommunication },
+    components: { SideNav, AnimatedValue, ChartPie, MeterCommunication, LoadingOverlay },
     data() {
         return {
-            total_energy: '1,917.66',
-            total_energy_change: '+13.6%',
-            total_feeders: '2',
-            total_feeders_change: '+3.6%',
-            flagged_meters: '32',
-            flagged_meters_change: '+13.6%',
-            feeder_dt_loss: '151.22',
-            feeder_dt_loss_pct: '0.00%',
-            customer_dt_loss: '116.91',
-            customer_dt_loss_pct: '0.00%',
-            total_dts: '61',
-            public_dts: '31',
-            private_dts: '30',
-            billing_efficiency: '10.20%',
-            atc_c: '0.00%',
+            selectedFeeder: 'All',
+            selectedDate: '',
+            maxMonth: currentMonthStr(),
+            knownFeeders: [],
+            resolvedPeriod: '',
+
+            // Dashboard tab
+            loading: true,
+            error: null,
+            total_energy: '—',
+            total_feeders: '—',
+            flagged_meters: '—',
+            feeder_dt_loss: '—',
+            feeder_dt_loss_pct: 0,
+            customer_dt_loss: '—',
+            customer_dt_loss_pct: 0,
+            total_dts: '—',
+            public_dts: '—',
+            private_dts: '—',
+            billing_efficiency_pct: 0,
+            atc_c_pct: 0,
+            totalCustomersCenterText: '—',
+            totalCustomersValueLabels: [],
             totalCustomersData: {
                 labels: ['NMD Customers', 'MD Customers'],
-                datasets: [{ data: [88000, 24400], backgroundColor: ['#5b7cfa', '#8de8c5'] }]
+                datasets: [{ data: [0, 0], backgroundColor: ['#5b7cfa', '#8de8c5'] }]
             },
+            revenueValueLabels: [],
             revenueData: {
                 labels: ['Revenue Billed', 'Revenue Collected'],
-                datasets: [{ data: [258.19, 280.4], backgroundColor: ['#e991c4', '#f0a83a'] }]
+                datasets: [{ data: [0, 0], backgroundColor: ['#e991c4', '#f0a83a'] }]
             },
+            energyBreakdown: { mdValue: '—', mdPct: 0, nmdValue: '—', nmdPct: 0 },
+            meterCommunicationPct: 0,
             doughnutOptions: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -343,45 +408,217 @@ export default {
                 maintainAspectRatio: false,
                 legend: { display: false }
             },
-            feederLossRows: Array.from({ length: 8 }, () => ({
-                feeder: '11 - IgbobiINJ-T1 - Apata',
-                date: '2026 - Jan',
-                band: 'A',
-                total_public_dts: 21,
-                public_dts_energy: '1,179.05',
-                total_private_dts: 18,
-                private_dts_energy: '53.22',
-                total_dt_energy: '1,232,265.67',
-                feeder_energy: '1,291,260.00',
-                feeder_to_dt_loss: '58,994.33',
-                feeder_loss_pct: '4.57%'
-            })),
-            customerLossRows: Array.from({ length: 8 }, () => ({
-                feeder: '11 - IgbobiINJ-T1 - Apata',
-                all_customers: 211,
-                postpaid_md: 5,
-                comms_pct: '90.84%',
-                total_meters_communicating: 119,
-                prepaid_md: 1,
-                idb_prepay: 203,
-                dt_consumption: '81,807.62',
-                idb_prepay_consumption: '48,649.64',
-                md_prepay_consumption: '15.33',
-                postpaid_consumption: '15,114.30',
-                idb_md_consumption: '63,779.27',
-                ce: '107.48%',
-                be: '77.96%',
-                atc: '16.21%',
-                current_loss_pct: '22.04%',
-                customer_to_dt_loss: '18,028.35'
-            }))
+
+            // Feeder to DT loss table tab
+            feederLossLoading: false,
+            feederLossError: null,
+            feederLossPage: 1,
+            feederLossTotal: 0,
+            feederLossTotalPages: 0,
+            feederLossRows: [],
+
+            // Customer to DT loss table tab
+            customerLossLoading: false,
+            customerLossError: null,
+            customerLossPage: 1,
+            customerLossTotal: 0,
+            customerLossTotalPages: 0,
+            customerLossRows: []
         }
     },
-    mounted() {
-        this.$nextTick(() => {
-            const el = document.querySelector('.tabs')
-            if (el) M.Tabs.init(el, {})
-        })
+    computed: {
+        feederLossPaginationLabel() {
+            if (!this.feederLossTotal) return ''
+            return `Page ${this.feederLossPage} of ${this.feederLossTotalPages} · ${formatNumber(this.feederLossTotal)} rows`
+        },
+        customerLossPaginationLabel() {
+            if (!this.customerLossTotal) return ''
+            return `Page ${this.customerLossPage} of ${this.customerLossTotalPages} · ${formatNumber(this.customerLossTotal)} rows`
+        }
+    },
+    async mounted() {
+        const el = document.querySelector('.tabs')
+        if (el) M.Tabs.init(el, {})
+        await this.loadAll()
+    },
+    methods: {
+        openDatePicker,
+        clampPct(v) {
+            return Math.max(0, Math.min(100, v || 0))
+        },
+        mergeKnownFeeders(names) {
+            const seen = new Set(this.knownFeeders)
+            names.forEach((n) => { if (n) seen.add(n) })
+            this.knownFeeders = [...seen].sort()
+        },
+        onFilterChange() {
+            this.feederLossPage = 1
+            this.customerLossPage = 1
+            this.loadAll()
+        },
+        onDateChange(e) {
+            this.selectedDate = e.target.value
+            this.onFilterChange()
+        },
+        async loadAll() {
+            await Promise.all([this.loadDashboard(), this.loadFeederLossTable(), this.loadCustomerLossTable()])
+        },
+        async loadDashboard() {
+            this.loading = true
+            this.error = null
+            try {
+                const data = await getIdbDashboard({ feeder: this.selectedFeeder, date: this.selectedDate })
+                this.applyDashboard(data)
+            } catch (err) {
+                this.error = err.message || 'Failed to load IDB dashboard'
+            } finally {
+                this.loading = false
+            }
+        },
+        applyDashboard(data) {
+            this.resolvedPeriod = data.period || ''
+
+            const kpis = data.kpis || {}
+            this.total_energy = formatNumber(kpis.total_energy_mwh)
+            this.total_feeders = formatNumber(kpis.total_feeders)
+            this.flagged_meters = formatNumber(kpis.total_flagged_idb_meters)
+
+            const loss = data.loss_metrics || {}
+            this.feeder_dt_loss = formatNumber(loss.feeder_to_dt_loss_mwh)
+            this.feeder_dt_loss_pct = Number(loss.feeder_to_dt_loss_pct) || 0
+            this.customer_dt_loss = formatNumber(loss.customer_to_dt_loss_mwh)
+            this.customer_dt_loss_pct = Number(loss.customer_to_dt_loss_pct) || 0
+
+            const dtSummary = data.dt_summary || {}
+            this.total_dts = formatNumber(dtSummary.total_dts)
+            this.public_dts = formatNumber(dtSummary.public_dts)
+            this.private_dts = formatNumber(dtSummary.private_dts)
+
+            const eff = data.efficiency || {}
+            // billing_efficiency_pct can exceed 100 and atc_and_c_pct can go negative — that's
+            // a real, documented outcome of incomplete DT metering, not a bug. clampPct() only
+            // clamps the *bar's visual position*, the text still shows the true number.
+            this.billing_efficiency_pct = Number(eff.billing_efficiency_pct) || 0
+            this.atc_c_pct = Number(eff.atc_and_c_pct) || 0
+
+            const customers = data.customers || {}
+            this.totalCustomersData = {
+                labels: ['NMD Customers', 'MD Customers'],
+                datasets: [{ data: [customers.nmd_count || 0, customers.md_count || 0], backgroundColor: ['#5b7cfa', '#8de8c5'] }]
+            }
+            this.totalCustomersCenterText = formatNumber(customers.total)
+            this.totalCustomersValueLabels = [
+                `${formatNumber(customers.nmd_count)} (${formatPct(customers.nmd_pct)})`,
+                `${formatNumber(customers.md_count)} (${formatPct(customers.md_pct)})`
+            ]
+
+            const revenue = data.revenue || {}
+            this.revenueData = {
+                labels: ['Revenue Billed', 'Revenue Collected'],
+                datasets: [{ data: [revenue.billed || 0, revenue.collected || 0], backgroundColor: ['#e991c4', '#f0a83a'] }]
+            }
+            this.revenueValueLabels = [
+                `${formatNumber(revenue.billed)} (${formatPct(revenue.billed_pct_of_total)})`,
+                `${formatNumber(revenue.collected)} (${formatPct(revenue.collected_pct_of_total)})`
+            ]
+
+            const eb = data.energy_breakdown || {}
+            // Named exactly as the API doc warns: MD is MWh, NMD is kWh — not a typo, don't convert.
+            this.energyBreakdown = {
+                mdValue: formatNumber(eb.md_energy_mwh),
+                mdPct: Number(eb.md_energy_pct) || 0,
+                nmdValue: formatNumber(eb.nmd_energy_kwh),
+                nmdPct: Number(eb.nmd_energy_pct) || 0
+            }
+
+            this.meterCommunicationPct = (data.meter_communication || {}).communicating_pct || 0
+
+            if (data.feeder_filter && data.feeder_filter !== 'All') this.mergeKnownFeeders([data.feeder_filter])
+        },
+        goToFeederLossPage(delta) {
+            const next = this.feederLossPage + delta
+            if (next < 1) return
+            if (this.feederLossTotalPages && next > this.feederLossTotalPages) return
+            this.feederLossPage = next
+            this.loadFeederLossTable()
+        },
+        async loadFeederLossTable() {
+            this.feederLossLoading = true
+            this.feederLossError = null
+            try {
+                const data = await getIdbFeederDtLoss({
+                    feeder: this.selectedFeeder,
+                    date: this.selectedDate,
+                    page: this.feederLossPage,
+                    page_size: IDB_PAGE_SIZE
+                })
+                this.feederLossTotal = data.total || 0
+                this.feederLossTotalPages = data.total_pages || 0
+                this.feederLossRows = (data.data || []).map((row) => ({
+                    feeder: row.feeder,
+                    date: row.date,
+                    band: row.band,
+                    total_public_dts: formatNumber(row.total_public_dts),
+                    public_dts_energy: formatNumber(row.public_dts_energy_kwh),
+                    total_private_dts: formatNumber(row.total_private_dts),
+                    private_dts_energy: formatNumber(row.private_dts_energy_kwh),
+                    total_dt_energy: formatNumber(row.total_dt_energy_kwh),
+                    feeder_energy: formatNumber(row.feeder_energy_kwh),
+                    feeder_to_dt_loss: formatNumber(row.feeder_to_dt_loss_kwh),
+                    feeder_loss_pct: formatPct(row.feeder_loss_pct)
+                }))
+                this.mergeKnownFeeders((data.data || []).map((r) => r.feeder))
+            } catch (err) {
+                this.feederLossError = err.message || 'Failed to load Feeder to DT loss table'
+            } finally {
+                this.feederLossLoading = false
+            }
+        },
+        goToCustomerLossPage(delta) {
+            const next = this.customerLossPage + delta
+            if (next < 1) return
+            if (this.customerLossTotalPages && next > this.customerLossTotalPages) return
+            this.customerLossPage = next
+            this.loadCustomerLossTable()
+        },
+        async loadCustomerLossTable() {
+            this.customerLossLoading = true
+            this.customerLossError = null
+            try {
+                const data = await getIdbCustomerDtLoss({
+                    feeder: this.selectedFeeder,
+                    date: this.selectedDate,
+                    page: this.customerLossPage,
+                    page_size: IDB_PAGE_SIZE
+                })
+                this.customerLossTotal = data.total || 0
+                this.customerLossTotalPages = data.total_pages || 0
+                this.customerLossRows = (data.data || []).map((row) => ({
+                    feeder: row.feeder,
+                    all_customers: formatNumber(row.all_customers),
+                    postpaid_md: formatNumber(row.postpaid_md),
+                    comms_pct: formatPct(row.comms_pct),
+                    total_meters_communicating: formatNumber(row.total_meters_communicating),
+                    prepaid_md: formatNumber(row.prepaid_md),
+                    idb_prepay: formatNumber(row.idb_prepay),
+                    dt_consumption: formatNumber(row.dt_consumption_mwh),
+                    idb_prepay_consumption: formatNumber(row.idb_prepay_consumption_mwh),
+                    md_prepay_consumption: formatNumber(row.md_prepay_consumption_mwh),
+                    postpaid_consumption: formatNumber(row.postpaid_md_consumption_mwh),
+                    idb_md_consumption: formatNumber(row.idb_md_consumption_mwh),
+                    ce: formatPct(row.collection_efficiency_pct),
+                    be: formatPct(row.billing_efficiency_pct),
+                    atc: formatPct(row.atc_and_c_pct),
+                    current_loss_pct: formatPct(row.customer_to_dt_loss_pct),
+                    customer_to_dt_loss: formatNumber(row.customer_to_dt_loss_mwh)
+                }))
+                this.mergeKnownFeeders((data.data || []).map((r) => r.feeder))
+            } catch (err) {
+                this.customerLossError = err.message || 'Failed to load Customer to DT loss table'
+            } finally {
+                this.customerLossLoading = false
+            }
+        }
     }
 }
 </script>
@@ -396,6 +633,11 @@ export default {
     padding-left: 280px;
     padding-right: 20px;
     padding-top: 20px;
+}
+
+.tab-panel {
+    position: relative;
+    min-height: 60vh;
 }
 
 .avail-title {
@@ -467,6 +709,114 @@ export default {
 .filter-arrow {
     color: var(--text-muted);
     font-size: 20px !important;
+}
+
+.filter-pill-select,
+.filter-pill-date {
+    cursor: default;
+}
+
+.filter-pill-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-family: inherit;
+    flex: 1;
+    min-width: 0;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+select.filter-pill-input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* The native month input draws its own calendar icon next to our Material icon, showing
+   two icons — hide it visually (not removed) so clicking there still opens the picker. */
+.filter-pill-date .filter-pill-input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+select.filter-pill-input option {
+    color: #222;
+    background: #fff;
+}
+
+.resolved-period {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: -8px 0 14px;
+    text-align: right;
+}
+
+.idb-status-banner {
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+}
+
+.idb-error {
+    background: #fdecec;
+    color: #c0392b;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.idb-retry {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.idb-table-empty {
+    text-align: center;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    padding: 20px 16px;
+}
+
+.table-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+}
+
+.table-pagination-info {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.table-pagination-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.pagination-btn {
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* Top stat cards */

@@ -29,6 +29,9 @@
   "GridNetworkMap": {
     "description": "Auto imported from components/GridNetworkMap.vue"
   },
+  "LoadingOverlay": {
+    "description": "Auto imported from components/LoadingOverlay.vue"
+  },
   "Login": {
     "description": "Auto imported from components/Login.vue"
   },

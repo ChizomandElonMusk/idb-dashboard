@@ -21,17 +21,28 @@
             </div>
 
             <!-- Dashboard Tab -->
-            <div id="dt-dashboard">
+            <div id="dt-dashboard" class="tab-panel">
+                <LoadingOverlay :visible="dashboardLoading" />
                 <div class="row filter-row">
-                    <div class="col s3 offset-s9">
-                        <div class="filter-pill">
-                            <span class="filter-label">DT Name</span>
+                    <div class="col s4 offset-s8">
+                        <div class="filter-pill filter-pill-select">
+                            <select class="filter-pill-input" v-model="dtSearchInput" @change="searchDt">
+                                <option value="All">All</option>
+                                <option v-for="name in knownDtNames" :key="name" :value="name">{{ name }}</option>
+                            </select>
                             <i class="material-icons filter-arrow">arrow_drop_down</i>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
+                <div v-if="dashboardError" class="dt-status-banner dt-error">
+                    Couldn't load DT dashboard: {{ dashboardError }}
+                </div>
+                <div v-else-if="!dashboardLoading && !dtNameQuery" class="dt-status-banner dt-empty">
+                    Select a DT above to see its availability dashboard.
+                </div>
+
+                <div v-if="dtNameQuery" class="row">
                     <!-- Left: Metric Cards (2x3 grid) -->
                     <div class="col s12 m4">
                         <div class="row" style="margin-bottom: 0;">
@@ -73,7 +84,7 @@
                             </div>
                             <div class="col s6" style="padding: 0 0 0 6px;">
                                 <div class="card-panel metric-card">
-                                    <p class="metric-label">Availability Rate(%)</p>
+                                    <p class="metric-label">Feeder Availability Status</p>
                                     <p class="metric-value green-value">{{ feeder_availability_status }}</p>
                                 </div>
                             </div>
@@ -86,9 +97,9 @@
                             <div class="trend-header">
                                 <span class="trend-title">Availability Trend</span>
                                 <div class="chart-tabs">
-                                    <span class="chart-tab" :class="{ active: trendTab === 'Day' }" @click="trendTab = 'Day'">Day</span>
-                                    <span class="chart-tab" :class="{ active: trendTab === 'Week' }" @click="trendTab = 'Week'">Week</span>
-                                    <span class="chart-tab" :class="{ active: trendTab === 'Month' }" @click="trendTab = 'Month'">Month</span>
+                                    <span class="chart-tab" :class="{ active: trendTab === 'Day' }" @click="setTrendTab('Day')">Day</span>
+                                    <span class="chart-tab" :class="{ active: trendTab === 'Week' }" @click="setTrendTab('Week')">Week</span>
+                                    <span class="chart-tab" :class="{ active: trendTab === 'Month' }" @click="setTrendTab('Month')">Month</span>
                                     <span class="chart-icon-btn"><i class="material-icons tiny">calendar_today</i></span>
                                 </div>
                             </div>
@@ -96,9 +107,9 @@
                                 <div style="position: relative; height: 250px;">
                                     <canvas id="availabilityChart"></canvas>
                                 </div>
-                                <div class="chart-callout" style="left: 58%; top: 20px;">
-                                    <span class="callout-title">July 16</span>
-                                    <span class="callout-value">21.5</span>
+                                <div v-if="trendCallout" class="chart-callout" :style="{ left: trendCallout.leftPct + '%', top: '20px' }">
+                                    <span class="callout-title">{{ trendCallout.title }}</span>
+                                    <span class="callout-value">{{ trendCallout.value }}</span>
                                 </div>
                             </div>
                             <div class="trend-legend">
@@ -117,20 +128,34 @@
             </div>
 
             <!-- DT Availability Table Tab -->
-            <div id="dt-table">
+            <div id="dt-table" class="tab-panel">
+                <LoadingOverlay :visible="tableLoading" />
                 <div class="row filter-row">
                     <div class="col s3 offset-s6">
-                        <div class="filter-pill">
-                            <span class="filter-label">All DTs</span>
+                        <div class="filter-pill filter-pill-select">
+                            <select class="filter-pill-input" v-model="tableDtName" @change="onTableDtNameChange">
+                                <option value="All">All DTs</option>
+                                <option v-for="name in knownDtNames" :key="name" :value="name">{{ name }}</option>
+                            </select>
                             <i class="material-icons filter-arrow">arrow_drop_down</i>
                         </div>
                     </div>
                     <div class="col s3">
-                        <div class="filter-pill">
-                            <span class="filter-label">Date</span>
+                        <div class="filter-pill filter-pill-date" @click="openDatePicker">
+                            <input
+                                type="date"
+                                class="filter-pill-input"
+                                :value="tableDate"
+                                :max="maxDate"
+                                @change="onTableDateChange"
+                            />
                             <i class="material-icons filter-arrow" style="font-size:18px;">calendar_today</i>
                         </div>
                     </div>
+                </div>
+
+                <div v-if="tableError" class="dt-status-banner dt-error">
+                    Couldn't load DT table: {{ tableError }}
                 </div>
 
                 <div class="table-wrapper">
@@ -154,8 +179,19 @@
                                 <td>{{ row.consumption }}</td>
                                 <td>{{ row.availability }}</td>
                             </tr>
+                            <tr v-if="!tableLoading && !dt_availability_rows.length">
+                                <td colspan="6" class="dt-table-empty">No rows for this filter combination.</td>
+                            </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="table-pagination">
+                    <span class="table-pagination-info">{{ tablePaginationLabel }}</span>
+                    <div class="table-pagination-btns">
+                        <button class="pagination-btn" :disabled="tablePage <= 1" @click="goToPage(-1)">Prev</button>
+                        <button class="pagination-btn" :disabled="tableTotalPages > 0 && tablePage >= tableTotalPages" @click="goToPage(1)">Next</button>
+                    </div>
                 </div>
             </div>
 
@@ -166,34 +202,154 @@
 <script>
 import Chart from '~/assets/js/Chart.js'
 import SideNav from '~/components/SideNav/SideNav.vue'
+import LoadingOverlay from '~/components/LoadingOverlay.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
-// UI-first rebuild to match the Figma "DT Availability Dashboard" screen exactly. Data below is
-// static mock content taken from the Figma mockup — real API wiring will be reintroduced once
-// the backend team ships the matching endpoint shape.
+import {
+    getDtAvailabilityDashboard,
+    getDtAvailabilityTable,
+    formatNumber,
+    pick,
+    todayStr,
+    buildTrendCallout,
+    openDatePicker
+} from '~/js_modules/controlCenterApi'
+// Matches the Figma "DT Availability Dashboard" screen, wired to two endpoints (see
+// static/api_live_responses3.md #5 and #6):
+//   - Dashboard tab: GET /dt-availability/dashboard?dt_name=...&period=Day|Week|Month
+//     The doc's own examples only ever name a specific DT (no "All" is documented for this
+//     endpoint), but "All" loads by default here anyway per request - if the API rejects it,
+//     the error banner surfaces that and the user can pick a real DT name instead.
+//   - Table tab: GET /dt-availability/table?dt_name=All&date=...&page=...&page_size=...
+//     dt_name defaults to 'All' and is genuinely optional here.
+
+const TABLE_PAGE_SIZE = 20
 
 export default {
-    components: { SideNav, AnimatedValue },
+    components: { SideNav, AnimatedValue, LoadingOverlay },
     data() {
         return {
+            // Dashboard tab
+            dtSearchInput: 'All',
+            dtNameQuery: '',
+            dashboardLoading: false,
+            dashboardError: null,
             trendTab: 'Month',
-            dt_target_availability: '20.00',
-            feeder_target_availability: '20.00',
-            dt_actual_availability: '22.03',
-            feeder_actual_availability: '20.03',
-            dt_availability_rate: '110.16',
-            feeder_availability_status: 'Exceeded',
-            dt_availability_rows: Array.from({ length: 8 }, () => ({
-                date: '07/01/2026',
-                dt_name: '11-OgudulNJ-T1Ogudu-94 VICTORIA STREET CSP',
-                feeder_name: '11-OgudulNJ-T1-Ogudu',
-                band: 'A',
-                consumption: '10.90',
-                availability: '19.35'
-            })),
-            trendChart: null
+            dt_target_availability: '—',
+            feeder_target_availability: '—',
+            dt_actual_availability: '—',
+            feeder_actual_availability: '—',
+            dt_availability_rate: '—',
+            feeder_availability_status: '—',
+            trendLabels: [],
+            trendAvailability: [],
+            trendTarget: [],
+            trendCallout: null,
+            trendChart: null,
+            // Accumulates across every table fetch (not just the currently-displayed page) so
+            // the Dashboard's DT picker offers more than whatever 20 rows are on screen right
+            // now. Still only ever real names the table endpoint actually returned — there's no
+            // endpoint that lists every DT name, so this can't be an exhaustive list.
+            knownDtNames: [],
+
+            // Table tab
+            tableDtName: 'All',
+            // Left unset (not defaulted to "yesterday") so the request omits `date` entirely
+            // and the server resolves its own "latest complete day" — the doc's own sample
+            // query used a date 3 days before its stated generation date, suggesting day-level
+            // readings lag by more than 1 day. Guessing "yesterday" risked querying a day that
+            // genuinely has zero rows yet, which looks identical to a bug.
+            tableDate: '',
+            maxDate: todayStr(),
+            tablePage: 1,
+            tablePageSize: TABLE_PAGE_SIZE,
+            tableTotal: 0,
+            tableTotalPages: 0,
+            tableLoading: false,
+            tableError: null,
+            dt_availability_rows: []
         }
     },
+    computed: {
+        tablePaginationLabel() {
+            if (!this.tableTotal) return ''
+            return `Page ${this.tablePage} of ${this.tableTotalPages} · ${formatNumber(this.tableTotal)} rows`
+        }
+    },
+    async mounted() {
+        const el = document.querySelector('.tabs')
+        if (el) M.Tabs.init(el, {})
+
+        // Seed the Dashboard's DT picker with a bigger batch than the visible table's own
+        // page size (20) so there's a reasonable number of options to choose from, without
+        // changing the table's own pagination. Runs alongside the table's own first-page
+        // load rather than after it.
+        await Promise.all([this.loadTable(), this.seedDtNameOptions()])
+
+        // "All" loads by default — if the API doesn't actually support it for this endpoint,
+        // the existing error banner below surfaces that, and the user can pick a real DT name.
+        this.dtNameQuery = this.dtSearchInput
+        await this.loadDashboard()
+    },
     methods: {
+        openDatePicker,
+        // --- Dashboard tab ---
+        async seedDtNameOptions() {
+            try {
+                const data = await getDtAvailabilityTable({ dt_name: 'All', date: this.tableDate, page: 1, page_size: 100 })
+                this.mergeKnownDtNames(data.data || [])
+            } catch (err) {
+                // Non-critical — the dropdown just falls back to whatever loadTable() finds.
+                console.error('[dt_availability] failed to seed DT name options', err)
+            }
+        },
+        mergeKnownDtNames(rows) {
+            const seen = new Set(this.knownDtNames)
+            rows.forEach((r) => { if (r.dt_name) seen.add(r.dt_name) })
+            this.knownDtNames = [...seen].sort()
+        },
+        searchDt() {
+            const name = this.dtSearchInput.trim()
+            if (!name) return
+            this.dtNameQuery = name
+            this.loadDashboard()
+        },
+        setTrendTab(tab) {
+            this.trendTab = tab
+            if (this.dtNameQuery) this.loadDashboard()
+        },
+        async loadDashboard() {
+            this.dashboardLoading = true
+            this.dashboardError = null
+            try {
+                const data = await getDtAvailabilityDashboard({ dt_name: this.dtNameQuery, period: this.trendTab })
+                this.applyDashboard(data)
+            } catch (err) {
+                this.dashboardError = err.message || 'Failed to load DT dashboard'
+            } finally {
+                this.dashboardLoading = false
+            }
+        },
+        applyDashboard(data) {
+            const dt = data.dt || {}
+            const feeder = data.feeder || {}
+            this.dt_target_availability = formatNumber(dt.target_hours)
+            this.feeder_target_availability = formatNumber(feeder.target_hours)
+            this.dt_actual_availability = formatNumber(dt.actual_hours)
+            this.feeder_actual_availability = formatNumber(feeder.actual_hours)
+            this.dt_availability_rate = formatNumber(dt.availability_rate_pct)
+            this.feeder_availability_status = feeder.status || '—'
+
+            const trend = data.trend || []
+            // The doc only shows a Month-period sample, whose points are keyed "month" — Day/Week
+            // periods aren't documented, so probe the likely alternate key names defensively.
+            const labelOf = (t) => pick(t, ['month', 'week', 'day', 'date', 'label'], '')
+            this.trendLabels = trend.map(labelOf)
+            this.trendAvailability = trend.map((t) => t.avg_availability)
+            this.trendTarget = trend.map((t) => t.avg_target)
+            this.trendCallout = buildTrendCallout(trend, 'avg_availability', labelOf, (v) => formatNumber(v))
+
+            this.$nextTick(() => this.renderTrendChart())
+        },
         renderTrendChart() {
             const canvas = document.getElementById('availabilityChart')
             if (!canvas) return
@@ -201,11 +357,11 @@ export default {
             this.trendChart = new Chart(canvas.getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    labels: this.trendLabels,
                     datasets: [
                         {
                             label: 'Average Availability',
-                            data: [21, 20.5, 19, 21, 22.5, 24, 22.5, 20, 19.5, 21.5, 23, 22.5],
+                            data: this.trendAvailability,
                             borderColor: '#4ecb71',
                             backgroundColor: 'rgba(78,203,113,0.08)',
                             pointBackgroundColor: '#4ecb71',
@@ -218,7 +374,7 @@ export default {
                         },
                         {
                             label: 'Average Target',
-                            data: Array(12).fill(20),
+                            data: this.trendTarget,
                             borderColor: '#5b7cfa',
                             backgroundColor: 'rgba(91,124,250,0.08)',
                             pointBackgroundColor: '#5b7cfa',
@@ -255,14 +411,52 @@ export default {
                     }
                 }
             })
+        },
+
+        // --- Table tab ---
+        onTableDtNameChange() {
+            this.tablePage = 1
+            this.loadTable()
+        },
+        onTableDateChange(e) {
+            this.tableDate = e.target.value
+            this.tablePage = 1
+            this.loadTable()
+        },
+        goToPage(delta) {
+            const next = this.tablePage + delta
+            if (next < 1) return
+            if (this.tableTotalPages && next > this.tableTotalPages) return
+            this.tablePage = next
+            this.loadTable()
+        },
+        async loadTable() {
+            this.tableLoading = true
+            this.tableError = null
+            try {
+                const data = await getDtAvailabilityTable({
+                    dt_name: this.tableDtName,
+                    date: this.tableDate,
+                    page: this.tablePage,
+                    page_size: this.tablePageSize
+                })
+                this.tableTotal = data.total || 0
+                this.tableTotalPages = data.total_pages || 0
+                this.dt_availability_rows = (data.data || []).map((row) => ({
+                    date: row.date,
+                    dt_name: row.dt_name,
+                    feeder_name: row.feeder_name,
+                    band: row.band,
+                    consumption: formatNumber(row.consumption_kwh),
+                    availability: formatNumber(row.dt_actual_availability_hrs)
+                }))
+                this.mergeKnownDtNames(data.data || [])
+            } catch (err) {
+                this.tableError = err.message || 'Failed to load DT availability table'
+            } finally {
+                this.tableLoading = false
+            }
         }
-    },
-    mounted() {
-        this.$nextTick(() => {
-            this.renderTrendChart()
-            const el = document.querySelector('.tabs')
-            if (el) M.Tabs.init(el, {})
-        })
     }
 }
 </script>
@@ -277,6 +471,11 @@ export default {
     padding-left: 280px;
     padding-right: 20px;
     padding-top: 20px;
+}
+
+.tab-panel {
+    position: relative;
+    min-height: 60vh;
 }
 
 .avail-title {
@@ -343,6 +542,106 @@ export default {
 .filter-arrow {
     color: var(--text-muted);
     font-size: 20px !important;
+}
+
+.filter-pill-date {
+    cursor: default;
+}
+
+.filter-pill-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-family: inherit;
+    flex: 1;
+    min-width: 0;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.filter-pill-date .filter-pill-input {
+    cursor: pointer;
+}
+
+/* The native date input draws its own calendar icon next to our Material icon, showing
+   two icons — hide it visually (not removed) so clicking there still opens the picker. */
+.filter-pill-date .filter-pill-input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+.filter-pill-select {
+    cursor: default;
+}
+
+select.filter-pill-input {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select.filter-pill-input option {
+    color: #222;
+    background: #fff;
+}
+
+.dt-status-banner {
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+}
+
+.dt-error {
+    background: #fdecec;
+    color: #c0392b;
+}
+
+.dt-empty {
+    background: var(--bg-card-alt);
+    color: var(--text-secondary);
+}
+
+.dt-table-empty {
+    text-align: center;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    padding: 20px 16px;
+}
+
+.table-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+}
+
+.table-pagination-info {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.table-pagination-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.pagination-btn {
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* Metric Cards */

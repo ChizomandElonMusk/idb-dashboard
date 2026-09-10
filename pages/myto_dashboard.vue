@@ -2,12 +2,21 @@
     <div class="dashboard-wrapper">
         <SideNav />
         <main class="main-content">
+            <LoadingOverlay :visible="loading" />
+
             <div class="avail-header">
                 <h5 class="avail-title">Feeders MYTO Energy Dashboard</h5>
-                <div class="filter-pill">
-                    <span class="filter-label">Feeder Band</span>
+                <div class="filter-pill filter-pill-select">
+                    <select class="filter-pill-input" v-model="selectedFeederBand" @change="loadSummary">
+                        <option v-for="fb in feederBands" :key="fb" :value="fb">{{ fb === 'All' ? 'Feeder Band' : `Band ${fb}` }}</option>
+                    </select>
                     <i class="material-icons filter-arrow">arrow_drop_down</i>
                 </div>
+            </div>
+
+            <div v-if="error" class="myto-error">
+                Couldn't load live data: {{ error }}
+                <button class="myto-retry" @click="loadSummary">Retry</button>
             </div>
 
             <div class="row">
@@ -25,7 +34,10 @@
                         </div>
                         <div class="top-stat-footer">
                             <span class="footer-month">{{ consumption_month }}</span>
-                            <span class="footer-pill footer-pill-up">{{ consumption_change }} <i class="material-icons tiny">arrow_upward</i></span>
+                            <span class="footer-pill" :class="consumptionUp ? 'footer-pill-up' : 'footer-pill-down'">
+                                {{ consumption_change }}
+                                <i class="material-icons tiny">{{ consumptionUp ? 'arrow_upward' : 'arrow_downward' }}</i>
+                            </span>
                         </div>
                     </div>
 
@@ -67,14 +79,20 @@
                         <div class="trend-header">
                             <span class="trend-title">Energy Consumption Trend</span>
                             <div class="chart-tabs">
-                                <span class="chart-tab" :class="{ active: trendTab === 'Day' }" @click="trendTab = 'Day'">Day</span>
-                                <span class="chart-tab" :class="{ active: trendTab === 'Week' }" @click="trendTab = 'Week'">Week</span>
-                                <span class="chart-tab" :class="{ active: trendTab === 'Month' }" @click="trendTab = 'Month'">Month</span>
+                                <span class="chart-tab" :class="{ active: trendTab === 'Day' }" @click="setTrendTab('Day')">Day</span>
+                                <span class="chart-tab" :class="{ active: trendTab === 'Week' }" @click="setTrendTab('Week')">Week</span>
+                                <span class="chart-tab" :class="{ active: trendTab === 'Month' }" @click="setTrendTab('Month')">Month</span>
                                 <span class="chart-icon-btn"><i class="material-icons tiny">calendar_today</i></span>
                             </div>
                         </div>
-                        <div style="position: relative; height: 220px;">
-                            <canvas id="consumptionTrendChart"></canvas>
+                        <div class="chart-callout-wrap">
+                            <div style="position: relative; height: 220px;">
+                                <canvas id="consumptionTrendChart"></canvas>
+                            </div>
+                            <div v-if="trendCallout" class="chart-callout" :style="{ left: trendCallout.leftPct + '%', top: '6px' }">
+                                <span class="callout-title">{{ trendCallout.title }}</span>
+                                <span class="callout-value">{{ trendCallout.value }}</span>
+                            </div>
                         </div>
                     </div>
 
@@ -94,7 +112,7 @@
                         <div class="col s12 m6">
                             <div class="card-panel mini-chart-card">
                                 <p class="pie-card-title center">Feeder Communication Status</p>
-                                <MeterCommunication :percentage="70" />
+                                <MeterCommunication :percentage="feederCommunicationPct" />
                             </div>
                         </div>
                     </div>
@@ -108,37 +126,47 @@
 <script>
 import Chart from '~/assets/js/Chart.js'
 import SideNav from '~/components/SideNav/SideNav.vue'
+import LoadingOverlay from '~/components/LoadingOverlay.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import ChartPie from '~/components/ChartPie.vue'
 import MeterCommunication from '~/components/MeterCommunication.vue'
-// UI-first rebuild to match the Figma "Feeders MYTO Energy Dashboard" screen exactly. Data below
-// is static mock content taken from the Figma mockup — real API wiring will be reintroduced once
-// the backend team ships the matching endpoint shape.
+import { getMytoSummary, formatNumber, bandColor, FEEDER_BANDS, buildTrendCallout, aggregateDailyTrend } from '~/js_modules/controlCenterApi'
+// Matches the Figma "Feeders MYTO Energy Dashboard" screen, wired to GET /api/v1/myto/summary
+// (see static/api_live_responses3.md #7). feeder_band is a documented, confirmed filter, so
+// changing it refetches. The Day/Week/Month trend tabs do NOT refetch with period=Day/Week —
+// the doc only confirms period=Month works for this endpoint, so instead we always fetch the
+// Month-grain response (which is itself daily energy_trend data for the month) and aggregate
+// Day/Week/Month client-side from that, the same way Control Center's Vending & Collection
+// card does. That's correct regardless of what the server actually does with `period`.
 
-const FEEDER_BAND_COLORS = ['#5b7cfa', '#3ec9a7', '#a56ef0', '#e74c3c']
+function statusColor(status) {
+    if (status === 'Exceeded') return '#27ae60'
+    if (status === 'Met') return '#d4a017'
+    if (status === 'Not met') return '#c0392b'
+    return '#999'
+}
 
 export default {
-    components: { SideNav, AnimatedValue, ChartPie, MeterCommunication },
+    components: { SideNav, AnimatedValue, ChartPie, MeterCommunication, LoadingOverlay },
     data() {
         return {
+            loading: true,
+            error: null,
+
+            selectedFeederBand: 'All',
+            feederBands: FEEDER_BANDS,
             trendTab: 'Day',
-            total_consumption: '48,060.44',
-            consumption_month: 'Jan 2026',
-            consumption_change: '+13.6%',
-            bandsRow1: [
-                { name: 'Band A', pct: '37.10%', status: 'Not met', target: '45%', color: '#c0392b' },
-                { name: 'Band B', pct: '25.00%', status: 'Exceeded', target: '22.98%', color: '#27ae60' }
-            ],
-            bandsRow2: [
-                { name: 'Band C', pct: '20.41%', status: 'Met', target: '20.41%', color: '#d4a017' },
-                { name: 'Band D', pct: '1.49%', status: 'Not met', target: '11.46%', color: '#c0392b' }
-            ],
-            bandsRow3: [
-                { name: 'Band E', pct: '0.1%', status: 'Not met', target: '0.15%', color: '#c0392b' }
-            ],
+
+            total_consumption: '—',
+            consumption_month: '',
+            consumption_change: '—',
+            consumptionUp: true,
+
+            bands: [],
+
             energyPerFeederData: {
-                labels: ['Band A', 'Band B', 'Band C', 'Band D'],
-                datasets: [{ data: [17737.08, 14636.88, 11125.60, 4306.36], backgroundColor: FEEDER_BAND_COLORS, borderWidth: 0 }]
+                labels: [],
+                datasets: [{ data: [], backgroundColor: [], borderWidth: 0 }]
             },
             doughnutOptions: {
                 responsive: true,
@@ -146,10 +174,76 @@ export default {
                 cutoutPercentage: 65,
                 legend: { display: false }
             },
+
+            feederCommunicationPct: 0,
+
+            energyRawTrend: [],
+            trendLabels: [],
+            trendValues: [],
+            trendCallout: null,
             trendChart: null
         }
     },
+    computed: {
+        bandsRow1() { return this.bands.slice(0, 2) },
+        bandsRow2() { return this.bands.slice(2, 4) },
+        bandsRow3() { return this.bands.slice(4, 5) }
+    },
+    async mounted() {
+        await this.loadSummary()
+    },
     methods: {
+        setTrendTab(tab) {
+            this.trendTab = tab
+            this.updateTrendView()
+            this.$nextTick(() => this.renderTrendChart())
+        },
+        async loadSummary() {
+            this.loading = true
+            this.error = null
+            try {
+                const data = await getMytoSummary({ feeder_band: this.selectedFeederBand, period: 'Month' })
+                this.applySummary(data)
+            } catch (err) {
+                this.error = err.message || 'Failed to load MYTO summary'
+            } finally {
+                this.loading = false
+            }
+        },
+        applySummary(data) {
+            this.total_consumption = formatNumber(data.total_consumption_mwh)
+            this.consumption_month = data.period || ''
+            const pct = data.period_vs_prev_pct
+            this.consumptionUp = (pct ?? 0) >= 0
+            this.consumption_change = pct === null || pct === undefined ? '—' : `${pct >= 0 ? '+' : ''}${pct}%`
+
+            this.bands = (data.band_compliance || []).map((b) => ({
+                name: `Band ${b.band}`,
+                pct: `${b.actual_pct}%`,
+                status: b.status,
+                target: `${b.nerc_target_pct}%`,
+                color: statusColor(b.status)
+            }))
+
+            const perFeeder = data.energy_per_feeder_mwh || []
+            this.energyPerFeederData = {
+                labels: perFeeder.map((b) => `Band ${b.band}`),
+                datasets: [{ data: perFeeder.map((b) => b.mwh), backgroundColor: perFeeder.map((b) => bandColor(b.band)), borderWidth: 0 }]
+            }
+
+            this.feederCommunicationPct = (data.feeder_communication_status || {}).communicating_pct || 0
+
+            this.energyRawTrend = data.energy_trend || []
+            this.updateTrendView()
+
+            this.$nextTick(() => this.renderTrendChart())
+        },
+        updateTrendView() {
+            const points = aggregateDailyTrend(this.energyRawTrend, this.trendTab, ['mwh'])
+            this.trendLabels = points.map((p) => p.label)
+            this.trendValues = points.map((p) => p.mwh)
+            this.trendCallout = buildTrendCallout(points, 'mwh', (p) => p.label, (v) => `${formatNumber(v)} MWh`)
+        },
         renderTrendChart() {
             const canvas = document.getElementById('consumptionTrendChart')
             if (!canvas) return
@@ -157,14 +251,14 @@ export default {
             this.trendChart = new Chart(canvas.getContext('2d'), {
                 type: 'line',
                 data: {
-                    labels: ['Jan 01', 'Jan 02', 'Jan 03', 'Jan 04', 'Jan 05', 'Jan 06'],
+                    labels: this.trendLabels,
                     datasets: [{
-                        data: [40, 45, 60, 48, 65, 30],
+                        data: this.trendValues,
                         borderColor: '#4ecb71',
                         backgroundColor: 'rgba(78,203,113,0.08)',
                         pointBackgroundColor: '#4ecb71',
                         pointBorderColor: '#fff',
-                        pointRadius: 6,
+                        pointRadius: 0,
                         pointBorderWidth: 2,
                         borderWidth: 2,
                         tension: 0.4,
@@ -177,15 +271,12 @@ export default {
                     legend: { display: false },
                     tooltips: { enabled: false },
                     scales: {
-                        xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#aaa' } }],
+                        xAxes: [{ gridLines: { display: false }, ticks: { fontColor: '#aaa', maxRotation: 0, autoSkip: true, maxTicksLimit: 8 } }],
                         yAxes: [{ gridLines: { color: 'rgba(0,0,0,0.04)' }, ticks: { display: false } }]
                     }
                 }
             })
         }
-    },
-    mounted() {
-        this.$nextTick(() => this.renderTrendChart())
     }
 }
 </script>
@@ -200,6 +291,8 @@ export default {
     padding-left: 280px;
     padding-right: 20px;
     padding-top: 20px;
+    position: relative;
+    min-height: 100vh;
 }
 
 .avail-header {
@@ -236,6 +329,56 @@ export default {
     color: var(--text-muted);
     font-size: 20px !important;
 }
+
+.filter-pill-select {
+    cursor: default;
+}
+
+.filter-pill-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-family: inherit;
+    flex: 1;
+    min-width: 0;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.filter-pill-input option {
+    color: #222;
+    background: #fff;
+}
+
+.myto-error {
+    background: #fdecec;
+    color: #c0392b;
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.myto-retry {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
 
 /* Total Consumption card */
 .top-stat-card {
@@ -308,7 +451,12 @@ export default {
     background: rgba(27, 138, 90, 0.12);
 }
 
-.footer-pill-up .material-icons { font-size: 13px !important; }
+.footer-pill-down {
+    color: #c0392b;
+    background: rgba(192, 57, 43, 0.12);
+}
+
+.footer-pill .material-icons { font-size: 13px !important; }
 
 /* Band cards */
 .band-card {
@@ -396,6 +544,24 @@ export default {
     justify-content: center;
     color: var(--text-muted);
 }
+
+.chart-callout-wrap { position: relative; }
+
+.chart-callout {
+    position: absolute;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px 12px;
+    box-shadow: 0 2px 8px var(--shadow-color, rgba(0,0,0,0.08));
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+    pointer-events: none;
+}
+
+.callout-title { font-size: 11px; color: var(--text-muted); }
+.callout-value { font-size: 13px; font-weight: 700; color: var(--text-primary); }
 
 /* Mini chart cards */
 .mini-chart-card {

@@ -2,20 +2,34 @@
     <div class="dashboard-wrapper">
         <SideNav />
         <main class="main-content">
+            <LoadingOverlay :visible="loading" />
 
             <!-- header -->
             <div class="avail-header">
                 <h5 class="avail-title">Overview</h5>
                 <div class="avail-filters">
-                    <div class="filter-input">
-                        <span class="filter-label">Date</span>
+                    <div class="filter-input filter-date" @click="openDatePicker">
+                        <input
+                            type="month"
+                            class="filter-date-input"
+                            :value="selectedDate"
+                            :max="maxMonth"
+                            @change="onDateChange"
+                        />
                         <i class="material-icons filter-icon">calendar_today</i>
                     </div>
-                    <div class="filter-input">
-                        <span class="filter-label">Business Unit</span>
+                    <div class="filter-input filter-select-wrap">
+                        <select class="filter-select" v-model="selectedBusinessUnit" @change="loadOverview">
+                            <option v-for="bu in businessUnits" :key="bu" :value="bu">{{ bu }}</option>
+                        </select>
                         <i class="material-icons filter-icon">arrow_drop_down</i>
                     </div>
                 </div>
+            </div>
+
+            <div v-if="error" class="e2e-error">
+                Couldn't load live data: {{ error }}
+                <button class="e2e-retry" @click="loadOverview">Retry</button>
             </div>
 
             <!-- top 3 KPI cards -->
@@ -32,7 +46,7 @@
                         <div class="kpi-divider"></div>
                         <div class="kpi-footer">
                             <span class="kpi-date">{{ kpi.date }}</span>
-                            <span class="kpi-trend" :class="kpi.up ? 'trend-up' : 'trend-down'">
+                            <span v-if="kpi.trend" class="kpi-trend" :class="kpi.up ? 'trend-up' : 'trend-down'">
                                 {{ kpi.trend }}
                                 <img
                                     v-if="kpi.customArrow"
@@ -110,102 +124,178 @@
 
 <script>
 import SideNav from '~/components/SideNav/SideNav.vue'
+import LoadingOverlay from '~/components/LoadingOverlay.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import GridNetworkMap from '~/components/GridNetworkMap.vue'
 import DTDetailsModal from '~/components/DTDetailsModal.vue'
-// UI-first rebuild to match the Figma "End-To-End Energy Dashboard" (Overview) screen exactly.
-// Data below is static mock content taken from the Figma mockup — real API wiring will be
-// reintroduced once the backend team ships the matching endpoint shape. The map uses Leaflet +
-// OpenStreetMap tiles (no API key required) plotting mock feeder/DT coordinates around Ojodu,
-// Lagos — the area referenced in the Figma mockup.
+import { getEndToEndOverview, formatNumber, BUSINESS_UNITS, currentMonthStr, openDatePicker } from '~/js_modules/controlCenterApi'
+// Matches the Figma "End-To-End Energy Dashboard" (Overview) screen, wired to
+// GET /api/v1/end-to-end/overview (see static/api_live_responses3.md #1). The map uses
+// Leaflet + OpenStreetMap tiles (no API key required), plotting the DT markers the API
+// returns — the API does not expose separate feeder coordinates, only DTs.
+
+const DEFAULT_CENTER = [6.6386, 3.3730]
+
+// Only total_energy_on_grid_mwh carries a period-over-period trend in the API response
+// (kpis.energy_vs_prev_period_pct). The other two KPI cards have no trend figure to show.
+function formatTrendPct(pct) {
+    if (pct === null || pct === undefined) return null
+    const sign = pct >= 0 ? '+' : ''
+    return `${sign}${pct}%`
+}
 
 export default {
-    components: { SideNav, AnimatedValue, GridNetworkMap, DTDetailsModal },
+    components: { SideNav, AnimatedValue, GridNetworkMap, DTDetailsModal, LoadingOverlay },
     data() {
         return {
+            loading: true,
+            error: null,
             selectedMarker: null,
+            selectedDate: '',
+            dateTouched: false,
+            maxMonth: currentMonthStr(),
+            selectedBusinessUnit: 'All',
+            businessUnits: BUSINESS_UNITS,
             kpis: [
+                { label: 'Total Energy on Grid (MWh)', value: '—', date: '', trend: null, up: true, icon: '/Total Energy on Grid (MWh).svg', customArrow: true },
+                { label: 'Total energy on DTs(MWh)', value: '—', date: '', trend: null, up: true, icon: '/Total energy on DTs(MWh).svg', customArrow: true },
+                { label: 'Total Grid  to DT loss(MWh)', value: '—', date: '', trend: null, up: false, icon: '/Total Grid to DT loss(MWh).svg', customArrow: true }
+            ],
+            gnStats: [
+                { label: 'TS', value: '—' },
+                { label: 'Transformer Capacity', value: '—' },
+                { label: '33KVA Feeders', value: '—' },
+                { label: 'ISS', value: '—' },
+                { label: 'Total Transformer', value: '—' }
+            ],
+            gnCounts: [
+                { label: '11KVA Incomer', value: '—' },
+                { label: '11KVA Outgoing Feeders', value: '—' },
+                { label: 'DT', value: '—' }
+            ],
+            gnStatuses: [
+                { label: 'Online', cls: 'status-online', dotCls: 'green', textCls: 'text-green', dt: '—', feeder: '—' },
+                { label: 'Offline', cls: 'status-offline', dotCls: 'red', textCls: 'text-red', dt: '—', feeder: '—' },
+                { label: 'Inactive', cls: 'status-inactive', dotCls: 'gray', textCls: 'text-gray', dt: '—', feeder: '—' }
+            ],
+            mapCenter: DEFAULT_CENTER,
+            mapMarkers: []
+        }
+    },
+    async mounted() {
+        await this.loadOverview()
+    },
+    methods: {
+        openDatePicker,
+        onDateChange(e) {
+            this.dateTouched = true
+            this.selectedDate = e.target.value
+            this.loadOverview()
+        },
+        async loadOverview() {
+            this.loading = true
+            this.error = null
+            try {
+                // marker_limit caps the payload — omitting it returns every one of ~19,700 DTs
+                // ("several megabytes" per the API doc).
+                const data = await getEndToEndOverview({
+                    date: this.selectedDate || undefined,
+                    business_unit: this.selectedBusinessUnit,
+                    marker_limit: 500
+                })
+                this.applyOverview(data)
+            } catch (err) {
+                this.error = err.message || 'Failed to load End-to-End overview data'
+            } finally {
+                this.loading = false
+            }
+        },
+        applyOverview(data) {
+            // Backfill the date filter with the server's own default ("latest complete
+            // month") on first load, so the picker reflects what's actually on screen —
+            // but only until the user picks a date themselves.
+            if (!this.dateTouched && data.period) {
+                this.selectedDate = data.period
+            }
+
+            const kpis = data.kpis || {}
+            // The API returns only one comparison figure — energy_vs_prev_period_pct — with no
+            // separate trend for total_energy_on_dts_mwh or total_grid_to_dt_loss_mwh. Reusing
+            // it across all three cards (rather than only the grid-energy one it technically
+            // describes) since it's the only period-over-period signal the API provides at all.
+            const trend = formatTrendPct(kpis.energy_vs_prev_period_pct)
+            const up = (kpis.energy_vs_prev_period_pct ?? 0) >= 0
+            this.kpis = [
                 {
                     label: 'Total Energy on Grid (MWh)',
-                    value: '4,917.66',
-                    date: 'Jan 2026',
-                    trend: '+13.6%',
-                    up: true,
-                    icon: '/Total Energy on Grid (MWh).svg'
+                    value: formatNumber(kpis.total_energy_on_grid_mwh),
+                    date: kpis.period_label || '',
+                    trend,
+                    up,
+                    icon: '/Total Energy on Grid (MWh).svg',
+                    customArrow: true
                 },
                 {
                     label: 'Total energy on DTs(MWh)',
-                    value: '2,000',
-                    date: 'Jan 2026',
-                    trend: '+3.6%',
-                    up: true,
+                    value: formatNumber(kpis.total_energy_on_dts_mwh),
+                    date: kpis.period_label || '',
+                    trend,
+                    up,
                     icon: '/Total energy on DTs(MWh).svg',
                     customArrow: true
                 },
                 {
                     label: 'Total Grid  to DT loss(MWh)',
-                    value: '1,123',
-                    date: 'Jan 2026',
-                    trend: '-13.6%',
-                    up: false,
+                    value: formatNumber(kpis.total_grid_to_dt_loss_mwh),
+                    date: kpis.period_label || '',
+                    trend,
+                    up,
                     icon: '/Total Grid to DT loss(MWh).svg',
                     customArrow: true
                 }
-            ],
-            gnStats: [
-                { label: 'TS', value: '15' },
-                { label: 'Transformer Capacity', value: '85' },
-                { label: '33KVA Feeders', value: '108' },
-                { label: 'ISS', value: '356' },
-                { label: 'Total Transformer', value: '16,712' }
-            ],
-            gnCounts: [
-                { label: '11KVA Incomer', value: '345' },
-                { label: '11KVA Outgoing Feeders', value: '85' },
-                { label: 'DT', value: '15' }
-            ],
-            gnStatuses: [
-                { label: 'Online', cls: 'status-online', dotCls: 'green', textCls: 'text-green', dt: 100, feeder: 80 },
-                { label: 'Offline', cls: 'status-offline', dotCls: 'red', textCls: 'text-red', dt: 70, feeder: 40 },
-                { label: 'Inactive', cls: 'status-inactive', dotCls: 'gray', textCls: 'text-gray', dt: 10, feeder: 20 }
-            ],
-            // Mock feeder/DT coordinates scattered around Ojodu, Lagos (the area referenced in
-            // the Figma mockup). Real coordinates will replace these once the backend ships them.
-            mapCenter: [6.6386, 3.3730],
-            mapMarkers: [
-                { lat: 6.6440, lng: 3.3612, status: 'offline', label: 'Feeder 33kV-014' },
-                { lat: 6.6462, lng: 3.3701, status: 'inactive', label: 'DT-1042' },
-                { lat: 6.6321, lng: 3.3560, status: 'online', label: 'Feeder 11kV-027' },
-                { lat: 6.6495, lng: 3.3822, status: 'offline', label: 'DT-1108' },
-                { lat: 6.6218, lng: 3.3499, status: 'offline', label: 'Feeder 33kV-009' },
-                { lat: 6.6355, lng: 3.3650, status: 'online', label: 'DT-1056' },
-                { lat: 6.6408, lng: 3.3745, status: 'inactive', label: 'Feeder 11kV-033' },
-                { lat: 6.6516, lng: 3.3880, status: 'offline', label: 'DT-1123' },
-                { lat: 6.6198, lng: 3.3420, status: 'online', label: 'Feeder 33kV-011' },
-                { lat: 6.6289, lng: 3.3560, status: 'offline', label: 'DT-1071' },
-                { lat: 6.6372, lng: 3.3690, status: 'inactive', label: 'Feeder 11kV-041' },
-                { lat: 6.6444, lng: 3.3810, status: 'offline', label: 'DT-1089' },
-                { lat: 6.6140, lng: 3.3390, status: 'inactive', label: 'Feeder 33kV-006' },
-                { lat: 6.6252, lng: 3.3530, status: 'online', label: 'DT-1034' },
-                { lat: 6.6330, lng: 3.3620, status: 'offline', label: 'Feeder 11kV-018' },
-                { lat: 6.6470, lng: 3.3900, status: 'online', label: 'DT-1147' },
-                { lat: 6.6170, lng: 3.3450, status: 'offline', label: 'Feeder 33kV-004' },
-                { lat: 6.6395, lng: 3.3730, status: 'inactive', label: 'DT-1063' },
-                { lat: 6.6540, lng: 3.3960, status: 'offline', label: 'Feeder 11kV-052' },
-                { lat: 6.6300, lng: 3.3480, status: 'online', label: 'DT-1097' },
-                { lat: 6.6120, lng: 3.3350, status: 'offline', label: 'Feeder 33kV-002' },
-                { lat: 6.6420, lng: 3.3560, status: 'offline', label: 'DT-1112' },
-                { lat: 6.6270, lng: 3.3690, status: 'inactive', label: 'Feeder 11kV-029' },
-                { lat: 6.6480, lng: 3.3650, status: 'online', label: 'DT-1005' },
-                { lat: 6.6355, lng: 3.3440, status: 'offline', label: 'Feeder 33kV-013' },
-                { lat: 6.6210, lng: 3.3620, status: 'offline', label: 'DT-1131' },
-                { lat: 6.6500, lng: 3.3760, status: 'inactive', label: 'Feeder 11kV-047' },
-                { lat: 6.6155, lng: 3.3560, status: 'online', label: 'DT-1019' },
-                { lat: 6.6430, lng: 3.3920, status: 'offline', label: 'Feeder 33kV-016' },
-                { lat: 6.6310, lng: 3.3390, status: 'offline', label: 'DT-1152' },
-                { lat: 6.6240, lng: 3.3760, status: 'online', label: 'Feeder 11kV-038' },
-                { lat: 6.6460, lng: 3.3500, status: 'offline', label: 'DT-1027' }
             ]
+
+            const infra = data.infrastructure_summary || {}
+            this.gnStats = [
+                { label: 'TS', value: formatNumber(infra.ts_count) },
+                { label: 'Transformer Capacity', value: formatNumber(infra.transformer_capacity_count) },
+                { label: '33KVA Feeders', value: formatNumber(infra.feeders_33kva) },
+                { label: 'ISS', value: formatNumber(infra.iss_count) },
+                { label: 'Total Transformer', value: formatNumber(infra.total_transformers) }
+            ]
+
+            const grid = data.grid_network || {}
+            this.gnCounts = [
+                { label: '11KVA Incomer', value: formatNumber(grid['11kva_incomer']) },
+                { label: '11KVA Outgoing Feeders', value: formatNumber(grid['11kva_outgoing_feeders']) },
+                { label: 'DT', value: formatNumber(grid.dt_count) }
+            ]
+
+            this.gnStatuses = [
+                { label: 'Online', cls: 'status-online', dotCls: 'green', textCls: 'text-green', dt: formatNumber(grid.online_dts), feeder: formatNumber(grid.online_feeders) },
+                { label: 'Offline', cls: 'status-offline', dotCls: 'red', textCls: 'text-red', dt: formatNumber(grid.offline_dts), feeder: formatNumber(grid.offline_feeders) },
+                // The API doesn't report an inactive-feeder count, only inactive_dts.
+                { label: 'Inactive', cls: 'status-inactive', dotCls: 'gray', textCls: 'text-gray', dt: formatNumber(grid.inactive_dts), feeder: '—' }
+            ]
+
+            const markers = (data.dt_markers || [])
+                .filter((m) => m.latitude != null && m.longitude != null)
+                .map((m) => ({
+                    lat: m.latitude,
+                    lng: m.longitude,
+                    status: (m.status || '').toLowerCase(),
+                    label: m.dt_name,
+                    feederName: m.feeder_name,
+                    band: m.band,
+                    dtId: m.dt_id
+                }))
+            this.mapMarkers = markers
+            if (markers.length) {
+                this.mapCenter = [
+                    markers.reduce((sum, m) => sum + m.lat, 0) / markers.length,
+                    markers.reduce((sum, m) => sum + m.lng, 0) / markers.length
+                ]
+            }
         }
     }
 }
@@ -221,6 +311,8 @@ export default {
     padding-left: 280px;
     padding-right: 20px;
     padding-top: 20px;
+    position: relative;
+    min-height: 100vh;
 }
 
 .avail-header {
@@ -262,6 +354,42 @@ export default {
 .filter-icon {
     font-size: 18px;
     color: var(--text-muted);
+}
+
+.filter-date-input,
+.filter-select {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-family: inherit;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+/* The native month input draws its own calendar icon next to our Material icon, showing
+   two icons — hide it visually (not removed) so clicking there still opens the picker. */
+.filter-date-input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+.filter-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Native option lists are OS-rendered and ignore the page's CSS variables/theme, so pin
+   readable colors explicitly rather than let dark-theme text disappear on a light popup. */
+.filter-select option {
+    color: #222;
+    background: #fff;
 }
 
 /* KPI cards */
@@ -500,6 +628,29 @@ export default {
 }
 
 .border-right { border-right: 1px solid var(--border-color); }
+
+.e2e-error {
+    background: #fdecec;
+    color: #c0392b;
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.e2e-retry {
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
 
 @media only screen and (max-width: 992px) {
     .main-content { padding-left: 20px; }
