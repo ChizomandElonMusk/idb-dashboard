@@ -55,5 +55,35 @@
   },
   "SideNav": {
     "description": "Auto imported from components/SideNav/SideNav.vue"
+  },
+  "UiBarChart": {
+    "description": "Auto imported from components/ui/BarChart.vue"
+  },
+  "UiDataTable": {
+    "description": "Auto imported from components/ui/DataTable.vue"
+  },
+  "UiDonut": {
+    "description": "Auto imported from components/ui/Donut.vue"
+  },
+  "UiFilterDate": {
+    "description": "Auto imported from components/ui/FilterDate.vue"
+  },
+  "UiFilterSelect": {
+    "description": "Auto imported from components/ui/FilterSelect.vue"
+  },
+  "UiGauge": {
+    "description": "Auto imported from components/ui/Gauge.vue"
+  },
+  "UiIcon": {
+    "description": "Auto imported from components/ui/Icon.vue"
+  },
+  "UiLineChart": {
+    "description": "Auto imported from components/ui/LineChart.vue"
+  },
+  "UiPageHeader": {
+    "description": "Auto imported from components/ui/PageHeader.vue"
+  },
+  "UiSkeletonPage": {
+    "description": "Auto imported from components/ui/SkeletonPage.vue"
   }
 }

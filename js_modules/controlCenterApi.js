@@ -179,7 +179,7 @@ export const BUSINESS_UNITS = ['All', 'Oshodi', 'Shomolu', 'Akowonjo', 'Ikeja', 
 export const FEEDER_BANDS = ['All', 'A', 'B', 'C', 'D', 'E']
 
 const BAND_ORDER = ['A', 'B', 'C', 'D', 'E']
-const BAND_COLORS = ['#5b7cfa', '#3ec9a7', '#a56ef0', '#e74c3c', '#f5a623']
+const BAND_COLORS = ['#128A5B', '#E58E0A', '#48598B', '#B7791F', '#DB362C']
 
 // Consistent color per band across every chart that breaks data down by band, keyed by
 // band letter rather than array position so it stays correct even if an endpoint ever

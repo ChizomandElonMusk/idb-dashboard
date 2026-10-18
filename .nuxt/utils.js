@@ -202,7 +202,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {"CONTROL_CENTER_API_BASE_URL":"http://192.168.80.108:8090/api/v1"}
+      env: {"CONTROL_CENTER_API_BASE_URL":"http://10.50.32.108:8090/api/v1"}
     }
     // Only set once
 

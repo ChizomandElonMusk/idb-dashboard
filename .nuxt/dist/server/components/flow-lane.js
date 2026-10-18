@@ -1,13 +1,90 @@
 exports.ids = [7];
 exports.modules = {
 
-/***/ 100:
+/***/ 125:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return LEVEL_LABELS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return LEVEL_COUNT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return LEVEL_RESPONSE_KEYS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return LEVEL_COUNT_KEYS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FILTERABLE_LEVEL_COUNT; });
+/* unused harmony export seededFloat */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return seededRange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return fmt; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return extractFeederFromPathKey; });
+// GET /api/v1/energy-flow now backs the Energy Flow Diagram's real numbers (see
+// static/api_live_responses3.md #2) - but it only accepts ts/transformer/feeder_33kva/dt/
+// dt_type as filters. There's no query param for ISS, Transformer 2, 11kV Incomer, or 11kV
+// Outgoing Feeder individually, even though the local relationship tree (ts_relationship.json)
+// lets a user browse the hierarchy that deep. So FlowLane.vue only refetches when a TS,
+// Transformer, or 33kV Feeder selection changes; the numbers shown for ISS/Transformer 2/11kV
+// Incomer/11kV Outgoing Feeder reflect the API's response for whatever TS/Transformer/33kV
+// Feeder is currently selected above them (i.e. "All" beneath that point), not the specific
+// sub-node the user has drilled into locally. seededRange below is now only used as a
+// last-resort fallback for the numeric fields if flowData hasn't loaded yet.
+//
+// DT names: dt-availability/table's rows carry both dt_name and feeder_name, and feeder_name
+// uses the exact same naming convention as this tree's "11kV Outgoing Feeder" leaf keys (e.g.
+// "11-AgegeINJ-T1-Iju Road" appears in both places) - so real DT names for the feeder a user
+// has drilled into can be looked up from that table instead of faked. See
+// energy_flow_diagram.vue's ensureDtNames() for the (paginated, fetched-once) index build, and
+// extractFeederFromPathKey() below for pulling the feeder name back out of a card's path.
+
+const LEVEL_LABELS = ['TS', 'Transformer', '33kV Feeder', 'ISS', 'Transformer 2', '11kV Incomer', '11kV Outgoing Feeder'];
+const LEVEL_COUNT = LEVEL_LABELS.length;
+
+// Maps each level index to the matching key in the /energy-flow response, and to the field
+// within that section holding the entity count (shown as the card's "Total X" footer).
+const LEVEL_RESPONSE_KEYS = ['ts', 'transformer_capacity', 'feeders_33kva', 'iss', 'transformer2', 'incomer_11kva', 'outgoing_feeder_11kva'];
+const LEVEL_COUNT_KEYS = ['total_ts', 'total_transformers', 'total_feeders', 'total_iss', 'total_transformer2', 'total_incomers', 'total_feeders'];
+
+// Only these levels correspond to real, documented query params (ts/transformer/feeder_33kva) -
+// a selection change at level 3+ (ISS onward) can't be sent to the API at all.
+const FILTERABLE_LEVEL_COUNT = 3;
+function hashCode(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = Math.imul(31, h) + str.charCodeAt(i) | 0;
+  }
+  return h;
+}
+function seededFloat(seedStr) {
+  const x = Math.sin(hashCode(seedStr)) * 10000;
+  return x - Math.floor(x);
+}
+function seededRange(seedStr, min, max) {
+  return min + seededFloat(seedStr) * (max - min);
+}
+function fmt(n) {
+  return Number(n).toLocaleString('en-US', {
+    maximumFractionDigits: 2
+  });
+}
+
+// Pulls the "11kV Outgoing Feeder" value back out of a card's selfPathKey (built as
+// "...>11kV Outgoing Feeder=<value>..."), so the DT card below it can look up real DTs for
+// that specific feeder. Returns null if DT is hanging off an earlier level instead (the
+// Path B dead-end branch - see FlowLane.vue), since there's no single feeder to key by then.
+function extractFeederFromPathKey(pathKey) {
+  const marker = '>11kV Outgoing Feeder=';
+  const idx = pathKey.lastIndexOf(marker);
+  if (idx === -1) return null;
+  const rest = pathKey.slice(idx + marker.length);
+  const nextGt = rest.indexOf('>');
+  return nextGt === -1 ? rest : rest.slice(0, nextGt);
+}
+
+/***/ }),
+
+/***/ 142:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(111);
+var content = __webpack_require__(176);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
@@ -19,7 +96,34 @@ module.exports.__inject__ = function (context) {
 
 /***/ }),
 
-/***/ 103:
+/***/ 175:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(142);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ 176:
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".flow-card-col[data-v-d1ec2ee4],.flow-row[data-v-d1ec2ee4]{align-items:flex-start;display:flex}.flow-card-col[data-v-d1ec2ee4]{flex-direction:column;flex-shrink:0}.flow-card-col.has-right[data-v-d1ec2ee4]{margin-right:70px}.flow-below-branch[data-v-d1ec2ee4]{align-items:flex-start;display:flex;flex-direction:column;margin-top:60px}.flow-card[data-v-d1ec2ee4]{align-self:flex-start;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;box-shadow:0 2px 8px var(--shadow-color);flex-shrink:0;padding:14px 16px;position:relative;transition:opacity .15s ease;width:230px}.flow-card-updating[data-v-d1ec2ee4]{opacity:.55}.flow-card-title[data-v-d1ec2ee4]{color:var(--text-primary);font-size:13px;font-weight:600;margin:0 0 10px;text-align:center}.flow-filters[data-v-d1ec2ee4]{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}.flow-filter[data-v-d1ec2ee4]{align-items:center;border:1px solid var(--border-color);border-radius:6px;display:flex;justify-content:space-between;padding:4px 8px;position:relative}.flow-filter[data-v-d1ec2ee4],.flow-filter select[data-v-d1ec2ee4]{color:var(--text-secondary);font-size:12px}.flow-filter select[data-v-d1ec2ee4]{-moz-appearance:none;appearance:none;-webkit-appearance:none;background:transparent;border:none;cursor:pointer;height:auto;padding:0 18px 0 0;width:100%}.flow-filter select[data-v-d1ec2ee4]:focus{outline:none}.flow-filter .material-icons[data-v-d1ec2ee4]{color:var(--text-muted);font-size:16px!important;pointer-events:none;position:absolute;right:6px}.flow-total-label[data-v-d1ec2ee4]{color:var(--text-muted);font-size:11px;margin:0}.flow-total-value[data-v-d1ec2ee4]{color:#2fa360;font-size:15px;font-weight:700;margin:2px 0 8px}.flow-bar[data-v-d1ec2ee4]{background:var(--border-color);border-radius:4px;display:flex;height:6px;margin-bottom:8px;overflow:hidden}.flow-bar-fill[data-v-d1ec2ee4]{background:#3ec97a;height:100%}.flow-bar-loss[data-v-d1ec2ee4]{background:#e05353;height:100%}.flow-stats-row[data-v-d1ec2ee4]{display:flex;font-size:11px;gap:8px;justify-content:space-between;margin-bottom:8px}.flow-stat[data-v-d1ec2ee4]{display:flex;flex-direction:column;gap:2px}.flow-stat.right[data-v-d1ec2ee4]{align-items:flex-end;text-align:right}.flow-stat-pct[data-v-d1ec2ee4]{color:var(--text-secondary);font-weight:600}.flow-stat-pct.loss[data-v-d1ec2ee4]{color:#c0392b}.flow-stat-val[data-v-d1ec2ee4]{color:var(--text-muted)}.flow-divider[data-v-d1ec2ee4]{background:var(--divider);height:1px;margin:6px 0}.flow-bottom-row[data-v-d1ec2ee4]{color:var(--text-secondary);display:flex;font-size:12px;justify-content:space-between;padding-top:4px}.flow-bottom-row b[data-v-d1ec2ee4]{color:var(--text-primary)}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
+
+
+/***/ }),
+
+/***/ 183:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92,117 +196,58 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./components/FlowLane.vue?vue&type=template&id=d1ec2ee4&scoped=true
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.add-all.js"
-var esnext_set_add_all_js_ = __webpack_require__(45);
+var esnext_set_add_all_js_ = __webpack_require__(49);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.delete-all.js"
-var esnext_set_delete_all_js_ = __webpack_require__(46);
+var esnext_set_delete_all_js_ = __webpack_require__(50);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.difference.js"
-var esnext_set_difference_js_ = __webpack_require__(47);
+var esnext_set_difference_js_ = __webpack_require__(51);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.every.js"
-var esnext_set_every_js_ = __webpack_require__(48);
+var esnext_set_every_js_ = __webpack_require__(52);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.filter.js"
-var esnext_set_filter_js_ = __webpack_require__(49);
+var esnext_set_filter_js_ = __webpack_require__(53);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.find.js"
-var esnext_set_find_js_ = __webpack_require__(50);
+var esnext_set_find_js_ = __webpack_require__(54);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.intersection.js"
-var esnext_set_intersection_js_ = __webpack_require__(51);
+var esnext_set_intersection_js_ = __webpack_require__(55);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.is-disjoint-from.js"
-var esnext_set_is_disjoint_from_js_ = __webpack_require__(52);
+var esnext_set_is_disjoint_from_js_ = __webpack_require__(56);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.is-subset-of.js"
-var esnext_set_is_subset_of_js_ = __webpack_require__(53);
+var esnext_set_is_subset_of_js_ = __webpack_require__(57);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.is-superset-of.js"
-var esnext_set_is_superset_of_js_ = __webpack_require__(54);
+var esnext_set_is_superset_of_js_ = __webpack_require__(58);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.join.js"
-var esnext_set_join_js_ = __webpack_require__(55);
+var esnext_set_join_js_ = __webpack_require__(59);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.map.js"
-var esnext_set_map_js_ = __webpack_require__(56);
+var esnext_set_map_js_ = __webpack_require__(60);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.reduce.js"
-var esnext_set_reduce_js_ = __webpack_require__(57);
+var esnext_set_reduce_js_ = __webpack_require__(61);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.some.js"
-var esnext_set_some_js_ = __webpack_require__(58);
+var esnext_set_some_js_ = __webpack_require__(62);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.symmetric-difference.js"
-var esnext_set_symmetric_difference_js_ = __webpack_require__(59);
+var esnext_set_symmetric_difference_js_ = __webpack_require__(63);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.union.js"
-var esnext_set_union_js_ = __webpack_require__(60);
+var esnext_set_union_js_ = __webpack_require__(64);
 
-// CONCATENATED MODULE: ./assets/js/energyFlowSim.js
-// GET /api/v1/energy-flow now backs the Energy Flow Diagram's real numbers (see
-// static/api_live_responses3.md #2) - but it only accepts ts/transformer/feeder_33kva/dt/
-// dt_type as filters. There's no query param for ISS, Transformer 2, 11kV Incomer, or 11kV
-// Outgoing Feeder individually, even though the local relationship tree (ts_relationship.json)
-// lets a user browse the hierarchy that deep. So FlowLane.vue only refetches when a TS,
-// Transformer, or 33kV Feeder selection changes; the numbers shown for ISS/Transformer 2/11kV
-// Incomer/11kV Outgoing Feeder reflect the API's response for whatever TS/Transformer/33kV
-// Feeder is currently selected above them (i.e. "All" beneath that point), not the specific
-// sub-node the user has drilled into locally. seededRange below is now only used as a
-// last-resort fallback for the numeric fields if flowData hasn't loaded yet.
-//
-// DT names: dt-availability/table's rows carry both dt_name and feeder_name, and feeder_name
-// uses the exact same naming convention as this tree's "11kV Outgoing Feeder" leaf keys (e.g.
-// "11-AgegeINJ-T1-Iju Road" appears in both places) - so real DT names for the feeder a user
-// has drilled into can be looked up from that table instead of faked. See
-// energy_flow_diagram.vue's ensureDtNames() for the (paginated, fetched-once) index build, and
-// extractFeederFromPathKey() below for pulling the feeder name back out of a card's path.
+// EXTERNAL MODULE: ./assets/js/energyFlowSim.js
+var energyFlowSim = __webpack_require__(125);
 
-const LEVEL_LABELS = ['TS', 'Transformer', '33kV Feeder', 'ISS', 'Transformer 2', '11kV Incomer', '11kV Outgoing Feeder'];
-const LEVEL_COUNT = LEVEL_LABELS.length;
-
-// Maps each level index to the matching key in the /energy-flow response, and to the field
-// within that section holding the entity count (shown as the card's "Total X" footer).
-const LEVEL_RESPONSE_KEYS = ['ts', 'transformer_capacity', 'feeders_33kva', 'iss', 'transformer2', 'incomer_11kva', 'outgoing_feeder_11kva'];
-const LEVEL_COUNT_KEYS = ['total_ts', 'total_transformers', 'total_feeders', 'total_iss', 'total_transformer2', 'total_incomers', 'total_feeders'];
-
-// Only these levels correspond to real, documented query params (ts/transformer/feeder_33kva) -
-// a selection change at level 3+ (ISS onward) can't be sent to the API at all.
-const FILTERABLE_LEVEL_COUNT = 3;
-function hashCode(str) {
-  let h = 0;
-  for (let i = 0; i < str.length; i++) {
-    h = Math.imul(31, h) + str.charCodeAt(i) | 0;
-  }
-  return h;
-}
-function seededFloat(seedStr) {
-  const x = Math.sin(hashCode(seedStr)) * 10000;
-  return x - Math.floor(x);
-}
-function seededRange(seedStr, min, max) {
-  return min + seededFloat(seedStr) * (max - min);
-}
-function fmt(n) {
-  return Number(n).toLocaleString('en-US', {
-    maximumFractionDigits: 2
-  });
-}
-
-// Pulls the "11kV Outgoing Feeder" value back out of a card's selfPathKey (built as
-// "...>11kV Outgoing Feeder=<value>..."), so the DT card below it can look up real DTs for
-// that specific feeder. Returns null if DT is hanging off an earlier level instead (the
-// Path B dead-end branch - see FlowLane.vue), since there's no single feeder to key by then.
-function extractFeederFromPathKey(pathKey) {
-  const marker = '>11kV Outgoing Feeder=';
-  const idx = pathKey.lastIndexOf(marker);
-  if (idx === -1) return null;
-  const rest = pathKey.slice(idx + marker.length);
-  const nextGt = rest.indexOf('>');
-  return nextGt === -1 ? rest : rest.slice(0, nextGt);
-}
 // EXTERNAL MODULE: ./js_modules/controlCenterApi.js
-var controlCenterApi = __webpack_require__(87);
+var controlCenterApi = __webpack_require__(85);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/FlowLane.vue?vue&type=script&lang=js
 
@@ -324,7 +369,7 @@ var controlCenterApi = __webpack_require__(87);
         // Only meaningful for the root (TS) card - the page listens on it
         // alone to know when to show the Reset button.
         this.$emit('change', val);
-        if (this.level < FILTERABLE_LEVEL_COUNT && this.onFilterChange) {
+        if (this.level < energyFlowSim["a" /* FILTERABLE_LEVEL_COUNT */] && this.onFilterChange) {
           this.onFilterChange({
             level: this.level,
             value: val
@@ -349,7 +394,7 @@ var controlCenterApi = __webpack_require__(87);
   },
   computed: {
     title() {
-      if (this.mode === 'level') return LEVEL_LABELS[this.level];
+      if (this.mode === 'level') return energyFlowSim["d" /* LEVEL_LABELS */][this.level];
       if (this.mode === 'dt') return 'DT';
       return 'Customer';
     },
@@ -364,7 +409,7 @@ var controlCenterApi = __webpack_require__(87);
       }
       if (this.mode === 'dt') {
         if (!this.dtNameIndex) return [];
-        const feeder = extractFeederFromPathKey(this.pathKey);
+        const feeder = Object(energyFlowSim["f" /* extractFeederFromPathKey */])(this.pathKey);
         if (feeder && this.dtNameIndex.byFeeder.has(feeder)) {
           return Array.from(this.dtNameIndex.byFeeder.get(feeder)).sort();
         }
@@ -391,7 +436,7 @@ var controlCenterApi = __webpack_require__(87);
       return list;
     },
     nonEmptyChildren() {
-      if (this.level >= LEVEL_COUNT - 1) return [];
+      if (this.level >= energyFlowSim["b" /* LEVEL_COUNT */] - 1) return [];
       return this.resolvedNodeList.filter(n => Object.keys(n).length > 0);
     },
     emptyChildren() {
@@ -422,7 +467,7 @@ var controlCenterApi = __webpack_require__(87);
         return this.flowData ? this.flowData.dts || null : null;
       }
       if (!this.flowData) return null;
-      if (this.mode === 'level') return this.flowData[LEVEL_RESPONSE_KEYS[this.level]] || null;
+      if (this.mode === 'level') return this.flowData[energyFlowSim["e" /* LEVEL_RESPONSE_KEYS */][this.level]] || null;
       if (this.mode === 'customer') return this.flowData.customer || null;
       return null;
     },
@@ -430,13 +475,13 @@ var controlCenterApi = __webpack_require__(87);
       if (this.apiSection && this.apiSection.total_energy_mwh != null) return this.apiSection.total_energy_mwh;
       if (this.incomingTotal != null) return this.incomingTotal;
       // Fallback while flowData hasn't loaded yet (covered by the page's loading overlay).
-      return Math.round(seededRange(`TOTAL:${this.selfPathKey}`, 40000, 480000));
+      return Math.round(Object(energyFlowSim["h" /* seededRange */])(`TOTAL:${this.selfPathKey}`, 40000, 480000));
     },
     lossPct() {
       if (this.mode === 'customer') return 0;
       if (this.apiSection && this.apiSection.loss_pct != null) return this.apiSection.loss_pct;
       const [min, max] = this.mode === 'dt' ? [8, 18] : [2, 12];
-      return Math.round(seededRange(`LOSS:${this.selfPathKey}`, min, max));
+      return Math.round(Object(energyFlowSim["h" /* seededRange */])(`LOSS:${this.selfPathKey}`, min, max));
     },
     outgoingPct() {
       if (this.apiSection && this.apiSection.transmission_pct != null) return this.apiSection.transmission_pct;
@@ -454,7 +499,7 @@ var controlCenterApi = __webpack_require__(87);
       // customer has no comparable real percentage in the API response - a full bar
       // beats fabricating a number that looks meaningful but isn't.
       if (this.apiSection) return 100;
-      return Math.round(seededRange(`FILL:${this.selfPathKey}`, 82, 96));
+      return Math.round(Object(energyFlowSim["h" /* seededRange */])(`FILL:${this.selfPathKey}`, 82, 96));
     },
     bottomLabel() {
       if (this.mode === 'customer') return 'Total Customers';
@@ -464,7 +509,7 @@ var controlCenterApi = __webpack_require__(87);
     bottomVal() {
       if (this.mode === 'customer') {
         if (this.apiSection && this.apiSection.total_customers != null) return this.fmt(this.apiSection.total_customers);
-        return this.fmt(Math.round(seededRange(`CUST:${this.selfPathKey}`, 800, 210000)));
+        return this.fmt(Math.round(Object(energyFlowSim["h" /* seededRange */])(`CUST:${this.selfPathKey}`, 800, 210000)));
       }
       if (this.mode === 'dt') {
         if (this.apiSection) {
@@ -473,14 +518,14 @@ var controlCenterApi = __webpack_require__(87);
         return this.options.length;
       }
       if (this.apiSection) {
-        const countKey = LEVEL_COUNT_KEYS[this.level];
+        const countKey = energyFlowSim["c" /* LEVEL_COUNT_KEYS */][this.level];
         if (this.apiSection[countKey] != null) return this.fmt(this.apiSection[countKey]);
       }
       return this.options.length;
     }
   },
   methods: {
-    fmt: fmt,
+    fmt: energyFlowSim["g" /* fmt */],
     // Called when THIS DT card's own dropdown changes. Refetches /energy-flow with the
     // same ts/transformer/feeder_33kva the shared flowData was fetched with, plus this
     // specific dt name, and stores the result locally - only this card and its Customer
@@ -495,7 +540,7 @@ var controlCenterApi = __webpack_require__(87);
       this.dtLocalLoading = true;
       try {
         const base = this.flowData || {};
-        this.dtLocalFlowData = await Object(controlCenterApi["n" /* getEnergyFlow */])({
+        this.dtLocalFlowData = await Object(controlCenterApi["k" /* getEnergyFlow */])({
           ts: base.ts && base.ts.name || 'All',
           transformer: base.transformer_capacity && base.transformer_capacity.selected || 'All',
           feeder_33kva: base.feeders_33kva && base.feeders_33kva.selected || 'All',
@@ -540,7 +585,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(110)
+  var style0 = __webpack_require__(175)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -561,67 +606,40 @@ var component = Object(componentNormalizer["a" /* default */])(
 /* harmony default export */ var FlowLane = __webpack_exports__["default"] = (component.exports);
 
 /* nuxt-component-imports */
-installComponents(component, {FlowLane: __webpack_require__(103).default})
+installComponents(component, {FlowLane: __webpack_require__(183).default})
 
 
 /***/ }),
 
-/***/ 110:
+/***/ 85:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(100);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 111:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".flow-card-col[data-v-d1ec2ee4],.flow-row[data-v-d1ec2ee4]{align-items:flex-start;display:flex}.flow-card-col[data-v-d1ec2ee4]{flex-direction:column;flex-shrink:0}.flow-card-col.has-right[data-v-d1ec2ee4]{margin-right:70px}.flow-below-branch[data-v-d1ec2ee4]{align-items:flex-start;display:flex;flex-direction:column;margin-top:60px}.flow-card[data-v-d1ec2ee4]{align-self:flex-start;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;box-shadow:0 2px 8px var(--shadow-color);flex-shrink:0;padding:14px 16px;position:relative;transition:opacity .15s ease;width:230px}.flow-card-updating[data-v-d1ec2ee4]{opacity:.55}.flow-card-title[data-v-d1ec2ee4]{color:var(--text-primary);font-size:13px;font-weight:600;margin:0 0 10px;text-align:center}.flow-filters[data-v-d1ec2ee4]{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}.flow-filter[data-v-d1ec2ee4]{align-items:center;border:1px solid var(--border-color);border-radius:6px;display:flex;justify-content:space-between;padding:4px 8px;position:relative}.flow-filter[data-v-d1ec2ee4],.flow-filter select[data-v-d1ec2ee4]{color:var(--text-secondary);font-size:12px}.flow-filter select[data-v-d1ec2ee4]{-moz-appearance:none;appearance:none;-webkit-appearance:none;background:transparent;border:none;cursor:pointer;height:auto;padding:0 18px 0 0;width:100%}.flow-filter select[data-v-d1ec2ee4]:focus{outline:none}.flow-filter .material-icons[data-v-d1ec2ee4]{color:var(--text-muted);font-size:16px!important;pointer-events:none;position:absolute;right:6px}.flow-total-label[data-v-d1ec2ee4]{color:var(--text-muted);font-size:11px;margin:0}.flow-total-value[data-v-d1ec2ee4]{color:#2fa360;font-size:15px;font-weight:700;margin:2px 0 8px}.flow-bar[data-v-d1ec2ee4]{background:var(--border-color);border-radius:4px;display:flex;height:6px;margin-bottom:8px;overflow:hidden}.flow-bar-fill[data-v-d1ec2ee4]{background:#3ec97a;height:100%}.flow-bar-loss[data-v-d1ec2ee4]{background:#e05353;height:100%}.flow-stats-row[data-v-d1ec2ee4]{display:flex;font-size:11px;gap:8px;justify-content:space-between;margin-bottom:8px}.flow-stat[data-v-d1ec2ee4]{display:flex;flex-direction:column;gap:2px}.flow-stat.right[data-v-d1ec2ee4]{align-items:flex-end;text-align:right}.flow-stat-pct[data-v-d1ec2ee4]{color:var(--text-secondary);font-weight:600}.flow-stat-pct.loss[data-v-d1ec2ee4]{color:#c0392b}.flow-stat-val[data-v-d1ec2ee4]{color:var(--text-muted)}.flow-divider[data-v-d1ec2ee4]{background:var(--divider);height:1px;margin:6px 0}.flow-bottom-row[data-v-d1ec2ee4]{color:var(--text-secondary);display:flex;font-size:12px;justify-content:space-between;padding-top:4px}.flow-bottom-row b[data-v-d1ec2ee4]{color:var(--text-primary)}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 87:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(URLSearchParams) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return openDatePicker; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return pick; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return formatNumber; });
+/* WEBPACK VAR INJECTION */(function(URLSearchParams) {/* unused harmony export openDatePicker */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return pick; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return formatNumber; });
 /* unused harmony export lastNMonths */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return monthLabel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return monthLabel; });
 /* unused harmony export lastNDays */
 /* unused harmony export dayLabel */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return todayStr; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return currentMonthStr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return todayStr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return currentMonthStr; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return aggregateDailyTrend; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return formatPct; });
+/* unused harmony export formatPct */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BUSINESS_UNITS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FEEDER_BANDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return bandColor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return getEndToEndOverview; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return getEnergyFlow; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getControlCenterSummary; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getAvailabilitySummary; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getDtAvailabilityDashboard; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return getDtAvailabilityTable; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return getMytoSummary; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return getIdbDashboard; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return getIdbFeederDtLoss; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return getIdbCustomerDtLoss; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return buildTrendCallout; });
+/* unused harmony export bandColor */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getEndToEndOverview; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getEnergyFlow; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getControlCenterSummary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getAvailabilitySummary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return getDtAvailabilityDashboard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getDtAvailabilityTable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return getMytoSummary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return getIdbDashboard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return getIdbFeederDtLoss; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return getIdbCustomerDtLoss; });
+/* unused harmony export buildTrendCallout */
 // Client for the streaming-dashboard-api Control Center backend.
 // See static/api_live_responses3.md for endpoint/field documentation and live response samples.
 // Endpoints are added here incrementally as each screen gets wired up.
@@ -647,7 +665,7 @@ function openDatePicker(e) {
     input.focus();
   }
 }
-const BASE_URL = "http://192.168.80.108:8090/api/v1";
+const BASE_URL = "http://10.50.32.108:8090/api/v1";
 function buildQuery(params = {}) {
   const search = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
@@ -811,7 +829,7 @@ const BUSINESS_UNITS = ['All', 'Oshodi', 'Shomolu', 'Akowonjo', 'Ikeja', 'Ikorod
 // feeders_by_band, myto/summary's band_compliance, etc).
 const FEEDER_BANDS = ['All', 'A', 'B', 'C', 'D', 'E'];
 const BAND_ORDER = ['A', 'B', 'C', 'D', 'E'];
-const BAND_COLORS = ['#5b7cfa', '#3ec9a7', '#a56ef0', '#e74c3c', '#f5a623'];
+const BAND_COLORS = ['#128A5B', '#E58E0A', '#48598B', '#B7791F', '#DB362C'];
 
 // Consistent color per band across every chart that breaks data down by band, keyed by
 // band letter rather than array position so it stays correct even if an endpoint ever
@@ -970,7 +988,7 @@ function buildTrendCallout(trend, valueKey, titleFn, valueLabel) {
     leftPct: Math.min(90, Math.max(5, leftPct))
   };
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(44)["URLSearchParams"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(48)["URLSearchParams"]))
 
 /***/ })
 

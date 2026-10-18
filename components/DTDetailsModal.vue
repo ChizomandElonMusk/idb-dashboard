@@ -1,120 +1,139 @@
 <template>
     <transition name="dt-modal-fade">
-        <div v-if="marker" class="dt-modal-overlay" @click.self="$emit('close')">
-            <div class="dt-modal-card">
-                <div class="dt-modal-header">
-                    <h4 class="dt-modal-title">{{ marker.label }}<br />Details</h4>
-                    <button class="dt-modal-close" aria-label="Close" @click="$emit('close')">
-                        <i class="material-icons">close</i>
-                    </button>
+        <div v-if="marker" class="ie-backdrop" @click.self="$emit('close')">
+            <div class="ie-modal ie-fadeup" role="dialog" aria-modal="true">
+                <div class="dm-head" :style="{ background: meta.soft }">
+                    <div class="pt-circuit ie-layer" :style="{ color: meta.color, opacity: .12 }"></div>
+                    <div class="dm-head-row">
+                        <span class="dm-head-ico"><img :src="'/' + status + '.svg'" alt="" /></span>
+                        <div style="flex:1;min-width:0">
+                            <div class="dm-kicker" :style="{ color: meta.color }">Distribution transformer</div>
+                            <div class="dm-title">{{ marker.label }}</div>
+                            <div class="dm-feeder mono">{{ marker.feederName || '—' }}</div>
+                        </div>
+                        <button class="ie-icon-btn" aria-label="Close" @click="$emit('close')"><Icon name="x" :size="15" /></button>
+                    </div>
                 </div>
 
-                <div class="dt-modal-grid">
-                    <div class="dt-modal-box">
-                        <span class="dt-modal-label">Status</span>
-                        <div class="dt-modal-status">
-                            <i class="marker-dot" :class="statusDotClass"></i>
-                            <b class="dt-modal-value">{{ statusLabel }}</b>
+                <div class="dm-grid">
+                    <div class="ie-stat-box">
+                        <div class="ie-stat-label">Status</div>
+                        <div style="display:flex;align-items:center;gap:7px;margin-top:5px">
+                            <span class="dm-dot" :style="{ background: meta.color }"></span>
+                            <span class="ie-stat-value" style="margin:0" :style="{ color: meta.color }">{{ meta.label }}</span>
                         </div>
                     </div>
-                    <div class="dt-modal-box">
-                        <span class="dt-modal-label">Type</span>
-                        <b class="dt-modal-value">{{ details.type }}</b>
+                    <div class="ie-stat-box">
+                        <div class="ie-stat-label">Type</div>
+                        <div class="ie-stat-value">{{ details.type }}</div>
                     </div>
-
-                    <div class="dt-modal-box">
-                        <span class="dt-modal-label">Address</span>
-                        <b class="dt-modal-value dt-modal-address">
-                            <i class="material-icons tiny">place</i>{{ details.address }}
-                        </b>
-                    </div>
-                    <div class="dt-modal-box">
-                        <span class="dt-modal-label">Total Energy</span>
-                        <b class="dt-modal-value dt-modal-accent">{{ details.totalEnergy }}</b>
-                    </div>
-
-                    <div class="dt-modal-box">
-                        <span class="dt-modal-label">Voltage</span>
-                        <b class="dt-modal-value dt-modal-voltage">{{ details.voltage }}</b>
-                    </div>
-                    <div class="dt-modal-box">
-                        <span class="dt-modal-label">Loss</span>
-                        <div class="dt-modal-loss">
-                            <div class="dt-modal-loss-track">
-                                <div class="dt-modal-loss-fill" :style="{ width: details.loss + '%' }"></div>
-                            </div>
-                            <b class="dt-modal-value">{{ details.loss }}%</b>
+                    <div class="ie-stat-box dm-wide">
+                        <div class="ie-stat-label">Address</div>
+                        <div class="ie-stat-value" style="display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700">
+                            <Icon name="pin" :size="14" style="color:var(--primary)" />{{ details.address }}
                         </div>
+                    </div>
+                    <div class="ie-stat-box">
+                        <div class="ie-stat-label">Total energy</div>
+                        <div class="mono ie-stat-value" style="font-size:15px;color:var(--primary-press)">{{ details.totalEnergy }} <span style="font-size:11px;color:var(--text-3)">kWh</span></div>
+                    </div>
+                    <div class="ie-stat-box">
+                        <div class="ie-stat-label">Voltage</div>
+                        <div class="mono ie-stat-value" style="font-size:15px">{{ details.voltage }}</div>
+                    </div>
+                    <div class="ie-stat-box dm-wide">
+                        <div style="display:flex;align-items:baseline;justify-content:space-between">
+                            <span class="ie-stat-label">Loss</span>
+                            <span class="mono" style="font-size:14px;font-weight:700" :style="{ color: lossColor }">{{ details.loss }}%</span>
+                        </div>
+                        <div class="ie-track" style="margin-top:8px"><div class="ie-fill" :style="{ width: details.loss + '%', background: lossColor }"></div></div>
                     </div>
 
                     <template v-if="showFullDetails">
-                        <div class="dt-modal-box">
-                            <span class="dt-modal-label">Feeder Band</span>
-                            <b class="dt-modal-value dt-modal-band">{{ details.feederBand }}</b>
+                        <div class="ie-stat-box">
+                            <div class="ie-stat-label">Feeder band</div>
+                            <div style="display:flex;align-items:center;gap:8px;margin-top:5px">
+                                <span class="ie-band" :style="{ background: bandSoft, color: bandColor }">{{ band }}</span>
+                                <span v-if="bandTarget" style="font-size:12px;color:var(--text-3);font-weight:600">{{ bandTarget }}h target</span>
+                            </div>
                         </div>
-                        <div class="dt-modal-box">
-                            <span class="dt-modal-label">Availability (Hrs)</span>
-                            <b class="dt-modal-value dt-modal-accent">{{ details.availabilityHrs }}</b>
+                        <div class="ie-stat-box">
+                            <div class="ie-stat-label">Availability</div>
+                            <div class="mono ie-stat-value" style="font-size:15px;color:var(--success)">{{ details.availabilityHrs }}<span style="font-size:11px;color:var(--text-3)"> hrs</span></div>
                         </div>
-
-                        <div class="dt-modal-box dt-modal-box-wide">
-                            <span class="dt-modal-label">Last Updated</span>
-                            <b class="dt-modal-value">{{ details.lastUpdated }}</b>
-                        </div>
-
-                        <div class="dt-modal-box dt-modal-box-wide">
-                            <span class="dt-modal-label">Location Coordinates</span>
-                            <b class="dt-modal-value dt-modal-mono">{{ details.coordinates }}</b>
+                        <div class="ie-stat-box dm-wide" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                            <div><div class="ie-stat-label">Last updated</div><div style="font-size:13px;font-weight:700;margin-top:5px">{{ details.lastUpdated }}</div></div>
+                            <div style="text-align:right"><div class="ie-stat-label">Coordinates</div><div class="mono" style="font-size:12.5px;font-weight:700;margin-top:5px">{{ details.coordinates }}</div></div>
                         </div>
                     </template>
                 </div>
 
-                <button v-if="!showFullDetails" class="dt-modal-full-btn" @click="showFullDetails = true">
-                    View Full Details
-                </button>
+                <div class="dm-actions">
+                    <button v-if="!showFullDetails" class="ie-btn dm-btn" @click="showFullDetails = true">View full details</button>
+                    <button class="ie-btn dm-btn" @click="openDt">Open in DT Availability<Icon name="arrowR" :size="14" /></button>
+                </div>
             </div>
         </div>
     </transition>
 </template>
 
 <script>
-// Detail fields (type, address, energy readings, feeder band, etc.) are not yet exposed by the
-// backend for individual grid network assets, so they're derived deterministically from the
+import Icon from '~/components/ui/Icon.vue'
+import { bandColorVar, bandSoftVar } from '~/js_modules/pages'
+
+const BAND_TARGET = { A: 20, B: 16, C: 12, D: 8, E: 4 }
+const STATUS = {
+    online: { label: 'Online', color: 'var(--success)', soft: 'var(--success-soft)' },
+    offline: { label: 'Offline', color: 'var(--danger)', soft: 'var(--danger-soft)' },
+    inactive: { label: 'Inactive', color: 'var(--warning)', soft: 'var(--warning-soft)' }
+}
+
+// Detail fields (type, address, energy readings, etc.) are not yet exposed by the backend
+// for individual grid network assets, so they're derived deterministically from the
 // marker's own data here. Swap `details` for real API data once that endpoint ships.
 export default {
     name: 'DTDetailsModal',
+    components: { Icon },
     props: {
-        marker: {
-            type: Object,
-            default: null
-        }
+        marker: { type: Object, default: null }
     },
     data() {
-        return {
-            showFullDetails: false
-        }
+        return { showFullDetails: false }
     },
     computed: {
-        statusLabel() {
-            const status = this.marker?.status || 'online'
-            return status.charAt(0).toUpperCase() + status.slice(1)
+        status() {
+            return STATUS[this.marker?.status] ? this.marker.status : 'online'
         },
-        statusDotClass() {
-            const map = { online: 'green', offline: 'red', inactive: 'orange' }
-            return map[this.marker?.status] || 'green'
+        meta() {
+            return STATUS[this.status]
+        },
+        band() {
+            return this.marker?.band || this.details.feederBand
+        },
+        bandColor() {
+            return bandColorVar(this.band)
+        },
+        bandSoft() {
+            return bandSoftVar(this.band)
+        },
+        bandTarget() {
+            return BAND_TARGET[this.band] || null
+        },
+        lossColor() {
+            const l = this.details.loss || 0
+            return l >= 50 ? 'var(--danger)' : l >= 25 ? 'var(--warning)' : 'var(--success)'
         },
         details() {
             if (!this.marker) return {}
             const seed = this.seedFromString(this.marker.label || '')
             const isFeeder = /feeder/i.test(this.marker.label || '')
-
             return {
                 type: seed % 2 === 0 ? 'Public' : 'Private',
                 address: this.marker.address || 'Adeniyi Jones ISS',
-                totalEnergy: `${(200 + (seed % 400) + (seed % 100) / 100).toFixed(2)}KWH`,
+                totalEnergy: (200 + (seed % 400) + (seed % 100) / 100).toFixed(2),
                 voltage: isFeeder ? (seed % 2 === 0 ? '33kV' : '11kV') : '33kV',
                 loss: 30 + (seed % 60),
-                feederBand: `Band ${String.fromCharCode(65 + (seed % 4))}`,
+                feederBand: String.fromCharCode(65 + (seed % 4)),
                 availabilityHrs: 12 + (seed % 12),
                 lastUpdated: this.formatDate(new Date(Date.now() - (seed % 72) * 3600 * 1000)),
                 coordinates: `${this.marker.lat.toFixed(4)}, ${this.marker.lng.toFixed(4)}`
@@ -126,7 +145,21 @@ export default {
             this.showFullDetails = false
         }
     },
+    mounted() {
+        window.addEventListener('keydown', this.onKey)
+    },
+    beforeDestroy() {
+        window.removeEventListener('keydown', this.onKey)
+    },
     methods: {
+        onKey(e) {
+            if (e.key === 'Escape' && this.marker) this.$emit('close')
+        },
+        openDt() {
+            const name = this.marker && this.marker.label
+            this.$emit('close')
+            this.$router.push({ path: '/dt_availability', query: name ? { dt: name } : {} })
+        },
         seedFromString(str) {
             let hash = 0
             for (let i = 0; i < str.length; i++) {
@@ -135,184 +168,27 @@ export default {
             return hash
         },
         formatDate(date) {
-            return date.toLocaleString('en-US', {
-                month: 'numeric',
-                day: 'numeric',
-                year: 'numeric',
-                hour: 'numeric',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true
-            })
+            return date.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
         }
     }
 }
 </script>
 
 <style scoped>
-.dt-modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    padding: 20px;
-}
-
-.dt-modal-card {
-    background: var(--bg-card);
-    border-radius: 16px;
-    width: 100%;
-    max-width: 560px;
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
-    padding: 24px 28px 28px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.dt-modal-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.dt-modal-title {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.25;
-    color: var(--text-primary);
-    margin: 0;
-}
-
-.dt-modal-close {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text-muted);
-    padding: 4px;
-    line-height: 0;
-    flex-shrink: 0;
-}
-
-.dt-modal-close:hover { color: var(--text-primary); }
-
-.dt-modal-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.dt-modal-box {
-    background: var(--bg-card-alt);
-    border-radius: 10px;
-    padding: 12px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.dt-modal-box-wide {
-    grid-column: 1 / -1;
-    background: rgba(66, 133, 244, 0.08);
-}
-
-.dt-modal-label {
-    font-size: 12px;
-    color: var(--text-muted);
-}
-
-.dt-modal-value {
-    font-size: 16px;
-    color: var(--text-primary);
-    font-weight: 700;
-}
-
-.dt-modal-mono {
-    font-family: monospace;
-}
-
-.dt-modal-status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.dt-modal-address {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.dt-modal-address .material-icons {
-    font-size: 16px;
-    color: var(--text-muted);
-}
-
-.dt-modal-accent { color: #2fa360; }
-.dt-modal-voltage { color: #2266dd; }
-.dt-modal-band { color: #8a3fd1; }
-
-.dt-modal-loss {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.dt-modal-loss-track {
-    flex: 1;
-    height: 6px;
-    border-radius: 3px;
-    background: var(--divider);
-    overflow: hidden;
-}
-
-.dt-modal-loss-fill {
-    height: 100%;
-    background: #c0392b;
-    border-radius: 3px;
-}
-
-.marker-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.marker-dot.green  { background: #2fa360; }
-.marker-dot.red    { background: #c0392b; }
-.marker-dot.orange { background: #e8a325; }
-
-.dt-modal-full-btn {
-    width: 100%;
-    background: #2266ee;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 14px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.dt-modal-full-btn:hover { background: #1a52c4; }
-
-.dt-modal-fade-enter-active,
-.dt-modal-fade-leave-active {
-    transition: opacity 0.15s ease;
-}
-
-.dt-modal-fade-enter,
-.dt-modal-fade-leave-to {
-    opacity: 0;
-}
-
-@media only screen and (max-width: 600px) {
-    .dt-modal-grid { grid-template-columns: 1fr; }
-}
+.ie-backdrop { z-index: 2000; }
+.dm-head { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); padding: 18px 20px; }
+.dm-head-row { position: relative; display: flex; align-items: flex-start; gap: 13px; }
+.dm-head-ico { width: 44px; height: 44px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex: none; box-shadow: var(--shadow-xs); }
+.dm-head-ico img { width: 26px; height: 26px; }
+.dm-kicker { font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.dm-title { font-size: 16px; font-weight: 800; letter-spacing: -.3px; margin-top: 3px; line-height: 1.25; word-break: break-word; }
+.dm-feeder { font-size: 11.5px; color: var(--text-2); margin-top: 3px; }
+.dm-grid { padding: 16px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.dm-wide { grid-column: 1 / -1; }
+.dm-dot { width: 8px; height: 8px; border-radius: 50%; }
+.dm-actions { display: flex; gap: 9px; padding: 0 20px 18px; }
+.dm-btn { flex: 1; padding: 11px; font-size: 13px; border-radius: 10px; background: var(--surface); }
+.dt-modal-fade-enter-active, .dt-modal-fade-leave-active { transition: opacity .15s ease; }
+.dt-modal-fade-enter, .dt-modal-fade-leave-to { opacity: 0; }
+@media (max-width: 600px) { .dm-grid { grid-template-columns: 1fr; } .dm-actions { flex-direction: column; } }
 </style>

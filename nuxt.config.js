@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'IE IDB',
+    title: 'IE Grid Intelligence',
     htmlAttrs: {
       lang: 'en'
     },
@@ -16,7 +16,10 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600;700&display=swap' }
     ],
     script: [
       // {
@@ -29,15 +32,16 @@ export default {
         type: 'text/javascript',
         body: false
       }
-  ]
+    ],
+    // Nuxt HTML-escapes inline script bodies by default, which turns the quotes above into
+    // entities and breaks the script — opt this one out so the theme applies before paint.
+    __dangerouslyDisableSanitizersByTagID: { 'theme-init': ['innerHTML'] }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '~/assets/css/materialize.css',
-    '~/assets/css/style.css',
     'leaflet/dist/leaflet.css',
-
+    '~/assets/css/grid.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -53,7 +57,7 @@ export default {
   // Exposed to the client bundle at build time (target: 'static' means the
   // dashboard fetches live data in the browser at runtime, not at generate time)
   env: {
-    CONTROL_CENTER_API_BASE_URL: process.env.CONTROL_CENTER_API_BASE_URL || 'http://192.168.80.108:8090/api/v1'
+    CONTROL_CENTER_API_BASE_URL: process.env.CONTROL_CENTER_API_BASE_URL || 'http://10.50.32.108:8090/api/v1'
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components

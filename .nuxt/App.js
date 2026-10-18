@@ -5,17 +5,16 @@ import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch,
 import NuxtError from './components/nuxt-error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '../assets/css/materialize.css'
-
-import '../assets/css/style.css'
-
 import '../node_modules/leaflet/dist/leaflet.css'
 
+import '../assets/css/grid.css'
+
 import _4df9051f from '../layouts/admin_main.vue'
+import _5fa3735e from '../layouts/dashboard.vue'
 import _6f6c098b from '../layouts/default.vue'
 import _2d26a6af from '../layouts/main.vue'
 
-const layouts = { "_admin_main": sanitizeComponent(_4df9051f),"_default": sanitizeComponent(_6f6c098b),"_main": sanitizeComponent(_2d26a6af) }
+const layouts = { "_admin_main": sanitizeComponent(_4df9051f),"_dashboard": sanitizeComponent(_5fa3735e),"_default": sanitizeComponent(_6f6c098b),"_main": sanitizeComponent(_2d26a6af) }
 
 export default {
   render (h, props) {

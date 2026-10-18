@@ -1,154 +1,176 @@
 <template>
-    <div class="dashboard-wrapper">
-        <SideNav />
-        <main class="main-content">
-            <LoadingOverlay :visible="loading" />
+    <div>
+        <PageHeader page="overview" :loading="loading">
+            <FilterDate type="month" label="Period" :value="selectedDate" :max="maxMonth" @change="onDateChange" />
+            <FilterSelect v-model="selectedBusinessUnit" label="Business unit" icon="building" :options="businessUnits" @change="loadOverview" />
+        </PageHeader>
 
-            <!-- header -->
-            <div class="avail-header">
-                <h5 class="avail-title">Overview</h5>
-                <div class="avail-filters">
-                    <div class="filter-input filter-date" @click="openDatePicker">
-                        <input
-                            type="month"
-                            class="filter-date-input"
-                            :value="selectedDate"
-                            :max="maxMonth"
-                            @change="onDateChange"
-                        />
-                        <i class="material-icons filter-icon">calendar_today</i>
-                    </div>
-                    <div class="filter-input filter-select-wrap">
-                        <select class="filter-select" v-model="selectedBusinessUnit" @change="loadOverview">
-                            <option v-for="bu in businessUnits" :key="bu" :value="bu">{{ bu }}</option>
-                        </select>
-                        <i class="material-icons filter-icon">arrow_drop_down</i>
-                    </div>
-                </div>
+        <div class="ie-page">
+            <div v-if="error" class="ie-error">
+                <Icon name="alert" :size="16" />Couldn't load live data: {{ error }}
+                <button class="ie-btn" @click="loadOverview">Retry</button>
             </div>
 
-            <div v-if="error" class="e2e-error">
-                Couldn't load live data: {{ error }}
-                <button class="e2e-retry" @click="loadOverview">Retry</button>
-            </div>
+            <SkeletonPage v-if="loading && !loaded" />
 
-            <!-- top 3 KPI cards -->
-            <div class="row">
-                <div class="col s12 m4" v-for="kpi in kpis" :key="kpi.label">
-                    <div class="card-panel kpi-card">
-                        <div class="kpi-top">
-                            <img :src="kpi.icon" :alt="kpi.label" class="kpi-icon-img" />
-                            <div class="kpi-info">
-                                <p class="kpi-value"><AnimatedValue :value="kpi.value" /></p>
-                                <p class="kpi-label">{{ kpi.label }}</p>
-                            </div>
-                        </div>
-                        <div class="kpi-divider"></div>
-                        <div class="kpi-footer">
-                            <span class="kpi-date">{{ kpi.date }}</span>
-                            <span v-if="kpi.trend" class="kpi-trend" :class="kpi.up ? 'trend-up' : 'trend-down'">
-                                {{ kpi.trend }}
-                                <img
-                                    v-if="kpi.customArrow"
-                                    :src="kpi.up ? '/mdi_arrow-up-bold.png' : '/mdi_arrow-down-bold.png'"
-                                    :alt="kpi.up ? 'up' : 'down'"
-                                    class="kpi-trend-icon"
-                                />
-                                <i v-else class="material-icons tiny">{{ kpi.up ? 'arrow_upward' : 'arrow_downward' }}</i>
-                            </span>
+            <div v-else class="ie-fadein">
+                <!-- headline band -->
+                <div class="ie-grid" style="grid-template-columns: repeat(auto-fit, minmax(252px, 1fr))">
+                    <div class="ie-hero">
+                        <div class="ie-hero-kicker"><Icon name="bolt" :size="18" />Energy on grid</div>
+                        <div class="ie-hero-value" style="font-size:clamp(28px, 2.6vw, 44px)"><AnimatedValue :value="fmt(kpi.total_energy_on_grid_mwh)" /></div>
+                        <div class="ie-hero-unit">MWh · {{ periodLabel }}</div>
+                        <div v-if="trendText" style="display:flex;align-items:center;gap:8px;margin-top:16px">
+                            <span class="ie-hero-trend"><Icon :name="trendUp ? 'trendUp' : 'trendDown'" :size="13" />{{ trendText }}</span>
+                            <span style="font-size:11.5px;font-weight:600;opacity:.75">vs previous period</span>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Grid Network -->
-            <div class="card-panel grid-network-card">
-                <div class="gn-header">
-                    <p class="gn-title">Grid Network</p>
-                    <div class="gn-search">
-                        <i class="material-icons tiny">search</i>
-                        <input type="text" placeholder="Search by DT or Feeder" />
+                    <div class="ie-card" style="padding:22px 24px">
+                        <div class="ie-layer watermark">DT</div>
+                        <div class="ie-kpi-head"><span class="ie-ico tone-success"><Icon name="dt" :size="16" /></span><span class="ie-kpi-label">Energy delivered to DTs</span></div>
+                        <div class="ie-kpi-value" style="font-size:34px;margin-top:16px"><AnimatedValue :value="fmt(kpi.total_energy_on_dts_mwh)" /></div>
+                        <div class="ie-kpi-unit">MWh</div>
+                        <div style="margin-top:16px">
+                            <div class="ie-bar-row"><span style="color:var(--text-3)">Share of grid energy</span><span style="color:var(--success)">{{ pct(dtsPct) }}</span></div>
+                            <div class="ie-track"><div class="ie-fill" :style="{ width: barW(dtsPct), background: 'var(--success)' }"></div></div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="gn-stat-strip">
-                    <div class="gn-stat" v-for="(s, i) in gnStats" :key="s.label" :class="{ 'border-right': i !== gnStats.length - 1 }">
-                        <span class="gn-stat-label">{{ s.label }}</span>
-                        <span class="gn-stat-value">{{ s.value }}</span>
+                    <div class="ie-card ie-card--danger" style="padding:22px 24px">
+                        <div class="ie-diag ie-layer" style="color:var(--danger);opacity:.06"></div>
+                        <div class="ie-kpi-head"><span class="ie-ico tone-danger"><Icon name="loss" :size="16" /></span><span class="ie-kpi-label">Grid → DT loss</span></div>
+                        <div class="ie-kpi-value" style="font-size:34px;margin-top:16px;color:var(--danger)"><AnimatedValue :value="fmt(kpi.total_grid_to_dt_loss_mwh)" /></div>
+                        <div class="ie-kpi-unit">MWh</div>
+                        <div style="margin-top:16px">
+                            <div class="ie-bar-row"><span style="color:var(--text-3)">Loss rate</span><span style="color:var(--danger)">{{ pct(lossPct) }}</span></div>
+                            <div class="ie-track"><div class="ie-fill" :style="{ width: barW(lossPct), background: 'var(--danger)' }"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="ie-card ie-card--success" style="padding:22px 24px">
+                        <div class="pt-chev ie-layer" style="color:var(--success);opacity:.05"></div>
+                        <div class="ie-kpi-head"><span class="ie-ico tone-success" style="font-size:15px;font-weight:800">₦</span><span class="ie-kpi-label">Revenue expected</span></div>
+                        <div class="ie-kpi-value" style="font-size:34px;margin-top:16px;color:var(--success)">{{ revenueShort }}</div>
+                        <div class="ie-kpi-unit">WAT – ₦{{ WAT }}</div>
+                        <div class="mono" style="margin-top:16px;font-size:11px;font-weight:700;color:var(--text-3)">{{ revenueFull }}</div>
                     </div>
                 </div>
 
-                <div class="gn-body">
-                    <div class="gn-side-panel">
-                        <div class="gn-count-box">
-                            <div class="gn-count-row" v-for="(c, i) in gnCounts" :key="c.label" :class="{ 'gn-count-divider': i !== gnCounts.length - 1 }">
-                                <span>{{ c.label }}</span>
-                                <b>{{ c.value }}</b>
-                            </div>
+                <!-- network status -->
+                <div class="ie-grid" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr))">
+                    <div v-for="c in netCards" :key="c.label" class="ie-card net-card" :class="'tone-' + c.tone">
+                        <span class="ie-ico ie-ico--lg"><Icon :name="c.icon" :size="20" /></span>
+                        <div style="min-width:0">
+                            <div class="mono net-value">{{ c.value }}</div>
+                            <div class="net-label">{{ c.label }}</div>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="gn-status-box" v-for="st in gnStatuses" :key="st.label" :class="st.cls">
-                            <div class="gn-status-head">
-                                <span class="gn-status-dot" :class="st.dotCls"></span>
-                                {{ st.label }}
+                <!-- infrastructure strip -->
+                <div class="infra">
+                    <div v-for="i in infra" :key="i.label" class="infra-cell" :class="'tone-' + i.tone">
+                        <span class="ie-ico ie-ico--md"><Icon :name="i.icon" :size="17" /></span>
+                        <div style="min-width:0">
+                            <div class="mono infra-value">{{ i.value }}</div>
+                            <div class="infra-label ie-ellip">{{ i.label }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- grid network -->
+                <div class="ie-card ie-card--flush">
+                    <div class="ie-card-head">
+                        <div>
+                            <div class="ie-card-title" style="font-size:15.5px">Grid network</div>
+                            <div class="ie-card-sub">{{ fmt(grid.dt_count) }} distribution transformers across the network</div>
+                        </div>
+                        <div ref="gnSearch" class="gn-search-wrap">
+                            <div class="ie-search">
+                                <Icon name="search" :size="16" />
+                                <input v-model="gnQuery" placeholder="Search by DT or feeder…" @focus="gnFocused = true" />
+                                <span v-if="gnQuery" class="mono" style="font-size:10.5px;font-weight:700">{{ gnResults.length }}</span>
                             </div>
-                            <div class="gn-status-cols">
-                                <div class="gn-status-col">
-                                    <span class="gn-status-sub">DT</span>
-                                    <b :class="st.textCls">{{ st.dt }}</b>
+                            <div v-if="gnFocused && gnQuery.trim()" class="gn-results ie-fadeup ie-scroll">
+                                <div v-for="r in gnResults.slice(0, 40)" :key="r.dtId || r.label" class="gn-result" @click="openMarker(r)">
+                                    <img :src="'/' + r.status + '.svg'" alt="" class="gn-result-ico" />
+                                    <div style="min-width:0;flex:1">
+                                        <div class="ie-ellip" style="font-size:12.5px;font-weight:700">{{ r.label }}</div>
+                                        <div class="ie-ellip" style="font-size:11px;color:var(--text-3)">{{ r.feederName }}</div>
+                                    </div>
+                                    <span style="font-size:10.5px;font-weight:700" :style="{ color: statusMeta[r.status].color }">{{ statusMeta[r.status].label }}</span>
                                 </div>
-                                <div class="gn-status-col">
-                                    <span class="gn-status-sub">Feeder</span>
-                                    <b :class="st.textCls">{{ st.feeder }}</b>
-                                </div>
+                                <div v-if="!gnResults.length" class="gn-none">No transformer or feeder matches “{{ gnQuery }}”</div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="gn-map">
-                        <GridNetworkMap :markers="mapMarkers" :center="mapCenter" :zoom="14" @marker-click="selectedMarker = $event" />
-                        <div class="gn-map-legend">
-                            <span><i class="marker-dot green"></i> Online</span>
-                            <span><i class="marker-dot red"></i> Offline</span>
-                            <span><i class="marker-dot orange"></i> Inactive</span>
+                    <div class="gn-body">
+                        <div class="gn-side">
+                            <div class="gn-side-label">Transformers</div>
+                            <div v-for="g in dtStatus" :key="g.key" class="gn-stat" :style="{ opacity: !gnFilter || gnFilter === g.key ? 1 : .38 }" @click="gnFilter = gnFilter === g.key ? null : g.key">
+                                <div class="gn-stat-row">
+                                    <span style="display:flex;align-items:center;gap:7px"><span class="gn-dot" :style="{ background: g.color }"></span>{{ g.label }}</span>
+                                    <span class="mono">{{ g.value }}</span>
+                                </div>
+                                <div class="ie-track" style="height:6px"><div class="ie-fill" :style="{ width: g.pct, background: g.color }"></div></div>
+                            </div>
+                            <div class="gn-side-label" style="margin-top:6px">Feeders</div>
+                            <div class="gn-feeders">
+                                <div><span class="gn-dot" style="background:var(--success)"></span>Online<b class="mono">{{ fmt(grid.online_feeders) }}</b></div>
+                                <div><span class="gn-dot" style="background:var(--danger)"></span>Offline<b class="mono">{{ fmt(grid.offline_feeders) }}</b></div>
+                            </div>
+                            <div class="gn-hint">Click a status to filter the map.</div>
+                        </div>
+                        <div class="gn-map">
+                            <GridNetworkMap :markers="visibleMarkers" :center="mapCenter" :zoom="11" @marker-click="openMarker" />
+                            <div class="gn-legend">
+                                <span v-for="g in dtStatus" :key="g.key"><img :src="'/' + g.key + '.svg'" alt="" />{{ g.label }}</span>
+                            </div>
+                            <div class="gn-sample">Sampled view · {{ fmt(visibleMarkers.length) }} of {{ fmt(grid.dt_count) }} · click a transformer for details</div>
                         </div>
                     </div>
                 </div>
             </div>
-
-        </main>
+        </div>
 
         <DTDetailsModal :marker="selectedMarker" @close="selectedMarker = null" />
     </div>
 </template>
 
 <script>
-import SideNav from '~/components/SideNav/SideNav.vue'
-import LoadingOverlay from '~/components/LoadingOverlay.vue'
+import Icon from '~/components/ui/Icon.vue'
+import PageHeader from '~/components/ui/PageHeader.vue'
+import FilterSelect from '~/components/ui/FilterSelect.vue'
+import FilterDate from '~/components/ui/FilterDate.vue'
+import SkeletonPage from '~/components/ui/SkeletonPage.vue'
 import AnimatedValue from '~/components/AnimatedValue.vue'
 import GridNetworkMap from '~/components/GridNetworkMap.vue'
 import DTDetailsModal from '~/components/DTDetailsModal.vue'
-import { getEndToEndOverview, formatNumber, BUSINESS_UNITS, currentMonthStr, openDatePicker } from '~/js_modules/controlCenterApi'
-// Matches the Figma "End-To-End Energy Dashboard" (Overview) screen, wired to
-// GET /api/v1/end-to-end/overview (see static/api_live_responses3.md #1). The map uses
-// Leaflet + OpenStreetMap tiles (no API key required), plotting the DT markers the API
-// returns — the API does not expose separate feeder coordinates, only DTs.
+import { getEndToEndOverview, formatNumber, BUSINESS_UNITS, currentMonthStr } from '~/js_modules/controlCenterApi'
+// Wired to GET /api/v1/end-to-end/overview (see static/api_live_responses3.md #1). The map
+// uses Leaflet + Esri tiles (no API key), plotting the DT markers the API returns.
 
 const DEFAULT_CENTER = [6.6386, 3.3730]
+// Weighted average tariff (₦/kWh) the design uses for "Revenue expected".
+const WAT = 118.54
 
-// Only total_energy_on_grid_mwh carries a period-over-period trend in the API response
-// (kpis.energy_vs_prev_period_pct). The other two KPI cards have no trend figure to show.
-function formatTrendPct(pct) {
-    if (pct === null || pct === undefined) return null
-    const sign = pct >= 0 ? '+' : ''
-    return `${sign}${pct}%`
+function naira(v) {
+    if (!Number.isFinite(v)) return '—'
+    if (v >= 1e9) return '₦' + (v / 1e9).toFixed(2) + 'bn'
+    if (v >= 1e6) return '₦' + (v / 1e6).toFixed(1) + 'm'
+    if (v >= 1e3) return '₦' + (v / 1e3).toFixed(0) + 'k'
+    return '₦' + Math.round(v).toLocaleString()
 }
 
 export default {
-    components: { SideNav, AnimatedValue, GridNetworkMap, DTDetailsModal, LoadingOverlay },
+    layout: 'dashboard',
+    components: { Icon, PageHeader, FilterSelect, FilterDate, SkeletonPage, AnimatedValue, GridNetworkMap, DTDetailsModal },
     data() {
         return {
+            WAT,
             loading: true,
+            loaded: false,
             error: null,
             selectedMarker: null,
             selectedDate: '',
@@ -156,41 +178,111 @@ export default {
             maxMonth: currentMonthStr(),
             selectedBusinessUnit: 'All',
             businessUnits: BUSINESS_UNITS,
-            kpis: [
-                { label: 'Total Energy on Grid (MWh)', value: '—', date: '', trend: null, up: true, icon: '/Total Energy on Grid (MWh).svg', customArrow: true },
-                { label: 'Total energy on DTs(MWh)', value: '—', date: '', trend: null, up: true, icon: '/Total energy on DTs(MWh).svg', customArrow: true },
-                { label: 'Total Grid  to DT loss(MWh)', value: '—', date: '', trend: null, up: false, icon: '/Total Grid to DT loss(MWh).svg', customArrow: true }
-            ],
-            gnStats: [
-                { label: 'TS', value: '—' },
-                { label: 'Transformer Capacity', value: '—' },
-                { label: '33KVA Feeders', value: '—' },
-                { label: 'ISS', value: '—' },
-                { label: 'Total Transformer', value: '—' }
-            ],
-            gnCounts: [
-                { label: '11KVA Incomer', value: '—' },
-                { label: '11KVA Outgoing Feeders', value: '—' },
-                { label: 'DT', value: '—' }
-            ],
-            gnStatuses: [
-                { label: 'Online', cls: 'status-online', dotCls: 'green', textCls: 'text-green', dt: '—', feeder: '—' },
-                { label: 'Offline', cls: 'status-offline', dotCls: 'red', textCls: 'text-red', dt: '—', feeder: '—' },
-                { label: 'Inactive', cls: 'status-inactive', dotCls: 'gray', textCls: 'text-gray', dt: '—', feeder: '—' }
-            ],
+            kpi: {},
+            infraRaw: {},
+            grid: {},
+            periodLabel: '',
             mapCenter: DEFAULT_CENTER,
-            mapMarkers: []
+            mapMarkers: [],
+            gnQuery: '',
+            gnFocused: false,
+            gnFilter: null,
+            statusMeta: {
+                online: { label: 'Online', color: 'var(--success)' },
+                offline: { label: 'Offline', color: 'var(--danger)' },
+                inactive: { label: 'Inactive', color: 'var(--warning)' }
+            }
+        }
+    },
+    computed: {
+        dtsPct() {
+            return this.kpi.total_energy_on_grid_mwh ? this.kpi.total_energy_on_dts_mwh / this.kpi.total_energy_on_grid_mwh * 100 : null
+        },
+        lossPct() {
+            return this.kpi.total_energy_on_grid_mwh ? this.kpi.total_grid_to_dt_loss_mwh / this.kpi.total_energy_on_grid_mwh * 100 : null
+        },
+        trendText() {
+            const p = this.kpi.energy_vs_prev_period_pct
+            if (p === null || p === undefined) return null
+            return (p >= 0 ? '+' : '') + Number(p).toFixed(2) + '%'
+        },
+        trendUp() {
+            return (this.kpi.energy_vs_prev_period_pct ?? 0) >= 0
+        },
+        revenue() {
+            const g = Number(this.kpi.total_energy_on_grid_mwh)
+            return Number.isFinite(g) ? g * 1000 * WAT : NaN
+        },
+        revenueShort() {
+            return naira(this.revenue)
+        },
+        revenueFull() {
+            return Number.isFinite(this.revenue) ? '₦' + Math.round(this.revenue).toLocaleString() : ''
+        },
+        netCards() {
+            const g = this.grid
+            return [
+                { label: '11kV incomers', value: formatNumber(g['11kva_incomer']), icon: 'plug', tone: 'soe' },
+                { label: '11kV outgoing feeders', value: formatNumber(g['11kva_outgoing_feeders']), icon: 'feeder', tone: 'primary' },
+                { label: 'Online feeders', value: formatNumber(g.online_feeders), icon: 'check', tone: 'success' },
+                { label: 'Offline feeders', value: formatNumber(g.offline_feeders), icon: 'alert', tone: 'danger' }
+            ]
+        },
+        infra() {
+            const i = this.infraRaw
+            return [
+                { label: 'Transmission stations', value: formatNumber(i.ts_count), icon: 'tower', tone: 'soe' },
+                { label: 'Transformer capacity', value: formatNumber(i.transformer_capacity_count), icon: 'cap', tone: 'primary' },
+                { label: '33 kV feeders', value: formatNumber(i.feeders_33kva), icon: 'feeder', tone: 'ca' },
+                { label: 'Injection substations', value: formatNumber(i.iss_count), icon: 'station', tone: 'accent' },
+                { label: 'Distribution transformers', value: formatNumber(i.total_transformers), icon: 'dt', tone: 'info' }
+            ]
+        },
+        dtStatus() {
+            const g = this.grid
+            const total = Number(g.dt_count) || 0
+            const p = (v) => (total ? (Number(v) / total * 100).toFixed(1) + '%' : '0%')
+            return [
+                { key: 'online', label: 'Online', value: formatNumber(g.online_dts), pct: p(g.online_dts), color: 'var(--success)' },
+                { key: 'offline', label: 'Offline', value: formatNumber(g.offline_dts), pct: p(g.offline_dts), color: 'var(--danger)' },
+                { key: 'inactive', label: 'Inactive', value: formatNumber(g.inactive_dts), pct: p(g.inactive_dts), color: 'var(--warning)' }
+            ]
+        },
+        visibleMarkers() {
+            return this.gnFilter ? this.mapMarkers.filter((m) => m.status === this.gnFilter) : this.mapMarkers
+        },
+        gnResults() {
+            const q = this.gnQuery.trim().toLowerCase()
+            if (!q) return []
+            return this.mapMarkers.filter((m) => (m.label || '').toLowerCase().includes(q) || (m.feederName || '').toLowerCase().includes(q))
         }
     },
     async mounted() {
+        document.addEventListener('mousedown', this.onDocDown)
         await this.loadOverview()
     },
+    beforeDestroy() {
+        document.removeEventListener('mousedown', this.onDocDown)
+    },
     methods: {
-        openDatePicker,
-        onDateChange(e) {
+        fmt: formatNumber,
+        pct(v) {
+            return v == null || !Number.isFinite(v) ? '—' : v.toFixed(1) + '%'
+        },
+        barW(v) {
+            return v == null || !Number.isFinite(v) ? '0%' : Math.min(100, v).toFixed(1) + '%'
+        },
+        onDateChange(value) {
             this.dateTouched = true
-            this.selectedDate = e.target.value
+            this.selectedDate = value
             this.loadOverview()
+        },
+        onDocDown(e) {
+            if (this.gnFocused && this.$refs.gnSearch && !this.$refs.gnSearch.contains(e.target)) this.gnFocused = false
+        },
+        openMarker(m) {
+            this.gnFocused = false
+            this.selectedMarker = m
         },
         async loadOverview() {
             this.loading = true
@@ -204,6 +296,7 @@ export default {
                     marker_limit: 500
                 })
                 this.applyOverview(data)
+                this.loaded = true
             } catch (err) {
                 this.error = err.message || 'Failed to load End-to-End overview data'
             } finally {
@@ -217,73 +310,17 @@ export default {
             if (!this.dateTouched && data.period) {
                 this.selectedDate = data.period
             }
-
-            const kpis = data.kpis || {}
-            // The API returns only one comparison figure — energy_vs_prev_period_pct — with no
-            // separate trend for total_energy_on_dts_mwh or total_grid_to_dt_loss_mwh. Reusing
-            // it across all three cards (rather than only the grid-energy one it technically
-            // describes) since it's the only period-over-period signal the API provides at all.
-            const trend = formatTrendPct(kpis.energy_vs_prev_period_pct)
-            const up = (kpis.energy_vs_prev_period_pct ?? 0) >= 0
-            this.kpis = [
-                {
-                    label: 'Total Energy on Grid (MWh)',
-                    value: formatNumber(kpis.total_energy_on_grid_mwh),
-                    date: kpis.period_label || '',
-                    trend,
-                    up,
-                    icon: '/Total Energy on Grid (MWh).svg',
-                    customArrow: true
-                },
-                {
-                    label: 'Total energy on DTs(MWh)',
-                    value: formatNumber(kpis.total_energy_on_dts_mwh),
-                    date: kpis.period_label || '',
-                    trend,
-                    up,
-                    icon: '/Total energy on DTs(MWh).svg',
-                    customArrow: true
-                },
-                {
-                    label: 'Total Grid  to DT loss(MWh)',
-                    value: formatNumber(kpis.total_grid_to_dt_loss_mwh),
-                    date: kpis.period_label || '',
-                    trend,
-                    up,
-                    icon: '/Total Grid to DT loss(MWh).svg',
-                    customArrow: true
-                }
-            ]
-
-            const infra = data.infrastructure_summary || {}
-            this.gnStats = [
-                { label: 'TS', value: formatNumber(infra.ts_count) },
-                { label: 'Transformer Capacity', value: formatNumber(infra.transformer_capacity_count) },
-                { label: '33KVA Feeders', value: formatNumber(infra.feeders_33kva) },
-                { label: 'ISS', value: formatNumber(infra.iss_count) },
-                { label: 'Total Transformer', value: formatNumber(infra.total_transformers) }
-            ]
-
-            const grid = data.grid_network || {}
-            this.gnCounts = [
-                { label: '11KVA Incomer', value: formatNumber(grid['11kva_incomer']) },
-                { label: '11KVA Outgoing Feeders', value: formatNumber(grid['11kva_outgoing_feeders']) },
-                { label: 'DT', value: formatNumber(grid.dt_count) }
-            ]
-
-            this.gnStatuses = [
-                { label: 'Online', cls: 'status-online', dotCls: 'green', textCls: 'text-green', dt: formatNumber(grid.online_dts), feeder: formatNumber(grid.online_feeders) },
-                { label: 'Offline', cls: 'status-offline', dotCls: 'red', textCls: 'text-red', dt: formatNumber(grid.offline_dts), feeder: formatNumber(grid.offline_feeders) },
-                // The API doesn't report an inactive-feeder count, only inactive_dts.
-                { label: 'Inactive', cls: 'status-inactive', dotCls: 'gray', textCls: 'text-gray', dt: formatNumber(grid.inactive_dts), feeder: '—' }
-            ]
+            this.kpi = data.kpis || {}
+            this.periodLabel = this.kpi.period_label || data.period || ''
+            this.infraRaw = data.infrastructure_summary || {}
+            this.grid = data.grid_network || {}
 
             const markers = (data.dt_markers || [])
                 .filter((m) => m.latitude != null && m.longitude != null)
                 .map((m) => ({
                     lat: m.latitude,
                     lng: m.longitude,
-                    status: (m.status || '').toLowerCase(),
+                    status: ['online', 'offline', 'inactive'].includes((m.status || '').toLowerCase()) ? m.status.toLowerCase() : 'inactive',
                     label: m.dt_name,
                     feederName: m.feeder_name,
                     band: m.band,
@@ -302,360 +339,46 @@ export default {
 </script>
 
 <style scoped>
-.dashboard-wrapper {
-    background-color: var(--bg-page);
-    min-height: 100vh;
-}
+.watermark { right: 10px; top: -18px; left: auto; bottom: auto; font-family: var(--mono); font-size: 92px; font-weight: 700; color: var(--text); opacity: .045; user-select: none; }
 
-.main-content {
-    padding-left: 280px;
-    padding-right: 20px;
-    padding-top: 20px;
-    position: relative;
-    min-height: 100vh;
-}
+.net-card { padding: 16px 18px; display: flex; align-items: center; gap: 14px; border-radius: 16px; }
+.net-value { font-size: 30px; font-weight: 700; letter-spacing: -1.2px; line-height: 1; color: var(--chip-fg); }
+.net-label { font-size: 12.5px; font-weight: 700; color: var(--text-2); margin-top: 5px; }
 
-.avail-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
+.infra { display: grid; grid-template-columns: repeat(auto-fit, minmax(186px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 14px; }
+.infra-cell { background: var(--surface); padding: 15px 18px; display: flex; align-items: center; gap: 12px; min-width: 0; }
+.infra-value { font-size: 19px; font-weight: 700; letter-spacing: -.6px; }
+.infra-label { font-size: 11px; color: var(--text-2); font-weight: 600; }
 
-.avail-title {
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0;
-}
+.gn-search-wrap { position: relative; min-width: 290px; }
+.gn-results { position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 1100; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow-lg); padding: 5px; max-height: 300px; overflow-y: auto; }
+.gn-result { display: flex; align-items: center; gap: 10px; padding: 8px 9px; border-radius: 8px; cursor: pointer; }
+.gn-result:hover { background: var(--surface-2); }
+.gn-result-ico { width: 20px; height: 20px; flex: none; }
+.gn-none { padding: 14px 10px; font-size: 12px; color: var(--text-3); text-align: center; }
 
-.avail-filters {
-    display: flex;
-    gap: 12px;
-}
+.gn-body { display: grid; grid-template-columns: 280px minmax(0, 1fr); }
+.gn-side { border-right: 1px solid var(--border); padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+.gn-side-label { font-size: 10.5px; font-weight: 700; letter-spacing: .07em; color: var(--text-3); text-transform: uppercase; }
+.gn-stat { cursor: pointer; transition: opacity .2s; }
+.gn-stat-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 5px; }
+.gn-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
+.gn-feeders { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.gn-feeders > div { display: flex; flex-direction: column; gap: 3px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; font-size: 11px; font-weight: 700; color: var(--text-2); }
+.gn-feeders > div .gn-dot { margin-bottom: 2px; }
+.gn-feeders b { font-size: 17px; color: var(--text); letter-spacing: -.5px; }
+.gn-hint { margin-top: auto; font-size: 11px; color: var(--text-3); font-weight: 600; }
+.gn-map { position: relative; min-height: 420px; background: var(--surface-2); overflow: hidden; }
+.gn-map ::v-deep .grid-map-el { min-height: 420px; height: 100%; }
+.gn-legend { position: absolute; left: 16px; bottom: 14px; z-index: 500; display: flex; gap: 14px; background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: blur(6px); border: 1px solid var(--border); border-radius: 999px; padding: 7px 14px; }
+.gn-legend span { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: var(--text-2); }
+.gn-legend img { width: 15px; height: 15px; }
+.gn-sample { position: absolute; right: 16px; top: 14px; z-index: 500; font-size: 10.5px; font-weight: 700; color: var(--text-3); background: color-mix(in srgb, var(--surface) 88%, transparent); border: 1px solid var(--border); border-radius: 7px; padding: 5px 10px; }
 
-.filter-input {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 6px 14px;
-    cursor: pointer;
-    min-width: 130px;
-}
-
-.filter-label {
-    font-size: 13px;
-    color: var(--text-secondary);
-    flex: 1;
-}
-
-.filter-icon {
-    font-size: 18px;
-    color: var(--text-muted);
-}
-
-.filter-date-input,
-.filter-select {
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 13px;
-    color: var(--text-secondary);
-    font-family: inherit;
-    flex: 1;
-    min-width: 0;
-    width: 100%;
-    height: auto;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-}
-
-/* The native month input draws its own calendar icon next to our Material icon, showing
-   two icons — hide it visually (not removed) so clicking there still opens the picker. */
-.filter-date-input::-webkit-calendar-picker-indicator {
-    opacity: 0;
-}
-
-.filter-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-/* Native option lists are OS-rendered and ignore the page's CSS variables/theme, so pin
-   readable colors explicitly rather than let dark-theme text disappear on a light popup. */
-.filter-select option {
-    color: #222;
-    background: #fff;
-}
-
-/* KPI cards */
-.kpi-card {
-    border-radius: 14px;
-    padding: 18px 16px 14px;
-    margin-bottom: 12px;
-    background: var(--bg-card);
-}
-
-.kpi-top {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 14px;
-}
-
-.kpi-icon-img {
-    width: 46px;
-    height: 46px;
-    flex-shrink: 0;
-}
-
-.kpi-info { flex: 1; }
-
-.kpi-value {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin: 0 0 2px 0;
-    line-height: 1.1;
-}
-
-.kpi-label {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin: 0;
-}
-
-.kpi-divider {
-    height: 1px;
-    background: var(--divider);
-    margin-bottom: 10px;
-}
-
-.kpi-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.kpi-date { font-size: 12px; color: var(--text-muted); }
-
-.kpi-trend {
-    font-size: 12px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    padding: 2px 8px;
-    border-radius: 10px;
-}
-
-.trend-up   { color: #2fa360; background: #e3f7ea; }
-.trend-down { color: #c0392b; background: #fdeaeb; }
-.kpi-trend .material-icons { font-size: 13px !important; }
-.kpi-trend-icon { width: 14px; height: 14px; }
-
-/* Grid Network card */
-.grid-network-card {
-    border-radius: 14px;
-    background: var(--bg-card);
-    padding: 20px;
-    margin-bottom: 16px;
-}
-
-.gn-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-}
-
-.gn-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0;
-}
-
-.gn-search {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--bg-card-alt);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 6px 12px;
-    color: var(--text-muted);
-    min-width: 240px;
-}
-
-.gn-search input {
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 13px;
-    color: var(--text-primary);
-    height: auto;
-    margin: 0;
-    width: 100%;
-}
-
-.gn-stat-strip {
-    display: flex;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    margin-bottom: 16px;
-    overflow: hidden;
-}
-
-.gn-stat {
-    flex: 1;
-    padding: 10px 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.gn-stat-label { font-size: 12px; color: var(--text-muted); }
-.gn-stat-value { font-size: 16px; font-weight: 700; color: var(--text-primary); }
-
-.gn-body {
-    display: flex;
-    gap: 16px;
-    align-items: stretch;
-}
-
-.gn-side-panel {
-    width: 230px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.gn-count-box {
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 4px 14px;
-}
-
-.gn-count-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 0;
-    font-size: 12px;
-    color: var(--text-secondary);
-}
-
-.gn-count-row b { font-size: 15px; color: var(--text-primary); }
-.gn-count-divider { border-bottom: 1px solid var(--divider); }
-
-.gn-status-box {
-    border-radius: 10px;
-    padding: 10px 14px;
-}
-
-.status-online   { background: #e9f8ef; }
-.status-offline  { background: #fdecec; }
-.status-inactive { background: var(--bg-card-alt); }
-
-.gn-status-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
-}
-
-.gn-status-cols {
-    display: flex;
-    justify-content: space-between;
-}
-
-.gn-status-col { display: flex; flex-direction: column; gap: 2px; }
-.gn-status-sub { font-size: 11px; color: var(--text-muted); }
-.gn-status-col b { font-size: 18px; }
-
-.text-green { color: #2fa360; }
-.text-red   { color: #c0392b; }
-.text-gray  { color: var(--text-secondary); }
-
-.marker-dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
-
-.marker-dot.green  { background: #2fa360; }
-.marker-dot.red    { background: #c0392b; }
-.marker-dot.orange { background: #e8a325; }
-
-/* Map */
-.gn-map {
-    position: relative;
-    flex: 1;
-    min-height: 380px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-}
-
-.gn-map-legend {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    z-index: 1000;
-    display: flex;
-    gap: 14px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 12px;
-    color: #333;
-}
-
-.gn-map-legend span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.border-right { border-right: 1px solid var(--border-color); }
-
-.e2e-error {
-    background: #fdecec;
-    color: #c0392b;
-    border-radius: 10px;
-    padding: 10px 16px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 13px;
-}
-
-.e2e-retry {
-    background: #c0392b;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 4px 12px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-
-@media only screen and (max-width: 992px) {
-    .main-content { padding-left: 20px; }
-    .gn-body { flex-direction: column; }
-    .gn-side-panel { width: 100%; flex-direction: row; flex-wrap: wrap; }
-    .gn-count-box, .gn-status-box { flex: 1; min-width: 200px; }
+@media (max-width: 900px) {
+    .gn-body { grid-template-columns: 1fr; }
+    .gn-side { border-right: none; border-bottom: 1px solid var(--border); }
+    .gn-search-wrap { min-width: 0; width: 100%; }
+    .gn-sample { display: none; }
 }
 </style>

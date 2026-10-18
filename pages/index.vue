@@ -1,122 +1,73 @@
 <template>
-  <div>
-    <div class="row full-width">
-      <div class="col s12 m6" style="margin-top: 130px; position: relative;">
-        <client-only>
-          <button type="button" class="login-theme-toggle" @click="$theme.toggle()">
-            <i class="material-icons">{{ $theme.isDark ? 'light_mode' : 'dark_mode' }}</i>
-          </button>
-        </client-only>
-        <!-- <Logo /> -->
-        <div class="container">
-          <div class="row">
-            <h5 class="center red-text">
-              <!-- IE Commercial Workforce <br> -->
-              Login <br>
-              
-            </h5>
-            <PreLoader class="center" :class="{ 'hide': hidePreLoader }" />
-          </div>
-          <form @submit.prevent>
-            <div class="row">
-              <div class="input-field col s12">
-                <input type="text" class="black-text focus" placeholder="" id="username" ref="username"
-                  v-model="username" focused>
-                <label for="username">Username</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input type="password" class="black-text" placeholder="" id="password" v-model="password">
-                <label for="password">Password</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <button class="red btn btn-large col s12" @click="signIn" :disabled="disabled" style="background: linear-gradient(to right, #E75309, #C60606);">
-                  Login
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+  <div class="login ie-fadein">
+    <div class="login-hero">
+      <img src="/grid-hero.jpg" alt="" class="login-hero-img" />
+      <div class="login-hero-shade"></div>
+      <div class="login-hero-brand">
+        <div class="login-hero-logo"><img src="~/assets/images/logo.png" alt="Ikeja Electric" /></div>
+        <div class="login-hero-org">Ikeja Electric</div>
       </div>
+      <div class="login-hero-copy">
+        <div class="login-hero-tag">Grid Intelligence Platform</div>
+        <div class="login-hero-title">Every megawatt,<br>end to end.</div>
+        <div class="login-hero-sub">Grid to transformer to customer — energy, losses and availability across the Ikeja Electric network, in one live picture.</div>
+      </div>
+      <div class="login-hero-ver">Version {{ version_number }} · Control Centre Build</div>
+    </div>
 
-      <!-- Electric wave animation panel -->
-      <div class="col s12 m6 hide-on-small-and-down electric-panel">
+    <div class="login-panel">
+      <div class="pt-circuit ie-layer login-circuit"></div>
+      <div class="login-glow login-glow--a"></div>
+      <div class="login-glow login-glow--b"></div>
+      <client-only>
+        <button type="button" class="ie-icon-btn login-theme" title="Toggle theme" @click="$theme.toggle()">
+          <Icon :name="$theme.isDark ? 'sun' : 'moon'" :size="17" />
+        </button>
+      </client-only>
 
-        <!-- Scrolling sine waves -->
-        <svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
-          <!-- Wave 1 — cyan, large amplitude -->
-          <path class="e-wave w1"
-            d="M 0,300 C 50,220 100,380 150,300 C 200,220 250,380 300,300 C 350,220 400,380 450,300
-               C 500,220 550,380 600,300 C 650,220 700,380 750,300 C 800,220 850,380 900,300
-               C 950,220 1000,380 1050,300 C 1100,220 1150,380 1200,300
-               C 1250,220 1300,380 1350,300 C 1400,220 1450,380 1500,300
-               C 1550,220 1600,380 1650,300 C 1700,220 1750,380 1800,300
-               C 1850,220 1900,380 1950,300 C 2000,220 2050,380 2100,300"
-            fill="none" stroke="#00d4ff" stroke-width="2.5"/>
-          <!-- Wave 2 — blue, mid offset -->
-          <path class="e-wave w2"
-            d="M 0,340 C 50,270 100,410 150,340 C 200,270 250,410 300,340 C 350,270 400,410 450,340
-               C 500,270 550,410 600,340 C 650,270 700,410 750,340 C 800,270 850,410 900,340
-               C 950,270 1000,410 1050,340 C 1100,270 1150,410 1200,340
-               C 1250,270 1300,410 1350,340 C 1400,270 1450,410 1500,340
-               C 1550,270 1600,410 1650,340 C 1700,270 1750,410 1800,340
-               C 1850,270 1900,410 1950,340 C 2000,270 2050,410 2100,340"
-            fill="none" stroke="#5b7cfa" stroke-width="1.8"/>
-          <!-- Wave 3 — purple, upper offset -->
-          <path class="e-wave w3"
-            d="M 0,260 C 50,190 100,330 150,260 C 200,190 250,330 300,260 C 350,190 400,330 450,260
-               C 500,190 550,330 600,260 C 650,190 700,330 750,260 C 800,190 850,330 900,260
-               C 950,190 1000,330 1050,260 C 1100,190 1150,330 1200,260
-               C 1250,190 1300,330 1350,260 C 1400,190 1450,330 1500,260
-               C 1550,190 1600,330 1650,260 C 1700,190 1750,330 1800,260
-               C 1850,190 1900,330 1950,260 C 2000,190 2050,330 2100,260"
-            fill="none" stroke="#c87dff" stroke-width="1.2"/>
-          <!-- Wave 4 — faint bottom -->
-          <path class="e-wave w4"
-            d="M 0,400 C 50,340 100,460 150,400 C 200,340 250,460 300,400 C 350,340 400,460 450,400
-               C 500,340 550,460 600,400 C 650,340 700,460 750,400 C 800,340 850,460 900,400
-               C 950,340 1000,460 1050,400 C 1100,340 1150,460 1200,400
-               C 1250,340 1300,460 1350,400 C 1400,340 1450,460 1500,400
-               C 1550,340 1600,460 1650,400 C 1700,340 1750,460 1800,400
-               C 1850,340 1900,460 1950,400 C 2000,340 2050,460 2100,400"
-            fill="none" stroke="#00d4ff" stroke-width="0.8"/>
-        </svg>
+      <form class="login-form ie-fadeup" @submit.prevent="signIn">
+        <div class="login-brand">
+          <div class="login-brand-logo"><img src="~/assets/images/logo.png" alt="Ikeja Electric" /></div>
+          <div class="login-brand-text"><div class="login-brand-name">Grid Intelligence</div><div class="login-brand-org">IKEJA ELECTRIC</div></div>
+        </div>
+        <div class="login-welcome">Welcome back</div>
+        <div class="login-lede">Sign in with your Ikeja Electric staff account.</div>
 
-        <!-- Floating sparks -->
-        <span class="spark sp1"></span>
-        <span class="spark sp2"></span>
-        <span class="spark sp3"></span>
-        <span class="spark sp4"></span>
-        <span class="spark sp5"></span>
-        <span class="spark sp6"></span>
-
-        <!-- Center bolt + rings -->
-        <div class="e-center">
-          <div class="e-ring r1"></div>
-          <div class="e-ring r2"></div>
-          <div class="e-ring r3"></div>
-          <!-- <div class="e-bolt-wrap">
-            <i class="material-icons e-bolt">bolt</i>
-          </div> -->
-          <div class="logo-circle">
-            <img src="~assets/images/logo.png" class="responsive-img" alt="" style="max-width:70px; max-height:70px;">
+        <div class="login-field">
+          <label for="username">Username</label>
+          <div class="login-input">
+            <Icon name="user" :size="18" />
+            <input id="username" ref="username" v-model="username" type="text" placeholder="firstname.lastname" autocomplete="username" />
           </div>
-          <p class="e-brand">IDB Dashboard</p>
-          <p class="e-sub">Ikeja Electric</p>
-          <b class="center white-text" style="font-weight: 300; font-size: 12px;">Version: {{ version_number }}</b>
+        </div>
+        <div class="login-field">
+          <label for="password">Password</label>
+          <div class="login-input">
+            <Icon name="lock" :size="18" />
+            <input id="password" v-model="password" :type="showPw ? 'text' : 'password'" placeholder="••••••••" autocomplete="current-password" />
+            <button type="button" class="login-eye" :aria-label="showPw ? 'Hide password' : 'Show password'" @click="showPw = !showPw">
+              <Icon :name="showPw ? 'eyeOff' : 'eye'" :size="18" />
+            </button>
+          </div>
         </div>
 
-      </div>
+        <div v-if="notice" class="login-notice" :class="'login-notice--' + notice.tone">{{ notice.text }}</div>
 
+        <button type="submit" class="login-submit" :disabled="disabled">
+          <span v-if="disabled" class="login-spin"></span>
+          {{ disabled ? 'Signing in…' : 'Sign in' }}
+        </button>
+        <div class="login-links">
+          <a href="#" @click.prevent>Forgot password?</a>
+          <span>Need access? Contact IT Service Desk</span>
+        </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
-import PreLoader from '~/components/PreLoader.vue'
+import Icon from '~/components/ui/Icon.vue'
 import { getCurrentPosition } from '~/js_modules/mods'
 
 export default {
@@ -127,7 +78,7 @@ export default {
       ]
     }
   },
-  components: { PreLoader },
+  components: { Icon },
   data() {
     return {
       user_test: '',
@@ -139,12 +90,18 @@ export default {
       lat: '',
       long: '',
       hidePreLoader: true,
+      showPw: false,
+      notice: null,
     }
   },
 
   methods: {
     signIn() {
-      M.toast({ html: '<b class="yellow-text">Please wait...</b>' })
+      this.disabled = true
+      this.notice = null
+      if (process.client) {
+        try { localStorage.setItem('username', this.username.trim()) } catch (e) {}
+      }
       this.$router.push('./end_to_end_energy_dashboard')
       this.username = this.username.trim()
       this.password = this.password.trim()
@@ -182,11 +139,11 @@ export default {
         let message = content.message
 
         if (responseCode == "09" || responseCode == null || responseCode == undefined) {
-          M.toast({ html: `<b class="red-text">${message}</b>` })
+          this.notice = { tone: 'error', text: message }
           this.hidePreLoader = true
           this.disabled = false
         } else if (responseCode === '00') {
-          M.toast({ html: `<b class="green-text">Welcome</b>` })
+          this.notice = { tone: 'ok', text: 'Welcome' }
           this.disabled = false
           if (process.client) {
             localStorage.setItem('token', content.token)
@@ -197,11 +154,12 @@ export default {
           this.hidePreLoader = true
           this.$router.push('./menu')
         } else {
-          M.toast({ html: `<b class="green-text">${content.message}</b>` })
+          this.notice = { tone: 'ok', text: content.message }
           this.disabled = false
         }
       } catch (error) {
-        M.toast({ html: `<b class="red-text">${error}</b>` })
+        this.notice = { tone: 'error', text: String(error) }
+        this.disabled = false
         this.hidePreLoader = true
       }
     },
@@ -236,171 +194,62 @@ export default {
 </script>
 
 <style scoped>
-.login-theme-toggle {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 1px solid var(--border-color);
-  background: var(--bg-card-alt);
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 3;
-}
-.login-theme-toggle .material-icons {
-  font-size: 20px !important;
-}
+.login { min-height: 100vh; display: grid; grid-template-columns: 1.1fr .9fr; background: var(--canvas); color: var(--text); }
 
-/* ── Electric Panel ── */
-.electric-panel {
-  position: relative;
-  background: linear-gradient(160deg, #2a0300 0%, #6b0d00 40%, #e75309 100%);
-  overflow: hidden;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 !important;
-}
+.login-hero { position: relative; overflow: hidden; background: #100E0B; display: flex; flex-direction: column; justify-content: space-between; padding: 44px 52px; }
+.login-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .92; }
+.login-hero-shade { position: absolute; inset: 0; background: linear-gradient(155deg, rgba(12,9,5,.82) 0%, rgba(12,9,5,.52) 45%, rgba(120,50,4,.44) 100%); }
+.login-hero-brand { position: relative; display: flex; align-items: center; gap: 12px; }
+.login-hero-logo { width: 44px; height: 44px; border-radius: 12px; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); }
+.login-hero-logo img { width: 32px; height: 32px; object-fit: contain; }
+.login-hero-org { font-weight: 800; font-size: 16px; color: #fff; letter-spacing: -.2px; }
+.login-hero-copy { position: relative; max-width: 470px; }
+.login-hero-tag { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,.14); backdrop-filter: blur(6px); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 6px 13px; border-radius: 999px; margin-bottom: 22px; }
+.login-hero-title { font-size: 58px; line-height: 1; font-weight: 800; letter-spacing: -2.4px; color: #fff; }
+.login-hero-sub { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.74); margin-top: 16px; max-width: 420px; }
+.login-hero-ver { position: relative; font-size: 11.5px; color: rgba(255,255,255,.45); font-weight: 600; }
 
-/* ── SVG Waves ── */
-.waves-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
+.login-panel { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; background: var(--canvas); }
+.login-circuit { color: var(--primary); opacity: .07; }
+.login-glow { position: absolute; border-radius: 50%; pointer-events: none; }
+.login-glow--a { right: -180px; top: -180px; width: 520px; height: 520px; background: radial-gradient(circle, color-mix(in srgb, var(--primary) 22%, transparent) 0%, transparent 68%); }
+.login-glow--b { left: -160px; bottom: -200px; width: 460px; height: 460px; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 68%); }
+.login-theme { position: absolute; top: 20px; right: 20px; z-index: 2; }
 
-.e-wave {
-  stroke-opacity: 0.6;
-  filter: drop-shadow(0 0 6px currentColor);
-  animation: waveScroll linear infinite;
-}
+.login-form { position: relative; width: 100%; max-width: 380px; }
+.login-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+.login-brand-logo { width: 40px; height: 40px; border-radius: 11px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-xs); }
+.login-brand-logo img { width: 28px; height: 28px; object-fit: contain; }
+.login-brand-text { line-height: 1.15; }
+.login-brand-name { font-size: 13.5px; font-weight: 800; letter-spacing: -.2px; }
+.login-brand-org { font-size: 10.5px; font-weight: 700; letter-spacing: .06em; color: var(--text-3); }
+.login-welcome { font-size: 27px; font-weight: 800; letter-spacing: -.9px; }
+.login-lede { font-size: 14px; color: var(--text-2); margin-top: 6px; }
 
-/* On red: white = crisp contrast, golden-orange = warm energy, light pink = depth, pale yellow = faint shimmer */
-.w1 { animation-duration: 6s;  stroke: #ffffff;  stroke-opacity: 0.75; filter: drop-shadow(0 0 8px rgba(255,255,255,0.8)); }
-.w2 { animation-duration: 9s;  stroke: #ffd180;  stroke-opacity: 0.6;  filter: drop-shadow(0 0 6px #ffd180); }
-.w3 { animation-duration: 7s;  stroke: #ffab76;  stroke-opacity: 0.45; filter: drop-shadow(0 0 5px #ffab76); }
-.w4 { animation-duration: 11s; stroke: #fff3e0;  stroke-opacity: 0.25; filter: drop-shadow(0 0 4px #fff3e0); }
+.login-field { margin-top: 16px; }
+.login-field:first-of-type { margin-top: 28px; }
+.login-field label { display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 7px; color: var(--text); }
+.login-input { display: flex; align-items: center; gap: 9px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px; padding: 0 13px; color: var(--text-3); }
+.login-input:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent); }
+.login-input input { flex: 1; min-width: 0; border: none; background: transparent; font-size: 14px; color: var(--text); outline: none; padding: 12px 0; }
+.login-eye { flex: none; background: none; border: none; color: var(--text-3); cursor: pointer; display: flex; padding: 4px; }
 
-@keyframes waveScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-600px); }
-}
+.login-notice { margin-top: 16px; border-radius: 9px; padding: 9px 12px; font-size: 12.5px; font-weight: 700; }
+.login-notice--error { background: var(--danger-soft); color: var(--danger); }
+.login-notice--ok { background: var(--success-soft); color: var(--success); }
 
-/* ── Floating Sparks ── */
-.spark {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 0 10px 2px #ffffff;
-  animation: sparkFloat linear infinite;
-  opacity: 0;
-}
+.login-submit { width: 100%; margin-top: 24px; background: var(--primary); color: var(--on-primary); border: none; border-radius: 10px; padding: 13px; font-size: 14.5px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 9px; box-shadow: var(--shadow-xs); }
+.login-submit:hover:not(:disabled) { background: var(--primary-hover); }
+.login-submit:disabled { cursor: progress; }
+.login-spin { width: 16px; height: 16px; border: 2px solid rgba(0,0,0,.25); border-top-color: currentColor; border-radius: 50%; animation: ie-spin .7s linear infinite; display: inline-block; }
+.login-links { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 16px; font-size: 12.5px; font-weight: 600; flex-wrap: wrap; }
+.login-links span { color: var(--text-3); }
 
-.sp1 { left: 15%;  bottom: 10%; animation-duration: 5s;   animation-delay: 0s;   background: #ffffff; box-shadow: 0 0 10px 2px rgba(255,255,255,0.8); }
-.sp2 { left: 30%;  bottom: 20%; animation-duration: 7s;   animation-delay: 1.2s; background: #ffd180; box-shadow: 0 0 10px 2px #ffd180; }
-.sp3 { left: 55%;  bottom: 5%;  animation-duration: 6s;   animation-delay: 0.5s; background: #ffab76; box-shadow: 0 0 10px 2px #ffab76; }
-.sp4 { left: 70%;  bottom: 15%; animation-duration: 8s;   animation-delay: 2s;   background: #ffffff; box-shadow: 0 0 10px 2px rgba(255,255,255,0.8); }
-.sp5 { left: 82%;  bottom: 30%; animation-duration: 5.5s; animation-delay: 0.8s; background: #ffd180; box-shadow: 0 0 10px 2px #ffd180; }
-.sp6 { left: 45%;  bottom: 8%;  animation-duration: 9s;   animation-delay: 3s;   background: #ffab76; box-shadow: 0 0 10px 2px #ffab76; }
-
-@keyframes sparkFloat {
-  0%   { transform: translateY(0)   scale(1);   opacity: 0; }
-  10%  { opacity: 1; }
-  80%  { opacity: 0.6; }
-  100% { transform: translateY(-300px) scale(0.3); opacity: 0; }
-}
-
-/* ── Center Element ── */
-.e-center {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Pulsing rings */
-.e-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 220, 160, 0.5);
-  animation: ringPulse ease-out infinite;
-}
-
-.r1 { width: 120px; height: 120px; animation-duration: 2.4s; animation-delay: 0s; }
-.r2 { width: 180px; height: 180px; animation-duration: 2.4s; animation-delay: 0.6s; }
-.r3 { width: 240px; height: 240px; animation-duration: 2.4s; animation-delay: 1.2s; }
-
-@keyframes ringPulse {
-  0%   { transform: scale(0.8); opacity: 0.8; }
-  100% { transform: scale(1.4); opacity: 0; }
-}
-
-/* Logo circle */
-.logo-circle {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 30px rgba(255,255,255,0.4), 0 4px 20px rgba(0,0,0,0.2);
-}
-
-/* Bolt icon */
-.e-bolt-wrap {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,220,160,0.25) 0%, rgba(255,180,80,0.05) 70%);
-  border: 2px solid rgba(255,220,160,0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 30px rgba(255,200,100,0.4), inset 0 0 20px rgba(255,200,100,0.1);
-  animation: boltGlow 2s ease-in-out infinite alternate;
-}
-
-.e-bolt {
-  font-size: 42px !important;
-  color: #fff;
-  text-shadow: 0 0 20px #ffd180, 0 0 40px #ffa040;
-}
-
-@keyframes boltGlow {
-  0%   { box-shadow: 0 0 20px rgba(255,200,100,0.3), inset 0 0 10px rgba(255,200,100,0.1); }
-  100% { box-shadow: 0 0 60px rgba(255,220,140,0.7), inset 0 0 30px rgba(255,200,100,0.2); }
-}
-
-.e-brand {
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
-  margin: 6px 0 0 0;
-  text-align: center;
-  letter-spacing: 1px;
-  text-shadow: 0 0 14px rgba(255,200,100,0.7);
-}
-
-.e-sub {
-  font-size: 12px;
-  color: rgba(255,220,160,0.85);
-  margin: 0;
-  text-align: center;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+@media (max-width: 900px) {
+  .login { grid-template-columns: 1fr; }
+  .login-hero { min-height: 280px; padding: 28px 24px; }
+  .login-hero-title { font-size: 38px; letter-spacing: -1.4px; }
+  .login-hero-sub { display: none; }
+  .login-panel { padding: 36px 16px 48px; }
 }
 </style>

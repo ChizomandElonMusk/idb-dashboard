@@ -17,6 +17,16 @@ export const PreLoader = () => import('../../components/PreLoader.vue' /* webpac
 export const SignUp = () => import('../../components/SignUp.vue' /* webpackChunkName: "components/sign-up" */).then(c => wrapFunctional(c.default || c))
 export const ThemeToggle = () => import('../../components/ThemeToggle.vue' /* webpackChunkName: "components/theme-toggle" */).then(c => wrapFunctional(c.default || c))
 export const SideNav = () => import('../../components/SideNav/SideNav.vue' /* webpackChunkName: "components/side-nav" */).then(c => wrapFunctional(c.default || c))
+export const UiBarChart = () => import('../../components/ui/BarChart.vue' /* webpackChunkName: "components/ui-bar-chart" */).then(c => wrapFunctional(c.default || c))
+export const UiDataTable = () => import('../../components/ui/DataTable.vue' /* webpackChunkName: "components/ui-data-table" */).then(c => wrapFunctional(c.default || c))
+export const UiDonut = () => import('../../components/ui/Donut.vue' /* webpackChunkName: "components/ui-donut" */).then(c => wrapFunctional(c.default || c))
+export const UiFilterDate = () => import('../../components/ui/FilterDate.vue' /* webpackChunkName: "components/ui-filter-date" */).then(c => wrapFunctional(c.default || c))
+export const UiFilterSelect = () => import('../../components/ui/FilterSelect.vue' /* webpackChunkName: "components/ui-filter-select" */).then(c => wrapFunctional(c.default || c))
+export const UiGauge = () => import('../../components/ui/Gauge.vue' /* webpackChunkName: "components/ui-gauge" */).then(c => wrapFunctional(c.default || c))
+export const UiIcon = () => import('../../components/ui/Icon.vue' /* webpackChunkName: "components/ui-icon" */).then(c => wrapFunctional(c.default || c))
+export const UiLineChart = () => import('../../components/ui/LineChart.vue' /* webpackChunkName: "components/ui-line-chart" */).then(c => wrapFunctional(c.default || c))
+export const UiPageHeader = () => import('../../components/ui/PageHeader.vue' /* webpackChunkName: "components/ui-page-header" */).then(c => wrapFunctional(c.default || c))
+export const UiSkeletonPage = () => import('../../components/ui/SkeletonPage.vue' /* webpackChunkName: "components/ui-skeleton-page" */).then(c => wrapFunctional(c.default || c))
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {

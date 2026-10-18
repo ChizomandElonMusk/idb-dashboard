@@ -1,145 +1,19 @@
-exports.ids = [22,6,7,10,15,17];
+exports.ids = [31,22,25,26];
 exports.modules = {
 
-/***/ 100:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(111);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(4).default
-module.exports.__inject__ = function (context) {
-  add("6ac87367", content, true, context)
-};
-
-/***/ }),
-
-/***/ 103:
+/***/ 125:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/FlowLane.vue?vue&type=template&id=d1ec2ee4&scoped=true
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', {
-    staticClass: "flow-row"
-  }, [_vm._ssrNode("<div" + _vm._ssrClass("flow-card-col", {
-    'has-right': !!_vm.forwardKind
-  }) + " data-v-d1ec2ee4>", "</div>", [_vm._ssrNode("<div" + _vm._ssrClass("flow-card", {
-    'flow-card-updating': _vm.dtLocalLoading
-  }) + " data-v-d1ec2ee4><p class=\"flow-card-title\" data-v-d1ec2ee4>" + _vm._ssrEscape(_vm._s(_vm.title)) + "</p> <div class=\"flow-filters\" data-v-d1ec2ee4><div class=\"flow-filter\" data-v-d1ec2ee4><select" + _vm._ssrAttr("value", _vm.selected) + " data-v-d1ec2ee4>" + (_vm.mode === 'level' ? "<option value disabled=\"disabled\" data-v-d1ec2ee4>-- Select --</option>" : "<!---->") + " <option" + _vm._ssrAttr("value", _vm.allValue) + " data-v-d1ec2ee4>" + _vm._ssrEscape(_vm._s(_vm.allValue)) + "</option> " + _vm._ssrList(_vm.options, function (opt) {
-    return "<option" + _vm._ssrAttr("value", opt) + " data-v-d1ec2ee4>" + _vm._ssrEscape(_vm._s(opt)) + "</option>";
-  }) + "</select> <i class=\"material-icons tiny\" data-v-d1ec2ee4>arrow_drop_down</i></div></div> <p class=\"flow-total-label\" data-v-d1ec2ee4>Total Energy</p> <p class=\"flow-total-value\" data-v-d1ec2ee4>" + _vm._ssrEscape(_vm._s(_vm.fmt(_vm.total)) + " MWH") + "</p> " + (_vm.mode !== 'customer' ? "<div class=\"flow-bar\" data-v-d1ec2ee4><div class=\"flow-bar-fill\"" + _vm._ssrStyle(null, {
-    width: _vm.outgoingPct + '%'
-  }, null) + " data-v-d1ec2ee4></div> <div class=\"flow-bar-loss\"" + _vm._ssrStyle(null, {
-    width: _vm.lossPct + '%'
-  }, null) + " data-v-d1ec2ee4></div></div> <div class=\"flow-stats-row\" data-v-d1ec2ee4><div class=\"flow-stat\" data-v-d1ec2ee4><span class=\"flow-stat-pct\" data-v-d1ec2ee4>" + _vm._ssrEscape(_vm._s(_vm.outgoingPct) + "% Outgoing") + "</span> <span class=\"flow-stat-val\" data-v-d1ec2ee4>" + _vm._ssrEscape(_vm._s(_vm.fmt(_vm.outgoingVal)) + " MWH") + "</span></div> <div class=\"flow-stat right\" data-v-d1ec2ee4><span class=\"flow-stat-pct loss\" data-v-d1ec2ee4>" + _vm._ssrEscape(_vm._s(_vm.lossPct) + "% Loss") + "</span> <span class=\"flow-stat-val\" data-v-d1ec2ee4>" + _vm._ssrEscape(_vm._s(_vm.fmt(_vm.lossVal)) + " MWH") + "</span></div></div>" : "<div class=\"flow-bar single\" data-v-d1ec2ee4><div class=\"flow-bar-fill\"" + _vm._ssrStyle(null, {
-    width: _vm.fillPct + '%'
-  }, null) + " data-v-d1ec2ee4></div></div>") + " <div class=\"flow-divider\" data-v-d1ec2ee4></div> <div class=\"flow-bottom-row\" data-v-d1ec2ee4><span data-v-d1ec2ee4>" + _vm._ssrEscape(_vm._s(_vm.bottomLabel)) + "</span> <b data-v-d1ec2ee4>" + _vm._ssrEscape(_vm._s(_vm.bottomVal)) + "</b></div></div> "), _vm.dtBelow ? _vm._ssrNode("<div class=\"flow-below-branch\" data-v-d1ec2ee4>", "</div>", [_c('FlowLane', {
-    key: _vm.selfPathKey,
-    ref: "belowChild",
-    attrs: {
-      "mode": "dt",
-      "path-key": _vm.selfPathKey,
-      "incoming-total": _vm.outgoingVal,
-      "connector-api": _vm.connectorApi,
-      "flow-data": _vm.flowData,
-      "on-filter-change": _vm.onFilterChange,
-      "dt-name-index": _vm.dtNameIndex,
-      "request-dt-names": _vm.requestDtNames
-    }
-  })], 1) : _vm._e()], 2), _vm._ssrNode(" "), _vm.forwardKind ? [_vm.forwardKind === 'continue' ? _c('FlowLane', {
-    key: _vm.selfPathKey,
-    ref: "rightChild",
-    attrs: {
-      "mode": "level",
-      "level": _vm.level + 1,
-      "node-list": _vm.nonEmptyChildren,
-      "path-key": _vm.selfPathKey,
-      "incoming-total": _vm.outgoingVal,
-      "connector-api": _vm.connectorApi,
-      "flow-data": _vm.flowData,
-      "on-filter-change": _vm.onFilterChange,
-      "dt-name-index": _vm.dtNameIndex,
-      "request-dt-names": _vm.requestDtNames
-    }
-  }) : _vm.forwardKind === 'customer' ? _c('FlowLane', {
-    key: _vm.selfPathKey,
-    ref: "rightChild",
-    attrs: {
-      "mode": "customer",
-      "path-key": _vm.selfPathKey,
-      "incoming-total": _vm.outgoingVal,
-      "connector-api": _vm.connectorApi,
-      "flow-data": _vm.dtLocalFlowData || _vm.flowData,
-      "on-filter-change": _vm.onFilterChange,
-      "dt-name-index": _vm.dtNameIndex,
-      "request-dt-names": _vm.requestDtNames
-    }
-  }) : _vm._e()] : _vm._e()], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/FlowLane.vue?vue&type=template&id=d1ec2ee4&scoped=true
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.add-all.js"
-var esnext_set_add_all_js_ = __webpack_require__(45);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.delete-all.js"
-var esnext_set_delete_all_js_ = __webpack_require__(46);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.difference.js"
-var esnext_set_difference_js_ = __webpack_require__(47);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.every.js"
-var esnext_set_every_js_ = __webpack_require__(48);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.filter.js"
-var esnext_set_filter_js_ = __webpack_require__(49);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.find.js"
-var esnext_set_find_js_ = __webpack_require__(50);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.intersection.js"
-var esnext_set_intersection_js_ = __webpack_require__(51);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.is-disjoint-from.js"
-var esnext_set_is_disjoint_from_js_ = __webpack_require__(52);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.is-subset-of.js"
-var esnext_set_is_subset_of_js_ = __webpack_require__(53);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.is-superset-of.js"
-var esnext_set_is_superset_of_js_ = __webpack_require__(54);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.join.js"
-var esnext_set_join_js_ = __webpack_require__(55);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.map.js"
-var esnext_set_map_js_ = __webpack_require__(56);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.reduce.js"
-var esnext_set_reduce_js_ = __webpack_require__(57);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.some.js"
-var esnext_set_some_js_ = __webpack_require__(58);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.symmetric-difference.js"
-var esnext_set_symmetric_difference_js_ = __webpack_require__(59);
-
-// EXTERNAL MODULE: external "core-js/modules/esnext.set.union.js"
-var esnext_set_union_js_ = __webpack_require__(60);
-
-// CONCATENATED MODULE: ./assets/js/energyFlowSim.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return LEVEL_LABELS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return LEVEL_COUNT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return LEVEL_RESPONSE_KEYS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return LEVEL_COUNT_KEYS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FILTERABLE_LEVEL_COUNT; });
+/* unused harmony export seededFloat */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return seededRange; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return fmt; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return extractFeederFromPathKey; });
 // GET /api/v1/energy-flow now backs the Energy Flow Diagram's real numbers (see
 // static/api_live_responses3.md #2) - but it only accepts ts/transformer/feeder_33kva/dt/
 // dt_type as filters. There's no query param for ISS, Transformer 2, 11kV Incomer, or 11kV
@@ -201,634 +75,54 @@ function extractFeederFromPathKey(pathKey) {
   const nextGt = rest.indexOf('>');
   return nextGt === -1 ? rest : rest.slice(0, nextGt);
 }
-// EXTERNAL MODULE: ./js_modules/controlCenterApi.js
-var controlCenterApi = __webpack_require__(87);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/FlowLane.vue?vue&type=script&lang=js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Recursive card: one instance renders one card plus whatever legitimately
-// follows it. A "level" card (TS..11kV Outgoing Feeder) starts unselected -
-// the next card only appears once something is picked, and every recursive
-// child is :key'd to the selection path above it, so picking a new value
-// anywhere destroys and rebuilds everything downstream (the same reset the
-// page's Reset button does, just scoped to whatever changed). What follows
-// a level card depends on the hierarchy data at this point:
-//  - every reachable child has its own children -> continue right to the
-//    next standard card, no DT branch
-//  - any reachable child is a dead end (no ISS beneath a 33kV feeder, etc,
-//    per static/TSrelationship.xlsx) -> a DT card drops straight down from
-//    THIS card (Path B) - whether that's the only outcome, or a branch
-//    alongside the normal rightward continuation (only possible when "All"
-//    fans out several branches, some of which dead-end and some don't).
-//    Matches the reference Figma energy flow diagram.
-// DT and Customer are always terminal display cards; DT defaults to "All
-// DTs" already selected since nothing gates behind it except Customer, which
-// still continues rightward from DT.
-//
-// The numbers each card shows (total/loss/transmission/count) now come from the live
-// GET /energy-flow response (flowData prop, fetched by the page) wherever available - see
-// the apiSection computed property and assets/js/energyFlowSim.js's header comment for which
-// levels the API can actually be filtered by.
-
-/* harmony default export */ var FlowLanevue_type_script_lang_js = ({
-  name: 'FlowLane',
-  props: {
-    mode: {
-      type: String,
-      default: 'level'
-    },
-    // 'level' | 'dt' | 'customer'
-    level: {
-      type: Number,
-      default: 0
-    },
-    nodeList: {
-      type: Array,
-      default: () => []
-    },
-    pathKey: {
-      type: String,
-      default: ''
-    },
-    incomingTotal: {
-      type: Number,
-      default: null
-    },
-    // The FlowDiagramCanvas instance (has register()/unregister()) -
-    // passed as a plain prop and threaded down through every recursive
-    // level, rather than via provide/inject, since inject through
-    // default slot content is ambiguous in Vue 2.
-    connectorApi: {
-      type: Object,
-      default: null
-    },
-    // Latest GET /energy-flow response (or null while loading/unfetched), threaded down
-    // the same way as connectorApi. Only ts/transformer/feeder_33kva/dt/dt_type are real
-    // API filters - see the comment atop assets/js/energyFlowSim.js.
-    flowData: {
-      type: Object,
-      default: null
-    },
-    // Called as onFilterChange({ level, value }) when a TS/Transformer/33kV Feeder card's
-    // selection changes, so the page can refetch. Not called for deeper levels since the
-    // API has no param for them.
-    onFilterChange: {
-      type: Function,
-      default: null
-    },
-    // { byFeeder: Map<feederName, Set<dtName>>, all: string[] } built from real
-    // dt-availability/table rows by the page (see ensureDtNames() there), or null before
-    // that's been requested/has finished loading.
-    dtNameIndex: {
-      type: Object,
-      default: null
-    },
-    // Lets a DT card (mode === 'dt') ask the page to start building dtNameIndex the first
-    // time one is actually rendered, rather than eagerly on page load.
-    requestDtNames: {
-      type: Function,
-      default: null
-    }
-  },
-  data() {
-    return {
-      selected: this.mode === 'level' ? '' : this.mode === 'dt' ? 'All DTs' : 'All',
-      // Set only when this specific DT card has picked a named DT - overrides flowData
-      // for THIS card and its Customer child only (see the customer FlowLane's :flow-data
-      // binding below), so picking a DT in one branch never changes numbers shown
-      // elsewhere in the diagram.
-      dtLocalFlowData: null,
-      dtLocalLoading: false
-    };
-  },
-  watch: {
-    selected(val) {
-      if (this.mode === 'level') {
-        // Only meaningful for the root (TS) card - the page listens on it
-        // alone to know when to show the Reset button.
-        this.$emit('change', val);
-        if (this.level < FILTERABLE_LEVEL_COUNT && this.onFilterChange) {
-          this.onFilterChange({
-            level: this.level,
-            value: val
-          });
-        }
-      } else if (this.mode === 'dt') {
-        this.fetchDtFlow(val);
-      }
-    }
-  },
-  mounted() {
-    this.$nextTick(this.syncConnectors);
-    if (this.mode === 'dt' && this.requestDtNames) this.requestDtNames();
-  },
-  updated() {
-    this.$nextTick(this.syncConnectors);
-  },
-  beforeDestroy() {
-    if (!this.connectorApi) return;
-    this.connectorApi.unregister(`${this._uid}:right`);
-    this.connectorApi.unregister(`${this._uid}:below`);
-  },
-  computed: {
-    title() {
-      if (this.mode === 'level') return LEVEL_LABELS[this.level];
-      if (this.mode === 'dt') return 'DT';
-      return 'Customer';
-    },
-    allValue() {
-      return this.mode === 'dt' ? 'All DTs' : 'All';
-    },
-    options() {
-      if (this.mode === 'level') {
-        const set = new Set();
-        this.nodeList.forEach(n => Object.keys(n).forEach(k => set.add(k)));
-        return Array.from(set).sort();
-      }
-      if (this.mode === 'dt') {
-        if (!this.dtNameIndex) return [];
-        const feeder = extractFeederFromPathKey(this.pathKey);
-        if (feeder && this.dtNameIndex.byFeeder.has(feeder)) {
-          return Array.from(this.dtNameIndex.byFeeder.get(feeder)).sort();
-        }
-        // DT hanging off an earlier level (Path B dead-end) or no match found for this
-        // specific feeder in the sample we fetched - fall back to every real DT name
-        // known, rather than showing nothing or a fake name.
-        return this.dtNameIndex.all;
-      }
-      return [];
-    },
-    selfPathKey() {
-      return `${this.pathKey}>${this.title}=${this.selected}`;
-    },
-    resolvedNodeList() {
-      if (this.mode !== 'level' || this.selected === '') return [];
-      const list = [];
-      this.nodeList.forEach(n => {
-        if (this.selected === 'All') {
-          Object.values(n).forEach(c => list.push(c));
-        } else if (n[this.selected]) {
-          list.push(n[this.selected]);
-        }
-      });
-      return list;
-    },
-    nonEmptyChildren() {
-      if (this.level >= LEVEL_COUNT - 1) return [];
-      return this.resolvedNodeList.filter(n => Object.keys(n).length > 0);
-    },
-    emptyChildren() {
-      return this.resolvedNodeList.filter(n => Object.keys(n).length === 0);
-    },
-    forwardKind() {
-      if (this.mode === 'level') {
-        if (this.selected === '') return null;
-        return this.nonEmptyChildren.length > 0 ? 'continue' : null;
-      }
-      if (this.mode === 'dt') return 'customer';
-      return null;
-    },
-    // DT always renders as a downward branch under this card - whether
-    // every reachable child is a dead end, or only some of them are.
-    dtBelow() {
-      return this.mode === 'level' && this.selected !== '' && this.emptyChildren.length > 0;
-    },
-    // The /energy-flow section matching this card, if flowData has loaded. Note this is
-    // NOT scoped to this card's own local selection for level >= 3 (ISS onward) - see the
-    // comment atop assets/js/energyFlowSim.js. Levels 0-2 and dt/customer ARE accurate to
-    // whatever TS/Transformer/33kV Feeder is currently selected, since those drive the fetch.
-    apiSection() {
-      if (this.mode === 'dt') {
-        // A DT-specific fetch (see fetchDtFlow) takes priority over the shared
-        // flowData's dt=All aggregate, once one has loaded for this card.
-        if (this.dtLocalFlowData) return this.dtLocalFlowData.dts || null;
-        return this.flowData ? this.flowData.dts || null : null;
-      }
-      if (!this.flowData) return null;
-      if (this.mode === 'level') return this.flowData[LEVEL_RESPONSE_KEYS[this.level]] || null;
-      if (this.mode === 'customer') return this.flowData.customer || null;
-      return null;
-    },
-    total() {
-      if (this.apiSection && this.apiSection.total_energy_mwh != null) return this.apiSection.total_energy_mwh;
-      if (this.incomingTotal != null) return this.incomingTotal;
-      // Fallback while flowData hasn't loaded yet (covered by the page's loading overlay).
-      return Math.round(seededRange(`TOTAL:${this.selfPathKey}`, 40000, 480000));
-    },
-    lossPct() {
-      if (this.mode === 'customer') return 0;
-      if (this.apiSection && this.apiSection.loss_pct != null) return this.apiSection.loss_pct;
-      const [min, max] = this.mode === 'dt' ? [8, 18] : [2, 12];
-      return Math.round(seededRange(`LOSS:${this.selfPathKey}`, min, max));
-    },
-    outgoingPct() {
-      if (this.apiSection && this.apiSection.transmission_pct != null) return this.apiSection.transmission_pct;
-      return 100 - this.lossPct;
-    },
-    outgoingVal() {
-      if (this.apiSection && this.apiSection.transmission_mwh != null) return this.apiSection.transmission_mwh;
-      return this.total * this.outgoingPct / 100;
-    },
-    lossVal() {
-      if (this.apiSection && this.apiSection.loss_mwh != null) return this.apiSection.loss_mwh;
-      return this.total - this.outgoingVal;
-    },
-    fillPct() {
-      // customer has no comparable real percentage in the API response - a full bar
-      // beats fabricating a number that looks meaningful but isn't.
-      if (this.apiSection) return 100;
-      return Math.round(seededRange(`FILL:${this.selfPathKey}`, 82, 96));
-    },
-    bottomLabel() {
-      if (this.mode === 'customer') return 'Total Customers';
-      if (this.mode === 'dt') return 'Total DTs';
-      return `Total ${this.title}`;
-    },
-    bottomVal() {
-      if (this.mode === 'customer') {
-        if (this.apiSection && this.apiSection.total_customers != null) return this.fmt(this.apiSection.total_customers);
-        return this.fmt(Math.round(seededRange(`CUST:${this.selfPathKey}`, 800, 210000)));
-      }
-      if (this.mode === 'dt') {
-        if (this.apiSection) {
-          return this.fmt((this.apiSection.total_public_dts || 0) + (this.apiSection.total_private_dts || 0));
-        }
-        return this.options.length;
-      }
-      if (this.apiSection) {
-        const countKey = LEVEL_COUNT_KEYS[this.level];
-        if (this.apiSection[countKey] != null) return this.fmt(this.apiSection[countKey]);
-      }
-      return this.options.length;
-    }
-  },
-  methods: {
-    fmt: fmt,
-    // Called when THIS DT card's own dropdown changes. Refetches /energy-flow with the
-    // same ts/transformer/feeder_33kva the shared flowData was fetched with, plus this
-    // specific dt name, and stores the result locally - only this card and its Customer
-    // child (via the :flow-data="dtLocalFlowData || flowData" binding below) read it.
-    // Other DT cards elsewhere in the diagram, and the main TS..11kV Outgoing Feeder
-    // chain, keep reading the shared flowData untouched.
-    async fetchDtFlow(dtName) {
-      if (!dtName || dtName === 'All DTs' || dtName === 'All') {
-        this.dtLocalFlowData = null;
-        return;
-      }
-      this.dtLocalLoading = true;
-      try {
-        const base = this.flowData || {};
-        this.dtLocalFlowData = await Object(controlCenterApi["n" /* getEnergyFlow */])({
-          ts: base.ts && base.ts.name || 'All',
-          transformer: base.transformer_capacity && base.transformer_capacity.selected || 'All',
-          feeder_33kva: base.feeders_33kva && base.feeders_33kva.selected || 'All',
-          dt: dtName,
-          dt_type: 'All'
-        });
-      } catch (err) {
-        // Non-critical - falls back to the shared flowData's dt=All aggregate.
-        console.error('[FlowLane] failed to load DT-specific energy flow', err);
-        this.dtLocalFlowData = null;
-      } finally {
-        this.dtLocalLoading = false;
-      }
-    },
-    syncConnectors() {
-      if (!this.connectorApi) return;
-      const rightId = `${this._uid}:right`;
-      const belowId = `${this._uid}:below`;
-      const rightChild = this.$refs.rightChild;
-      if ((this.forwardKind === 'continue' || this.forwardKind === 'customer') && rightChild && rightChild.$refs.cardEl) {
-        this.connectorApi.register(rightId, this.$refs.cardEl, rightChild.$refs.cardEl, 'right');
-      } else {
-        this.connectorApi.unregister(rightId);
-      }
-      const belowChild = this.$refs.belowChild;
-      if (this.dtBelow && belowChild && belowChild.$refs.cardEl) {
-        this.connectorApi.register(belowId, this.$refs.cardEl, belowChild.$refs.cardEl, 'down');
-      } else {
-        this.connectorApi.unregister(belowId);
-      }
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/FlowLane.vue?vue&type=script&lang=js
- /* harmony default export */ var components_FlowLanevue_type_script_lang_js = (FlowLanevue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./components/FlowLane.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(110)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_FlowLanevue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "d1ec2ee4",
-  "3c1eb2cc"
-  
-)
-
-/* harmony default export */ var FlowLane = __webpack_exports__["default"] = (component.exports);
-
-/* nuxt-component-imports */
-installComponents(component, {FlowLane: __webpack_require__(103).default})
-
 
 /***/ }),
 
-/***/ 108:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowDiagramCanvas_vue_vue_type_style_index_0_id_2b11caca_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(99);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowDiagramCanvas_vue_vue_type_style_index_0_id_2b11caca_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowDiagramCanvas_vue_vue_type_style_index_0_id_2b11caca_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowDiagramCanvas_vue_vue_type_style_index_0_id_2b11caca_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowDiagramCanvas_vue_vue_type_style_index_0_id_2b11caca_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 109:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".flow-canvas-wrap[data-v-2b11caca]{position:relative}.flow-canvas-content[data-v-2b11caca]{position:relative;z-index:1}.flow-canvas-svg[data-v-2b11caca]{left:0;overflow:visible;pointer-events:none;position:absolute;top:0;z-index:0}.flow-connector-path[data-v-2b11caca]{fill:none;stroke:var(--border-strong);stroke-width:1.5}.flow-connector-arrowhead[data-v-2b11caca]{fill:var(--border-strong)}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 110:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(100);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FlowLane_vue_vue_type_style_index_0_id_d1ec2ee4_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 111:
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
-var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.i, ".flow-card-col[data-v-d1ec2ee4],.flow-row[data-v-d1ec2ee4]{align-items:flex-start;display:flex}.flow-card-col[data-v-d1ec2ee4]{flex-direction:column;flex-shrink:0}.flow-card-col.has-right[data-v-d1ec2ee4]{margin-right:70px}.flow-below-branch[data-v-d1ec2ee4]{align-items:flex-start;display:flex;flex-direction:column;margin-top:60px}.flow-card[data-v-d1ec2ee4]{align-self:flex-start;background:var(--bg-card);border:1px solid var(--border-color);border-radius:12px;box-shadow:0 2px 8px var(--shadow-color);flex-shrink:0;padding:14px 16px;position:relative;transition:opacity .15s ease;width:230px}.flow-card-updating[data-v-d1ec2ee4]{opacity:.55}.flow-card-title[data-v-d1ec2ee4]{color:var(--text-primary);font-size:13px;font-weight:600;margin:0 0 10px;text-align:center}.flow-filters[data-v-d1ec2ee4]{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}.flow-filter[data-v-d1ec2ee4]{align-items:center;border:1px solid var(--border-color);border-radius:6px;display:flex;justify-content:space-between;padding:4px 8px;position:relative}.flow-filter[data-v-d1ec2ee4],.flow-filter select[data-v-d1ec2ee4]{color:var(--text-secondary);font-size:12px}.flow-filter select[data-v-d1ec2ee4]{-moz-appearance:none;appearance:none;-webkit-appearance:none;background:transparent;border:none;cursor:pointer;height:auto;padding:0 18px 0 0;width:100%}.flow-filter select[data-v-d1ec2ee4]:focus{outline:none}.flow-filter .material-icons[data-v-d1ec2ee4]{color:var(--text-muted);font-size:16px!important;pointer-events:none;position:absolute;right:6px}.flow-total-label[data-v-d1ec2ee4]{color:var(--text-muted);font-size:11px;margin:0}.flow-total-value[data-v-d1ec2ee4]{color:#2fa360;font-size:15px;font-weight:700;margin:2px 0 8px}.flow-bar[data-v-d1ec2ee4]{background:var(--border-color);border-radius:4px;display:flex;height:6px;margin-bottom:8px;overflow:hidden}.flow-bar-fill[data-v-d1ec2ee4]{background:#3ec97a;height:100%}.flow-bar-loss[data-v-d1ec2ee4]{background:#e05353;height:100%}.flow-stats-row[data-v-d1ec2ee4]{display:flex;font-size:11px;gap:8px;justify-content:space-between;margin-bottom:8px}.flow-stat[data-v-d1ec2ee4]{display:flex;flex-direction:column;gap:2px}.flow-stat.right[data-v-d1ec2ee4]{align-items:flex-end;text-align:right}.flow-stat-pct[data-v-d1ec2ee4]{color:var(--text-secondary);font-weight:600}.flow-stat-pct.loss[data-v-d1ec2ee4]{color:#c0392b}.flow-stat-val[data-v-d1ec2ee4]{color:var(--text-muted)}.flow-divider[data-v-d1ec2ee4]{background:var(--divider);height:1px;margin:6px 0}.flow-bottom-row[data-v-d1ec2ee4]{color:var(--text-secondary);display:flex;font-size:12px;justify-content:space-between;padding-top:4px}.flow-bottom-row b[data-v-d1ec2ee4]{color:var(--text-primary)}", ""]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-module.exports = ___CSS_LOADER_EXPORT___;
-
-
-/***/ }),
-
-/***/ 114:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/FlowDiagramCanvas.vue?vue&type=template&id=2b11caca&scoped=true
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', {
-    ref: "wrap",
-    staticClass: "flow-canvas-wrap"
-  }, [_vm._ssrNode("<div class=\"flow-canvas-content\" data-v-2b11caca>", "</div>", [_vm._t("default")], 2), _vm._ssrNode(" <svg" + _vm._ssrAttr("width", _vm.size.w) + _vm._ssrAttr("height", _vm.size.h) + " class=\"flow-canvas-svg\" data-v-2b11caca><defs data-v-2b11caca><marker id=\"flow-arrowhead\" markerWidth=\"8\" markerHeight=\"8\" refX=\"5.5\" refY=\"3\" orient=\"auto\" data-v-2b11caca><path d=\"M0,0 L6,3 L0,6 Z\" class=\"flow-connector-arrowhead\" data-v-2b11caca></path></marker></defs> " + _vm._ssrList(_vm.segments, function (seg) {
-    return "<path" + _vm._ssrAttr("d", seg.d) + " marker-end=\"url(#flow-arrowhead)\" class=\"flow-connector-path\" data-v-2b11caca></path>";
-  }) + "</svg>")], 2);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/FlowDiagramCanvas.vue?vue&type=template&id=2b11caca&scoped=true
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/FlowDiagramCanvas.vue?vue&type=script&lang=js
-// Draws the curved connector lines between FlowLane cards (replacing plain
-// arrow icons), matching the look of static/PHOTO-2026-09-09-20-46-09.jpg -
-// a smooth bezier from one card's edge to the next, not a boxy straight
-// arrow. FlowLane instances register/unregister their own connections here
-// via the injected `flowConnectorApi`; this component owns the single SVG
-// overlay and recomputes every path whenever the diagram's size changes
-// (new cards appearing/disappearing, window resize).
-
-/* harmony default export */ var FlowDiagramCanvasvue_type_script_lang_js = ({
-  name: 'FlowDiagramCanvas',
-  // register()/unregister() are called directly by FlowLane instances,
-  // which receive this component as a plain prop (see connectorApi in
-  // FlowLane.vue) rather than via provide/inject - inject through default
-  // slot content is ambiguous in Vue 2, so this sidesteps it entirely.
-  data() {
-    return {
-      connectors: {},
-      segments: [],
-      size: {
-        w: 0,
-        h: 0
-      }
-    };
-  },
-  mounted() {
-    this._ro = new ResizeObserver(() => this.scheduleRecompute());
-    this._ro.observe(this.$refs.wrap);
-    window.addEventListener('resize', this.scheduleRecompute);
-    this.scheduleRecompute();
-  },
-  beforeDestroy() {
-    if (this._ro) this._ro.disconnect();
-    window.removeEventListener('resize', this.scheduleRecompute);
-    if (this._raf) cancelAnimationFrame(this._raf);
-  },
-  methods: {
-    // orientation: 'right' (edge-to-edge, mostly horizontal curve) or
-    // 'down' (edge-to-edge, mostly vertical curve)
-    register(id, fromEl, toEl, orientation) {
-      this.connectors[id] = {
-        fromEl,
-        toEl,
-        orientation
-      };
-      this.scheduleRecompute();
-    },
-    unregister(id) {
-      if (this.connectors[id]) {
-        delete this.connectors[id];
-        this.scheduleRecompute();
-      }
-    },
-    scheduleRecompute() {
-      if (this._raf) cancelAnimationFrame(this._raf);
-      this._raf = requestAnimationFrame(() => this.recompute());
-    },
-    recompute() {
-      const wrap = this.$refs.wrap;
-      if (!wrap) return;
-      const wrapRect = wrap.getBoundingClientRect();
-      const segs = [];
-      Object.keys(this.connectors).forEach(id => {
-        const {
-          fromEl,
-          toEl,
-          orientation
-        } = this.connectors[id];
-        if (!fromEl || !toEl || !fromEl.isConnected || !toEl.isConnected) return;
-        const fr = fromEl.getBoundingClientRect();
-        const tr = toEl.getBoundingClientRect();
-        let x1, y1, x2, y2, d;
-        if (orientation === 'down') {
-          x1 = fr.left + fr.width / 2 - wrapRect.left;
-          y1 = fr.bottom - wrapRect.top;
-          x2 = tr.left + tr.width / 2 - wrapRect.left;
-          y2 = tr.top - wrapRect.top;
-          const dy = Math.max(20, (y2 - y1) * 0.5);
-          d = `M ${x1} ${y1} C ${x1} ${y1 + dy}, ${x2} ${y2 - dy}, ${x2} ${y2}`;
-        } else {
-          x1 = fr.right - wrapRect.left;
-          y1 = fr.top + fr.height / 2 - wrapRect.top;
-          x2 = tr.left - wrapRect.left;
-          y2 = tr.top + tr.height / 2 - wrapRect.top;
-          const dx = Math.max(24, (x2 - x1) * 0.5);
-          d = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
-        }
-        segs.push({
-          id,
-          d
-        });
-      });
-      this.segments = segs;
-      // Measure the content column, not the wrap's scrollWidth/Height -
-      // the SVG is an absolutely-positioned sibling that would
-      // otherwise inflate the wrap's scroll size, which we'd then read
-      // back in as this size on the next pass (never shrinking back
-      // down once the diagram had grown, e.g. after Reset).
-      const content = this.$refs.content;
-      this.size = content ? {
-        w: content.offsetWidth,
-        h: content.offsetHeight
-      } : {
-        w: 0,
-        h: 0
-      };
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/FlowDiagramCanvas.vue?vue&type=script&lang=js
- /* harmony default export */ var components_FlowDiagramCanvasvue_type_script_lang_js = (FlowDiagramCanvasvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./components/FlowDiagramCanvas.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(108)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_FlowDiagramCanvasvue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "2b11caca",
-  "1983ddcd"
-  
-)
-
-/* harmony default export */ var FlowDiagramCanvas = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ 120:
+/***/ 133:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(137);
+var content = __webpack_require__(157);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(4).default
 module.exports.__inject__ = function (context) {
-  add("091acbf4", content, true, context)
+  add("4b24f007", content, true, context)
 };
 
 /***/ }),
 
-/***/ 135:
+/***/ 155:
 /***/ (function(module) {
 
 module.exports = JSON.parse("{\"AKOKA TS\":{\"T3\":{\"33-AkokaTCN-New Yaba\":{\"NEW YABA INJ\":{\"T2\":{\"11-New YabaINJ-T2-Incomer\":{\"11-New YabaINJ-T2-Jibowu\":{}}}}},\"33-AkokaTCN-T3A\":{\"AKOKA INJ\":{\"T3\":{\"11-AkokaINJ-T3-Incomer\":{\"11-AkokaINJ-T3-Akoka\":{},\"11-AkokaINJ-T3-Community\":{}}}}}}},\"ALAUSA TS\":{\"T1\":{\"33-AlausaTCN-OJODU\":{\"OPEBI INJ\":{\"T1\":{\"11-OpebiINJ-T1-Incomer\":{\"11-OpebiINJ-T1-Agbaoku\":{},\"11-OpebiINJ-T1-Olusosun\":{},\"11-OpebiINJ-T1-Salvation\":{}}}}},\"33-AlausaTCN-T4\":{\"NEW ALAUSA INJ\":{\"T4\":{\"11-New AlausaINJ-T4-Incomer\":{\"11-New AlausaINJ-T4-Allen\":{},\"11-New AlausaINJ-T4-Aromire\":{},\"11-New AlausaINJ-T4-Oregun\":{}}},\"T5\":{\"11-New AlausaINJ-T5-Incomer\":{\"11-New AlausaINJ-T5-Alausa\":{},\"11-New AlausaINJ-T5-Kudirat\":{},\"11-New AlausaINJ-T5-Morrison\":{}}}}},\"33-AlausaTCN-T6\":{\"NEW ALAUSA INJ\":{\"T6\":{\"11-New AlausaINJ-T6-Incomer\":{\"11-New AlausaINJ-T6-Awolowo\":{},\"11-New AlausaINJ-T6-Ogundana\":{},\"11-New AlausaINJ-T6-Siyanbola\":{}}}}}},\"T2\":{\"33-AlausaTCN-ALAUSA\":{\"SECRETARIAT INJ\":{\"T1\":{\"11-SecretariatINJ-T1-Incomer\":{\"11-SecretariatINJ-T1-Estate\":{},\"11-SecretariatINJ-T1-Lateef Jakande\":{},\"11-SecretariatINJ-T1-Omole\":{}}},\"T2\":{\"11-SecretariatINJ-T2-Incomer\":{\"11-SecretariatINJ-T2-7UP\":{},\"11-SecretariatINJ-T2-Agidingbi\":{},\"11-SecretariatINJ-T2-UAC\":{}}}}},\"33-AlausaTCN-MAGODO\":{\"MAGODO INJ\":{\"T1\":{\"11-MagodoINJ-T1-Incomer\":{\"11-MagodoINJ-T1-Emmanuel Keshi\":{},\"11-MagodoINJ-T1-Oluyombo\":{},\"11-MagodoINJ-T1-Owulade\":{},\"11-MagodoINJ-T1-Shangisha\":{}}},\"T2\":{\"11-MagodoINJ-T2-Incomer\":{\"11-MagodoINJ-T2-Bashiru\":{},\"11-MagodoINJ-T2-CMD\":{}}}}},\"33-AlausaTCN-OPIC\":{\"ISHERI INJ\":{\"T1\":{\"11-IsheriINJ-T1-Incomer\":{\"11-IsheriINJ-T1-Bankole\":{},\"11-IsheriINJ-T1-Isheri\":{},\"11-IsheriINJ-T1-Olowora\":{}}}},\"OLOWORA INJ\":{\"T1\":{\"11-OloworaINJ-T1-Incomer\":{\"11-OloworaINJ-T1-Orisha\":{},\"11-OloworaINJ-T1-UNILAG\":{}}}}}},\"T3\":{\"33-AlausaTCN-OPEBI\":{},\"33-AlausaTCN-T5\":{}}},\"ALIMOSHO TS\":{\"T1\":{\"33-AlimoshoTCN-T4\":{\"ALIMOSHO INJ\":{\"T4\":{\"11-AlimoshoINJ-T4-Incomer\":{\"11-AlimoshoINJ-T4-Akowonjo\":{},\"11-AlimoshoINJ-T4-FHA\":{},\"11-AlimoshoINJ-T4-Oki\":{}}}}},\"33-AlimoshoTCN-T6\":{\"ALIMOSHO INJ\":{\"T6\":{\"11-AlimoshoINJ-T6-Incomer\":{\"11-AlimoshoINJ-T6-Orelope\":{},\"11-AlimoshoINJ-T6-Shasha\":{}}}}}},\"T2\":{\"33-AlimoshoTCN-AGEGE\":{\"AGEGE INJ\":{\"T2\":{\"11-AgegeINJ-T2-Incomer\":{\"11-AgegeINJ-T2-Abule Egba\":{},\"11-AgegeINJ-T2-Orile Agege\":{},\"11-AgegeINJ-T2-Power Line\":{}}},\"T3\":{\"11-AgegeINJ-T3-Incomer\":{\"11-AgegeINJ-T3-Oyemekun\":{},\"11-AgegeINJ-T3-Pen Cinema\":{},\"11-AgegeINJ-T3-Tabon Tabon\":{}}}},\"HILLTOP INJ\":{\"T1\":{\"11-HilltopINJ-T1-Incomer\":{\"11-HilltopINJ-T1-Hilltop\":{}}}}},\"33-AlimoshoTCN-T8\":{\"ALIMOSHO INJ\":{\"T8\":{\"11-AlimoshoINJ-T8-Incomer\":{\"11-AlimoshoINJ-T8-Alimosho\":{},\"11-AlimoshoINJ-T8-Okunola\":{},\"11-AlimoshoINJ-T8-Wole Omo Osho\":{}}}}}},\"T3\":{\"33-AlimoshoTCN-ADIYAN\":{\"NEW GOWON INJ\":{\"T1\":{\"11-New GowonINJ-T1-Incomer\":{\"11-New GowonINJ-T1-Kuwait\":{},\"11-New GowonINJ-T1-Olorunadaba\":{},\"11-New GowonINJ-T1-Unity\":{}}}}},\"33-AlimoshoTCN-EKORO\":{\"AGEGE INJ\":{\"T1\":{\"11-AgegeINJ-T1-Incomer\":{\"11-AgegeINJ-T1-Abattoir\":{},\"11-AgegeINJ-T1-Iju Road\":{},\"11-AgegeINJ-T1-Oko Oba\":{}}}},\"EKORO INJ\":{\"T2\":{\"11-EkoroINJ-T2-Incomer\":{\"11-EkoroINJ-T2-Agbele\":{},\"11-EkoroINJ-T2-Oke Odo\":{},\"11-EkoroINJ-T2-Olota\":{}}}}},\"33-AlimoshoTCN-TOWER IPAJA\":{\"ADARANIJO INJ\":{\"T1\":{\"11-AdaranijoINJ-T1-Incomer\":{\"11-AdaranijoINJ-T1-Arigbanla\":{},\"11-AdaranijoINJ-T1-NYSC\":{},\"11-AdaranijoINJ-T1-Oyewole\":{}}}}}}},\"AMUWO TS\":{\"T1\":{\"33-AmuwoTCN-FESTAC1\":{}},\"T3\":{\"33-AmuwoTCN-HONGXING 2\":{}},\"T5\":{\"33-AmuwoTCN-AMUKOKO\":{\"AMUWO INJ\":{\"T1\":{\"11-AmuwoINJ-T1-Incomer\":{\"11-AmuwoINJ-T1-Ijesha Express\":{},\"11-AmuwoINJ-T1-Old Ojo Road\":{}}},\"T2\":{\"11-AmuwoINJ-T2-Incomer\":{\"11-AmuwoINJ-T2-Jakande 1\":{},\"11-AmuwoINJ-T2-Jakande 2\":{}}}}},\"33-AmuwoTCN-HONGXING 1\":{}}},\"AYOBO TS\":{\"T1 & T2\":{\"33-AyoboTCN-ABESAN\":{\"ABESAN INJ\":{\"T1\":{\"11-AbesanINJ-T1-Incomer\":{\"11-AbesanINJ-T1-Aboru\":{},\"11-AbesanINJ-T1-Baruwa\":{},\"11-AbesanINJ-T1-Ipaja\":{}}},\"T2\":{\"11-AbesanINJ-T2-Incomer\":{\"11-AbesanINJ-T2-Abesan\":{},\"11-AbesanINJ-T2-Shagari\":{}}}}},\"33-AyoboTCN-ABULE TAYLOR\":{\"ABULE TAYLOR INJ\":{\"T1\":{\"11-Abule TaylorINJ-T1-Incomer\":{\"11-Abule TaylorINJ-T1-Bode Williams\":{},\"11-Abule TaylorINJ-T1-Walter Anderm\":{}}}},\"EKORO INJ\":{\"T1\":{\"11-EkoroINJ-T1-Incomer\":{\"11-EkoroINJ-T1-Ajasa\":{},\"11-EkoroINJ-T1-Ekoro\":{}}}}},\"33-AyoboTCN-AIYETORO\":{\"ALAJA INJ\":{\"T1\":{\"11-AlajaINJ-T1-Incomer\":{\"11-AlajaINJ-T1-Fadayomi\":{},\"11-AlajaINJ-T1-Koloba\":{},\"11-AlajaINJ-T1-Megida\":{}}}},\"AYETORO INJ\":{\"T1\":{\"11-AyetoroINJ-T1-Incomer\":{\"11-AyetoroINJ-T1-Bada\":{},\"11-AyetoroINJ-T1-Itele\":{},\"11-AyetoroINJ-T1-Lafenwa\":{}}}}},\"33-AyoboTCN-AMIKANLE\":{\"AMIKANLE INJ\":{\"T1\":{\"11-AmikanleINJ-T1-Incomer\":{\"11-AmikanleINJ-T1-Aiyetobi\":{},\"11-AmikanleINJ-T1-Ige\":{},\"11-AmikanleINJ-T1-Isoto\":{}}}},\"ILAPO INJ\":{\"T1\":{\"11-IlapoINJ-T1-Incomer\":{\"11-IlapoINJ-T1-Ilapo\":{}}}}},\"33-AyoboTCN-AYOBO\":{\"AYOBO INJ\":{\"T1\":{\"11-AyoboINJ-T1-Incomer\":{\"11-AyoboINJ-T1-Atanla\":{},\"11-AyoboINJ-T1-Ayobo\":{},\"11-AyoboINJ-T1-Ikola\":{}}}}}}},\"EGBIN TS\":{\"T1\":{\"33-EgbinTCN-AMBER\":{},\"33-EgbinTCN-OKE ELETU\":{\"IJEDE INJ\":{\"T1\":{\"11-IjedeINJ-T1-Incomer\":{\"11-IjedeINJ-T1-Gberibe\":{},\"11-IjedeINJ-T1-Luwasa\":{}}}}}}},\"EJIGBO TS\":{\"T1\":{\"33-EjigboTCN-AIRPORT\":{},\"33-EjigboTCN-OKE AFA 1\":{\"OKE AFA INJ\":{\"T2\":{\"11-Oke AfaINJ-T2-Incomer\":{\"11-Oke AfaINJ-T2-Ilamoshe\":{},\"11-Oke AfaINJ-T2-LCHE\":{},\"11-Oke AfaINJ-T2-Osolo\":{}}}}},\"33-EjigboTCN-OKEAFA 2\":{\"OKE AFA INJ\":{\"T1\":{\"11-Oke AfaINJ-T1-Incomer\":{\"11-Oke AfaINJ-T1-Bucknor\":{},\"11-Oke AfaINJ-T1-Ejigbo\":{},\"11-Oke AfaINJ-T1-Ire-Akari\":{}}},\"T3\":{\"11-Oke AfaINJ-T3-Incomer\":{\"11-Oke AfaINJ-T3-Bungalow\":{},\"11-Oke AfaINJ-T3-NNPC\":{},\"11-Oke AfaINJ-T3-Ori Oke\":{}}}}}},\"T2\":{\"33-EjigboTCN-IGANDO\":{\"IGANDO INJ\":{\"T1\":{\"11-IgandoINJ-T1-Incomer\":{\"11-IgandoINJ-T1-Egan\":{},\"11-IgandoINJ-T1-New Igando\":{},\"11-IgandoINJ-T1-Obadore\":{}}},\"T2\":{\"11-IgandoINJ-T2-Incomer\":{\"11-IgandoINJ-T2-Agric Road\":{},\"11-IgandoINJ-T2-Akesan\":{},\"11-IgandoINJ-T2-General Hospital\":{},\"11-IgandoINJ-T2-Ikotun Igando\":{}}}},\"LAGOS HOMS INJ\":{\"T1\":{\"11-Lagos HomsINJ-T1-Incomer\":{\"11-Lagos HomsINJ-T1-Estate\":{}}}}},\"33-EjigboTCN-IJEGUN\":{\"IJEGUN INJ\":{\"T1\":{\"11-IjegunINJ-T1-Incomer\":{\"11-IjegunINJ-T1-Ikotun\":{},\"11-IjegunINJ-T1-Obalagbe\":{},\"11-IjegunINJ-T1-Okerube\":{}}},\"T2\":{\"11-IjegunINJ-T2-Incomer\":{\"11-IjegunINJ-T2-Ijegun\":{},\"11-IjegunINJ-T2-Isheri Oshun\":{},\"11-IjegunINJ-T2-Pipeline\":{}}}}}},\"T3\":{\"33-EjigboTCN-AGODO\":{\"AGODO EGBE INJ\":{\"T1\":{\"11-Agodo EgbeINJ-T1-Incomer\":{\"11-Agodo EgbeINJ-T1-Abanishe\":{},\"11-Agodo EgbeINJ-T1-Kudaki\":{}}}}},\"33-EjigboTCN-EGBE\":{\"BOLORUNPELU INJ\":{\"T1\":{\"11-BolorunpeluINJ-T1-Incomer\":{\"11-BolorunpeluINJ-T1-Abaranje\":{},\"11-BolorunpeluINJ-T1-Idimu\":{},\"11-BolorunpeluINJ-T1-Isijola\":{}},\"11-BolorunpeluINJ-T3-Incomer\":{\"11-BolorunpeluINJ-T3-Governor\":{},\"11-BolorunpeluINJ-T3-Liasu\":{}}}},\"KWARU INJ\":{\"T1\":{\"11-KwaruINJ-T1-Incomer\":{\"11-KwaruINJ-T1-Asalu\":{},\"11-KwaruINJ-T1-Osunba\":{}}}}},\"33-EjigboTCN-SHASHA\":{\"SHASHA INJ\":{\"T1\":{\"11-ShashaINJ-T1-Incomer\":{\"11-ShashaINJ-T1-Coker Estate\":{},\"11-ShashaINJ-T1-Foursquare\":{},\"11-ShashaINJ-T1-NAF\":{},\"11-ShashaINJ-T1-Oguntade\":{},\"11-ShashaINJ-T1-Orisunbare\":{}}}}}},\"T4\":{\"33-EjigboTCN-BOLORUNPELU\":{}}},\"IKORODU TS\":{\"T1\":{\"33-IkoroduTCN-IJEDE\":{},\"33-IkoroduTCN-T1A\":{\"SABO INJ\":{\"T1\":{\"11-SaboINJ-T1-Incomer\":{\"11-SaboINJ-T1-Ayangburen\":{},\"11-SaboINJ-T1-Ijebu Ode\":{},\"11-SaboINJ-T1-Lasunwon\":{},\"11-SaboINJ-T1-Mary Hill\":{}}}}},\"33-IkoroduTCN-UNTL\":{}},\"T2\":{\"33-IkoroduTCN-INDUSTRIAL\":{},\"33-IkoroduTCN-IPAKODO\":{\"IPAKODO INJ\":{\"T1\":{\"11-Ipakodo (Ebute)INJ-T1-Incomer\":{\"11-Ipakodo (Ebute)INJ-T1-Abuja\":{},\"11-Ipakodo (Ebute)INJ-T1-Ipakodo\":{},\"11-Ipakodo (Ebute)INJ-T1-WAEC\":{}}}}},\"33-IkoroduTCN-T2A\":{\"SABO INJ\":{\"T2\":{\"11-SaboINJ-T2-Incomer\":{\"11-SaboINJ-T2-Erunwen\":{},\"11-SaboINJ-T2-Eyita\":{},\"11-SaboINJ-T2-Igbogbo\":{},\"11-SaboINJ-T2-Ladega\":{},\"11-SaboINJ-T2-Lagos Road\":{}}}}}},\"T3\":{\"33-IkoroduTCN-DANGOTE\":{},\"33-IkoroduTCN-FAKALE Source\":{},\"33-IkoroduTCN-IBESHE\":{\"AJEGUNLE INJ\":{\"T1\":{\"11-AjegunleINJ-T1-Incomer\":{\"11-AjegunleINJ-T1-Owode Onirin\":{},\"11-AjegunleINJ-T1-Thomas Olaniyan\":{}}}}},\"33-IkoroduTCN-OWUTU\":{\"OWUTU INJ\":{\"T1\":{\"11-OwutuINJ-T1-Incomer\":{\"11-OwutuINJ-T1-Agric\":{},\"11-OwutuINJ-T1-Ori Okuta\":{}}},\"T2\":{\"11-OwutuINJ-T2-Incomer\":{\"11-OwutuINJ-T2-Asolo\":{},\"11-OwutuINJ-T2-Isawo\":{},\"11-OwutuINJ-T2-Majidun\":{}}}}},\"33-IkoroduTCN-PULKIT\":{}},\"T4\":{\"33-IkoroduTCN-AGBOWA\":{\"EPE INJ\":{\"T1\":{\"11-EpeINJ-T1-Incomer\":{\"11-EpeINJ-T1-LASU\":{},\"11-EpeINJ-T1-Township\":{},\"11-EpeINJ-T1-Water Works\":{}}}}},\"33-IkoroduTCN-IGBOGBO\":{\"IGBOGBO INJ\":{\"T1\":{\"11-IgbogboINJ-T1-Incomer\":{\"11-IgbogboINJ-T1-Bayeku\":{},\"11-IgbogboINJ-T1-Ofin\":{}}},\"T2\":{\"11-IgbogboINJ-T2-Incomer\":{\"11-IgbogboINJ-T2-Agbele\":{},\"11-IgbogboINJ-T2-Agunfoye\":{},\"11-IgbogboINJ-T2-Odofin\":{}}}}},\"33-IkoroduTCN-SPINTEX\":{}}},\"ILUPEJU TS\":{\"T1 & T3\":{\"11-IlupejuINJ-T1-Incomer\":{\"ILUPEJU INJ\":{\"T1\":{\"11-IlupejuINJ-T1-Incomer\":{\"11-IlupejuINJ-T1-ATM\":{},\"11-IlupejuINJ-T1-Bhojson\":{},\"11-IlupejuINJ-T1-Rida Plastic\":{}}}}},\"11-IlupejuINJ-T3-Incomer\":{\"ILUPEJU INJ\":{\"T3\":{\"11-IlupejuINJ-T3-Incomer\":{\"11-IlupejuINJ-T3-Coker\":{},\"11-IlupejuINJ-T3-L & K\":{},\"11-IlupejuINJ-T3-PZ\":{},\"11-IlupejuINJ-T3-Palmgrove\":{}}}}}},\"T2\":{\"33-IlupejuTCN-ILUPEJU IGBOBI\":{\"IGBOBI INJ\":{\"T2\":{\"11-IgbobiINJ-T2-Incomer\":{\"11-IgbobiINJ-T2-Adurosakin\":{},\"11-IgbobiINJ-T2-Igbobi\":{},\"11-IgbobiINJ-T2-Market\":{}}},\"T3\":{\"11-IgbobiINJ-T3-Incomer\":{\"11-IgbobiINJ-T3-Ikorodu\":{},\"11-IgbobiINJ-T3-Mushin\":{},\"11-IgbobiINJ-T3-Railway\":{}}}}},\"33-IlupejuTCN-ILUPEJU PACEGATE\":{}},\"T4\":{\"33-IlupejuTCN-ILUPEJU BY-PASS\":{\"ILUPEJU BYPASS INJ\":{\"T1\":{\"11-Ilupeju BypassINJ-T1-Incomer\":{\"11-Ilupeju BypassINJ-T1-Bypass\":{},\"11-Ilupeju BypassINJ-T1-Industrial\":{},\"11-Ilupeju BypassINJ-T1-Obanikoro\":{}}}},\"MUSHIN INJ\":{\"T1\":{\"11-MushinINJ-T1-Incomer\":{\"11-MushinINJ-T1-Mushin\":{},\"11-MushinINJ-T1-Mushin 2\":{}}}}},\"33-IlupejuTCN-ILUPEJU PRIME\":{},\"33-IlupejuTCN-T4A\":{\"ILUPEJU INJ\":{\"T4\":{\"11-IlupejuINJ-T4-Incomer\":{\"11-IlupejuINJ-T4-Army Cant.\":{},\"11-IlupejuINJ-T4-Ikorodu\":{}}}}}}},\"ISOLO TS\":{\"T1\":{\"33-IsoloTCN-PTC Interface\":{\"ALASIA INJ\":{\"T1\":{\"11-AlasiaINJ-T1-Incomer\":{\"11-AlasiaINJ-T1-Alasia\":{},\"11-AlasiaINJ-T1-Council\":{},\"11-AlasiaINJ-T1-Owoseni\":{}}}}}},\"T2\":{\"(Unspecified Feeder)\":{\"EKO MUSHIN INJ\":{}},\"33-IsoloTCN-AFPRINT\":{},\"33-IsoloTCN-AJAO\":{\"AJAO INJ\":{\"T1\":{\"11-AjaoINJ-T1-Incomer\":{\"11-AjaoINJ-T1-Airport Road\":{},\"11-AjaoINJ-T1-Domino\":{}}},\"T2\":{\"11-AjaoINJ-T2-Incomer\":{\"11-AjaoINJ-T2-New Estate\":{},\"11-AjaoINJ-T2-Run View\":{},\"11-AjaoINJ-T2-Sholanke\":{}}}},\"MAFOLUKU INJ\":{\"T1\":{\"11-MafolukuINJ-T1-Incomer\":{\"11-MafolukuINJ-T1-Dosunmu\":{},\"11-MafolukuINJ-T1-Makinde\":{},\"11-MafolukuINJ-T1-Saubana\":{}}}}},\"33-IsoloTCN-PURE HYGIENE\":{}},\"T3\":{\"33-IsoloTCN-AIRPORT\":{},\"33-IsoloTCN-ASWANI\":{}}},\"ITIRE TS\":{\"T1\":{\"33-ItireTCN-AGO II\":{},\"33-ItireTCN-T3A\":{\"ITIRE INJ\":{\"T3\":{\"11-ItireINJ-T3-Incomer\":{\"11-ItireINJ-T3-Ago\":{},\"11-ItireINJ-T3-Apena\":{}}}}}},\"T3\":{\"33-ItireTCN-AGO I\":{\"AGO OKOTA INJ\":{\"T1\":{\"11-Ago OkotaINJ-T1-Incomer\":{\"11-Ago OkotaINJ-T1-Amuwo Ind.\":{},\"11-Ago OkotaINJ-T1-Fasheun\":{}}},\"T2\":{\"11-Ago OkotaINJ-T2-Incomer\":{\"11-Ago OkotaINJ-T2-Lake View\":{},\"11-Ago OkotaINJ-T2-Oke Ogbere\":{}}}}},\"33-ItireTCN-ITIRE 1\":{\"ITIRE INJ\":{\"T1\":{\"11-ItireINJ-T1-Incomer\":{\"11-ItireINJ-T1-Ademulegun\":{},\"11-ItireINJ-T1-Okota\":{}}},\"T2\":{\"11-ItireINJ-T2-Incomer\":{\"11-ItireINJ-T2-Amuwo-Ijesha\":{},\"11-ItireINJ-T2-Canal\":{},\"11-ItireINJ-T2-Ibalex\":{}}}}}}},\"LANDCRAFT TS\":{\"T1\":{\"132-EgbinTCN-MARYLAND-LANDCRAFT\":{}}},\"MARYLAND TS\":{\"T1 & T3\":{\"33-MarylandTCN-M/ALAUSA\":{},\"33-MarylandTCN-RACK CENTRE\":{},\"33-MarylandTCN-T1A\":{\"MARYLAND INJ\":{\"T1\":{\"11-MarylandINJ-T1-Incomer\":{\"11-MarylandINJ-T1-Ketu\":{},\"11-MarylandINJ-T1-Okupe\":{},\"11-MarylandINJ-T1-PTC\":{}}}}},\"33-MarylandTCN-T3A\":{\"MARYLAND INJ\":{\"T3\":{\"11-MarylandINJ-T3-Incomer\":{\"11-MarylandINJ-T3-Demurin\":{},\"11-MarylandINJ-T3-Ikosi\":{},\"11-MarylandINJ-T3-Sylvia\":{}}}}}},\"T2\":{\"33-MarylandTCN-AJEGUNLE\":{\"WASIMI INJ\":{\"T1\":{\"11-WasimiINJ-T1-Incomer\":{\"11-WasimiINJ-T1-Agiliti\":{},\"11-WasimiINJ-T1-Akanimodo\":{},\"11-WasimiINJ-T1-Araromi\":{}}},\"T2\":{\"11-WasimiINJ-T2-Incomer\":{\"11-WasimiINJ-T2-Agidi\":{},\"11-WasimiINJ-T2-Wasimi\":{}}}}},\"33-MarylandTCN-PTC\":{\"ADEKUNLE FAJUYI INJ\":{\"T1\":{\"11-Adekunle FajuyiINJ-T1-Incomer\":{\"11-Adekunle FajuyiINJ-T1-Isaac John\":{},\"11-Adekunle FajuyiINJ-T1-Oduduwa\":{}}}}},\"33-MarylandTCN-T2A\":{\"MARYLAND INJ\":{\"T2\":{\"11-MarylandINJ-T2-Incomer\":{\"11-MarylandINJ-T2-GRA\":{},\"11-MarylandINJ-T2-Ojota\":{},\"11-MarylandINJ-T2-Westex\":{}}}}}}},\"MONARCH TS\":{\"T1\":{\"132-Egbin-TCN-SAGAMU-MONARCH ALLOYS\":{}}},\"ODOGUNYAN TS\":{\"T1\":{\"33-OdogunyanTCN-AGBEDE\":{},\"33-OdogunyanTCN-MEGA STEEL\":{}},\"T2\":{\"33-OdogunyanTCN-CHIKKICHIKKI\":{},\"33-OdogunyanTCN-FAKALE MAYA\":{},\"33-OdogunyanTCN-ODOGUNYAN\":{\"ODOGUNYAN INJ\":{\"T1\":{\"11-OdogunyanINJ-T1-Incomer\":{\"11-OdogunyanINJ-T1-Agodo\":{},\"11-OdogunyanINJ-T1-Centex\":{},\"11-OdogunyanINJ-T1-Industrial\":{}}},\"T2\":{\"11-OdogunyanINJ-T2-Incomer\":{\"11-OdogunyanINJ-T2-Cantonment\":{},\"11-OdogunyanINJ-T2-Ita Oluwo\":{},\"11-OdogunyanINJ-T2-Odokekere\":{}}}}}}},\"OGBA TS\":{\"T1 & T2\":{\"33-OgbaTCN-ABEOKUTA EXP.\":{\"BECKLEY INJ\":{\"T1\":{\"11-BeckleyINJ-T1-Incomer\":{\"11-BeckleyINJ-T1-Agbe road\":{},\"11-BeckleyINJ-T1-Beckley\":{}}}},\"IJAIYE OJOKORO INJ\":{\"T1\":{\"11-Ijaiye OjokoroINJ-T1-Incomer\":{\"11-Ijaiye OjokoroINJ-T1-Abeokuta Express\":{},\"11-Ijaiye OjokoroINJ-T1-Agbado 2\":{},\"11-Ijaiye OjokoroINJ-T1-Jankara\":{}}}},\"MAPLEWOOD INJ\":{\"T1\":{\"11-MaplewoodINJ-T1-Incomer\":{\"11-MaplewoodINJ-T1-Maplewood\":{}}}}},\"33-OgbaTCN-FEEDER 2\":{\"OGBA INJ\":{\"T1\":{\"11-OgbaINJ-T1-Incomer\":{\"11-OgbaINJ-T1-Ijaye\":{},\"11-OgbaINJ-T1-Isokoko\":{}}}}},\"33-OgbaTCN-PTC DUNLOP\":{\"MONGORO INJ\":{\"T1\":{\"11-MongoroINJ-T1-Incomer\":{\"11-MongoroINJ-T1-Capitol\":{},\"11-MongoroINJ-T1-New Dopemu\":{},\"11-MongoroINJ-T1-Sule\":{}}}}},\"33-OgbaTCN-SANKYO\":{}},\"T3\":{\"33-OgbaTCN-FEEDER 8\":{\"OGBA INJ\":{\"T2\":{\"11-OgbaINJ-T2-Incomer\":{\"11-OgbaINJ-T2-Ifako\":{},\"11-OgbaINJ-T2-Mangoro\":{}}},\"T3\":{\"11-OgbaINJ-T3-Incomer\":{\"11-OgbaINJ-T3-Agege\":{},\"11-OgbaINJ-T3-Oba Akran\":{}}}}},\"33-OgbaTCN-IJU WATER WORKS\":{\"OBAWOLE INJ\":{\"T1\":{\"11-ObawoleINJ-T1-Incomer\":{\"11-ObawoleINJ-T1-Rotimi Williams\":{},\"11-ObawoleINJ-T1-Shonubi\":{},\"11-ObawoleINJ-T1-Youdeowei\":{}}}}},\"33-OgbaTCN-UNIVERSAL STEEL\":{\"ADENIYI JONES INJ\":{\"T1\":{\"11-Adeniyi JonesINJ-T1-Incomer\":{\"11-Adeniyi JonesINJ-T1-Adeniyi Jones\":{},\"11-Adeniyi JonesINJ-T1-Ajao\":{},\"11-Adeniyi JonesINJ-T1-Anifowoshe\":{}}}}}},\"T4\":{\"33-OgbaTCN-MTN\":{},\"33-OgbaTCN-NEW OJODU\":{\"OJODU INJ\":{\"T1\":{\"11-OjoduINJ-T1-Incomer\":{\"11-OjoduINJ-T1-Alagbole\":{},\"11-OjoduINJ-T1-King Avenue\":{},\"11-OjoduINJ-T1-Ojodu\":{}}},\"T2\":{\"11-OjoduINJ-T2-Incomer\":{\"11-OjoduINJ-T2-Express\":{},\"11-OjoduINJ-T2-River Valley\":{},\"11-OjoduINJ-T2-Yakoyo\":{}}}}},\"33-OgbaTCN-PTC EXP.\":{\"PTC INJ\":{\"T1\":{\"11-PTCINJ-T1-Incomer\":{\"11-PTCINJ-T1-Olowu\":{},\"11-PTCINJ-T1-Opebi\":{}}},\"T2\":{\"11-PTCINJ-T2-Incomer\":{\"11-PTCINJ-T2-Awuse\":{},\"11-PTCINJ-T2-Medical\":{}}},\"T3\":{\"11-PTCINJ-T3-Incomer\":{\"11-PTCINJ-T3-General Hospital\":{},\"11-PTCINJ-T3-Oba Akinjobi\":{}}}}}},\"T4 Mobitra\":{\"33-OgbaTCN-CISCO\":{\"OKE IRA INJ\":{\"T1\":{\"11-Oke IraINJ-T1-Incomer\":{\"11-Oke IraINJ-T1-Ayo Alabi\":{},\"11-Oke IraINJ-T1-Nob Oluwa\":{},\"11-Oke IraINJ-T1-Oke Ira\":{}}},\"T2\":{\"11-Oke IraINJ-T2-Incomer\":{\"11-Oke IraINJ-T2-Abiodun Jagun\":{},\"11-Oke IraINJ-T2-Kayode\":{},\"11-Oke IraINJ-T2-Thomas Salako\":{}}}}}}},\"OJO TS\":{\"T2\":{\"33-OjoTCN-FESTAC II INTERFACE\":{}}},\"OKE ARO TS\":{\"T5 & T6\":{\"33-Oke-AroTCN-AKUTE\":{},\"33-Oke-AroTCN-LAMBE\":{\"AKUTE INJ\":{\"T1\":{\"11-AkuteINJ-T1-Incomer\":{\"11-AkuteINJ-T1-Ishashi\":{},\"11-AkuteINJ-T1-Majente\":{},\"11-AkuteINJ-T1-Oyeyemi\":{}}}},\"LAMBE INJ\":{\"T1\":{\"11-LambeINJ-T1-Incomer\":{\"11-LambeINJ-T1-Jolasco\":{},\"11-LambeINJ-T1-Matogun\":{},\"11-LambeINJ-T1-Olambe\":{}}}}},\"33-Oke-AroTCN-NEW IJU W/WORKS\":{\"IJU INJ\":{\"T1\":{\"11-IjuINJ-T1-Incomer\":{\"11-IjuINJ-T1-Ajuwon\":{},\"11-IjuINJ-T1-Asore\":{},\"11-IjuINJ-T1-Galilee\":{},\"11-IjuINJ-T1-Grailand\":{}}},\"T2\":{\"11-IjuINJ-T2-Incomer\":{\"11-IjuINJ-T2-Agbado 1\":{},\"11-IjuINJ-T2-Ishaga\":{},\"11-IjuINJ-T2-Water works\":{}}}}},\"33-Oke-AroTCN-YIDI\":{\"OPE ILU INJ\":{\"T1\":{\"11-Ope IluINJ-T1-Incomer\":{\"11-Ope IluINJ-T1-Aboro\":{},\"11-Ope IluINJ-T1-Adiyan\":{},\"11-Ope IluINJ-T1-Ijoko\":{}}}},\"YIDI INJ\":{\"T1\":{\"11-YidiINJ-T1-Incomer\":{\"11-YidiINJ-T1-Opeilu\":{},\"11-YidiINJ-T1-Osoba\":{}}}}}}},\"OMINIK TS\":{\"T1\":{\"132-EgbinTCN-MARYLAND-OMNIK\":{}}},\"OTA TS\":{\"T2\":{\"33-OtaTCN-AMJE\":{\"ABULE IROKO INJ\":{\"T1\":{\"11-Abule IrokoINJ-T1-Incomer\":{\"11-Abule IrokoINJ-T1-Abule Iroko\":{},\"11-Abule IrokoINJ-T1-Alakuko\":{},\"11-Abule IrokoINJ-T1-Books\":{}}}},\"YUSUF INJ\":{\"T1\":{\"11-YusufINJ-T1-Incomer\":{\"11-YusufINJ-T1-Yusuf\":{}}},\"T2\":{\"11-YusufINJ-T2-Incomer\":{\"11-YusufINJ-T2-Agbefa\":{},\"11-YusufINJ-T2-Akera\":{}}}}}}},\"OWORO TS\":{\"T1\":{\"33-OworonshokiTCN-OWORO 1\":{\"OWORO INJ\":{\"T1\":{\"11-OworoINJ-T1-Incomer\":{\"11-OworoINJ-T1-Bariga\":{},\"11-OworoINJ-T1-Hospital\":{},\"11-OworoINJ-T1-Ifako\":{}}}}},\"33-OworonshokiTCN-OWORO 2\":{\"OWORO INJ\":{\"T2\":{\"11-OworoINJ-T2-Incomer\":{\"11-OworoINJ-T2-Ladilac\":{},\"11-OworoINJ-T2-Oworo\":{},\"11-OworoINJ-T2-Pedro\":{}}}}},\"33-OworonshokiTCN-OWORO 3\":{\"OWORO INJ\":{\"T3\":{\"11-OworoINJ-T3-Incomer\":{\"11-OworoINJ-T3-Anthony\":{},\"11-OworoINJ-T3-GTB\":{},\"11-OworoINJ-T3-Gbagada\":{}}}}}},\"T2\":{\"33-OworonshokiTCN-IGBOBI\":{\"IGBOBI INJ\":{\"T1\":{\"11-IgbobiINJ-T1-Incomer\":{\"11-IgbobiINJ-T1-Apata\":{},\"11-IgbobiINJ-T1-Military\":{},\"11-IgbobiINJ-T1-Orthopaedic\":{}}}}},\"33-OworonshokiTCN-NEW OWORO\":{\"NEW OWORO INJ\":{\"T1\":{\"11-New OworoINJ-T1-Incomer\":{\"11-New OworoINJ-T1-Finbars\":{},\"11-New OworoINJ-T1-Odunsi\":{}}}}},\"33-OworonshokiTCN-OGUDU 1\":{\"OGUDU INJ\":{\"T1\":{\"11-OguduINJ-T1-Incomer\":{\"11-OguduINJ-T1-CAC\":{},\"11-OguduINJ-T1-Express\":{},\"11-OguduINJ-T1-Ogudu\":{}}},\"T2\":{\"11-OguduINJ-T2-Incomer\":{\"11-OguduINJ-T2-Alapere\":{},\"11-OguduINJ-T2-Oriola\":{}}},\"T3\":{\"11-OguduINJ-T3-Incomer\":{\"11-OguduINJ-T3-Balogun\":{},\"11-OguduINJ-T3-Kola Adeshina\":{},\"11-OguduINJ-T3-Soluyi\":{}}}}}},\"T3\":{\"33-OworonshokiTCN-ALAPERE\":{\"ALAPERE INJ\":{\"T1\":{\"11-AlapereINJ-T1-Incomer\":{\"11-AlapereINJ-T1-Agboyi\":{},\"11-AlapereINJ-T1-Araba\":{},\"11-AlapereINJ-T1-Bakare\":{}}}}}}},\"SUNFLAG\":{\"T1\":{\"132-EgbinTCN-SAGAMU-SUNFLAG\":{}}},\"TOP-STEEL TS\":{\"T1\":{\"132-EgbinTCN-SAGAMU-TOPSTEEL\":{}}}}");
 
 /***/ }),
 
-/***/ 136:
+/***/ 156:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_19490b90_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(120);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_19490b90_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_19490b90_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_19490b90_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_19490b90_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_cf5f48fe_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(133);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_cf5f48fe_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_cf5f48fe_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_cf5f48fe_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_energy_flow_diagram_vue_vue_type_style_index_0_id_cf5f48fe_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ 137:
+/***/ 157:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-19490b90]{background-color:var(--bg-page);min-height:100vh}.main-content[data-v-19490b90]{padding-left:280px;padding-right:20px;padding-top:20px}.avail-header[data-v-19490b90]{align-items:center;display:flex;justify-content:space-between;margin-bottom:20px}.avail-title[data-v-19490b90]{color:var(--text-primary);font-weight:600;margin:0}.flow-panel[data-v-19490b90]{background:var(--bg-card);border-radius:14px;min-height:300px;padding:24px;position:relative}.flow-error[data-v-19490b90]{align-items:center;background:#fdecec;border-radius:10px;color:#c0392b;display:flex;font-size:13px;gap:12px;margin-bottom:16px;padding:10px 16px}.flow-retry[data-v-19490b90]{background:#c0392b;border:none;border-radius:6px;color:#fff;cursor:pointer;font-size:12px;padding:4px 12px}.flow-api-note[data-v-19490b90]{color:var(--text-muted);font-size:12px;margin:-12px 0 18px}.flow-path-row[data-v-19490b90]{align-items:center;display:flex;gap:12px;justify-content:space-between;margin-bottom:18px}.flow-path-desc[data-v-19490b90]{color:var(--text-secondary);font-size:13px;margin:0}.flow-reset-btn[data-v-19490b90]{align-items:center;background:none;border:1px solid var(--border-color);border-radius:8px;color:var(--text-secondary);cursor:pointer;display:flex;flex-shrink:0;font-size:12px;font-weight:600;gap:4px;padding:5px 12px}.flow-reset-btn[data-v-19490b90]:hover{color:var(--text-primary)}.flow-scroll[data-v-19490b90]{overflow:auto;padding-bottom:8px}@media only screen and (max-width:992px){.main-content[data-v-19490b90]{padding-left:20px}.avail-header[data-v-19490b90]{align-items:flex-start;flex-direction:column;gap:12px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".flow-layout[data-v-cf5f48fe]{display:grid;grid-template-columns:minmax(0,2fr) minmax(280px,1fr);grid-gap:16px;align-items:start;gap:16px}.flow-main[data-v-cf5f48fe]{min-width:0}.sld[data-v-cf5f48fe]{padding:24px 20px 28px}.sld[data-v-cf5f48fe],.sld-step[data-v-cf5f48fe]{align-items:center;display:flex;flex-direction:column;position:relative}.sld-step[data-v-cf5f48fe]{max-width:600px;width:100%;z-index:1}.sld-step[data-v-cf5f48fe]:focus-within,.sld-step[data-v-cf5f48fe]:hover{z-index:20}.sld-node[data-v-cf5f48fe]{display:grid;grid-template-columns:44px minmax(0,1fr) auto;position:relative;width:100%;grid-gap:14px;align-items:center;background:var(--surface);border:1.5px solid var(--border);border-radius:14px;box-shadow:var(--shadow-xs);gap:14px;padding:12px 14px}.sld-node.picked[data-v-cf5f48fe]{border-color:var(--primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary) 14%,transparent)}.sld-node.open[data-v-cf5f48fe]{border-color:var(--danger)}.sld-level[data-v-cf5f48fe]{align-items:center;display:flex;flex-wrap:wrap;gap:8px}.sld-level>span[data-v-cf5f48fe]:first-child{color:var(--text-3);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}.sld-count[data-v-cf5f48fe]{background:var(--surface-3);border-radius:5px;color:var(--text-2);font-size:10.5px;font-weight:700;padding:1px 6px}.sld-energy[data-v-cf5f48fe]{text-align:right}.sld-energy-val[data-v-cf5f48fe]{font-size:17px;font-weight:700;letter-spacing:-.4px;transition:opacity .2s}.sld-energy-val.updating[data-v-cf5f48fe]{opacity:.4}.sld-energy-unit[data-v-cf5f48fe]{color:var(--text-3);font-size:10.5px;font-weight:700}.sld-bus[data-v-cf5f48fe]{display:flex;height:58px;justify-content:center;position:relative;width:100%}.sld-bus .ie-bus[data-v-cf5f48fe]{border-radius:3px;transition:width .4s}.sld-arrow[data-v-cf5f48fe]{border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid;bottom:0;height:0;left:50%;position:absolute;transform:translateX(-50%);width:0}.sld-loss[data-v-cf5f48fe]{align-items:center;border:1.5px solid;border-radius:999px;box-shadow:var(--shadow-xs);cursor:pointer;display:flex;font-size:11.5px;font-weight:800;gap:7px;left:calc(50% + 24px);padding:5px 12px;position:absolute;top:50%;transform:translateY(-50%);white-space:nowrap}.sld-loss--danger[data-v-cf5f48fe]{background:var(--danger-soft);border-color:color-mix(in srgb,var(--danger) 40%,transparent);color:var(--danger)}.sld-loss--warning[data-v-cf5f48fe]{background:var(--warning-soft);border-color:color-mix(in srgb,var(--warning) 40%,transparent);color:var(--warning)}.sld-pass[data-v-cf5f48fe]{color:var(--text-3);font-size:11px;font-weight:600;left:calc(50% + 24px);position:absolute;top:50%;transform:translateY(-50%);white-space:nowrap}.sld-cust[data-v-cf5f48fe]{background:linear-gradient(145deg,#1f1c17,#12100d);border-radius:14px;color:#f5f3ef;display:grid;grid-template-columns:44px minmax(0,1fr) auto;max-width:600px;overflow:hidden;padding:16px 18px;width:100%;grid-gap:14px;align-items:center;box-shadow:var(--shadow-md);gap:14px}.sld-cust[data-v-cf5f48fe],.sld-cust[data-v-cf5f48fe]>:not(.ie-layer){position:relative}.sld-cust-ico[data-v-cf5f48fe]{align-items:center;background:var(--primary);border-radius:12px;color:var(--on-primary);display:flex;height:44px;justify-content:center;width:44px}.sld-cust-label[data-v-cf5f48fe]{color:hsla(0,0%,100%,.55);font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}.sld-cust-sub[data-v-cf5f48fe]{color:hsla(0,0%,100%,.75);font-size:12.5px;font-weight:600;margin-top:3px}.sld-cust-val[data-v-cf5f48fe]{color:var(--primary);font-size:24px;font-weight:700;letter-spacing:-.8px}.sld-cust-unit[data-v-cf5f48fe]{color:hsla(0,0%,100%,.55);font-size:10.5px;font-weight:700}.sld-note[data-v-cf5f48fe]{align-items:center;color:var(--text-3);display:flex;font-size:11.5px;font-weight:600;gap:8px;margin-top:14px;max-width:600px;position:relative;width:100%}.flow-side[data-v-cf5f48fe]{display:flex;flex-direction:column;gap:12px;min-width:0;position:sticky;top:78px}.side-card[data-v-cf5f48fe]{border-radius:16px;padding:16px 18px}.side-label[data-v-cf5f48fe]{color:var(--text-2);font-size:11.5px;font-weight:700}.side-val[data-v-cf5f48fe]{font-size:26px;font-weight:700;letter-spacing:-1px;margin-top:6px}.side-unit[data-v-cf5f48fe]{color:var(--text-3);font-size:11.5px;font-weight:600}.stage-kicker[data-v-cf5f48fe]{color:var(--danger);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}.stage-title[data-v-cf5f48fe]{font-size:14px;font-weight:800;letter-spacing:-.2px;margin-top:3px}.stage-share[data-v-cf5f48fe]{color:var(--text-3);font-size:11px;font-weight:600;margin:4px 0 8px}.stage-row[data-v-cf5f48fe]{border-bottom:1.5px dotted var(--border-strong);display:flex;font-size:12px;font-weight:700;gap:10px;justify-content:space-between;padding:9px 0}.stage-hint[data-v-cf5f48fe],.stage-row span[data-v-cf5f48fe]{color:var(--text-2)}.stage-hint[data-v-cf5f48fe]{align-items:flex-start;background:var(--surface-2);border:1px dashed var(--border-strong);border-radius:14px;display:flex;font-size:12px;font-weight:600;gap:10px;line-height:1.5;padding:14px 16px}@media (max-width:1000px){.flow-layout[data-v-cf5f48fe]{grid-template-columns:1fr}.flow-side[data-v-cf5f48fe]{position:static}}@media (max-width:640px){.sld[data-v-cf5f48fe]{padding:18px 12px}.sld-node[data-v-cf5f48fe]{grid-template-columns:1fr}.sld-node .ie-ico[data-v-cf5f48fe]{display:none}.sld-energy[data-v-cf5f48fe]{text-align:left}.sld-loss[data-v-cf5f48fe],.sld-pass[data-v-cf5f48fe]{font-size:10.5px;left:auto;right:0}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -836,148 +130,434 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 155:
+/***/ 189:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/energy_flow_diagram.vue?vue&type=template&id=19490b90&scoped=true
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/energy_flow_diagram.vue?vue&type=template&id=cf5f48fe&scoped=true
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c('div', {
-    staticClass: "dashboard-wrapper"
-  }, [_c('SideNav'), _vm._ssrNode(" "), _vm._ssrNode("<main class=\"main-content\" data-v-19490b90>", "</main>", [_vm._ssrNode("<div class=\"avail-header\" data-v-19490b90><h5 class=\"avail-title\" data-v-19490b90>Energy Flow Diagram</h5></div> " + (_vm.error ? "<div class=\"flow-error\" data-v-19490b90>" + _vm._ssrEscape("\n            Couldn't load live data: " + _vm._s(_vm.error) + "\n            ") + "<button class=\"flow-retry\" data-v-19490b90>Retry</button></div>" : "<!---->") + " "), _vm._ssrNode("<div class=\"card-panel flow-panel\" data-v-19490b90>", "</div>", [_c('LoadingOverlay', {
+  return _c('div', [_c('PageHeader', {
     attrs: {
-      "visible": _vm.loading
+      "page": "flow",
+      "loading": _vm.loading
     }
-  }), _vm._ssrNode(" <div class=\"flow-path-row\" data-v-19490b90><p class=\"flow-path-desc\" data-v-19490b90>Select a Transmission Station to begin — each choice narrows the next step.</p> " + (_vm.hasStarted ? "<button type=\"button\" class=\"flow-reset-btn\" data-v-19490b90><i class=\"material-icons tiny\" data-v-19490b90>replay</i> Reset\n                </button>" : "<!---->") + "</div> "), _vm._ssrNode("<div class=\"flow-scroll\" data-v-19490b90>", "</div>", [_c('FlowDiagramCanvas', {
-    ref: "canvas"
-  }, [_c('FlowLane', {
-    key: _vm.resetKey,
+  }, [_c('FilterSelect', {
     attrs: {
-      "mode": "level",
-      "level": 0,
-      "node-list": [_vm.tsTree],
-      "path-key": "",
-      "connector-api": _vm.connectorApi,
-      "flow-data": _vm.flowData,
-      "on-filter-change": _vm.onFilterChange,
-      "dt-name-index": _vm.dtNameIndex,
-      "request-dt-names": _vm.ensureDtNames
+      "label": "DT type",
+      "icon": "dt",
+      "options": ['All', 'Public', 'Private']
     },
     on: {
-      "change": _vm.onRootChange
+      "change": _vm.fetchFlow
+    },
+    model: {
+      value: _vm.dtType,
+      callback: function ($$v) {
+        _vm.dtType = $$v;
+      },
+      expression: "dtType"
     }
-  })], 1)], 1)], 2)], 2)], 2);
+  })], 1), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"ie-page\" data-v-cf5f48fe>", "</div>", [_vm.error ? _vm._ssrNode("<div class=\"ie-error\" data-v-cf5f48fe>", "</div>", [_c('Icon', {
+    attrs: {
+      "name": "alert",
+      "size": 16
+    }
+  }), _vm._ssrNode(_vm._ssrEscape("Couldn't load live data: " + _vm._s(_vm.error) + "\n            ") + "<button class=\"ie-btn\" data-v-cf5f48fe>Retry</button>")], 2) : _vm._e(), _vm._ssrNode(" "), _vm.loading && !_vm.flowData ? _c('SkeletonPage') : _c('div', {
+    staticClass: "flow-layout ie-fadein"
+  }, [_c('div', {
+    staticClass: "ie-card ie-card--flush flow-main"
+  }, [_c('div', {
+    staticClass: "ie-card-head"
+  }, [_c('div', [_c('div', {
+    staticClass: "ie-card-title",
+    staticStyle: {
+      "font-size": "15.5px"
+    }
+  }, [_vm._v("Single-line diagram")]), _vm._v(" "), _c('div', {
+    staticClass: "ie-card-sub"
+  }, [_vm._v("Pick an asset at any level to follow its energy down the network")])]), _vm._v(" "), _vm.hasSelection ? _c('button', {
+    staticClass: "ie-btn",
+    on: {
+      "click": _vm.resetFlow
+    }
+  }, [_c('Icon', {
+    attrs: {
+      "name": "x",
+      "size": 15
+    }
+  }), _vm._v("Clear selections")], 1) : _vm._e()]), _vm._v(" "), _c('div', {
+    staticClass: "sld"
+  }, [_c('div', {
+    staticClass: "pt-circuit ie-layer",
+    staticStyle: {
+      "color": "var(--text-3)",
+      "opacity": ".05"
+    }
+  }), _vm._v(" "), _vm._l(_vm.nodes, function (n, i) {
+    return _c('div', {
+      key: n.key,
+      staticClass: "sld-step"
+    }, [_c('div', {
+      staticClass: "sld-node",
+      class: {
+        picked: !String(n.selected).startsWith('All'),
+        open: _vm.openStage === i
+      }
+    }, [_c('span', {
+      staticClass: "ie-ico ie-ico--lg",
+      class: 'tone-' + n.tone
+    }, [_c('Icon', {
+      attrs: {
+        "name": n.icon,
+        "size": 20
+      }
+    })], 1), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "min-width": "0"
+      }
+    }, [_c('div', {
+      staticClass: "sld-level"
+    }, [_c('span', [_vm._v(_vm._s(n.label))]), _vm._v(" "), _c('span', {
+      staticClass: "sld-count mono"
+    }, [_vm._v(_vm._s(n.count))])]), _vm._v(" "), _c('div', {
+      staticStyle: {
+        "margin-top": "5px"
+      }
+    }, [_c('FilterSelect', {
+      attrs: {
+        "compact": "",
+        "block": "",
+        "value": n.selected,
+        "options": n.options,
+        "searchable": true,
+        "pop-width": "280px"
+      },
+      on: {
+        "change": v => _vm.pick(i, v)
+      }
+    })], 1)]), _vm._v(" "), _c('div', {
+      staticClass: "sld-energy"
+    }, [_c('div', {
+      staticClass: "mono sld-energy-val",
+      class: {
+        updating: n.key === 'dts' && _vm.dtLoading
+      }
+    }, [_vm._v(_vm._s(_vm.fmt(n.energy)))]), _vm._v(" "), _c('div', {
+      staticClass: "sld-energy-unit"
+    }, [_vm._v("MWh in")])])]), _vm._v(" "), _c('div', {
+      staticClass: "sld-bus"
+    }, [_c('div', {
+      staticClass: "ie-bus",
+      style: {
+        width: n.busW,
+        backgroundColor: n.busColor
+      }
+    }), _vm._v(" "), _c('span', {
+      staticClass: "sld-arrow",
+      style: {
+        borderTopColor: n.busColor
+      }
+    }), _vm._v(" "), n.lossMwh > 0 ? _c('button', {
+      staticClass: "sld-loss",
+      class: 'sld-loss--' + n.lossTone,
+      attrs: {
+        "title": "See this step's loss breakdown"
+      },
+      on: {
+        "click": function ($event) {
+          _vm.openStage = _vm.openStage === i ? null : i;
+        }
+      }
+    }, [_c('Icon', {
+      attrs: {
+        "name": "loss",
+        "size": 14
+      }
+    }), _vm._v("−" + _vm._s(_vm.fmt(n.lossMwh)) + " MWh · " + _vm._s(n.lossPct.toFixed(1)) + "%\n                            ")], 1) : _c('span', {
+      staticClass: "sld-pass"
+    }, [_vm._v("pass-through · not metered")])])]);
+  }), _vm._v(" "), _c('div', {
+    staticClass: "sld-cust"
+  }, [_c('div', {
+    staticClass: "pt-circuit ie-layer",
+    staticStyle: {
+      "color": "var(--primary)",
+      "opacity": ".1"
+    }
+  }), _vm._v(" "), _c('span', {
+    staticClass: "sld-cust-ico"
+  }, [_c('Icon', {
+    attrs: {
+      "name": "users",
+      "size": 20
+    }
+  })], 1), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "min-width": "0"
+    }
+  }, [_c('div', {
+    staticClass: "sld-cust-label"
+  }, [_vm._v("Customers")]), _vm._v(" "), _c('div', {
+    staticClass: "sld-cust-sub ie-ellip"
+  }, [_vm._v(_vm._s(_vm.custSub))])]), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "text-align": "right"
+    }
+  }, [_c('div', {
+    staticClass: "mono sld-cust-val"
+  }, [_vm._v(_vm._s(_vm.fmt(_vm.cust.total_customers)))]), _vm._v(" "), _c('div', {
+    staticClass: "sld-cust-unit"
+  }, [_vm._v("customers")])])]), _vm._v(" "), _c('div', {
+    staticClass: "sld-note"
+  }, [_c('Icon', {
+    attrs: {
+      "name": "info",
+      "size": 14
+    }
+  }), _vm._v("Only TS, transformer, 33 kV feeder and DT picks refine the figures — the API has no filter for the levels in between.")], 1)], 2)]), _vm._v(" "), _c('div', {
+    staticClass: "flow-side"
+  }, [_c('div', {
+    staticClass: "ie-card side-card"
+  }, [_c('div', {
+    staticClass: "side-label"
+  }, [_vm._v("Injected at transmission")]), _vm._v(" "), _c('div', {
+    staticClass: "mono side-val"
+  }, [_vm._v(_vm._s(_vm.fmt(_vm.injected)))]), _vm._v(" "), _c('div', {
+    staticClass: "side-unit"
+  }, [_vm._v("MWh")])]), _vm._v(" "), _c('div', {
+    staticClass: "ie-card ie-card--danger side-card"
+  }, [_c('div', {
+    staticClass: "ie-diag ie-layer",
+    staticStyle: {
+      "color": "var(--danger)",
+      "opacity": ".06"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "side-label"
+  }, [_vm._v("Lost across the chain")]), _vm._v(" "), _c('div', {
+    staticClass: "mono side-val",
+    staticStyle: {
+      "color": "var(--danger)"
+    }
+  }, [_vm._v(_vm._s(_vm.fmt(_vm.chainLoss)))]), _vm._v(" "), _c('div', {
+    staticClass: "side-unit"
+  }, [_vm._v("MWh · " + _vm._s(_vm.pctText(_vm.chainLossPct)) + " of injected")])]), _vm._v(" "), _c('div', {
+    staticClass: "ie-hero side-card",
+    staticStyle: {
+      "padding": "16px 18px"
+    }
+  }, [_c('div', {
+    staticStyle: {
+      "font-size": "11.5px",
+      "font-weight": "800"
+    }
+  }, [_vm._v("Reached customers")]), _vm._v(" "), _c('div', {
+    staticClass: "mono side-val"
+  }, [_vm._v(_vm._s(_vm.fmt(_vm.cust.total_energy_mwh)))]), _vm._v(" "), _c('div', {
+    staticStyle: {
+      "font-size": "11.5px",
+      "font-weight": "700",
+      "opacity": ".8"
+    }
+  }, [_vm._v("MWh · " + _vm._s(_vm.pctText(_vm.efficiency)) + " end-to-end")])]), _vm._v(" "), _vm.stage ? _c('div', {
+    staticClass: "ie-card side-card ie-fadeup"
+  }, [_c('div', {
+    staticStyle: {
+      "display": "flex",
+      "align-items": "flex-start",
+      "justify-content": "space-between",
+      "gap": "10px"
+    }
+  }, [_c('div', [_c('div', {
+    staticClass: "stage-kicker"
+  }, [_vm._v(_vm._s(_vm.stage.from) + " → " + _vm._s(_vm.stage.to))]), _vm._v(" "), _c('div', {
+    staticClass: "stage-title"
+  }, [_vm._v("Step loss")])]), _vm._v(" "), _c('button', {
+    staticClass: "ie-icon-btn",
+    staticStyle: {
+      "width": "28px",
+      "height": "28px"
+    },
+    attrs: {
+      "aria-label": "Close"
+    },
+    on: {
+      "click": function ($event) {
+        _vm.openStage = null;
+      }
+    }
+  }, [_c('Icon', {
+    attrs: {
+      "name": "x",
+      "size": 15
+    }
+  })], 1)]), _vm._v(" "), _c('div', {
+    staticClass: "stage-share"
+  }, [_vm._v(_vm._s(_vm.pctText(_vm.stage.share)) + " of everything lost between transmission and customer")]), _vm._v(" "), _c('div', {
+    staticClass: "stage-row"
+  }, [_c('span', [_vm._v("Energy in")]), _c('b', {
+    staticClass: "mono"
+  }, [_vm._v(_vm._s(_vm.fmt(_vm.stage.energy)) + " MWh")])]), _vm._v(" "), _c('div', {
+    staticClass: "stage-row"
+  }, [_c('span', [_vm._v("Passed on")]), _c('b', {
+    staticClass: "mono"
+  }, [_vm._v(_vm._s(_vm.fmt(_vm.stage.out)) + " MWh")])]), _vm._v(" "), _c('div', {
+    staticClass: "stage-row"
+  }, [_c('span', [_vm._v("Lost")]), _c('b', {
+    staticClass: "mono",
+    staticStyle: {
+      "color": "var(--danger)"
+    }
+  }, [_vm._v(_vm._s(_vm.fmt(_vm.stage.lossMwh)) + " MWh")])]), _vm._v(" "), _c('div', {
+    staticClass: "ie-bar-row",
+    staticStyle: {
+      "margin-top": "12px"
+    }
+  }, [_c('span', {
+    staticStyle: {
+      "color": "var(--text-3)"
+    }
+  }, [_vm._v("Loss rate")]), _c('span', {
+    staticStyle: {
+      "color": "var(--danger)"
+    }
+  }, [_vm._v(_vm._s(_vm.stage.lossPct.toFixed(2)) + "%")])]), _vm._v(" "), _c('div', {
+    staticClass: "ie-track"
+  }, [_c('div', {
+    staticClass: "ie-fill",
+    style: {
+      width: Math.min(100, _vm.stage.lossPct) + '%',
+      background: 'var(--danger)'
+    }
+  })])]) : _c('div', {
+    staticClass: "stage-hint"
+  }, [_c('Icon', {
+    staticStyle: {
+      "color": "var(--danger)",
+      "margin-top": "1px"
+    },
+    attrs: {
+      "name": "loss",
+      "size": 14
+    }
+  }), _vm._v("\n                    Click a red loss marker on the diagram to see that step's breakdown.\n                ")], 1)])])], 2)], 2);
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/energy_flow_diagram.vue?vue&type=template&id=19490b90&scoped=true
+// CONCATENATED MODULE: ./pages/energy_flow_diagram.vue?vue&type=template&id=cf5f48fe&scoped=true
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.delete-all.js"
-var esnext_map_delete_all_js_ = __webpack_require__(61);
+var esnext_map_delete_all_js_ = __webpack_require__(65);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.every.js"
-var esnext_map_every_js_ = __webpack_require__(62);
+var esnext_map_every_js_ = __webpack_require__(66);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.filter.js"
-var esnext_map_filter_js_ = __webpack_require__(63);
+var esnext_map_filter_js_ = __webpack_require__(67);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.find.js"
-var esnext_map_find_js_ = __webpack_require__(64);
+var esnext_map_find_js_ = __webpack_require__(68);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.find-key.js"
-var esnext_map_find_key_js_ = __webpack_require__(65);
+var esnext_map_find_key_js_ = __webpack_require__(69);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.includes.js"
-var esnext_map_includes_js_ = __webpack_require__(66);
+var esnext_map_includes_js_ = __webpack_require__(70);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.key-of.js"
-var esnext_map_key_of_js_ = __webpack_require__(67);
+var esnext_map_key_of_js_ = __webpack_require__(71);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.map-keys.js"
-var esnext_map_map_keys_js_ = __webpack_require__(68);
+var esnext_map_map_keys_js_ = __webpack_require__(72);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.map-values.js"
-var esnext_map_map_values_js_ = __webpack_require__(69);
+var esnext_map_map_values_js_ = __webpack_require__(73);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.merge.js"
-var esnext_map_merge_js_ = __webpack_require__(70);
+var esnext_map_merge_js_ = __webpack_require__(74);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.reduce.js"
-var esnext_map_reduce_js_ = __webpack_require__(71);
+var esnext_map_reduce_js_ = __webpack_require__(75);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.some.js"
-var esnext_map_some_js_ = __webpack_require__(72);
+var esnext_map_some_js_ = __webpack_require__(76);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.map.update.js"
-var esnext_map_update_js_ = __webpack_require__(73);
+var esnext_map_update_js_ = __webpack_require__(77);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.add-all.js"
-var esnext_set_add_all_js_ = __webpack_require__(45);
+var esnext_set_add_all_js_ = __webpack_require__(49);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.delete-all.js"
-var esnext_set_delete_all_js_ = __webpack_require__(46);
+var esnext_set_delete_all_js_ = __webpack_require__(50);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.difference.js"
-var esnext_set_difference_js_ = __webpack_require__(47);
+var esnext_set_difference_js_ = __webpack_require__(51);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.every.js"
-var esnext_set_every_js_ = __webpack_require__(48);
+var esnext_set_every_js_ = __webpack_require__(52);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.filter.js"
-var esnext_set_filter_js_ = __webpack_require__(49);
+var esnext_set_filter_js_ = __webpack_require__(53);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.find.js"
-var esnext_set_find_js_ = __webpack_require__(50);
+var esnext_set_find_js_ = __webpack_require__(54);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.intersection.js"
-var esnext_set_intersection_js_ = __webpack_require__(51);
+var esnext_set_intersection_js_ = __webpack_require__(55);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.is-disjoint-from.js"
-var esnext_set_is_disjoint_from_js_ = __webpack_require__(52);
+var esnext_set_is_disjoint_from_js_ = __webpack_require__(56);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.is-subset-of.js"
-var esnext_set_is_subset_of_js_ = __webpack_require__(53);
+var esnext_set_is_subset_of_js_ = __webpack_require__(57);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.is-superset-of.js"
-var esnext_set_is_superset_of_js_ = __webpack_require__(54);
+var esnext_set_is_superset_of_js_ = __webpack_require__(58);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.join.js"
-var esnext_set_join_js_ = __webpack_require__(55);
+var esnext_set_join_js_ = __webpack_require__(59);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.map.js"
-var esnext_set_map_js_ = __webpack_require__(56);
+var esnext_set_map_js_ = __webpack_require__(60);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.reduce.js"
-var esnext_set_reduce_js_ = __webpack_require__(57);
+var esnext_set_reduce_js_ = __webpack_require__(61);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.some.js"
-var esnext_set_some_js_ = __webpack_require__(58);
+var esnext_set_some_js_ = __webpack_require__(62);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.symmetric-difference.js"
-var esnext_set_symmetric_difference_js_ = __webpack_require__(59);
+var esnext_set_symmetric_difference_js_ = __webpack_require__(63);
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.union.js"
-var esnext_set_union_js_ = __webpack_require__(60);
+var esnext_set_union_js_ = __webpack_require__(64);
 
-// EXTERNAL MODULE: ./components/SideNav/SideNav.vue + 4 modules
-var SideNav = __webpack_require__(78);
+// EXTERNAL MODULE: ./components/ui/Icon.vue + 2 modules
+var Icon = __webpack_require__(13);
 
-// EXTERNAL MODULE: ./components/LoadingOverlay.vue + 4 modules
-var LoadingOverlay = __webpack_require__(80);
+// EXTERNAL MODULE: ./components/ui/PageHeader.vue + 4 modules
+var PageHeader = __webpack_require__(87);
 
-// EXTERNAL MODULE: ./components/FlowDiagramCanvas.vue + 4 modules
-var FlowDiagramCanvas = __webpack_require__(114);
+// EXTERNAL MODULE: ./components/ui/FilterSelect.vue + 4 modules
+var FilterSelect = __webpack_require__(92);
+
+// EXTERNAL MODULE: ./components/ui/SkeletonPage.vue + 4 modules
+var SkeletonPage = __webpack_require__(95);
 
 // EXTERNAL MODULE: ./assets/data/ts_relationship.json
-var ts_relationship = __webpack_require__(135);
+var ts_relationship = __webpack_require__(155);
+
+// EXTERNAL MODULE: ./assets/js/energyFlowSim.js
+var energyFlowSim = __webpack_require__(125);
 
 // EXTERNAL MODULE: ./js_modules/controlCenterApi.js
-var controlCenterApi = __webpack_require__(87);
+var controlCenterApi = __webpack_require__(85);
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/energy_flow_diagram.vue?vue&type=script&lang=js
 
@@ -1014,103 +594,271 @@ var controlCenterApi = __webpack_require__(87);
 
 
 
-// The drill-down itself (TS -> Transformer -> 33kV Feeder -> ISS ->
-// Transformer 2 -> 11kV Incomer -> 11kV Outgoing Feeder -> DT -> Customer,
-// including the Path B "direct to DT" shortcut and its fork when a level's
-// "All" selection mixes both) lives in the recursive <FlowLane> component -
-// see components/FlowLane.vue. The numbers each card shows now come from
-// GET /energy-flow (see static/api_live_responses3.md #2 and the header
-// comment in assets/js/energyFlowSim.js for which levels are real filters).
 
+
+// The TS -> Customer chain as a vertical single-line diagram. Each level's dropdown is
+// narrowed by the picks above it using the static TS relationship tree
+// (assets/data/ts_relationship.json). Numbers come from GET /energy-flow (see
+// static/api_live_responses3.md #2) — only ts / transformer / feeder_33kva / dt / dt_type
+// are real API filters, so picks at ISS..11kV Outgoing only narrow the dropdowns below.
+
+const LEVELS = [{
+  label: 'Transmission stations',
+  icon: 'tower',
+  tone: 'soe',
+  unit: 'stations'
+}, {
+  label: 'Transformer capacity',
+  icon: 'cap',
+  tone: 'primary',
+  unit: 'transformers'
+}, {
+  label: '33 kV feeders',
+  icon: 'feeder',
+  tone: 'ca',
+  unit: 'feeders'
+}, {
+  label: 'Injection substations',
+  icon: 'station',
+  tone: 'accent',
+  unit: 'substations'
+}, {
+  label: 'Secondary transformers',
+  icon: 'cap',
+  tone: 'primary',
+  unit: 'transformers'
+}, {
+  label: '11 kV incomers',
+  icon: 'plug',
+  tone: 'soe',
+  unit: 'incomers'
+}, {
+  label: '11 kV outgoing feeders',
+  icon: 'feeder',
+  tone: 'ca',
+  unit: 'feeders'
+}];
+const SHORT = ['TS', 'Transformer', '33 kV', 'ISS', 'Transformer 2', 'Incomer', '11 kV', 'DT', 'Customer'];
 /* harmony default export */ var energy_flow_diagramvue_type_script_lang_js = ({
+  layout: 'dashboard',
   components: {
-    SideNav: SideNav["default"],
-    FlowDiagramCanvas: FlowDiagramCanvas["default"],
-    LoadingOverlay: LoadingOverlay["default"]
+    Icon: Icon["default"],
+    PageHeader: PageHeader["default"],
+    FilterSelect: FilterSelect["default"],
+    SkeletonPage: SkeletonPage["default"]
   },
   data() {
     return {
-      tsTree: ts_relationship,
-      resetKey: 0,
-      hasStarted: false,
-      connectorApi: null,
       loading: true,
       error: null,
       flowData: null,
-      // Only these three map to real /energy-flow query params - picking a new value at
-      // an earlier level clears the ones after it, mirroring the FlowLane :key reset that
-      // already happens visually when an ancestor selection changes.
-      tsSelected: 'All',
-      transformerSelected: 'All',
-      feeder33kvaSelected: 'All',
-      // Real DT names for the DT card - built once, on demand, from dt-availability/table
-      // (no endpoint lists DT names directly; that table's dt_name/feeder_name pairs are
-      // the closest real source - see the comment atop assets/js/energyFlowSim.js).
+      dtFlowData: null,
+      dtLoading: false,
+      dtType: 'All',
+      // One pick per tree level (TS .. 11kV Outgoing), plus the DT pick.
+      picks: LEVELS.map(() => 'All'),
+      dtPick: 'All DTs',
+      openStage: null,
+      // Real DT names, built once on demand from dt-availability/table (no endpoint lists
+      // DT names directly; that table's dt_name/feeder_name pairs are the closest source).
       dtNameIndex: null,
       dtNamesFetchStarted: false
     };
   },
+  computed: {
+    data() {
+      return this.dtFlowData || this.flowData || {};
+    },
+    // Tree nodes reachable at each depth given the picks above it.
+    levelNodes() {
+      const out = [];
+      let frontier = [ts_relationship];
+      for (let i = 0; i < LEVELS.length; i++) {
+        out.push(frontier);
+        const pick = this.picks[i];
+        const next = [];
+        frontier.forEach(n => {
+          Object.keys(n).forEach(k => {
+            if (pick === 'All' || pick === k) next.push(n[k]);
+          });
+        });
+        frontier = next;
+      }
+      return out;
+    },
+    nodes() {
+      const d = this.data;
+      const injected = this.injected || 0;
+      const list = LEVELS.map((lv, i) => {
+        const sec = d[energyFlowSim["e" /* LEVEL_RESPONSE_KEYS */][i]] || {};
+        const opts = new Set();
+        this.levelNodes[i].forEach(n => Object.keys(n).forEach(k => opts.add(k)));
+        return this.decorate({
+          key: energyFlowSim["e" /* LEVEL_RESPONSE_KEYS */][i],
+          ...lv,
+          count: Object(controlCenterApi["e" /* formatNumber */])(sec[energyFlowSim["c" /* LEVEL_COUNT_KEYS */][i]]) + ' ' + lv.unit,
+          options: ['All', ...Array.from(opts).sort()],
+          selected: this.picks[i],
+          sec
+        }, injected);
+      });
+      const dts = d.dts || {};
+      const pub = dts.total_public_dts || 0;
+      const priv = dts.total_private_dts || 0;
+      list.push(this.decorate({
+        key: 'dts',
+        label: 'Distribution transformers',
+        icon: 'dt',
+        tone: 'info',
+        count: `${Object(controlCenterApi["e" /* formatNumber */])(pub + priv)} · ${Object(controlCenterApi["e" /* formatNumber */])(pub)} public / ${Object(controlCenterApi["e" /* formatNumber */])(priv)} private`,
+        options: ['All DTs', ...this.dtOptions],
+        selected: this.dtPick,
+        sec: dts
+      }, injected));
+      return list;
+    },
+    dtOptions() {
+      if (!this.dtNameIndex) return [];
+      const feeder = this.picks[LEVELS.length - 1];
+      if (feeder !== 'All' && this.dtNameIndex.byFeeder.has(feeder)) {
+        return Array.from(this.dtNameIndex.byFeeder.get(feeder)).sort();
+      }
+      return this.dtNameIndex.all;
+    },
+    cust() {
+      return this.data.customer || {};
+    },
+    custSub() {
+      if (this.dtPick !== 'All DTs') return 'Served by ' + this.dtPick;
+      const last = [...this.picks].reverse().find(p => p !== 'All');
+      return last ? 'Downstream of ' + last : 'Across the whole network';
+    },
+    injected() {
+      const ts = this.data.ts || {};
+      return Number(ts.total_energy_mwh) || 0;
+    },
+    chainLoss() {
+      const out = Number(this.cust.total_energy_mwh);
+      return this.injected && Number.isFinite(out) ? this.injected - out : null;
+    },
+    chainLossPct() {
+      return this.injected && this.chainLoss != null ? this.chainLoss / this.injected * 100 : null;
+    },
+    efficiency() {
+      const out = Number(this.cust.total_energy_mwh);
+      return this.injected && Number.isFinite(out) ? out / this.injected * 100 : null;
+    },
+    stage() {
+      if (this.openStage === null) return null;
+      const n = this.nodes[this.openStage];
+      if (!n || !(n.lossMwh > 0)) return null;
+      return {
+        ...n,
+        from: SHORT[this.openStage],
+        to: SHORT[this.openStage + 1],
+        share: this.chainLoss ? n.lossMwh / this.chainLoss * 100 : null
+      };
+    },
+    hasSelection() {
+      return this.picks.some(p => p !== 'All') || this.dtPick !== 'All DTs';
+    }
+  },
   async mounted() {
-    this.connectorApi = this.$refs.canvas;
     await this.fetchFlow();
+    this.ensureDtNames();
   },
   methods: {
-    onRootChange(val) {
-      this.hasStarted = val !== '';
+    fmt(v) {
+      if (v === null || v === undefined || !Number.isFinite(Number(v))) return '—';
+      return Number(v).toLocaleString('en-US', {
+        maximumFractionDigits: 2
+      });
     },
-    onFilterChange({
-      level,
-      value
-    }) {
-      const v = value || 'All';
-      if (level === 0) {
-        this.tsSelected = v;
-        this.transformerSelected = 'All';
-        this.feeder33kvaSelected = 'All';
-      } else if (level === 1) {
-        this.transformerSelected = v;
-        this.feeder33kvaSelected = 'All';
-      } else if (level === 2) {
-        this.feeder33kvaSelected = v;
+    pctText(v) {
+      return v == null || !Number.isFinite(v) ? '—' : v.toFixed(1) + '%';
+    },
+    decorate(n, injected) {
+      const sec = n.sec || {};
+      const energy = Number(sec.total_energy_mwh);
+      const out = Number(sec.transmission_mwh);
+      const lossMwh = Number(sec.loss_mwh) || 0;
+      const lossPct = Number(sec.loss_pct) || 0;
+      const ratio = injected && Number.isFinite(out) ? Math.max(0, Math.min(1, out / injected)) : 1;
+      return {
+        ...n,
+        energy: Number.isFinite(energy) ? energy : null,
+        out: Number.isFinite(out) ? out : null,
+        lossMwh,
+        lossPct,
+        lossTone: lossPct >= 15 ? 'danger' : 'warning',
+        busW: (6 + ratio * 28).toFixed(1) + 'px',
+        busColor: lossMwh > 0 ? 'color-mix(in srgb, var(--primary) 70%, var(--danger))' : 'var(--primary)'
+      };
+    },
+    pick(level, value) {
+      this.openStage = null;
+      if (level === LEVELS.length) {
+        this.dtPick = value;
+        this.fetchDtFlow();
+        return;
       }
-      this.fetchFlow();
+      const picks = this.picks.slice();
+      picks[level] = value;
+      for (let i = level + 1; i < picks.length; i++) picks[i] = 'All';
+      this.picks = picks;
+      this.dtPick = 'All DTs';
+      this.dtFlowData = null;
+      if (level < energyFlowSim["a" /* FILTERABLE_LEVEL_COUNT */]) this.fetchFlow();
     },
     async fetchFlow() {
       this.loading = true;
       this.error = null;
       try {
-        this.flowData = await Object(controlCenterApi["n" /* getEnergyFlow */])({
-          ts: this.tsSelected,
-          transformer: this.transformerSelected,
-          feeder_33kva: this.feeder33kvaSelected,
+        this.flowData = await Object(controlCenterApi["k" /* getEnergyFlow */])({
+          ts: this.picks[0],
+          transformer: this.picks[1],
+          feeder_33kva: this.picks[2],
           dt: 'All',
-          dt_type: 'All'
+          dt_type: this.dtType
         });
+        if (this.dtPick !== 'All DTs') await this.fetchDtFlow();
       } catch (err) {
         this.error = err.message || 'Failed to load energy flow data';
       } finally {
         this.loading = false;
       }
     },
-    resetFlow() {
-      this.resetKey++;
-      this.hasStarted = false;
-      this.tsSelected = 'All';
-      this.transformerSelected = 'All';
-      this.feeder33kvaSelected = 'All';
-      this.fetchFlow();
-      this.$nextTick(() => {
-        if (this.$refs.scrollBox) {
-          this.$refs.scrollBox.scrollLeft = 0;
-          this.$refs.scrollBox.scrollTop = 0;
-        }
-      });
+    async fetchDtFlow() {
+      if (this.dtPick === 'All DTs') {
+        this.dtFlowData = null;
+        return;
+      }
+      this.dtLoading = true;
+      try {
+        this.dtFlowData = await Object(controlCenterApi["k" /* getEnergyFlow */])({
+          ts: this.picks[0],
+          transformer: this.picks[1],
+          feeder_33kva: this.picks[2],
+          dt: this.dtPick,
+          dt_type: this.dtType
+        });
+      } catch (err) {
+        // Non-critical — falls back to the dt=All aggregate.
+        console.error('[energy_flow_diagram] failed to load DT-specific energy flow', err);
+        this.dtFlowData = null;
+      } finally {
+        this.dtLoading = false;
+      }
     },
-    // Fetches every page of dt-availability/table once (it has no feeder filter, so there's
-    // no way to ask the server for just one feeder's DTs) and indexes dt_name by
-    // feeder_name, so DT cards can show real names instead of faking them. Triggered
-    // lazily by the first DT card that mounts (FlowLane's requestDtNames prop), not
-    // eagerly on page load, since a user may never drill that deep.
+    resetFlow() {
+      this.picks = LEVELS.map(() => 'All');
+      this.dtPick = 'All DTs';
+      this.dtFlowData = null;
+      this.openStage = null;
+      this.fetchFlow();
+    },
+    // Fetches every page of dt-availability/table once (it has no feeder filter) and
+    // indexes dt_name by feeder_name, so the DT dropdown can list real names.
     async ensureDtNames() {
       if (this.dtNamesFetchStarted) return;
       this.dtNamesFetchStarted = true;
@@ -1128,7 +876,7 @@ var controlCenterApi = __webpack_require__(87);
         });
       };
       try {
-        const first = await Object(controlCenterApi["l" /* getDtAvailabilityTable */])({
+        const first = await Object(controlCenterApi["i" /* getDtAvailabilityTable */])({
           dt_name: 'All',
           page: 1,
           page_size: pageSize
@@ -1137,7 +885,7 @@ var controlCenterApi = __webpack_require__(87);
         const totalPages = Math.min(first.total_pages || 1, 50);
         const rest = await Promise.all(Array.from({
           length: Math.max(0, totalPages - 1)
-        }, (_, i) => Object(controlCenterApi["l" /* getDtAvailabilityTable */])({
+        }, (_, i) => Object(controlCenterApi["i" /* getDtAvailabilityTable */])({
           dt_name: 'All',
           page: i + 2,
           page_size: pageSize
@@ -1148,7 +896,7 @@ var controlCenterApi = __webpack_require__(87);
           all: Array.from(all).sort()
         };
       } catch (err) {
-        // Non-critical - DT cards just show "All DTs" only (no name list) if this fails.
+        // Non-critical — the DT dropdown just offers "All DTs" if this fails.
         console.error('[energy_flow_diagram] failed to build DT name index', err);
         this.dtNamesFetchStarted = false;
       }
@@ -1166,7 +914,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(136)
+  var style0 = __webpack_require__(156)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1179,259 +927,34 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "19490b90",
+  "cf5f48fe",
   "1fc1aef5"
   
 )
 
 /* harmony default export */ var energy_flow_diagram = __webpack_exports__["default"] = (component.exports);
 
-/* nuxt-component-imports */
-installComponents(component, {SideNav: __webpack_require__(78).default,LoadingOverlay: __webpack_require__(80).default,FlowLane: __webpack_require__(103).default,FlowDiagramCanvas: __webpack_require__(114).default})
-
-
 /***/ }),
 
-/***/ 75:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "img/logo.d2f3c61.png";
-
-/***/ }),
-
-/***/ 76:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ThemeToggle.vue?vue&type=template&id=2e254ded
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('client-only', {
-    scopedSlots: _vm._u([{
-      key: "placeholder",
-      fn: function () {
-        return [_c('button', {
-          staticClass: "theme-toggle-btn",
-          attrs: {
-            "type": "button",
-            "disabled": ""
-          }
-        }, [_c('i', {
-          staticClass: "material-icons"
-        }, [_vm._v("dark_mode")]), _vm._v(" "), _c('span', [_vm._v("Dark mode")])])];
-      },
-      proxy: true
-    }])
-  }, [_c('button', {
-    staticClass: "theme-toggle-btn",
-    attrs: {
-      "type": "button"
-    },
-    on: {
-      "click": function ($event) {
-        return _vm.$theme.toggle();
-      }
-    }
-  }, [_c('i', {
-    staticClass: "material-icons"
-  }, [_vm._v(_vm._s(_vm.$theme.isDark ? 'light_mode' : 'dark_mode'))]), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.$theme.isDark ? 'Light mode' : 'Dark mode'))])])]);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/ThemeToggle.vue?vue&type=template&id=2e254ded
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ThemeToggle.vue?vue&type=script&lang=js
-/* harmony default export */ var ThemeTogglevue_type_script_lang_js = ({
-  name: 'ThemeToggle'
-});
-// CONCATENATED MODULE: ./components/ThemeToggle.vue?vue&type=script&lang=js
- /* harmony default export */ var components_ThemeTogglevue_type_script_lang_js = (ThemeTogglevue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./components/ThemeToggle.vue
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_ThemeTogglevue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  "37bdce66"
-  
-)
-
-/* harmony default export */ var ThemeToggle = __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ 77:
+/***/ 79:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(84);
+var content = __webpack_require__(83);
 if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(4).default
 module.exports.__inject__ = function (context) {
-  add("3fada58a", content, true, context)
+  add("bc765b12", content, true, context)
 };
 
 /***/ }),
 
-/***/ 78:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=template&id=8411a820&scoped=true
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('div', [_vm._ssrNode("<ul id=\"slide-out\" class=\"sidenav sidenav-fixed z-depth-0\" data-v-8411a820>", "</ul>", [_vm._ssrNode("<li class=\"logo-container center-align\" data-v-8411a820><img" + _vm._ssrAttr("src", __webpack_require__(75)) + " alt=\"Logo\" class=\"responsive-img\" style=\"width: 60px; margin-top: 20px;\" data-v-8411a820></li> "), _vm._ssrNode("<li class=\"theme-toggle-container\" data-v-8411a820>", "</li>", [_c('ThemeToggle')], 1), _vm._ssrNode(" "), _vm._l(_vm.menuItems, function (item) {
-    return _vm._ssrNode("<li" + _vm._ssrClass(null, {
-      active: _vm.isActive(item)
-    }) + " data-v-8411a820>", "</li>", [_c('nuxt-link', {
-      class: {
-        'red-text text-darken-2': _vm.isActive(item)
-      },
-      attrs: {
-        "to": item.url
-      }
-    }, [_c('i', {
-      staticClass: "material-icons"
-    }, [_vm._v(_vm._s(item.icon))]), _vm._v(" "), _c('b', {
-      staticStyle: {
-        "font-weight": "500",
-        "font-size": "10px"
-      }
-    }, [_vm._v("\n                    " + _vm._s(item.title) + "\n                ")])])], 1);
-  }), _vm._ssrNode(" "), _vm._ssrNode("<li data-v-8411a820>", "</li>", [_c('nuxt-link', {
-    staticClass: "red-text",
-    attrs: {
-      "to": "/"
-    }
-  }, [_c('i', {
-    staticClass: "material-icons"
-  }, [_vm._v("lock")]), _vm._v(" "), _c('b', {
-    staticStyle: {
-      "font-weight": "500",
-      "font-size": "10px"
-    }
-  }, [_vm._v("\n                    Logout\n                ")])])], 1)], 2)]);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=template&id=8411a820&scoped=true
-
-// EXTERNAL MODULE: ./components/ThemeToggle.vue + 4 modules
-var ThemeToggle = __webpack_require__(76);
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/SideNav/SideNav.vue?vue&type=script&lang=js
-
-/* harmony default export */ var SideNavvue_type_script_lang_js = ({
-  name: 'SideNav',
-  components: {
-    ThemeToggle: ThemeToggle["default"]
-  },
-  data() {
-    return {
-      menuItems: [{
-        title: 'End-To-End Energy Dashboard',
-        icon: 'dashboard',
-        url: '/end_to_end_energy_dashboard'
-      }, {
-        title: 'Energy Flow Diagram',
-        icon: 'dashboard',
-        url: '/energy_flow_diagram'
-      }, {
-        title: 'Control Center Dashboard',
-        icon: 'dashboard',
-        url: '/control_center_dashboard'
-      }, {
-        title: 'Availability Summary',
-        icon: 'dashboard',
-        url: '/availability_summary'
-      }, {
-        title: 'DT Availability',
-        icon: 'dashboard',
-        url: '/dt_availability'
-      }, {
-        title: 'MYTO Dashboard',
-        icon: 'dashboard',
-        url: '/myto_dashboard'
-      }, {
-        title: 'IDB Dashboard',
-        icon: 'dashboard',
-        url: '/idb_dashboard'
-      }, {
-        title: 'IDB Events',
-        icon: 'dashboard',
-        url: '/idb_events'
-      }]
-    };
-  },
-  methods: {
-    isActive(item) {
-      return this.$route.path === item.url;
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/SideNav/SideNav.vue?vue&type=script&lang=js
- /* harmony default export */ var SideNav_SideNavvue_type_script_lang_js = (SideNavvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./components/SideNav/SideNav.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(83)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  SideNav_SideNavvue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "8411a820",
-  "0f3f648e"
-  
-)
-
-/* harmony default export */ var SideNav = __webpack_exports__["default"] = (component.exports);
-
-/* nuxt-component-imports */
-installComponents(component, {ThemeToggle: __webpack_require__(76).default})
-
-
-/***/ }),
-
-/***/ 79:
+/***/ 80:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
@@ -1444,177 +967,49 @@ if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
 var add = __webpack_require__(4).default
 module.exports.__inject__ = function (context) {
-  add("6881e304", content, true, context)
+  add("704eab78", content, true, context)
 };
 
 /***/ }),
 
-/***/ 80:
+/***/ 81:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(94);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add CSS to SSR context
+var add = __webpack_require__(4).default
+module.exports.__inject__ = function (context) {
+  add("4d7f107a", content, true, context)
+};
+
+/***/ }),
+
+/***/ 82:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PageHeader_vue_vue_type_style_index_0_id_3404a146_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(79);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PageHeader_vue_vue_type_style_index_0_id_3404a146_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PageHeader_vue_vue_type_style_index_0_id_3404a146_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PageHeader_vue_vue_type_style_index_0_id_3404a146_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PageHeader_vue_vue_type_style_index_0_id_3404a146_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/LoadingOverlay.vue?vue&type=template&id=702659cf&scoped=true
-var render = function render() {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c('transition', {
-    attrs: {
-      "name": "loading-overlay-fade"
-    }
-  }, [_vm.visible ? _c('div', {
-    staticClass: "loading-overlay"
-  }, [_c('svg', {
-    staticClass: "waves-svg",
-    attrs: {
-      "xmlns": "http://www.w3.org/2000/svg",
-      "viewBox": "0 0 1200 600",
-      "preserveAspectRatio": "xMidYMid slice"
-    }
-  }, [_c('path', {
-    staticClass: "e-wave w1",
-    attrs: {
-      "d": "M 0,300 C 50,220 100,380 150,300 C 200,220 250,380 300,300 C 350,220 400,380 450,300\n                   C 500,220 550,380 600,300 C 650,220 700,380 750,300 C 800,220 850,380 900,300\n                   C 950,220 1000,380 1050,300 C 1100,220 1150,380 1200,300\n                   C 1250,220 1300,380 1350,300 C 1400,220 1450,380 1500,300\n                   C 1550,220 1600,380 1650,300 C 1700,220 1750,380 1800,300\n                   C 1850,220 1900,380 1950,300 C 2000,220 2050,380 2100,300",
-      "fill": "none",
-      "stroke": "#00d4ff",
-      "stroke-width": "2.5"
-    }
-  }), _vm._v(" "), _c('path', {
-    staticClass: "e-wave w2",
-    attrs: {
-      "d": "M 0,340 C 50,270 100,410 150,340 C 200,270 250,410 300,340 C 350,270 400,410 450,340\n                   C 500,270 550,410 600,340 C 650,270 700,410 750,340 C 800,270 850,410 900,340\n                   C 950,270 1000,410 1050,340 C 1100,270 1150,410 1200,340\n                   C 1250,270 1300,410 1350,340 C 1400,270 1450,410 1500,340\n                   C 1550,270 1600,410 1650,340 C 1700,270 1750,410 1800,340\n                   C 1850,270 1900,410 1950,340 C 2000,270 2050,410 2100,340",
-      "fill": "none",
-      "stroke": "#5b7cfa",
-      "stroke-width": "1.8"
-    }
-  }), _vm._v(" "), _c('path', {
-    staticClass: "e-wave w3",
-    attrs: {
-      "d": "M 0,260 C 50,190 100,330 150,260 C 200,190 250,330 300,260 C 350,190 400,330 450,260\n                   C 500,190 550,330 600,260 C 650,190 700,330 750,260 C 800,190 850,330 900,260\n                   C 950,190 1000,330 1050,260 C 1100,190 1150,330 1200,260\n                   C 1250,190 1300,330 1350,260 C 1400,190 1450,330 1500,260\n                   C 1550,190 1600,330 1650,260 C 1700,190 1750,330 1800,260\n                   C 1850,190 1900,330 1950,260 C 2000,190 2050,330 2100,260",
-      "fill": "none",
-      "stroke": "#c87dff",
-      "stroke-width": "1.2"
-    }
-  }), _vm._v(" "), _c('path', {
-    staticClass: "e-wave w4",
-    attrs: {
-      "d": "M 0,400 C 50,340 100,460 150,400 C 200,340 250,460 300,400 C 350,340 400,460 450,400\n                   C 500,340 550,460 600,400 C 650,340 700,460 750,400 C 800,340 850,460 900,400\n                   C 950,340 1000,460 1050,400 C 1100,340 1150,460 1200,400\n                   C 1250,340 1300,460 1350,400 C 1400,340 1450,460 1500,400\n                   C 1550,340 1600,460 1650,400 C 1700,340 1750,460 1800,400\n                   C 1850,340 1900,460 1950,400 C 2000,340 2050,460 2100,400",
-      "fill": "none",
-      "stroke": "#00d4ff",
-      "stroke-width": "0.8"
-    }
-  })]), _vm._v(" "), _c('span', {
-    staticClass: "spark sp1"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "spark sp2"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "spark sp3"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "spark sp4"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "spark sp5"
-  }), _vm._v(" "), _c('span', {
-    staticClass: "spark sp6"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "e-center"
-  }, [_c('div', {
-    staticClass: "e-ring r1"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "e-ring r2"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "e-ring r3"
-  }), _vm._v(" "), _c('div', {
-    staticClass: "logo-circle"
-  }, [_c('img', {
-    staticClass: "responsive-img",
-    staticStyle: {
-      "max-width": "70px",
-      "max-height": "70px"
-    },
-    attrs: {
-      "src": __webpack_require__(75),
-      "alt": ""
-    }
-  })]), _vm._v(" "), _c('p', {
-    staticClass: "e-brand"
-  }, [_vm._v(_vm._s(_vm.message))])])]) : _vm._e()]);
-};
-var staticRenderFns = [];
-
-// CONCATENATED MODULE: ./components/LoadingOverlay.vue?vue&type=template&id=702659cf&scoped=true
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/LoadingOverlay.vue?vue&type=script&lang=js
-// The login page's "electric panel" animation (logo, pulsing rings, scrolling waves), reused
-// as a loading overlay: same animation, but with a translucent background instead of an opaque
-// one so it overlays existing dashboard content rather than replacing it.
-/* harmony default export */ var LoadingOverlayvue_type_script_lang_js = ({
-  name: 'LoadingOverlay',
-  props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
-    message: {
-      type: String,
-      default: 'Loading live data…'
-    }
-  }
-});
-// CONCATENATED MODULE: ./components/LoadingOverlay.vue?vue&type=script&lang=js
- /* harmony default export */ var components_LoadingOverlayvue_type_script_lang_js = (LoadingOverlayvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(2);
-
-// CONCATENATED MODULE: ./components/LoadingOverlay.vue
-
-
-
-function injectStyles (context) {
-  
-  var style0 = __webpack_require__(88)
-if (style0.__inject__) style0.__inject__(context)
-
-}
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  components_LoadingOverlayvue_type_script_lang_js,
-  render,
-  staticRenderFns,
-  false,
-  injectStyles,
-  "702659cf",
-  "695f3a58"
-  
-)
-
-/* harmony default export */ var LoadingOverlay = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
 /***/ 83:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(77);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SideNav_vue_vue_type_style_index_0_id_8411a820_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ 84:
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".dashboard-wrapper[data-v-8411a820]{min-height:100vh}.dashboard-wrapper[data-v-8411a820],.sidenav[data-v-8411a820]{background-color:var(--bg-sidenav)}.sidenav[data-v-8411a820]{border-right:1px solid var(--border-color);width:260px}.sidenav li>a[data-v-8411a820]{align-items:center;display:flex;height:auto;line-height:1.3;min-height:48px;padding:10px 32px}.sidenav li>a>i.material-icons[data-v-8411a820]{flex-shrink:0;height:auto;line-height:1.3}.theme-toggle-container[data-v-8411a820]{padding:0 16px}.main-content[data-v-8411a820]{padding-left:280px;padding-right:20px;padding-top:20px}.stats-card[data-v-8411a820]{border-radius:12px;position:relative}.icon-circle[data-v-8411a820]{align-items:center;border-radius:50%;display:flex;height:50px;justify-content:center;margin-right:15px;width:50px}.stats-text .value[data-v-8411a820]{font-size:24px;font-weight:700}.stats-text p[data-v-8411a820]{font-size:12px;margin:0}.badge[data-v-8411a820]{border-radius:4px!important;position:absolute;right:15px;top:15px}.mini-chart-card[data-v-8411a820]{border-radius:12px;margin-bottom:10px}.tiny-text[data-v-8411a820]{font-size:11px;margin-bottom:5px}.border-right[data-v-8411a820]{border-right:1px solid var(--border-color)}.tabs[data-v-8411a820]{background:transparent;border-bottom:1px solid var(--border-strong);margin-bottom:20px}.tabs .tab a[data-v-8411a820]{color:var(--text-muted);text-transform:none}.tabs .tab a.active[data-v-8411a820]{border-bottom:2px solid #e91e63}@media only screen and (max-width:992px){.main-content[data-v-8411a820]{padding-left:20px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".ph[data-v-3404a146]{background:var(--surface);border-bottom:1px solid var(--border);position:relative;z-index:20}.ph-prog[data-v-3404a146]{background:color-mix(in srgb,var(--primary) 18%,transparent);height:2px;left:0;overflow:hidden;position:absolute;right:0;top:-1px;z-index:2}.ph-prog .ie-prog[data-v-3404a146]{background:var(--primary);border-radius:2px;height:100%;width:38%}.ph-pattern[data-v-3404a146]{bottom:0;left:0;opacity:.5;overflow:hidden;pointer-events:none;position:absolute;right:0;top:0}.ph-pattern>div[data-v-3404a146]{height:100%;opacity:.09;width:100%}.ph-photo[data-v-3404a146]{bottom:0;left:0;overflow:hidden;pointer-events:none}.ph-photo[data-v-3404a146],.ph-photo img[data-v-3404a146]{position:absolute;right:0;top:0}.ph-photo img[data-v-3404a146]{height:100%;-o-object-fit:cover;object-fit:cover;-o-object-position:center 58%;object-position:center 58%;width:64%}.ph-photo-fade[data-v-3404a146]{background:linear-gradient(90deg,var(--surface) 36%,color-mix(in srgb,var(--surface) 62%,transparent) 58%,color-mix(in srgb,var(--surface) 8%,transparent) 100%);bottom:0;left:0;position:absolute;right:0;top:0}.ph-inner[data-v-3404a146]{align-items:flex-start;display:flex;flex-direction:column;gap:16px;margin:0 auto;max-width:1460px;padding:22px 28px;position:relative}.ph-kicker[data-v-3404a146]{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}.ph-title[data-v-3404a146]{font-size:26px;font-weight:800;letter-spacing:-.9px;line-height:1.2;margin:5px 0 0}.ph-sub[data-v-3404a146]{color:var(--text-2);font-size:13px;margin-top:3px}.ph-filters[data-v-3404a146]{align-items:center;align-self:stretch;display:flex;flex-wrap:wrap;gap:9px}@media (max-width:720px){.ph-inner[data-v-3404a146]{padding:18px 16px}.ph-photo img[data-v-3404a146]{opacity:.35;width:100%}}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -1622,35 +1017,35 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 87:
+/***/ 85:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(URLSearchParams) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return openDatePicker; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return pick; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return formatNumber; });
+/* WEBPACK VAR INJECTION */(function(URLSearchParams) {/* unused harmony export openDatePicker */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return pick; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return formatNumber; });
 /* unused harmony export lastNMonths */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return monthLabel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return monthLabel; });
 /* unused harmony export lastNDays */
 /* unused harmony export dayLabel */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return todayStr; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return currentMonthStr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return todayStr; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return currentMonthStr; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return aggregateDailyTrend; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return formatPct; });
+/* unused harmony export formatPct */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BUSINESS_UNITS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FEEDER_BANDS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return bandColor; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return getEndToEndOverview; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return getEnergyFlow; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getControlCenterSummary; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getAvailabilitySummary; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getDtAvailabilityDashboard; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return getDtAvailabilityTable; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return getMytoSummary; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return getIdbDashboard; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return getIdbFeederDtLoss; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return getIdbCustomerDtLoss; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return buildTrendCallout; });
+/* unused harmony export bandColor */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return getEndToEndOverview; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return getEnergyFlow; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return getControlCenterSummary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getAvailabilitySummary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return getDtAvailabilityDashboard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return getDtAvailabilityTable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return getMytoSummary; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return getIdbDashboard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return getIdbFeederDtLoss; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return getIdbCustomerDtLoss; });
+/* unused harmony export buildTrendCallout */
 // Client for the streaming-dashboard-api Control Center backend.
 // See static/api_live_responses3.md for endpoint/field documentation and live response samples.
 // Endpoints are added here incrementally as each screen gets wired up.
@@ -1676,7 +1071,7 @@ function openDatePicker(e) {
     input.focus();
   }
 }
-const BASE_URL = "http://192.168.80.108:8090/api/v1";
+const BASE_URL = "http://10.50.32.108:8090/api/v1";
 function buildQuery(params = {}) {
   const search = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
@@ -1840,7 +1235,7 @@ const BUSINESS_UNITS = ['All', 'Oshodi', 'Shomolu', 'Akowonjo', 'Ikeja', 'Ikorod
 // feeders_by_band, myto/summary's band_compliance, etc).
 const FEEDER_BANDS = ['All', 'A', 'B', 'C', 'D', 'E'];
 const BAND_ORDER = ['A', 'B', 'C', 'D', 'E'];
-const BAND_COLORS = ['#5b7cfa', '#3ec9a7', '#a56ef0', '#e74c3c', '#f5a623'];
+const BAND_COLORS = ['#128A5B', '#E58E0A', '#48598B', '#B7791F', '#DB362C'];
 
 // Consistent color per band across every chart that breaks data down by band, keyed by
 // band letter rather than array position so it stays correct even if an endpoint ever
@@ -1999,7 +1394,86 @@ function buildTrendCallout(trend, valueKey, titleFn, valueLabel) {
     leftPct: Math.min(90, Math.max(5, leftPct))
   };
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(44)["URLSearchParams"]))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(48)["URLSearchParams"]))
+
+/***/ }),
+
+/***/ 87:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ui/PageHeader.vue?vue&type=template&id=3404a146&scoped=true
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "ph"
+  }, [_vm._ssrNode((_vm.loading ? "<div class=\"ph-prog\" data-v-3404a146><div class=\"ie-prog\" data-v-3404a146></div></div>" : "<!---->") + " <div class=\"ph-pattern\" data-v-3404a146><div" + _vm._ssrClass(null, _vm.meta.pattern) + _vm._ssrStyle(null, {
+    color: _vm.meta.color
+  }, null) + " data-v-3404a146></div></div> " + (_vm.meta.photo ? "<div class=\"ph-photo ie-fadein\" data-v-3404a146><img src=\"/grid-hero.jpg\" alt data-v-3404a146> <div class=\"ph-photo-fade\" data-v-3404a146></div></div>" : "<!---->") + " "), _vm._ssrNode("<div class=\"ph-inner\" data-v-3404a146>", "</div>", [_vm._ssrNode("<div data-v-3404a146><div class=\"ph-kicker\"" + _vm._ssrStyle(null, {
+    color: _vm.meta.color
+  }, null) + " data-v-3404a146>" + _vm._ssrEscape(_vm._s(_vm.meta.kicker)) + "</div> <h1 class=\"ph-title\" data-v-3404a146>" + _vm._ssrEscape(_vm._s(_vm.meta.title)) + "</h1> <div class=\"ph-sub\" data-v-3404a146>" + _vm._ssrEscape(_vm._s(_vm.meta.sub)) + "</div></div> "), _vm.$slots.default ? _vm._ssrNode("<div class=\"ph-filters\" data-v-3404a146>", "</div>", [_vm._t("default")], 2) : _vm._e()], 2)], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/ui/PageHeader.vue?vue&type=template&id=3404a146&scoped=true
+
+// EXTERNAL MODULE: ./js_modules/pages.js
+var pages = __webpack_require__(5);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ui/PageHeader.vue?vue&type=script&lang=js
+
+/* harmony default export */ var PageHeadervue_type_script_lang_js = ({
+  name: 'PageHeader',
+  props: {
+    page: {
+      type: String,
+      required: true
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    meta() {
+      return pages["b" /* PAGE_META */][this.page] || {};
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/ui/PageHeader.vue?vue&type=script&lang=js
+ /* harmony default export */ var ui_PageHeadervue_type_script_lang_js = (PageHeadervue_type_script_lang_js); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./components/ui/PageHeader.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(82)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  ui_PageHeadervue_type_script_lang_js,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "3404a146",
+  "1902ffe7"
+  
+)
+
+/* harmony default export */ var PageHeader = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
@@ -2008,9 +1482,9 @@ function buildTrendCallout(trend, valueKey, titleFn, valueLabel) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoadingOverlay_vue_vue_type_style_index_0_id_702659cf_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(79);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoadingOverlay_vue_vue_type_style_index_0_id_702659cf_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoadingOverlay_vue_vue_type_style_index_0_id_702659cf_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoadingOverlay_vue_vue_type_style_index_0_id_702659cf_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoadingOverlay_vue_vue_type_style_index_0_id_702659cf_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterSelect_vue_vue_type_style_index_0_id_d78a8f62_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(80);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterSelect_vue_vue_type_style_index_0_id_d78a8f62_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterSelect_vue_vue_type_style_index_0_id_d78a8f62_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterSelect_vue_vue_type_style_index_0_id_d78a8f62_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterSelect_vue_vue_type_style_index_0_id_d78a8f62_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
@@ -2022,7 +1496,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, ".loading-overlay[data-v-702659cf]{align-items:center;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);background:linear-gradient(160deg,rgba(42,3,0,.6),rgba(107,13,0,.55) 40%,rgba(231,83,9,.5));border-radius:inherit;bottom:0;display:flex;justify-content:center;left:0;overflow:hidden;position:absolute;right:0;top:0;z-index:1500}.loading-overlay-fade-enter-active[data-v-702659cf],.loading-overlay-fade-leave-active[data-v-702659cf]{transition:opacity .2s ease}.loading-overlay-fade-enter[data-v-702659cf],.loading-overlay-fade-leave-to[data-v-702659cf]{opacity:0}.waves-svg[data-v-702659cf]{height:100%;left:0;pointer-events:none;position:absolute;top:0;width:100%}.e-wave[data-v-702659cf]{animation:loading-waveScroll-702659cf linear infinite;filter:drop-shadow(0 0 6px currentColor);stroke-opacity:.6}.w1[data-v-702659cf]{animation-duration:6s;filter:drop-shadow(0 0 8px rgba(255,255,255,.8));stroke:#fff;stroke-opacity:.75}.w2[data-v-702659cf]{animation-duration:9s;filter:drop-shadow(0 0 6px #ffd180);stroke:#ffd180;stroke-opacity:.6}.w3[data-v-702659cf]{animation-duration:7s;filter:drop-shadow(0 0 5px #ffab76);stroke:#ffab76;stroke-opacity:.45}.w4[data-v-702659cf]{animation-duration:11s;filter:drop-shadow(0 0 4px #fff3e0);stroke:#fff3e0;stroke-opacity:.25}@keyframes loading-waveScroll-702659cf{0%{transform:translateX(0)}to{transform:translateX(-600px)}}.spark[data-v-702659cf]{animation:loading-sparkFloat-702659cf linear infinite;border-radius:50%;box-shadow:0 0 10px 2px #fff;height:4px;opacity:0;position:absolute;width:4px}.sp1[data-v-702659cf],.spark[data-v-702659cf]{background:#fff}.sp1[data-v-702659cf]{animation-delay:0s;animation-duration:5s;bottom:10%;box-shadow:0 0 10px 2px hsla(0,0%,100%,.8);left:15%}.sp2[data-v-702659cf]{animation-delay:1.2s;animation-duration:7s;background:#ffd180;bottom:20%;box-shadow:0 0 10px 2px #ffd180;left:30%}.sp3[data-v-702659cf]{animation-delay:.5s;animation-duration:6s;background:#ffab76;bottom:5%;box-shadow:0 0 10px 2px #ffab76;left:55%}.sp4[data-v-702659cf]{animation-delay:2s;animation-duration:8s;background:#fff;bottom:15%;box-shadow:0 0 10px 2px hsla(0,0%,100%,.8);left:70%}.sp5[data-v-702659cf]{animation-delay:.8s;animation-duration:5.5s;background:#ffd180;bottom:30%;box-shadow:0 0 10px 2px #ffd180;left:82%}.sp6[data-v-702659cf]{animation-delay:3s;animation-duration:9s;background:#ffab76;bottom:8%;box-shadow:0 0 10px 2px #ffab76;left:45%}@keyframes loading-sparkFloat-702659cf{0%{opacity:0;transform:translateY(0) scale(1)}10%{opacity:1}80%{opacity:.6}to{opacity:0;transform:translateY(-300px) scale(.3)}}.e-center[data-v-702659cf]{align-items:center;display:flex;flex-direction:column;gap:10px;position:relative;z-index:2}.e-ring[data-v-702659cf]{animation:loading-ringPulse-702659cf ease-out infinite;border:1px solid rgba(255,220,160,.5);border-radius:50%;position:absolute}.r1[data-v-702659cf]{animation-delay:0s;height:120px;width:120px}.r1[data-v-702659cf],.r2[data-v-702659cf]{animation-duration:2.4s}.r2[data-v-702659cf]{animation-delay:.6s;height:180px;width:180px}.r3[data-v-702659cf]{animation-delay:1.2s;animation-duration:2.4s;height:240px;width:240px}@keyframes loading-ringPulse-702659cf{0%{opacity:.8;transform:scale(.8)}to{opacity:0;transform:scale(1.4)}}.logo-circle[data-v-702659cf]{align-items:center;background:#fff;border-radius:50%;box-shadow:0 0 30px hsla(0,0%,100%,.4),0 4px 20px rgba(0,0,0,.2);display:flex;height:90px;justify-content:center;width:90px}.e-brand[data-v-702659cf]{color:#fff;font-size:14px;font-weight:600;letter-spacing:.5px;margin:6px 0 0;text-align:center;text-shadow:0 0 14px rgba(255,200,100,.7)}@media only screen and (max-width:600px){.r1[data-v-702659cf]{height:90px;width:90px}.r2[data-v-702659cf]{height:135px;width:135px}.r3[data-v-702659cf]{height:180px;width:180px}.logo-circle[data-v-702659cf]{height:70px;width:70px}}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, ".fs[data-v-d78a8f62]{position:relative}.fs.block[data-v-d78a8f62]{width:100%}.fs-btn[data-v-d78a8f62]{align-items:center;background:var(--surface-2);border:1px solid var(--border-strong);border-radius:9px;color:var(--text);cursor:pointer;display:flex;gap:8px;height:38px;max-width:340px;padding:0 11px;text-align:left}.fs.block .fs-btn[data-v-d78a8f62]{max-width:none;width:100%}.fs-btn.compact[data-v-d78a8f62]{background:var(--surface);border-color:var(--border);border-radius:8px;height:auto;padding:6px 9px 6px 10px}.fs-btn.open[data-v-d78a8f62]{border-color:var(--primary)}.fs-btn[data-v-d78a8f62]:disabled{cursor:default;opacity:.5}.fs-chev[data-v-d78a8f62],.fs-ico[data-v-d78a8f62]{color:var(--text-3);flex:none}.fs-chev[data-v-d78a8f62]{margin-left:auto;transition:transform .2s}.fs-text[data-v-d78a8f62]{align-items:flex-start;display:flex;flex-direction:column;line-height:1.05;min-width:0}.fs-label[data-v-d78a8f62]{color:var(--text-3);font-size:9px;letter-spacing:.06em;text-transform:uppercase}.fs-label[data-v-d78a8f62],.fs-value[data-v-d78a8f62]{font-weight:700;white-space:nowrap}.fs-value[data-v-d78a8f62]{font-size:12.5px;max-width:240px;overflow:hidden;text-overflow:ellipsis}.fs-value--compact[data-v-d78a8f62]{flex:1;max-width:none;min-width:0}.fs-pop[data-v-d78a8f62]{background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-xl);left:0;max-width:min(400px,calc(100vw - 40px));padding:6px;position:absolute;top:calc(100% + 8px);z-index:45}.fs.block .fs-pop[data-v-d78a8f62]{width:100%}.fs-search[data-v-d78a8f62]{align-items:center;background:var(--surface-2);border:1px solid var(--border-strong);border-radius:8px;color:var(--text-3);display:flex;gap:8px;margin-bottom:5px;padding:7px 10px}.fs-search input[data-v-d78a8f62]{background:transparent;border:none;color:var(--text);flex:1;font-size:12.5px;min-width:0;outline:none}.fs-list[data-v-d78a8f62]{display:flex;flex-direction:column;gap:1px;max-height:300px;overflow-x:hidden;overflow-y:auto}.fs-opt[data-v-d78a8f62]{align-items:center;border-radius:8px;color:var(--text);cursor:pointer;display:flex;font-size:12.5px;font-weight:600;gap:10px;padding:8px 10px}.fs-opt[data-v-d78a8f62]:hover{background:var(--surface-2)}.fs-opt.on[data-v-d78a8f62]{background:var(--primary-soft);font-weight:800}.fs-opt-text[data-v-d78a8f62]{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fs-check[data-v-d78a8f62]{color:var(--primary-press)}.fs-empty[data-v-d78a8f62]{color:var(--text-3);font-size:12px;padding:12px 10px;text-align:center}", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {};
 module.exports = ___CSS_LOADER_EXPORT___;
@@ -2030,21 +1504,299 @@ module.exports = ___CSS_LOADER_EXPORT___;
 
 /***/ }),
 
-/***/ 99:
+/***/ 92:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ui/FilterSelect.vue?vue&type=template&id=d78a8f62&scoped=true
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    ref: "root",
+    staticClass: "fs",
+    class: {
+      block: _vm.block
+    }
+  }, [_vm._ssrNode("<button type=\"button\"" + _vm._ssrAttr("disabled", _vm.disabled) + _vm._ssrClass("fs-btn", {
+    open: _vm.open,
+    compact: _vm.compact
+  }) + " data-v-d78a8f62>", "</button>", [_vm.icon ? _c('Icon', {
+    staticClass: "fs-ico",
+    attrs: {
+      "name": _vm.icon,
+      "size": 15
+    }
+  }) : _vm._e(), _vm._ssrNode(" " + (!_vm.compact ? "<span class=\"fs-text\" data-v-d78a8f62><span class=\"fs-label\" data-v-d78a8f62>" + _vm._ssrEscape(_vm._s(_vm.label)) + "</span> <span" + _vm._ssrAttr("title", _vm.currentLabel) + " class=\"fs-value\" data-v-d78a8f62>" + _vm._ssrEscape(_vm._s(_vm.currentLabel)) + "</span></span>" : "<span" + _vm._ssrAttr("title", _vm.currentLabel) + " class=\"fs-value fs-value--compact\" data-v-d78a8f62>" + _vm._ssrEscape(_vm._s(_vm.currentLabel)) + "</span>") + " "), _c('Icon', {
+    staticClass: "fs-chev",
+    style: {
+      transform: _vm.open ? 'rotate(180deg)' : 'none'
+    },
+    attrs: {
+      "name": "chevDown",
+      "size": 14
+    }
+  })], 2), _vm._ssrNode(" "), _vm.open ? _vm._ssrNode("<div class=\"fs-pop ie-fadeup\"" + _vm._ssrStyle(null, {
+    minWidth: _vm.popWidth
+  }, null) + " data-v-d78a8f62>", "</div>", [_vm.isSearchable ? _vm._ssrNode("<div class=\"fs-search\" data-v-d78a8f62>", "</div>", [_c('Icon', {
+    attrs: {
+      "name": "search",
+      "size": 15
+    }
+  }), _vm._ssrNode(" <input placeholder=\"Search…\"" + _vm._ssrAttr("value", _vm.query) + " data-v-d78a8f62>")], 2) : _vm._e(), _vm._ssrNode(" "), _vm._ssrNode("<div class=\"fs-list ie-scroll\" data-v-d78a8f62>", "</div>", [_vm._l(_vm.shown, function (o) {
+    return _vm._ssrNode("<div" + _vm._ssrClass("fs-opt", {
+      on: o.value === _vm.value
+    }) + " data-v-d78a8f62>", "</div>", [_vm._ssrNode("<span" + _vm._ssrAttr("title", o.label) + " class=\"fs-opt-text\" data-v-d78a8f62>" + _vm._ssrEscape(_vm._s(o.label)) + "</span> "), o.value === _vm.value ? _c('Icon', {
+      staticClass: "fs-check",
+      attrs: {
+        "name": "check",
+        "size": 15
+      }
+    }) : _vm._e()], 2);
+  }), _vm._ssrNode(" " + (!_vm.shown.length ? "<div class=\"fs-empty\" data-v-d78a8f62>No match</div>" : "<!---->") + " " + (_vm.clipped ? "<div class=\"fs-empty\" data-v-d78a8f62>" + _vm._ssrEscape("Showing first " + _vm._s(_vm.maxShown) + " · type to narrow") + "</div>" : "<!---->"))], 2)], 2) : _vm._e()], 2);
+};
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/ui/FilterSelect.vue?vue&type=template&id=d78a8f62&scoped=true
+
+// EXTERNAL MODULE: ./components/ui/Icon.vue + 2 modules
+var Icon = __webpack_require__(13);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ui/FilterSelect.vue?vue&type=script&lang=js
+
+
+// Header filter dropdown from the design: icon + small caps label + current value,
+// opening a searchable list. `options` may be strings or { value, label } objects.
+/* harmony default export */ var FilterSelectvue_type_script_lang_js = ({
+  name: 'FilterSelect',
+  components: {
+    Icon: Icon["default"]
+  },
+  props: {
+    value: {
+      type: [String, Number],
+      default: null
+    },
+    options: {
+      type: Array,
+      default: () => []
+    },
+    label: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
+    searchable: {
+      type: Boolean,
+      default: null
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    compact: {
+      type: Boolean,
+      default: false
+    },
+    block: {
+      type: Boolean,
+      default: false
+    },
+    popWidth: {
+      type: String,
+      default: '240px'
+    }
+  },
+  data() {
+    return {
+      open: false,
+      query: '',
+      maxShown: 300
+    };
+  },
+  computed: {
+    normalized() {
+      return this.options.map(o => o !== null && typeof o === 'object' ? o : {
+        value: o,
+        label: String(o)
+      });
+    },
+    isSearchable() {
+      return this.searchable === null ? this.normalized.length > 8 : this.searchable;
+    },
+    filtered() {
+      const q = this.query.trim().toLowerCase();
+      return q ? this.normalized.filter(o => o.label.toLowerCase().includes(q)) : this.normalized;
+    },
+    shown() {
+      return this.filtered.slice(0, this.maxShown);
+    },
+    clipped() {
+      return this.filtered.length > this.maxShown;
+    },
+    currentLabel() {
+      const hit = this.normalized.find(o => o.value === this.value);
+      return hit ? hit.label : this.value == null || this.value === '' ? '—' : String(this.value);
+    }
+  },
+  mounted() {
+    document.addEventListener('mousedown', this.onDoc);
+  },
+  beforeDestroy() {
+    document.removeEventListener('mousedown', this.onDoc);
+  },
+  methods: {
+    toggle() {
+      this.open = !this.open;
+      this.query = '';
+      if (this.open && this.isSearchable) this.$nextTick(() => this.$refs.q && this.$refs.q.focus());
+    },
+    pick(o) {
+      this.open = false;
+      if (o.value !== this.value) {
+        this.$emit('input', o.value);
+        this.$emit('change', o.value);
+      }
+    },
+    pickFirst() {
+      if (this.shown.length) this.pick(this.shown[0]);
+    },
+    onDoc(e) {
+      if (this.open && this.$refs.root && !this.$refs.root.contains(e.target)) this.open = false;
+    }
+  }
+});
+// CONCATENATED MODULE: ./components/ui/FilterSelect.vue?vue&type=script&lang=js
+ /* harmony default export */ var ui_FilterSelectvue_type_script_lang_js = (FilterSelectvue_type_script_lang_js); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./components/ui/FilterSelect.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(88)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  ui_FilterSelectvue_type_script_lang_js,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "d78a8f62",
+  "6f1693bf"
+  
+)
+
+/* harmony default export */ var FilterSelect = __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ 93:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SkeletonPage_vue_vue_type_style_index_0_id_9e7985aa_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(81);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SkeletonPage_vue_vue_type_style_index_0_id_9e7985aa_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SkeletonPage_vue_vue_type_style_index_0_id_9e7985aa_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SkeletonPage_vue_vue_type_style_index_0_id_9e7985aa_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_ref_3_oneOf_1_2_node_modules_nuxt_components_dist_loader_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SkeletonPage_vue_vue_type_style_index_0_id_9e7985aa_prod_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".sk-grid[data-v-9e7985aa]{display:grid;grid-gap:14px;gap:14px;margin-bottom:14px}.sk-grid--kpi[data-v-9e7985aa]{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.sk-grid--charts[data-v-9e7985aa]{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.sk-bars[data-v-9e7985aa]{align-items:flex-end;display:flex;gap:10px;height:190px;margin-top:20px}.sk-bars>div[data-v-9e7985aa]{flex:1}.sk-donut-row[data-v-9e7985aa]{align-items:center;display:flex;gap:18px;margin-top:22px}.sk-donut[data-v-9e7985aa]{border-radius:50%;flex:none;height:128px;-webkit-mask:radial-gradient(circle,transparent 42px,#000 43px);mask:radial-gradient(circle,transparent 42px,#000 43px);width:128px}.sk-lines[data-v-9e7985aa]{display:flex;flex:1;flex-direction:column;gap:12px}.sk-rule[data-v-9e7985aa]{background:color-mix(in srgb,var(--primary) 35%,transparent);height:2px;margin:18px 0 2px}.sk-row[data-v-9e7985aa]{display:grid;grid-template-columns:2fr 1.4fr 1fr 1fr;grid-gap:16px;border-bottom:1.5px dotted var(--border-strong);gap:16px;padding:14px 0}", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+module.exports = ___CSS_LOADER_EXPORT___;
 
-// load the styles
-var content = __webpack_require__(109);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add CSS to SSR context
-var add = __webpack_require__(4).default
-module.exports.__inject__ = function (context) {
-  add("7f7aabec", content, true, context)
+
+/***/ }),
+
+/***/ 95:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ui/SkeletonPage.vue?vue&type=template&id=9e7985aa&scoped=true
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c('div', {
+    staticClass: "ie-fadein",
+    attrs: {
+      "aria-busy": "true",
+      "aria-label": "Loading"
+    }
+  }, [_vm._ssrNode("<div class=\"sk-grid sk-grid--kpi\" data-v-9e7985aa>" + _vm._ssrList(4, function (i) {
+    return "<div class=\"ie-card\" data-v-9e7985aa><div class=\"ie-skel\" style=\"width:30px;height:30px;border-radius:8px\" data-v-9e7985aa></div> <div class=\"ie-skel\" style=\"width:46%;height:10px;margin-top:16px\" data-v-9e7985aa></div> <div class=\"ie-skel\" style=\"width:68%;height:28px;margin-top:10px\" data-v-9e7985aa></div> <div class=\"ie-skel\" style=\"width:100%;height:7px;margin-top:18px;border-radius:999px\" data-v-9e7985aa></div></div>";
+  }) + "</div> <div class=\"sk-grid sk-grid--charts\" data-v-9e7985aa><div class=\"ie-card\" data-v-9e7985aa><div class=\"ie-skel\" style=\"width:34%;height:13px\" data-v-9e7985aa></div> <div class=\"ie-skel\" style=\"width:22%;height:9px;margin-top:8px\" data-v-9e7985aa></div> <div class=\"sk-bars\" data-v-9e7985aa>" + _vm._ssrList([42, 68, 54, 86, 61, 74, 48], function (h, i) {
+    return "<div class=\"ie-skel\"" + _vm._ssrStyle(null, {
+      height: h + '%'
+    }, null) + " data-v-9e7985aa></div>";
+  }) + "</div></div> <div class=\"ie-card\" data-v-9e7985aa><div class=\"ie-skel\" style=\"width:48%;height:13px\" data-v-9e7985aa></div> <div class=\"sk-donut-row\" data-v-9e7985aa><div class=\"ie-skel sk-donut\" data-v-9e7985aa></div> <div class=\"sk-lines\" data-v-9e7985aa><div class=\"ie-skel\" style=\"width:80%;height:10px\" data-v-9e7985aa></div> <div class=\"ie-skel\" style=\"width:64%;height:10px\" data-v-9e7985aa></div> <div class=\"ie-skel\" style=\"width:72%;height:10px\" data-v-9e7985aa></div> <div class=\"ie-skel\" style=\"width:52%;height:10px\" data-v-9e7985aa></div></div></div></div></div> <div class=\"ie-card\" data-v-9e7985aa><div class=\"ie-skel\" style=\"width:22%;height:13px\" data-v-9e7985aa></div> <div class=\"sk-rule\" data-v-9e7985aa></div> " + _vm._ssrList(5, function (i) {
+    return "<div class=\"sk-row\" data-v-9e7985aa><div class=\"ie-skel\" style=\"height:10px;width:82%\" data-v-9e7985aa></div> <div class=\"ie-skel\" style=\"height:10px;width:70%\" data-v-9e7985aa></div> <div class=\"ie-skel\" style=\"height:10px;width:60%\" data-v-9e7985aa></div> <div class=\"ie-skel\" style=\"height:10px;width:50%;justify-self:end\" data-v-9e7985aa></div></div>";
+  }) + "</div>")]);
 };
+var staticRenderFns = [];
+
+// CONCATENATED MODULE: ./components/ui/SkeletonPage.vue?vue&type=template&id=9e7985aa&scoped=true
+
+// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--2-0!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./components/ui/SkeletonPage.vue?vue&type=script&lang=js
+/* harmony default export */ var SkeletonPagevue_type_script_lang_js = ({
+  name: 'SkeletonPage'
+});
+// CONCATENATED MODULE: ./components/ui/SkeletonPage.vue?vue&type=script&lang=js
+ /* harmony default export */ var ui_SkeletonPagevue_type_script_lang_js = (SkeletonPagevue_type_script_lang_js); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__(2);
+
+// CONCATENATED MODULE: ./components/ui/SkeletonPage.vue
+
+
+
+function injectStyles (context) {
+  
+  var style0 = __webpack_require__(93)
+if (style0.__inject__) style0.__inject__(context)
+
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  ui_SkeletonPagevue_type_script_lang_js,
+  render,
+  staticRenderFns,
+  false,
+  injectStyles,
+  "9e7985aa",
+  "37e664b2"
+  
+)
+
+/* harmony default export */ var SkeletonPage = __webpack_exports__["default"] = (component.exports);
 
 /***/ })
 
